@@ -9,14 +9,16 @@ export PATH=$HOME/bin:$PATH
 export PATH=.:$PATH
 
 # Export path for nodebrew
-if [[ -f ~/.nodebrew/nodebrew ]]; then
+if [ -f ~/.nodebrew/nodebrew ]; then
     export PATH=$HOME/.nodebrew/current/bin:$PATH
 fi
 
 # Setup
-ln -s dotfiles/.vimrc ~/.vimrc
-ln -s dotfiles/.aliases ~/.aliases
-ln -s dotfiles/.tmux.conf ~/.tmux.conf
+if [ ! -e ~/.vimrc ]; then
+  ln -s dotfiles/.vimrc ~/.vimrc
+  ln -s dotfiles/.aliases ~/.aliases
+  ln -s dotfiles/.tmux.conf ~/.tmux.conf
+fi
 
 # Ctrl + a とかやりたい
 bindkey -e
