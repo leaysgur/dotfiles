@@ -13,6 +13,11 @@ if [[ -f ~/.nodebrew/nodebrew ]]; then
     export PATH=$HOME/.nodebrew/current/bin:$PATH
 fi
 
+# Setup
+ln -s dotfiles/.vimrc ~/.vimrc
+ln -s dotfiles/.aliases ~/.aliases
+ln -s dotfiles/.tmux.conf ~/.tmux.conf
+
 # Ctrl + a とかやりたい
 bindkey -e
 
