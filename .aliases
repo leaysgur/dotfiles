@@ -1,0 +1,29 @@
+# Util
+alias cl='clear'
+alias la='ls -laF --color'
+alias ll='ls -laF --color'
+alias vi='vim'
+alias vo='vim'
+alias vu='vim'
+alias bi='vim'
+alias vimrc='vi ~/.vimrc'
+alias zshrc='vi ~/.zshrc'
+alias aliases='vi ~/.aliases'
+alias agignore='vi ~/.agignore'
+#alias tm='tmux' # .zshrcで作成
+alias ta='tmux a'
+
+# Git
+alias gs='git status'
+alias gb='git branch'
+alias gc='git commit -v'
+alias gca='git commit --amend'
+alias gch='git checkout HEAD'
+alias ga='git add'
+alias gd='git diff HEAD'
+
+# Others
+alias delf='find ./ -name "\._*" -exec rm {} \; && find ./ -name "\.DS_Store" -exec rm {} \;'
+alias delc='find ./ -name "*~" -exec rm {} \;'
+alias delt='find ./ -name "*\.TMP" -exec rm {} \;'
+alias deld='delf && delc && delt'
