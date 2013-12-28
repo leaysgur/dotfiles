@@ -1,0 +1,35 @@
+###################### Util ######################
+# Util
+alias cl='clear'
+alias la='ls -laF --color'
+alias ll='ls -laF --color'
+alias vi='vim'
+alias vo='vim'
+alias vu='vim'
+alias bi='vim'
+alias vimrc='vi ~/.vimrc'
+alias bashrc='vi ~/.bashrc'
+alias zshrc='vi ~/.zshrc'
+alias aliases='vi ~/.aliases'
+alias agignore='vi ~/.agignore'
+alias tmuxconf='vi ~/.tmux.conf'
+#alias tm='tmux' # .zshrcで作成
+alias ta='tmux a'
+
+###################### Develop ######################
+alias nginxconf='sudo vi /etc/nginx/conf.d/virtual.conf'
+alias nginxtest='sudo /etc/init.d/nginx configtest'
+alias nginxreload='sudo /etc/init.d/nginx reload'
+
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -v'
+alias gca='git commit --amend'
+alias gch='git checkout'
+alias gd='git diff'
+
+###################### Others ######################
+alias deld='find ./ -name "\._*" -exec rm {} \; && find ./ -name "\.DS_Store" -exec rm {} \;'
+alias delc='find ./ -name "*~" -exec rm {} \;'
+alias delt='find ./ -name "*\.TMP" -exec rm {} \;'
+alias dela='deld && delc && delt'
