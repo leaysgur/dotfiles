@@ -172,12 +172,13 @@ noremap <C-U><C-O> :Unite -no-quit -vertical -winwidth=40 outline<CR>
 "==============================================================================
 " 見た目関係
 "==============================================================================
+" いちおう、Syntaxを有効にしてから
+syntax on
 " カラースキームを使用
 colorscheme solarized
 set background=dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
-set syntax=on
 
 " ステータスラインとかに色つかないときのおまじない
 if !has('gui_running')
