@@ -29,7 +29,7 @@ NeoBundle 'Shougo/vimproc', {
       \    },
       \ }
 " My Bundles.
-NeoBundle 'mattn/zencoding-vim'
+NeoBundle "mattn/emmet-vim"
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/vimfiler'
@@ -45,6 +45,7 @@ NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'surround.vim'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " Installation check.
 NeoBundleCheck
@@ -55,9 +56,9 @@ filetype plugin indent on
 " Zen-coding settings.
 "==============================================================================
 " NeocomplcacheでZen-codingの補完を有効に
-let g:use_zen_complete_tag = 1
-let g:user_zen_leader_key = '<C-e>'
-let g:user_zen_settings = {
+let g:use_emmet_complete_tag = 1
+let g:user_emmet_leader_key='<C-e>'
+let g:user_emmet_settings = {
 \  'lang' : 'ja',
 \  'indentation' : '  ',
 \  'html': {
@@ -89,7 +90,7 @@ let g:syntastic_mode_map = {
 \  "active_filetypes": [],
 \  "passive_filetypes": ["html"],
 \}
-let g:syntastic_javascript_checker = 'jshint'
+
 
 "==============================================================================
 " Neocomplcache settings.
@@ -197,6 +198,19 @@ set ruler
 " 括弧入力で対応する括弧を一瞬強調
 set showmatch
 
+" インデントガイドを有効に
+let g:indent_guides_enable_on_vim_startup = 1
+" ガイドの幅
+let g:indent_guides_guide_size = 1
+" 1インデント目からガイドする
+let g:indent_guides_start_level = 2
+" 自動カラーを無効にして手動で設定する
+let g:indent_guides_auto_colors = 0
+" 奇数インデントのガイドカラー
+hi IndentGuidesOdd  ctermbg=cyan
+" 偶数インデントのガイドカラー
+hi IndentGuidesEven ctermbg=yellow
+
 
 "==============================================================================
 " ステータスライン関係
@@ -214,6 +228,7 @@ let g:lightline = {
 \  },
 \  'subseparator': { 'left': ' ', 'right': '/' }
 \}
+
 
 "==============================================================================
 " 検索関係
