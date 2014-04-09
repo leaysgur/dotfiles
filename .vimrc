@@ -9,7 +9,7 @@
 "==============================================================================
 " NeoBundle settings.
 "==============================================================================
-set nocompatible               " Be iMproved
+set nocompatible " Be iMproved
 
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -29,23 +29,26 @@ NeoBundle 'Shougo/vimproc', {
       \    },
       \ }
 " My Bundles.
-NeoBundle "mattn/emmet-vim"
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle "h1mesuke/unite-outline"
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'taichouchou2/html5.vim'
-NeoBundle 'taichouchou2/vim-javascript'
-NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'motemen/xslate-vim'
+NeoBundle 'myhere/vim-nodejs-complete'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'surround.vim'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " Installation check.
 NeoBundleCheck
@@ -86,14 +89,35 @@ let g:user_emmet_settings = {
 " Syntastic settings.
 "==============================================================================
 let g:syntastic_mode_map = {
-\  "mode": "active",
-\  "active_filetypes": [],
-\  "passive_filetypes": ["html"],
+\  "mode": "passive",
+\  "active_filetypes": ["javascript"],
+\  "passive_filetypes": ["html", "perl"],
 \}
+" jshintrcの場所を動的にさかのぼってみつける
+function s:find_jshintrc(dir)
+    let l:found = globpath(a:dir, '.jshintrc')
+    if filereadable(l:found)
+        return l:found
+    endif
+
+    let l:parent = fnamemodify(a:dir, ':h')
+    if l:parent != a:dir
+        return s:find_jshintrc(l:parent)
+    endif
+
+    return "~/.jshintrc"
+endfunction
+function UpdateJsHintConf()
+    let l:dir = expand('%:p:h')
+    let l:jshintrc = s:find_jshintrc(l:dir)
+    let g:syntastic_javascript_jshint_conf = l:jshintrc
+endfunction
+
+au BufEnter * call UpdateJsHintConf()
 
 
 "==============================================================================
-" Neocomplcache settings.
+" Neocomplcache/Neosnippet settings.
 "==============================================================================
 " 補完ウィンドウの設定
 set completeopt=menuone
@@ -106,8 +130,6 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_camel_case_completion  =  1
 " ポップアップメニューで表示される候補の数
 let g:neocomplcache_max_list = 5
-" 1つ目の候補を自動選択
-let g:neocomplcache_enable_auto_select = 1
 " 補完を開始する文字数
 let g:neocomplcache_auto_completion_start_length = 2
 " シンタックスをキャッシュするときの最小文字長
@@ -120,28 +142,33 @@ if !exists('g:neocomplcache_keyword_patterns')
   let g:neocomplcache_keyword_patterns = {}
 endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-" スニペットを展開する。スニペットが関係しないところでは行末まで削除
-imap <expr><C-k> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-o>D"
-smap <expr><C-k> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-o>D"
-" 前回行われた補完をキャンセルします
-inoremap <expr><C-g> neocomplcache#undo_completion()
-" 補完候補のなかから、共通する部分を補完します
-inoremap <expr><C-l> neocomplcache#complete_common_string()
+
 " 改行で補完ウィンドウを閉じる
 inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-"tabで補完候補の選択を行う
-inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
-" <C-h>や<BS>を押したときに確実にポップアップを削除します
+" <C-h>や<BS>を押したときに確実にポップアップを削除
 inoremap <expr><C-h> neocomplcache#smart_close_popup().”\<C-h>”
-" 現在選択している候補を確定します
+" 現在選択している候補を確定
 inoremap <expr><C-y> neocomplcache#close_popup()
-" 現在選択している候補をキャンセルし、ポップアップを閉じます
+" 現在選択している候補をキャンセルし、ポップアップを閉じ
 inoremap <expr><C-e> neocomplcache#cancel_popup()
+"tabで補完候補の選択を行う
+inoremap <expr><TAB>   pumvisible() ? "\<Down>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<Up>"   : "\<S-TAB>"
 " ポップアップメニューの配色
-highlight Pmenu ctermbg=8
-highlight PmenuSel ctermbg=1
+highlight Pmenu     ctermbg=8
+highlight PmenuSel  ctermbg=1
 highlight PmenuSbar ctermbg=0
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: "\<TAB>"
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 
 
 "==============================================================================
@@ -188,8 +215,6 @@ endif
 
 " ejsファイルをhtmlと同じシンタックスに
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
-" txファイルをhtmlと同じシンタックスに
-autocmd BufNewFile,BufReadPost *.tx set filetype=html
 " scssファイルをsassと同じシンタックスに
 autocmd BufNewFile,BufReadPost *.scss set filetype=sass
 
@@ -339,6 +364,7 @@ set cindent
 set smarttab
 " 拡張子別でタブ設定
 autocmd BufNewFile,BufRead *.tx   set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.tt   set tabstop=2 shiftwidth=2   et
 autocmd BufNewFile,BufRead *.ejs  set tabstop=2 shiftwidth=2   et
 autocmd BufNewFile,BufRead *.html set tabstop=2 shiftwidth=2   et
 autocmd BufNewFile,BufRead *.scss set tabstop=2 shiftwidth=2   et
@@ -364,4 +390,6 @@ autocmd BufWritePre * call <SID>remove_dust()
 " Escキーを早く
 set timeout timeoutlen=200 ttimeoutlen=75
 " ノーマルモードでEnterキーで改行挿入
-noremap <CR> o<ESC>
+nnoremap <CR> o<ESC>
+" matchitする
+:source ~/.vim/macros/matchit.vim
