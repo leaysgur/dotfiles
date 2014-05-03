@@ -15,9 +15,9 @@ fi
 
 # Setup
 if [ ! -e ~/.vimrc ]; then
-  ln -s dotfiles/.vimrc ~/.vimrc
-  ln -s dotfiles/.aliases ~/.aliases
-  ln -s dotfiles/.tmux.conf ~/.tmux.conf
+  ln -s ~/dotfiles/.vimrc ~/.vimrc
+  ln -s ~/dotfiles/.aliases ~/.aliases
+  ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 fi
 
 # Ctrl + a とかやりたい
@@ -157,7 +157,7 @@ fi
 
 function _update_vcs_info_msg() {
   psvar=()
-  LANG=en_US.UTF-8 vcs_info
+  LANG=ja-JP.UTF-8 vcs_info
   [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 add-zsh-hook precmd _update_vcs_info_msg
@@ -183,7 +183,7 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 
 # tmux起動時に状況判別
 if [ $SHLVL = 1 ]; then
-  alias tm="tmux a || tmux new-s \; source-file ~/.tmux/session"
+  alias tm="tmux a || tmux new-s \; source-file ~/.tmux.session"
 fi
 
 # tmuxでSSHキーを引き回す
@@ -197,4 +197,3 @@ fi
 
 # Aliase
 source $HOME/.aliases
-

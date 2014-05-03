@@ -9,7 +9,7 @@
 "==============================================================================
 " NeoBundle settings.
 "==============================================================================
-set nocompatible               " Be iMproved
+set nocompatible " Be iMproved
 
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -29,19 +29,23 @@ NeoBundle 'Shougo/vimproc', {
       \    },
       \ }
 " My Bundles.
-NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle "h1mesuke/unite-outline"
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'taichouchou2/html5.vim'
-NeoBundle 'taichouchou2/vim-javascript'
-NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'motemen/xslate-vim'
+NeoBundle 'myhere/vim-nodejs-complete'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'surround.vim'
 NeoBundle 'scrooloose/syntastic'
@@ -55,19 +59,19 @@ filetype plugin indent on
 " Zen-coding settings.
 "==============================================================================
 " NeocomplcacheでZen-codingの補完を有効に
-let g:use_zen_complete_tag = 1
-let g:user_zen_leader_key = '<C-e>'
-let g:user_zen_settings = {
+let g:use_emmet_complete_tag = 1
+let g:user_emmet_leader_key='<C-e>'
+let g:user_emmet_settings = {
 \  'lang' : 'ja',
 \  'indentation' : '  ',
 \  'html': {
 \    'filters': 'html, fc'
 \  },
-\  'ejs' : {
+\  'hbs' : {
 \    'extends' : 'html',
 \    'filters' : 'html, fc',
 \  },
-\  'tx' : {
+\  'ejs' : {
 \    'extends' : 'html',
 \    'filters' : 'html, fc',
 \  },
@@ -84,16 +88,36 @@ let g:user_zen_settings = {
 "==============================================================================
 " Syntastic settings.
 "==============================================================================
-" jsだけSyntastic
 let g:syntastic_mode_map = {
 \  "mode": "passive",
-\  "active_filetypes": ["javascript", "json"],
-\  "passive_filetypes": ["perl"],
+\  "active_filetypes": ["javascript"],
+\  "passive_filetypes": ["html", "perl"],
 \}
+" jshintrcの場所を動的にさかのぼってみつける
+function s:find_jshintrc(dir)
+    let l:found = globpath(a:dir, '.jshintrc')
+    if filereadable(l:found)
+        return l:found
+    endif
+
+    let l:parent = fnamemodify(a:dir, ':h')
+    if l:parent != a:dir
+        return s:find_jshintrc(l:parent)
+    endif
+
+    return "~/.jshintrc"
+endfunction
+function UpdateJsHintConf()
+    let l:dir = expand('%:p:h')
+    let l:jshintrc = s:find_jshintrc(l:dir)
+    let g:syntastic_javascript_jshint_conf = l:jshintrc
+endfunction
+
+au BufEnter * call UpdateJsHintConf()
 
 
 "==============================================================================
-" Neocomplcache settings.
+" Neocomplcache/Neosnippet settings.
 "==============================================================================
 " 補完ウィンドウの設定
 set completeopt=menuone
@@ -106,8 +130,6 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_camel_case_completion  =  1
 " ポップアップメニューで表示される候補の数
 let g:neocomplcache_max_list = 5
-" 1つ目の候補を自動選択
-let g:neocomplcache_enable_auto_select = 1
 " 補完を開始する文字数
 let g:neocomplcache_auto_completion_start_length = 2
 " シンタックスをキャッシュするときの最小文字長
@@ -129,19 +151,30 @@ inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
 " 改行で補完ウィンドウを閉じる
 inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-"tabで補完候補の選択を行う
-inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
-" <C-h>や<BS>を押したときに確実にポップアップを削除します
+" <C-h>や<BS>を押したときに確実にポップアップを削除
 inoremap <expr><C-h> neocomplcache#smart_close_popup().”\<C-h>”
-" 現在選択している候補を確定します
+" 現在選択している候補を確定
 inoremap <expr><C-y> neocomplcache#close_popup()
-" 現在選択している候補をキャンセルし、ポップアップを閉じます
+" 現在選択している候補をキャンセルし、ポップアップを閉じ
 inoremap <expr><C-e> neocomplcache#cancel_popup()
+"tabで補完候補の選択を行う
+inoremap <expr><TAB>   pumvisible() ? "\<Down>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<Up>"   : "\<S-TAB>"
 " ポップアップメニューの配色
-highlight Pmenu ctermbg=8
-highlight PmenuSel ctermbg=1
+highlight Pmenu     ctermbg=8
+highlight PmenuSel  ctermbg=1
 highlight PmenuSbar ctermbg=0
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: "\<TAB>"
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 
 
 "==============================================================================
@@ -173,12 +206,13 @@ noremap <C-U><C-O> :Unite -no-quit -vertical -winwidth=40 outline<CR>
 "==============================================================================
 " 見た目関係
 "==============================================================================
+" いちおう、Syntaxを有効にしてから
+syntax on
 " カラースキームを使用
 colorscheme solarized
 set background=dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
-set syntax=on
 
 " ステータスラインとかに色つかないときのおまじない
 if !has('gui_running')
@@ -187,8 +221,6 @@ endif
 
 " ejsファイルをhtmlと同じシンタックスに
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
-" txファイルをhtmlと同じシンタックスに
-autocmd BufNewFile,BufReadPost *.tx set filetype=html
 " scssファイルをsassと同じシンタックスに
 autocmd BufNewFile,BufReadPost *.scss set filetype=sass
 
@@ -196,6 +228,19 @@ autocmd BufNewFile,BufReadPost *.scss set filetype=sass
 set ruler
 " 括弧入力で対応する括弧を一瞬強調
 set showmatch
+
+" インデントガイドを有効に
+let g:indent_guides_enable_on_vim_startup = 1
+" ガイドの幅
+let g:indent_guides_guide_size = 1
+" 1インデント目からガイドする
+let g:indent_guides_start_level = 2
+" 自動カラーを無効にして手動で設定する
+let g:indent_guides_auto_colors = 0
+" 奇数インデントのガイドカラー
+hi IndentGuidesOdd  ctermbg=cyan
+" 偶数インデントのガイドカラー
+hi IndentGuidesEven ctermbg=yellow
 
 
 "==============================================================================
@@ -324,6 +369,7 @@ set cindent
 set smarttab
 " 拡張子別でタブ設定
 autocmd BufNewFile,BufRead *.tx   set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.tt   set tabstop=2 shiftwidth=2   et
 autocmd BufNewFile,BufRead *.ejs  set tabstop=2 shiftwidth=2   et
 autocmd BufNewFile,BufRead *.html set tabstop=2 shiftwidth=2   et
 autocmd BufNewFile,BufRead *.scss set tabstop=2 shiftwidth=2   et
@@ -351,4 +397,4 @@ set timeout timeoutlen=200 ttimeoutlen=75
 " ノーマルモードでEnterキーで改行挿入
 noremap <CR> o<ESC>
 " %でmatchitする
-source /usr/share/vim/vim73/macros/matchit.vim
+:source ~/.vim/macros/matchit.vim
