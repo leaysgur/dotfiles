@@ -20,6 +20,8 @@ if [ ! -e ~/.vimrc ]; then
   ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 fi
 
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local ]
+
 # Ctrl + a とかやりたい
 bindkey -e
 
