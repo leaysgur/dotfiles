@@ -48,6 +48,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'surround.vim'
+NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'scrooloose/syntastic'
 
 " Installation check.
@@ -396,5 +397,3 @@ autocmd BufWritePre * call <SID>remove_dust()
 set timeout timeoutlen=200 ttimeoutlen=75
 " ノーマルモードでEnterキーで改行挿入
 noremap <CR> o<ESC>
-" %でmatchitする
-:source ~/.vim/macros/matchit.vim
