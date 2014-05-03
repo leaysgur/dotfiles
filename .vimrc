@@ -45,6 +45,10 @@ NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'motemen/xslate-vim'
 NeoBundle 'myhere/vim-nodejs-complete'
 NeoBundle 'mattn/emmet-vim'
+NeoBundle 'marijnh/tern_for_vim', {
+\ 'build': {
+\   'others': 'npm install'
+\}}
 NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'surround.vim'
