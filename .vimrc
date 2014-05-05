@@ -45,6 +45,7 @@ NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'motemen/xslate-vim'
 NeoBundle 'myhere/vim-nodejs-complete'
 NeoBundle 'mattn/emmet-vim'
+NeoBundle 'leafgarland/typescript-vim.git'
 NeoBundle 'marijnh/tern_for_vim', {
 \ 'build': {
 \   'others': 'npm install'
@@ -380,7 +381,8 @@ autocmd BufNewFile,BufRead *.html set tabstop=2 shiftwidth=2   et
 autocmd BufNewFile,BufRead *.scss set tabstop=2 shiftwidth=2   et
 autocmd BufNewFile,BufRead *.css  set tabstop=2 shiftwidth=2   et
 autocmd BufNewFile,BufRead *.js   set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.pm   set tabstop=2 shiftwidth=2 noet
+autocmd BufNewFile,BufRead *.ts   set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.pm   set tabstop=2 shiftwidth=2   et
 " インデント後も続けてビジュアルモード
 :vnoremap < <gv
 :vnoremap > >gv
