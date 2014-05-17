@@ -229,6 +229,8 @@ endif
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 " scssファイルをsassと同じシンタックスに
 autocmd BufNewFile,BufReadPost *.scss set filetype=sass
+" mdファイルをmarkdownシンタックスに
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " ルーラを表示
 set ruler
