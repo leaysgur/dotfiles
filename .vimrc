@@ -43,6 +43,7 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'motemen/xslate-vim'
+NeoBundle 'elzr/vim-json'
 NeoBundle 'myhere/vim-nodejs-complete'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'leafgarland/typescript-vim.git'
@@ -231,6 +232,8 @@ autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 autocmd BufNewFile,BufReadPost *.scss set filetype=sass
 " mdファイルをmarkdownシンタックスに
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" json5ファイルをjsonシンタックスに
+autocmd BufNewFile,BufReadPost *.json5 set filetype=json
 
 " ルーラを表示
 set ruler
@@ -380,15 +383,17 @@ set cindent
 " 行頭でTabを有効に
 set smarttab
 " 拡張子別でタブ設定
-autocmd BufNewFile,BufRead *.tx   set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.tt   set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.ejs  set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.html set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.scss set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.css  set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.js   set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.ts   set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.pm   set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.tx    set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.tt    set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.ejs   set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.html  set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.scss  set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.css   set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.js    set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.json  set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.json5 set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.ts    set tabstop=2 shiftwidth=2   et
+autocmd BufNewFile,BufRead *.pm    set tabstop=2 shiftwidth=2   et
 " インデント後も続けてビジュアルモード
 :vnoremap < <gv
 :vnoremap > >gv
