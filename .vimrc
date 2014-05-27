@@ -232,8 +232,8 @@ autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 autocmd BufNewFile,BufReadPost *.scss set filetype=sass
 " mdファイルをmarkdownシンタックスに
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-" json5ファイルをjsonシンタックスに
-autocmd BufNewFile,BufReadPost *.json5 set filetype=json
+" json5ファイルをjsシンタックスに
+autocmd BufNewFile,BufReadPost *.json5 set filetype=javascript
 
 " ルーラを表示
 set ruler
@@ -382,18 +382,12 @@ set backspace=indent,eol,start
 set cindent
 " 行頭でTabを有効に
 set smarttab
-" 拡張子別でタブ設定
-autocmd BufNewFile,BufRead *.tx    set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.tt    set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.ejs   set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.html  set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.scss  set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.css   set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.js    set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.json  set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.json5 set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.ts    set tabstop=2 shiftwidth=2   et
-autocmd BufNewFile,BufRead *.pm    set tabstop=2 shiftwidth=2   et
+" ソフトタブ
+set expandtab
+" いかなるときも2つ
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 " インデント後も続けてビジュアルモード
 :vnoremap < <gv
 :vnoremap > >gv
