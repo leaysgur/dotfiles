@@ -117,7 +117,7 @@ endfunction
 function UpdateJsHintConf()
     let l:dir = expand('%:p:h')
     let l:jshintrc = s:find_jshintrc(l:dir)
-    let g:syntastic_javascript_jshint_conf = l:jshintrc
+    let g:syntastic_javascript_jshint_args = '--config ' . l:jshintrc
 endfunction
 
 au BufEnter * call UpdateJsHintConf()
@@ -228,8 +228,6 @@ endif
 
 " ejsファイルをhtmlと同じシンタックスに
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
-" scssファイルをsassと同じシンタックスに
-autocmd BufNewFile,BufReadPost *.scss set filetype=sass
 " mdファイルをmarkdownシンタックスに
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " json5ファイルをjsシンタックスに
