@@ -200,4 +200,4 @@ fi
 source $HOME/.aliases
 
 # Override by local
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local ]
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
