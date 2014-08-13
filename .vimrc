@@ -382,10 +382,10 @@ set cindent
 set smarttab
 " ソフトタブ
 set expandtab
-" いかなるときも2つ
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+" いかなるときも4つ
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 " インデント後も続けてビジュアルモード
 :vnoremap < <gv
 :vnoremap > >gv
