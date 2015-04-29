@@ -15,7 +15,7 @@ alias agignore='vi ~/.agignore'
 alias tmuxconf='vi ~/.tmux.conf'
 #alias tm='tmux' # .zshrcで作成
 alias ta='tmux a'
-alias tree='tree -I ".git|.sass-cache|node_modules|bower_components"'
+alias tree='tree -I ".git|.sass-cache|node_modules|bower_components|vendor|vendors"'
 alias tr='tree'
 
 ###################### Develop ######################
