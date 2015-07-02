@@ -18,7 +18,6 @@ endif
 " Let NeoBundle manage NeoBundle
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
 
 " Recommended to install
 NeoBundle 'Shougo/vimproc', {
@@ -52,6 +51,8 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'scrooloose/syntastic'
+
+call neobundle#end()
 
 " Installation check.
 NeoBundleCheck
