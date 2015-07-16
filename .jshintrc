@@ -14,11 +14,13 @@
     "expr": true,
     "sub": true,
     "browser": true,
+    "browserify": true,
     "devel": true,
+    "mocha": true,
     "node": true,
     "nonstandard": true,
     "validthis": true,
     "worker": true,
     "debug": true,
-    "predef": [ "define", "require", "module" ]
+    "predef": [ "define", "Promise" ]
 }
