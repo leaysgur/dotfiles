@@ -51,6 +51,7 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'editorconfig/editorconfig-vim'
 
 call neobundle#end()
 
