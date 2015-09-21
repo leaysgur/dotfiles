@@ -98,27 +98,30 @@ let g:syntastic_mode_map = {
 \  "active_filetypes": ["javascript"],
 \  "passive_filetypes": ["html", "perl"],
 \}
-" jshintrcの場所を動的にさかのぼってみつける
-function s:find_jshintrc(dir)
-    let l:found = globpath(a:dir, '.jshintrc')
+
+" ESlint試すのでしばし
+let g:syntastic_javascript_checkers = ['eslint']
+" .eslintrcの場所を動的にさかのぼってみつける
+function s:find_eslintrc(dir)
+    let l:found = globpath(a:dir, '.eslintrc')
     if filereadable(l:found)
         return l:found
     endif
 
     let l:parent = fnamemodify(a:dir, ':h')
     if l:parent != a:dir
-        return s:find_jshintrc(l:parent)
+        return s:find_eslintrc(l:parent)
     endif
 
-    return "~/.jshintrc"
+    return "~/.eslintrc"
 endfunction
-function UpdateJsHintConf()
+function UpdateEslintConf()
     let l:dir = expand('%:p:h')
-    let l:jshintrc = s:find_jshintrc(l:dir)
-    let g:syntastic_javascript_jshint_args = '--config ' . l:jshintrc
+    let l:eslintrc = s:find_eslintrc(l:dir)
+    let g:syntastic_javascript_eslint_args = '--config ' . l:eslintrc
 endfunction
 
-au BufEnter * call UpdateJsHintConf()
+au BufEnter * call UpdateEslintConf()
 
 
 "==============================================================================

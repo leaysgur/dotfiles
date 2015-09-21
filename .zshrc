@@ -17,7 +17,7 @@ fi
 if [ ! -e ~/.vimrc ]; then
   ln -s ~/dotfiles/.vimrc ~/.vimrc
   ln -s ~/dotfiles/.aliases ~/.aliases
-  ln -s ~/dotfiles/.jshintrc ~/.jshintrc
+  ln -s ~/dotfiles/.eslintrc ~/.eslintrc
   ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 fi
 
