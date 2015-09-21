@@ -5,7 +5,7 @@
     "node": true
   },
   "rules": {
-    "strict": 2,
+    "strict": [2, "global"],
 
     "default-case": 2,
     "no-self-compare": 2,
