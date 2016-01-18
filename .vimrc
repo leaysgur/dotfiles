@@ -101,6 +101,8 @@ let g:syntastic_mode_map = {
 
 " ESlint試すのでしばし
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
+" let g:syntastic_javascript_checkers = ['jshint']
 " .eslintrcの場所を動的にさかのぼってみつける
 function s:find_eslintrc(dir)
     let l:found = globpath(a:dir, '.eslintrc')
