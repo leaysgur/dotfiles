@@ -199,5 +199,8 @@ fi
 # Aliase
 source $HOME/.aliases
 
+# Enhancd
+[ -d ~/.enhancd ] && source ~/.enhanced/zsh/enhancd.zsh
+
 # Override by local
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

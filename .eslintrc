@@ -24,10 +24,11 @@
     "no-new-require": 2,
     "no-lonely-if": 2,
     "no-nested-ternary": 2,
-    "no-multiple-empty-lines": [2, { "max": 1 }],
+    "no-multiple-empty-lines": [2, { "max": 2 }],
     "no-unused-vars": [2, {"args": "all", "argsIgnorePattern": "^_"}],
     "no-unused-expressions": 0,
     "no-use-before-define": 0,
+    "semi": [2, "always"],
     "quotes": [2, "single"],
 
     "react/jsx-uses-vars": 1
