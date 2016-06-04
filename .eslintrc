@@ -12,6 +12,7 @@
   "plugins": [
     "react"
   ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "strict": [2, "global"],
 

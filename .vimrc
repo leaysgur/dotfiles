@@ -42,7 +42,6 @@ NeoBundle 'taichouchou2/html5.vim'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'jelera/vim-javascript-syntax'
-NeoBundle 'motemen/xslate-vim'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'myhere/vim-nodejs-complete'
 NeoBundle 'mattn/emmet-vim'
@@ -52,6 +51,8 @@ NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'mxw/vim-jsx'
 
 call neobundle#end()
 
@@ -96,11 +97,11 @@ let g:user_emmet_settings = {
 let g:syntastic_mode_map = {
 \  "mode": "passive",
 \  "active_filetypes": ["javascript"],
-\  "passive_filetypes": ["html", "perl"],
+\  "passive_filetypes": ["html"],
 \}
 
 " ESlint試すのでしばし
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 " let g:syntastic_javascript_checkers = ['jshint']
 " .eslintrcの場所を動的にさかのぼってみつける
@@ -117,6 +118,7 @@ function s:find_eslintrc(dir)
 
     return "~/.eslintrc"
 endfunction
+
 function UpdateEslintConf()
     let l:dir = expand('%:p:h')
     let l:eslintrc = s:find_eslintrc(l:dir)
