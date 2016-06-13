@@ -7,10 +7,16 @@
 
 
 "==============================================================================
+" Use VIM
+"==============================================================================
+if &compatible
+  set nocompatible
+endif
+
+
+"==============================================================================
 " NeoBundle settings.
 "==============================================================================
-set nocompatible " Be iMproved
-
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
@@ -68,26 +74,11 @@ filetype plugin indent on
 let g:use_emmet_complete_tag = 1
 let g:user_emmet_leader_key='<C-e>'
 let g:user_emmet_settings = {
-\  'lang' : 'ja',
+\  'variables': { 'lang' : 'ja' },
 \  'indentation' : '  ',
 \  'html': {
 \    'filters': 'html, fc'
 \  },
-\  'hbs' : {
-\    'extends' : 'html',
-\    'filters' : 'html, fc',
-\  },
-\  'ejs' : {
-\    'extends' : 'html',
-\    'filters' : 'html, fc',
-\  },
-\  'css': {
-\    'filters': 'html, fc'
-\  },
-\  'scss' : {
-\    'extends' : 'css',
-\    'filters' : 'html, fc',
-\  }
 \}
 
 
@@ -97,35 +88,41 @@ let g:user_emmet_settings = {
 let g:syntastic_mode_map = {
 \  "mode": "passive",
 \  "active_filetypes": ["javascript"],
-\  "passive_filetypes": ["html"],
 \}
 
-" ESlint試すのでしばし
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
-" let g:syntastic_javascript_checkers = ['jshint']
-" .eslintrcの場所を動的にさかのぼってみつける
-function s:find_eslintrc(dir)
-    let l:found = globpath(a:dir, '.eslintrc')
-    if filereadable(l:found)
-        return l:found
-    endif
+" jshintのとき
+let g:syntastic_javascript_checkers = ['jshint']
+au BufEnter * call UpdateJsHintConf()
 
-    let l:parent = fnamemodify(a:dir, ':h')
-    if l:parent != a:dir
-        return s:find_eslintrc(l:parent)
-    endif
+" eslintのとき
+" let g:syntastic_javascript_checkers = ['eslint', 'flow']
+" let g:syntastic_javascript_eslint_exec = 'eslint_d'
+" au BufEnter * call UpdateEslintConf()
 
-    return "~/.eslintrc"
+" .rcの場所を動的にさかのぼってみつける
+function s:_find_lintrc(dir, lintrc)
+  let l:found = globpath(a:dir, a:lintrc)
+  if filereadable(l:found)
+      return l:found
+  endif
+
+  let l:parent = fnamemodify(a:dir, ':h')
+  if l:parent != a:dir
+      return s:_find_lintrc(l:parent, a:lintrc)
+  endif
+
+  return "~/" . lintrc
 endfunction
 
 function UpdateEslintConf()
-    let l:dir = expand('%:p:h')
-    let l:eslintrc = s:find_eslintrc(l:dir)
-    let g:syntastic_javascript_eslint_args = '--config ' . l:eslintrc
+  let l:eslintrc = s:_find_lintrc(expand('%:p:h'), '.eslintrc')
+  let g:syntastic_javascript_eslint_args = '--config ' . l:eslintrc
 endfunction
 
-au BufEnter * call UpdateEslintConf()
+function UpdateJsHintConf()
+  let l:jshintrc = s:_find_lintrc(expand('%:p:h'), '.jshintrc')
+  let g:syntastic_javascript_jshint_conf = l:jshintrc
+endfunction
 
 
 "==============================================================================
@@ -208,6 +205,8 @@ set write
 "==============================================================================
 " Unite settings.
 "==============================================================================
+" 検索はagで
+let g:unite_source_grep_command = 'ag'
 " 入力モードで開始しない
 let g:unite_enable_start_insert=0
 " 最近使ったファイルの一覧
@@ -246,6 +245,10 @@ set ruler
 " 括弧入力で対応する括弧を一瞬強調
 set showmatch
 
+
+"==============================================================================
+" vim-indent-guides settings.
+"==============================================================================
 " インデントガイドを有効に
 let g:indent_guides_enable_on_vim_startup = 1
 " ガイドの幅
@@ -261,11 +264,10 @@ hi IndentGuidesEven ctermbg=yellow
 
 
 "==============================================================================
-" ステータスライン関係
+" vim-lightline settings.
 "==============================================================================
 " ステータスラインを常に表示
 set laststatus=2
-" Vim-lightline
 let g:lightline = {
 \  'colorscheme': 'solarized',
 \  'component': {
@@ -276,6 +278,7 @@ let g:lightline = {
 \  },
 \  'subseparator': { 'left': ' ', 'right': '/' }
 \}
+
 
 "==============================================================================
 " 検索関係
@@ -302,15 +305,9 @@ set fenc=utf-8
 " 対応する文字コード
 set fencs=utf-8,iso-2022-jp,euc-jp,cp932
 set langmenu=ja_JP.utf-8
-
-
-"==============================================================================
-" デフォルトエンコーディング
-"   □とか○の文字があってもカーソル位置がずれないようにする
-"   文字コードの自動判別機能は下に記述
-"==============================================================================
 set termencoding=utf-8
 set fileformats=unix,dos,mac
+" □とか○の文字があってもカーソル位置がずれないようにする
 if exists('&ambiwidth')
   set ambiwidth=double
 endif
@@ -329,6 +326,7 @@ set number
 set wrap
 " BSでindent, 改行, 挿入開始前の文字を削除
 set backspace=indent,eol,start
+
 " インデント類の設定
 set cindent
 " 行頭でTabを有効に
@@ -342,11 +340,13 @@ set shiftwidth=2
 " インデント後も続けてビジュアルモード
 :vnoremap < <gv
 :vnoremap > >gv
+
 " 不可視文字の表示
 set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 " 勝手にコメントアウトされるのを防ぐ
 autocmd FileType * setlocal formatoptions-=ro
+
 " 保存時に行末の空白を除去する
 function! s:remove_dust()
   let cursor = getpos(".")
@@ -355,10 +355,12 @@ function! s:remove_dust()
   unlet cursor
 endfunction
 autocmd BufWritePre * call <SID>remove_dust()
+
 " Escキーを早く
 set timeout timeoutlen=200 ttimeoutlen=75
 " ノーマルモードでEnterキーで改行挿入
 noremap <CR> o<ESC>
+
 " vimrcもlocalで欲しい
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
