@@ -121,7 +121,7 @@ endfunction
 
 function UpdateJsHintConf()
   let l:jshintrc = s:_find_lintrc(expand('%:p:h'), '.jshintrc')
-  let g:syntastic_javascript_jshint_conf = l:jshintrc
+  let g:syntastic_javascript_jshint_args = '--config ' . l:jshintrc
 endfunction
 
 
