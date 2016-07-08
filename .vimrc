@@ -57,7 +57,6 @@ NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mxw/vim-jsx'
 
 call neobundle#end()
@@ -91,13 +90,13 @@ let g:syntastic_mode_map = {
 \}
 
 " jshintのとき
-let g:syntastic_javascript_checkers = ['jshint']
-au BufEnter * call UpdateJsHintConf()
+" let g:syntastic_javascript_checkers = ['jshint']
+" au BufEnter * call UpdateJsHintConf()
 
 " eslintのとき
-" let g:syntastic_javascript_checkers = ['eslint', 'flow']
-" let g:syntastic_javascript_eslint_exec = 'eslint_d'
-" au BufEnter * call UpdateEslintConf()
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
+au BufEnter * call UpdateEslintConf()
 
 " .rcの場所を動的にさかのぼってみつける
 function s:_find_lintrc(dir, lintrc)
