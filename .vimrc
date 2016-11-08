@@ -44,7 +44,7 @@ NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'taichouchou2/html5.vim'
+NeoBundle 'othree/html5.vim'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'jelera/vim-javascript-syntax'
@@ -94,7 +94,7 @@ let g:syntastic_mode_map = {
 " au BufEnter * call UpdateJsHintConf()
 
 " eslintのとき
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 au BufEnter * call UpdateEslintConf()
 
@@ -359,6 +359,8 @@ autocmd BufWritePre * call <SID>remove_dust()
 set timeout timeoutlen=200 ttimeoutlen=75
 " ノーマルモードでEnterキーで改行挿入
 noremap <CR> o<ESC>
+" Escのかわり
+imap <c-j> <esc>
 
 " vimrcもlocalで欲しい
 if filereadable(expand('~/.vimrc.local'))
