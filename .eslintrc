@@ -20,6 +20,8 @@
     "no-self-compare": 2,
     "no-else-return": 2,
     "no-throw-literal": 2,
+    "no-console": 0,
+    "no-debugger": 0,
     "no-void": 2,
     "no-var": 2,
     "no-new-require": 2,

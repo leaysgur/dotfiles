@@ -57,7 +57,6 @@ NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'mxw/vim-jsx'
 
 call neobundle#end()
 
