@@ -58,6 +58,7 @@ NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'Quramy/tsuquyomi'
 
 call neobundle#end()
 
@@ -86,8 +87,12 @@ let g:user_emmet_settings = {
 "==============================================================================
 let g:syntastic_mode_map = {
 \  "mode": "passive",
-\  "active_filetypes": ["javascript"],
+\  "active_filetypes": ["javascript", "typescript"],
 \}
+
+" for .ts
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 " jshintのとき
 " let g:syntastic_javascript_checkers = ['jshint']
@@ -96,7 +101,7 @@ let g:syntastic_mode_map = {
 " eslintのとき
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
-au BufEnter * call UpdateEslintConf()
+au BufEnter * call UpdateEsLintConf()
 
 " .rcの場所を動的にさかのぼってみつける
 function s:_find_lintrc(dir, lintrc)
@@ -113,7 +118,7 @@ function s:_find_lintrc(dir, lintrc)
   return "~/" . lintrc
 endfunction
 
-function UpdateEslintConf()
+function UpdateEsLintConf()
   let l:eslintrc = s:_find_lintrc(expand('%:p:h'), '.eslintrc')
   let g:syntastic_javascript_eslint_args = '--config ' . l:eslintrc
 endfunction

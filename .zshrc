@@ -15,10 +15,7 @@ fi
 
 # Setup
 if [ ! -e ~/.vimrc ]; then
-  ln -s ~/dotfiles/.vimrc ~/.vimrc
-  ln -s ~/dotfiles/.aliases ~/.aliases
-  ln -s ~/dotfiles/.eslintrc ~/.eslintrc
-  ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+  ln -s ~/dotfiles/.* ~/
 fi
 
 # Ctrl + a とかやりたい
