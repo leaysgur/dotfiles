@@ -57,6 +57,7 @@ NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'leafgarland/typescript-vim'
 
 call neobundle#end()
 
