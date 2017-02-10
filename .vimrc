@@ -115,7 +115,7 @@ function s:_find_lintrc(dir, lintrc)
       return s:_find_lintrc(l:parent, a:lintrc)
   endif
 
-  return "~/" . lintrc
+  return "~/" . a:lintrc
 endfunction
 
 function UpdateEsLintConf()
