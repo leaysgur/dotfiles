@@ -203,6 +203,10 @@ fi
 # Aliase
 source $HOME/.aliases
 
+# zmv
+autoload -Uz zmv
+alias zmv='noglob zmv -W'
+
 # Enhancd
 [ -d ~/.enhancd ] && source ~/.enhanced/zsh/enhancd.zsh
 
