@@ -99,7 +99,7 @@ let g:syntastic_typescript_checkers = ['tsuquyomi']
 " au BufEnter * call UpdateJsHintConf()
 
 " eslintのとき
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 au BufEnter * call UpdateEsLintConf()
 
