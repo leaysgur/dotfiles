@@ -15,7 +15,14 @@ fi
 
 # Setup
 if [ ! -e ~/.vimrc ]; then
-  ln -s ~/dotfiles/.* ~/
+  ln -s ~/dotfiles/.zshrc ~/
+  ln -s ~/dotfiles/.aliases ~/
+  ln -s ~/dotfiles/.vimrc ~/
+  ln -s ~/dotfiles/.eslintrc ~/
+  ln -s ~/dotfiles/.agignore ~/
+  ln -s ~/dotfiles/.jshintrc ~/
+  ln -s ~/dotfiles/.tmux.conf ~/
+  ln -s ~/dotfiles/tsconfig.json ~/
 fi
 
 # Ctrl + a とかやりたい
@@ -195,6 +202,10 @@ fi
 
 # Aliase
 source $HOME/.aliases
+
+# zmv
+autoload -Uz zmv
+alias zmv='noglob zmv -W'
 
 # Enhancd
 [ -d ~/.enhancd ] && source ~/.enhanced/zsh/enhancd.zsh
