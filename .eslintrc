@@ -10,9 +10,13 @@
     "jsx": true
   },
   "plugins": [
-    "react"
+    "react", "flowtype"
   ],
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
+  ],
   "rules": {
     "strict": [2, "global"],
 
