@@ -1,12 +1,11 @@
-###################### Util ######################
-alias cl='clear'
 alias la='ls -laF'
 alias ll='ls -laF'
-alias vi='vim'
-alias vo='vim'
-alias vu='vim'
-alias bi='vim'
-alias bo='vim'
+
+alias vo='vi'
+alias vu='vi'
+alias bi='vi'
+alias bo='vi'
+
 alias vimrc='vi ~/.vimrc'
 alias bashrc='vi ~/.bashrc'
 alias zshrc='vi ~/.zshrc'
@@ -16,9 +15,7 @@ alias tmuxconf='vi ~/.tmux.conf'
 #alias tm='tmux' # .zshrcで作成
 alias ta='tmux a'
 alias tree='tree -I ".git|.sass-cache|node_modules|bower_components|vendor|vendors"'
-alias tr='tree'
 
-###################### Develop ######################
 alias nginxconf='sudo vi /etc/nginx/conf.d/virtual.conf'
 alias nginxtest='sudo /etc/init.d/nginx configtest'
 alias nginxreload='sudo /etc/init.d/nginx reload'
@@ -27,11 +24,11 @@ alias gs='git status'
 alias ga='git add'
 alias gd='git diff'
 alias gb='git branch'
+alias gr='git reset'
 alias gc='git commit -v'
 alias gca='git commit --amend'
 alias gch='git checkout'
 
-###################### Others ######################
 alias deld='find ./ -name "\._*" -exec rm {} \; && find ./ -name "\.DS_Store" -exec rm {} \;'
 alias delc='find ./ -name "*~" -exec rm {} \;'
 alias delt='find ./ -name "*\.TMP" -exec rm {} \;'
