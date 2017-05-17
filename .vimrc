@@ -1,4 +1,5 @@
 "==============================================================================
+
 " .vimrc
 "==============================================================================
 " Requirement:
@@ -55,7 +56,7 @@ NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'surround.vim'
 NeoBundle 'vim-scripts/matchit.zip'
-NeoBundle 'scrooloose/syntastic'
+NeoBundle 'w0rp/ale'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'Quramy/tsuquyomi'
@@ -83,50 +84,11 @@ let g:user_emmet_settings = {
 
 
 "==============================================================================
-" Syntastic settings.
+" ALE settings.
 "==============================================================================
-let g:syntastic_mode_map = {
-\  "mode": "passive",
-\  "active_filetypes": ["javascript", "typescript"],
+let g:ale_linters = {
+\   'javascript': ['eslint', 'flow'],
 \}
-
-" for .ts
-let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi']
-
-" jshintのとき
-" let g:syntastic_javascript_checkers = ['jshint']
-" au BufEnter * call UpdateJsHintConf()
-
-" eslintのとき
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
-au BufEnter * call UpdateEsLintConf()
-
-" .rcの場所を動的にさかのぼってみつける
-function s:_find_lintrc(dir, lintrc)
-  let l:found = globpath(a:dir, a:lintrc)
-  if filereadable(l:found)
-      return l:found
-  endif
-
-  let l:parent = fnamemodify(a:dir, ':h')
-  if l:parent != a:dir
-      return s:_find_lintrc(l:parent, a:lintrc)
-  endif
-
-  return "~/" . a:lintrc
-endfunction
-
-function UpdateEsLintConf()
-  let l:eslintrc = s:_find_lintrc(expand('%:p:h'), '.eslintrc')
-  let g:syntastic_javascript_eslint_args = '--config ' . l:eslintrc
-endfunction
-
-function UpdateJsHintConf()
-  let l:jshintrc = s:_find_lintrc(expand('%:p:h'), '.jshintrc')
-  let g:syntastic_javascript_jshint_args = '--config ' . l:jshintrc
-endfunction
 
 
 "==============================================================================

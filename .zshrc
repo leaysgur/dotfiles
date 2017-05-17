@@ -208,7 +208,7 @@ autoload -Uz zmv
 alias zmv='noglob zmv -W'
 
 # Enhancd
-[ -d ~/.enhancd ] && source ~/.enhancd/zsh/enhancd.zsh
+[ -d ~/.enhancd ] && source ~/.enhancd/init.sh
 
 # Override by local
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

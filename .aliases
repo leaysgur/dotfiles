@@ -1,10 +1,11 @@
 alias la='ls -laF'
 alias ll='ls -laF'
 
-alias vo='vi'
-alias vu='vi'
-alias bi='vi'
-alias bo='vi'
+alias vo='vim'
+alias vu='vim'
+alias bi='vim'
+alias bo='vim'
+alias vi='vim'
 
 alias vimrc='vi ~/.vimrc'
 alias bashrc='vi ~/.bashrc'
