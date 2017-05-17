@@ -1,14 +1,14 @@
 "==============================================================================
-
 " .vimrc
 "==============================================================================
 " Requirement:
 "   using NeoBundle for all plug-in installation.
 "   using Solarized color scheme.
+"   Vim v8 for ALE.
 
 
 "==============================================================================
-" Use VIM
+" Use Vim
 "==============================================================================
 if &compatible
   set nocompatible
@@ -26,46 +26,47 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-" Recommended to install
 NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows': 'echo "Sorry, cannot update vimproc binary file in Windows."',
-      \     'cygwin':  'make -f make_cygwin.mak',
-      \     'mac':     'make -f make_mac.mak',
-      \     'unix':    'make -f make_unix.mak',
-      \    },
-      \ }
-" My Bundles.
+\  'build' : {
+\    'windows': 'echo "Sorry, cannot update vimproc binary file in Windows."',
+\    'cygwin':  'make -f make_cygwin.mak',
+\    'mac':     'make -f make_mac.mak',
+\    'unix':    'make -f make_unix.mak',
+\  },
+\ }
+
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'Shougo/vimfiler'
+
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'surround.vim'
+NeoBundle 'vim-scripts/matchit.zip'
+
 NeoBundle 'othree/html5.vim'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'elzr/vim-json'
-NeoBundle 'myhere/vim-nodejs-complete'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'surround.vim'
-NeoBundle 'vim-scripts/matchit.zip'
-NeoBundle 'w0rp/ale'
-NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'myhere/vim-nodejs-complete'
+
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'editorconfig/editorconfig-vim'
+
+NeoBundle 'w0rp/ale'
 NeoBundle 'Quramy/tsuquyomi'
 
 call neobundle#end()
 
 " Installation check.
 NeoBundleCheck
-filetype plugin indent on
 
 
 "==============================================================================
@@ -169,25 +170,10 @@ set write
 
 
 "==============================================================================
-" Unite settings.
-"==============================================================================
-" 検索はagで
-let g:unite_source_grep_command = 'ag'
-" 入力モードで開始しない
-let g:unite_enable_start_insert=0
-" 最近使ったファイルの一覧
-noremap <C-U><C-R> :Unite -vertical file_mru<CR>
-" ファイルとバッファ
-noremap <C-U><C-U> :Unite -vertical buffer file_mru<CR>
-" Outline
-noremap <C-U><C-O> :Unite -no-quit -vertical -winwidth=40 outline<CR>
-
-
-"==============================================================================
 " 見た目関係
 "==============================================================================
 " いちおう、Syntaxを有効にしてから
-syntax on
+syntax enable
 " カラースキームを使用
 colorscheme solarized
 set background=dark
@@ -203,8 +189,6 @@ endif
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 " mdファイルをmarkdownシンタックスに
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-" json5ファイルをjsシンタックスに
-autocmd BufNewFile,BufReadPost *.json5 set filetype=javascript
 
 " ルーラを表示
 set ruler
@@ -282,6 +266,8 @@ endif
 "==============================================================================
 " その他の設定
 "==============================================================================
+filetype plugin indent on
+
 " .swp/~ は、邪魔にならない場所に
 set directory=/tmp
 set backupdir=/tmp
@@ -326,8 +312,6 @@ autocmd BufWritePre * call <SID>remove_dust()
 set timeout timeoutlen=200 ttimeoutlen=75
 " ノーマルモードでEnterキーで改行挿入
 noremap <CR> o<ESC>
-" Escのかわり
-imap <c-j> <esc>
 
 " vimrcもlocalで欲しい
 if filereadable(expand('~/.vimrc.local'))
