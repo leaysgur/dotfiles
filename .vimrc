@@ -54,14 +54,12 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'elzr/vim-json'
-NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'myhere/vim-nodejs-complete'
 
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'editorconfig/editorconfig-vim'
 
 NeoBundle 'w0rp/ale'
-NeoBundle 'Quramy/tsuquyomi'
 
 call neobundle#end()
 
@@ -88,6 +86,7 @@ let g:user_emmet_settings = {
 " ALE settings.
 "==============================================================================
 let g:ale_linters = {
+\   'html': [],
 \   'javascript': ['eslint', 'flow'],
 \}
 
