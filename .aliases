@@ -17,10 +17,6 @@ alias tmuxconf='vi ~/.tmux.conf'
 alias ta='tmux a'
 alias tree='tree -I ".git|.sass-cache|node_modules|bower_components|vendor|vendors"'
 
-alias nginxconf='sudo vi /etc/nginx/conf.d/virtual.conf'
-alias nginxtest='sudo /etc/init.d/nginx configtest'
-alias nginxreload='sudo /etc/init.d/nginx reload'
-
 alias gs='git status'
 alias ga='git add'
 alias gd='git diff'
