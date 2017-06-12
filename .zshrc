@@ -13,18 +13,6 @@ if [ -f ~/.nodebrew/nodebrew ]; then
     export PATH=$HOME/.nodebrew/current/bin:$PATH
 fi
 
-# Setup
-if [ ! -e ~/.vimrc ]; then
-  ln -s ~/dotfiles/.zshrc ~/
-  ln -s ~/dotfiles/.aliases ~/
-  ln -s ~/dotfiles/.vimrc ~/
-  ln -s ~/dotfiles/.eslintrc ~/
-  ln -s ~/dotfiles/.agignore ~/
-  ln -s ~/dotfiles/.jshintrc ~/
-  ln -s ~/dotfiles/.tmux.conf ~/
-  ln -s ~/dotfiles/tsconfig.json ~/
-fi
-
 # Ctrl + a とかやりたい
 bindkey -e
 
