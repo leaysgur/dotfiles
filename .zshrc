@@ -1,30 +1,7 @@
-# Export path
-export PATH=$PATH:$HOME/bin
-export PATH
-export PATH=/usr/sbin:$PATH
-export PATH=/usr/local/bin:$PATH
-export PATH=/sbin:$PATH
-export PATH=/usr/local/apache/bin:$PATH
-export PATH=$HOME/bin:$PATH
-export PATH=.:$PATH
-
-# Export path for nodebrew
-if [ -f ~/.nodebrew/nodebrew ]; then
-    export PATH=$HOME/.nodebrew/current/bin:$PATH
-fi
-
-# Ctrl + a とかやりたい
-bindkey -e
-
-# Ctrl + r で履歴さかのぼり
-bindkey "^R" history-incremental-search-backward
-
 # 基本設定
 # ----------------------------
-# 言語設定
+export PATH=/bin:/usr/bin:/usr/local/bin
 export LANG=ja_JP.UTF-8
-
-# エディタはvim
 export EDITOR=vim
 
 # PCRE 互換の正規表現を使う
@@ -41,6 +18,12 @@ setopt interactive_comments
 
 # もしかして機能
 setopt correct
+
+# Ctrl + a とかやりたい
+bindkey -e
+
+# Ctrl + r で履歴さかのぼり
+bindkey "^R" history-incremental-search-backward
 
 
 # 補完機能
@@ -63,9 +46,6 @@ setopt auto_menu
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
 
-# ディレクトリ名だけでcdする
-setopt auto_cd
-
 # cdの履歴を記録
 setopt auto_pushd
 
@@ -77,6 +57,7 @@ setopt pushd_ignore_dups
 
 # タイポを訂正
 setopt correct
+
 
 # 履歴関連
 # ----------------------------
@@ -155,7 +136,7 @@ function _update_vcs_info_msg() {
 }
 add-zsh-hook precmd _update_vcs_info_msg
 
-# コマンドを実行するときに右プロンプトを消す。他の端末等にコピペするときに便利。
+# コマンドを実行するときに右プロンプトを消す。他の端末等にコピペするときに便利
 setopt transient_rprompt
 
 # コマンドラインでも # 以降をコメントと見なす
@@ -174,18 +155,13 @@ PROMPT2='[%n]> '
 SPROMPT="%{$fg[red]%}%{$suggest%}もしかして %B%r%b %{$fg[red]%}? [y,n,a,e]:${reset_color} "
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
-# tmux起動時に状況判別
-if [ $SHLVL = 1 ]; then
-  alias tm="tmux a || tmux new-s \; source-file ~/.tmux.session"
-fi
-
 # tmuxでSSHキーを引き回す
 SOCK="/tmp/ssh-agent-$USER"
 if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
 then
-        rm -f $SOCK
-        ln -sf $SSH_AUTH_SOCK $SOCK
-        export SSH_AUTH_SOCK=$SOCK
+  rm -f $SOCK
+  ln -sf $SSH_AUTH_SOCK $SOCK
+  export SSH_AUTH_SOCK=$SOCK
 fi
 
 # Aliase
@@ -194,6 +170,11 @@ source $HOME/.aliases
 # zmv
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
+
+# Export path for nodebrew
+if [ -f ~/.nodebrew/nodebrew ]; then
+    export PATH=$HOME/.nodebrew/current/bin:$PATH
+fi
 
 # Enhancd
 [ -d ~/.enhancd ] && source ~/.enhancd/init.sh
