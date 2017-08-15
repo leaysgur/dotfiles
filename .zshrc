@@ -1,6 +1,6 @@
 # 基本設定
 # ----------------------------
-export PATH=/bin:/usr/bin:/usr/local/bin
+export PATH=/bin:/usr/local/bin:/usr/bin
 export LANG=ja_JP.UTF-8
 export EDITOR=vim
 
