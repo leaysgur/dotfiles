@@ -186,9 +186,11 @@ if !has('gui_running')
   set t_Co=256
 endif
 
-" ejsファイルをhtmlと同じシンタックスに
+" .flowファイルをhtmlと同じシンタックスに
+autocmd BufNewFile,BufReadPost *.flow set filetype=javascript
+" .ejsファイルをhtmlと同じシンタックスに
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
-" mdファイルをmarkdownシンタックスに
+" .mdファイルをmarkdownシンタックスに
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.pcss set filetype=scss
 
