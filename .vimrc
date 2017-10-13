@@ -52,9 +52,10 @@ NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'othree/yajs.vim'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'myhere/vim-nodejs-complete'
+NeoBundle 'posva/vim-vue'
 
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'editorconfig/editorconfig-vim'
@@ -189,6 +190,7 @@ endif
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 " mdファイルをmarkdownシンタックスに
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.pcss set filetype=scss
 
 " ルーラを表示
 set ruler
