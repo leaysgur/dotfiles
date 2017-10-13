@@ -186,6 +186,10 @@ if !has('gui_running')
   set t_Co=256
 endif
 
+" for pangloss/vim-javascript
+let g:javascript_plugin_flow = 1
+let g:javascript_plugin_jsdoc = 1
+
 " .flowファイルをhtmlと同じシンタックスに
 autocmd BufNewFile,BufReadPost *.flow set filetype=javascript
 " .ejsファイルをhtmlと同じシンタックスに
