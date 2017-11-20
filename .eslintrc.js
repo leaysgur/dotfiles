@@ -1,13 +1,9 @@
 module.exports = {
-  env: {
-    browser: true,
-    node: true,
-    jest: true,
-    es6: true
-  },
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'module',
+    ecmaFeatures: { jsx: true },
   },
   plugins: [
     'react',
@@ -17,26 +13,33 @@ module.exports = {
     'plugin:react/recommended',
   ],
   rules: {
-    'strict': [2, 'global'],
+    'strict': ['error', 'global'],
 
-    'default-case': 2,
-    'no-self-compare': 2,
-    'no-else-return': 2,
-    'no-throw-literal': 2,
-    'no-console': 0,
-    'no-debugger': 0,
-    'no-void': 2,
-    'no-var': 2,
-    'no-new-require': 2,
-    'no-lonely-if': 2,
-    'no-nested-ternary': 2,
-    'no-multiple-empty-lines': [2, { 'max': 2 }],
-    'no-unused-vars': [2, {'args': 'all', 'argsIgnorePattern': '^_'}],
-    'no-unused-expressions': 0,
-    'no-use-before-define': 0,
-    'semi': [2, 'always'],
-    'quotes': [2, 'single'],
+    'default-case': 'error',
+    'no-self-compare': 'error',
+    'no-else-return': 'error',
+    'no-throw-literal': 'error',
+    'no-console': 'off',
+    'no-debugger': 'off',
+    'no-void': 'error',
+    'no-var': 'error',
+    'no-new-require': 'error',
+    'no-lonely-if': 'error',
+    'no-nested-ternary': 'error',
+    'no-multiple-empty-lines': ['error', { 'max': 2 }],
+    'no-unused-vars': ['error', {'args': 'all', 'argsIgnorePattern': '^_'}],
+    'no-unused-expressions': 'off',
+    'no-use-before-define': 'off',
+    'prefer-const': 'error',
+    'semi': ['error', 'always'],
+    'quotes': ['error', 'single'],
 
-    'react/jsx-uses-vars': 1
-  }
+    'react/jsx-uses-vars': 'warning'
+  },
+  env: {
+    browser: true,
+    node: true,
+    jest: true,
+    es6: true
+  },
 };
