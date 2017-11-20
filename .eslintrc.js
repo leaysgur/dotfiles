@@ -1,5 +1,4 @@
 module.exports = {
-  parser: 'babel-eslint',
   env: {
     browser: true,
     node: true,
@@ -9,17 +8,13 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
   },
   plugins: [
-    'react', 'flowtype'
+    'react',
   ],
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:flowtype/recommended'
   ],
   rules: {
     'strict': [2, 'global'],
