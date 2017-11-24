@@ -88,7 +88,7 @@ let g:user_emmet_settings = {
 "==============================================================================
 let g:ale_linters = {
 \   'html': [],
-\   'javascript': ['eslint', 'flow'],
+\   'javascript': ['eslint'],
 \}
 let g:ale_lint_delay = 1000
 
@@ -187,11 +187,8 @@ if !has('gui_running')
 endif
 
 " for pangloss/vim-javascript
-let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
 
-" .flowファイルをhtmlと同じシンタックスに
-autocmd BufNewFile,BufReadPost *.flow set filetype=javascript
 " .ejsファイルをhtmlと同じシンタックスに
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 " .mdファイルをmarkdownシンタックスに
