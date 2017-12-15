@@ -53,9 +53,12 @@ NeoBundle 'othree/html5.vim'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'maxmellon/vim-jsx-pretty'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'myhere/vim-nodejs-complete'
 NeoBundle 'posva/vim-vue'
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'elixir-editors/vim-elixir'
 
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'editorconfig/editorconfig-vim'
@@ -189,9 +192,8 @@ endif
 " for pangloss/vim-javascript
 let g:javascript_plugin_jsdoc = 1
 
-" .ejsファイルをhtmlと同じシンタックスに
+" シンタックスのエイリアス
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
-" .mdファイルをmarkdownシンタックスに
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.pcss set filetype=scss
 
