@@ -92,6 +92,7 @@ let g:user_emmet_settings = {
 let g:ale_linters = {
 \   'html': [],
 \   'javascript': ['eslint'],
+\   'elixir': ['credo'],
 \}
 let g:ale_lint_delay = 1000
 
