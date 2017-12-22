@@ -1,7 +1,7 @@
 # 基本設定
 # ----------------------------
 export PATH=/bin:/sbin:/usr/local/bin:/usr/bin:/usr/sbin
-export LANG=ja_JP.UTF-8
+export LANG=en_US.UTF-8
 export EDITOR=vim
 
 # PCRE 互換の正規表現を使う
@@ -131,7 +131,7 @@ fi
 
 function _update_vcs_info_msg() {
   psvar=()
-  LANG=ja-JP.UTF-8 vcs_info
+  LANG=en_US.UTF-8 vcs_info
   [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 add-zsh-hook precmd _update_vcs_info_msg
