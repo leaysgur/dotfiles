@@ -92,6 +92,7 @@ let g:user_emmet_settings = {
 let g:ale_linters = {
 \   'html': [],
 \   'javascript': ['eslint'],
+\   'typescript': ['tslint', 'tsserver', 'typecheck'],
 \   'elixir': ['credo'],
 \}
 let g:ale_lint_delay = 1000
@@ -112,9 +113,9 @@ let g:neocomplcache_enable_camel_case_completion  =  1
 " ポップアップメニューで表示される候補の数
 let g:neocomplcache_max_list = 5
 " 補完を開始する文字数
-let g:neocomplcache_auto_completion_start_length = 2
+let g:neocomplcache_auto_completion_start_length = 3
 " シンタックスをキャッシュするときの最小文字長
-let g:neocomplcache_min_syntax_length = 2
+let g:neocomplcache_min_syntax_length = 3
 " ディクショナリ定義
 let g:neocomplcache_dictionary_filetype_lists = {
   \ 'default' : '',
