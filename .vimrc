@@ -96,7 +96,14 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'typescript': ['tslint', 'tsserver', 'typecheck'],
 \   'elixir': ['credo'],
+\   'rust': ['cargo', 'rls'],
 \}
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+let g:ale_rust_rls_toolchain = 'stable'
 let g:ale_lint_delay = 1000
 
 
