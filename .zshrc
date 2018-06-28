@@ -173,11 +173,20 @@ alias zmv='noglob zmv -W'
 
 # Export path for nodebrew
 if [ -f ~/.nodebrew/nodebrew ]; then
-    export PATH=$HOME/.nodebrew/current/bin:$PATH
+  export PATH=$HOME/.nodebrew/current/bin:$PATH
+fi
+
+# Export path for rust
+if [ -d ~/.cargo/bin ]; then
+  export PATH=$HOME/.cargo/bin:$PATH
 fi
 
 # Enhancd
-[ -d ~/.enhancd ] && source ~/.enhancd/init.sh
+if [ -d ~/.enhancd ]; then
+  source ~/.enhancd/init.sh
+fi
 
 # Override by local
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+if [ -f ~/.zshrc.local ]; then
+  source ~/.zshrc.local
+fi
