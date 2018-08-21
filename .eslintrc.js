@@ -7,6 +7,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    'import',
   ],
   extends: [
     'eslint:recommended',
@@ -33,6 +34,8 @@ module.exports = {
     'prefer-const': 'error',
     'semi': ['error', 'always'],
     'quotes': ['error', 'single'],
+
+    'import/order': 'error',
 
     'react/jsx-uses-vars': 'warn'
   },
