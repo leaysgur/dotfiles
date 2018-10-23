@@ -23,9 +23,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein')
 
   " Devtool
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('roxma/nvim-yarp')
-  call dein#add('roxma/vim-hug-neovim-rpc')
   call dein#add('w0rp/ale')
 
   " View
@@ -98,11 +95,6 @@ noremap <CR> o<ESC>
 "==============================================================================
 syntax enable
 
-" ステータスラインとかに色つかないときのおまじない
-if !has('gui_running')
-  set t_Co=256
-endif
-
 " シンタックスのエイリアス
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -143,10 +135,34 @@ endif
 
 
 "==============================================================================
+" Completion
+"==============================================================================
+" オムニ補完をTabで使う
+function InsertTabWrapper()
+  if pumvisible()
+    return "\<Down>"
+  endif
+
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k\|<\|/'
+    return "\<TAB>"
+  elseif exists('&omnifunc') && &omnifunc == ''
+    return "\<C-n>"
+  else
+    return "\<C-x>\<C-o>"
+  endif
+endfunction
+
+inoremap <TAB> <C-r>=InsertTabWrapper()<CR>
+" いきなり<S-Tab>することはないし、候補選択時のためだけにマッピングしておく
+inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
+
+
+"==============================================================================
 " emmet
 "==============================================================================
 let g:use_emmet_complete_tag = 1
-let g:user_emmet_leader_key='<C-e>'
+let g:user_emmet_leader_key = '<C-e>'
 let g:user_emmet_settings = {
 \  'variables': { 'lang' : 'ja' },
 \  'indentation' : '  ',
@@ -177,14 +193,6 @@ let g:ale_completion_enabled = 1
 let g:ale_rust_rls_toolchain = 'stable'
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_typescript_prettier_use_local_config = 1
-
-
-"==============================================================================
-" deoplete
-"==============================================================================
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><TAB>   pumvisible() ? "\<Down>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<Up>"   : "\<S-TAB>"
 
 
 "==============================================================================
