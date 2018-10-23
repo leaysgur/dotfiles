@@ -37,7 +37,8 @@ module.exports = {
 
     'import/order': 'error',
 
-    'react/jsx-uses-vars': 'warn'
+    'react/jsx-uses-vars': 'warn',
+    'react/prop-types': 'off',
   },
   env: {
     browser: true,
