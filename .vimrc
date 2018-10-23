@@ -2,7 +2,6 @@
 " .vimrc
 "
 " require Vim v8 for dein and ale.
-" using Solarized color scheme.
 "==============================================================================
 
 
@@ -30,7 +29,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('w0rp/ale')
 
   " View
-  call dein#add('altercation/vim-colors-solarized')
   call dein#add('itchyny/lightline.vim')
   call dein#add('nathanaelkane/vim-indent-guides')
 
@@ -94,15 +92,11 @@ set shiftwidth=2
 " ノーマルモードでEnterキーで改行挿入
 noremap <CR> o<ESC>
 
+
 "==============================================================================
 " Theme, Syntax
 "==============================================================================
 syntax enable
-
-colorscheme solarized
-set background=dark
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
 
 " ステータスラインとかに色つかないときのおまじない
 if !has('gui_running')
@@ -113,9 +107,6 @@ endif
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.pcss set filetype=scss
-
-" for pangloss/vim-javascript
-let g:javascript_plugin_jsdoc = 1
 
 
 "==============================================================================
@@ -219,7 +210,6 @@ hi IndentGuidesEven ctermbg=yellow
 " ステータスラインを常に表示
 set laststatus=2
 let g:lightline = {
-\  'colorscheme': 'solarized',
 \  'component': {
 \    'readonly': '%{&readonly?"ReadOnly |":"Editable |"}',
 \  },
