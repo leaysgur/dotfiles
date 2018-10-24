@@ -25,11 +25,9 @@ if dein#load_state('~/.cache/dein')
   " Devtool
   call dein#add('w0rp/ale')
 
-  " View
+  " Editor
   call dein#add('itchyny/lightline.vim')
   call dein#add('nathanaelkane/vim-indent-guides')
-
-  " Editor
   call dein#add('tomtom/tcomment_vim')
   call dein#add('Townk/vim-autoclose')
   call dein#add('vim-scripts/surround.vim')
@@ -155,6 +153,10 @@ endfunction
 inoremap <TAB> <C-r>=InsertTabWrapper()<CR>
 " いきなり<S-TAB>することはないし、候補選択時のためだけにマッピングしておく
 inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
+
+" 補完ポップアップの配色
+hi Pmenu    ctermfg=white    ctermbg=darkblue
+hi PmenuSel ctermfg=darkblue ctermbg=white
 
 
 "==============================================================================
