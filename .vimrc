@@ -134,6 +134,8 @@ endif
 "==============================================================================
 " Completion
 "==============================================================================
+set omnifunc=syntaxcomplete#Complete
+
 " オムニ補完をTabで使う
 function InsertTabWrapper()
   if pumvisible()
