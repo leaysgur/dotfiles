@@ -77,11 +77,10 @@ set backspace=indent,eol,start
 
 " インデント類の設定
 set cindent
-" 行頭でTabを有効に
+
+" Tabまわり
 set smarttab
-" ソフトタブ
 set expandtab
-" いかなるときも4つ
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
@@ -112,8 +111,6 @@ set ignorecase
 set smartcase
 " インクリメンタルサーチ
 set incsearch
-" Esc *2 でハイライト解除
-nmap <ESC><ESC> :nohlsearch<CR><ESC>
 
 
 "==============================================================================
@@ -154,21 +151,17 @@ function InsertTabWrapper()
 endfunction
 
 inoremap <TAB> <C-r>=InsertTabWrapper()<CR>
-" いきなり<S-Tab>することはないし、候補選択時のためだけにマッピングしておく
+" いきなり<S-TAB>することはないし、候補選択時のためだけにマッピングしておく
 inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
 
 "==============================================================================
 " emmet
 "==============================================================================
-let g:use_emmet_complete_tag = 1
 let g:user_emmet_leader_key = '<C-e>'
 let g:user_emmet_settings = {
 \  'variables': { 'lang' : 'ja' },
 \  'indentation' : '  ',
-\  'html': {
-\    'filters': 'html, fc'
-\  },
 \}
 
 
@@ -206,10 +199,8 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 " 自動カラーを無効にして手動で設定する
 let g:indent_guides_auto_colors = 0
-" 奇数インデントのガイドカラー
-hi IndentGuidesOdd  ctermbg=cyan
-" 偶数インデントのガイドカラー
-hi IndentGuidesEven ctermbg=yellow
+hi IndentGuidesOdd  ctermbg=lightblue
+hi IndentGuidesEven ctermbg=darkgray
 
 
 "==============================================================================
@@ -218,11 +209,13 @@ hi IndentGuidesEven ctermbg=yellow
 " ステータスラインを常に表示
 set laststatus=2
 let g:lightline = {
+\ 'colorscheme': 'wombat',
 \  'component': {
-\    'readonly': '%{&readonly?"ReadOnly |":"Editable |"}',
+\    'readonly': '%{&readonly ? "[RO]" : ""}',
 \  },
 \  'active': {
-\    'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ]
+\    'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
+\    'right': [ [ 'lineinfo' ], [ 'fileencoding', 'filetype' ] ]
 \  },
 \  'subseparator': { 'left': ' ', 'right': '/' }
 \}
