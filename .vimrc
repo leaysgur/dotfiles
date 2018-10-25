@@ -23,6 +23,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein')
 
   " Devtool
+  call dein#add('ajh17/VimCompletesMe')
   call dein#add('w0rp/ale')
 
   " Editor
@@ -128,27 +129,8 @@ endif
 "==============================================================================
 " Completion
 "==============================================================================
-set omnifunc=syntaxcomplete#Complete
-
-" オムニ補完をTabで使う
-function InsertTabWrapper()
-  if pumvisible()
-    return "\<Down>"
-  endif
-
-  let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k\|<\|/'
-    return "\<TAB>"
-  elseif exists('&omnifunc') && &omnifunc == ''
-    return "\<C-n>"
-  else
-    return "\<C-x>\<C-o>"
-  endif
-endfunction
-
-inoremap <TAB> <C-r>=InsertTabWrapper()<CR>
-" いきなり<S-TAB>することはないし、候補選択時のためだけにマッピングしておく
-inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
+" FilePathの補完時の起点となるパスを、pwdではなく開いたファイルにする
+set autochdir
 
 " 補完ポップアップの配色
 hi Pmenu    ctermfg=white    ctermbg=darkblue
