@@ -152,6 +152,7 @@ let g:user_emmet_settings = {
 "==============================================================================
 let g:ale_linters = {
 \   'html': [],
+\   'cpp': [],
 \   'javascript': ['eslint'],
 \   'typescript': ['tslint', 'tsserver', 'typecheck'],
 \   'elixir': ['credo'],
