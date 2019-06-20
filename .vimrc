@@ -154,13 +154,13 @@ let g:ale_linters = {
 \   'html': [],
 \   'cpp': [],
 \   'javascript': ['eslint'],
-\   'typescript': ['tslint', 'tsserver', 'typecheck'],
+\   'typescript': ['eslint', 'tsserver', 'typecheck'],
 \   'elixir': ['credo'],
 \   'rust': ['cargo', 'rls'],
 \}
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
-\   'typescript': ['tslint'],
+\   'typescript': ['eslint'],
 \   'rust': ['rustfmt'],
 \}
 let g:ale_lint_delay = 1000
