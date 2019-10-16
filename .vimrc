@@ -156,7 +156,6 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint', 'tsserver', 'typecheck'],
 \   'elixir': ['credo'],
-\   'rust': ['cargo', 'rls'],
 \}
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
