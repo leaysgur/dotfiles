@@ -46,7 +46,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('myhere/vim-nodejs-complete')
   call dein#add('posva/vim-vue')
   call dein#add('leafgarland/typescript-vim')
-  call dein#add('elixir-editors/vim-elixir')
+  call dein#add('rust-lang/rust.vim')
   call dein#add('styled-components/vim-styled-components')
 
   call dein#end()
@@ -155,7 +155,7 @@ let g:ale_linters = {
 \   'cpp': [],
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint', 'tsserver', 'typecheck'],
-\   'elixir': ['credo'],
+\   'rust': ['rls'],
 \}
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
@@ -165,7 +165,6 @@ let g:ale_fixers = {
 let g:ale_lint_delay = 1000
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
-let g:ale_rust_rls_toolchain = 'stable'
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_typescript_prettier_use_local_config = 1
 
