@@ -90,6 +90,8 @@ set shiftwidth=2
 noremap <CR> o<ESC>
 
 " シンタックスのエイリアス
+autocmd BufNewFile,BufReadPost *.jsx set filetype=javascript
+autocmd BufNewFile,BufReadPost *.tsx set filetype=typescript
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.pcss set filetype=scss
@@ -142,7 +144,6 @@ hi PmenuSel ctermfg=darkblue ctermbg=white
 "==============================================================================
 let g:user_emmet_leader_key = '<C-e>'
 let g:user_emmet_settings = {
-\  'variables': { 'lang' : 'ja' },
 \  'indentation' : '  ',
 \}
 
