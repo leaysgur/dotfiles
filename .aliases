@@ -15,7 +15,7 @@ alias agignore='vi ~/.agignore'
 alias tmuxconf='vi ~/.tmux.conf'
 alias tm='tmux'
 alias ta='tmux a'
-alias tree='tree -I ".git|.sass-cache|node_modules|bower_components|vendor|vendors"'
+alias tree='tree -I ".git|.sass-cache|node_modules|bower_components|vendor|vendors|__sapper__"'
 
 alias gs='git status'
 alias ga='git add'
