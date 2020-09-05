@@ -2,35 +2,25 @@ module.exports = {
   env: {
     es6: true,
     browser: true,
-    node: true
+    node: true,
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    sourceType: "module"
+    sourceType: "module",
   },
   plugins: ["@typescript-eslint"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "prettier/@typescript-eslint"
+    "prettier/@typescript-eslint",
   ],
   rules: {
-    "no-console": "off",
-    "no-debugger": "off",
-    "no-dupe-class-members": "off",
     "no-else-return": "error",
+    "no-lonely-if": "error",
     "no-self-compare": "error",
     "no-void": "error",
-    "no-var": "error",
-    "no-lonely-if": "error",
-    "prefer-const": "error",
 
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-member-accessibility": [
-      "error",
-      { accessibility: "no-public" }
-    ],
-    "@typescript-eslint/no-use-before-define": "off"
-  }
+    "@typescript-eslint/no-explicit-any": "error",
+  },
 };

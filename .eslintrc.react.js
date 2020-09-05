@@ -1,39 +1,43 @@
 module.exports = {
-  parser: 'babel-eslint',
-  parserOptions: {
-    ecmaVersion: 2017,
-    sourceType: 'module',
-    ecmaFeatures: { jsx: true },
-  },
-  plugins: [
-    'react',
-    'import',
-  ],
-  extends: [
-    'eslint:recommended',
-    "plugin:prettier/recommended",
-    'plugin:react/recommended',
-  ],
-  rules: {
-    "no-console": "off",
-    "no-debugger": "off",
-    "no-dupe-class-members": "off",
-    "no-else-return": "error",
-    "no-self-compare": "error",
-    "no-void": "error",
-    "no-var": "error",
-    "no-lonely-if": "error",
-    "prefer-const": "error",
-
-    'import/order': 'error',
-
-    'react/jsx-uses-vars': 'warn',
-    'react/prop-types': 'off',
-  },
   env: {
+    es6: true,
     browser: true,
     node: true,
-    jest: true,
-    es6: true
+  },
+  settings: {
+    react: {
+      // For Preact specific
+      // pragma: "h",
+      version: "detect",
+    },
+  },
+  parser: "babel-eslint",
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+  plugins: ["react", "react-hooks"],
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "prettier/react",
+  ],
+  rules: {
+    "no-else-return": "error",
+    "no-lonely-if": "error",
+    "no-self-compare": "error",
+    "no-void": "error",
+
+    // For Preact specific
+    // "react/no-unknown-property": ["error", { ignore: ["class"] }],
+    "react/prop-types": "off",
+
+    "react/self-closing-comp": "error",
+    "react-hooks/exhaustive-deps": "error",
   },
 };

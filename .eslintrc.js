@@ -1,31 +1,23 @@
 module.exports = {
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: [
-  ],
+  plugins: [],
   extends: [
     'eslint:recommended',
     "plugin:prettier/recommended",
   ],
   rules: {
-    "no-console": "off",
-    "no-debugger": "off",
-    "no-dupe-class-members": "off",
     "no-else-return": "error",
+    "no-lonely-if": "error",
     "no-self-compare": "error",
     "no-void": "error",
-    "no-var": "error",
-    "no-lonely-if": "error",
-    "prefer-const": "error",
   },
   env: {
     browser: true,
-    jasmine: true,
-    jest: true,
+    es6: true,
     node: true,
-    es6: true
   },
 };
 
