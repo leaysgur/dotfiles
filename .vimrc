@@ -29,13 +29,12 @@ if dein#load_state('~/.cache/dein')
   " Editor
   call dein#add('itchyny/lightline.vim')
   call dein#add('nathanaelkane/vim-indent-guides')
-  call dein#add('tomtom/tcomment_vim')
   call dein#add('Townk/vim-autoclose')
+  call dein#add('tyru/caw.vim')
   call dein#add('vim-scripts/surround.vim')
   call dein#add('vim-scripts/matchit.zip')
   call dein#add('haya14busa/is.vim')
   call dein#add('mattn/emmet-vim')
-  call dein#add('editorconfig/editorconfig-vim')
 
   " Syntax
   call dein#add('othree/html5.vim')
@@ -47,7 +46,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('myhere/vim-nodejs-complete')
   call dein#add('leafgarland/typescript-vim')
   call dein#add('rust-lang/rust.vim')
-  call dein#add('evanleck/vim-svelte')
+  call dein#add('leafOfTree/vim-svelte-plugin')
 
   call dein#end()
   call dein#save_state()
@@ -94,7 +93,6 @@ autocmd BufNewFile,BufReadPost *.jsx set filetype=javascript
 autocmd BufNewFile,BufReadPost *.tsx set filetype=typescript
 autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd BufNewFile,BufReadPost *.pcss set filetype=scss
 
 
 "==============================================================================
@@ -204,6 +202,13 @@ let g:lightline = {
 
 
 "==============================================================================
+" tyru/caw
+"==============================================================================
+nmap <C-/><C-/> <Plug>(caw:hatpos:toggle)
+vmap <C-/><C-/> <Plug>(caw:hatpos:toggle)
+
+
+"==============================================================================
 " Misc
 "==============================================================================
 " .swp/~ は、邪魔にならない場所に
@@ -225,9 +230,6 @@ function! s:remove_dust()
   unlet cursor
 endfunction
 autocmd BufWritePre * call <SID>remove_dust()
-
-" Escキーを早く
-set timeout timeoutlen=200 ttimeoutlen=75
 
 " vimrcもlocalで欲しい
 if filereadable(expand('~/.vimrc.local'))
