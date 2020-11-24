@@ -21,6 +21,7 @@ module.exports = {
     "no-self-compare": "error",
     "no-void": "error",
 
+    "no-restricted-syntax": ["error", "TSEnumDeclaration", "TSInterfaceDeclaration"],
     "@typescript-eslint/no-explicit-any": "error",
   },
 };
