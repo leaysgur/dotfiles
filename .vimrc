@@ -1,7 +1,7 @@
 "==============================================================================
 " .vimrc
 "
-" require Vim v8 for dein and ale.
+" require Vim v8 for dein.
 "==============================================================================
 
 
@@ -11,7 +11,6 @@
 if &compatible
   set nocompatible
 endif
-
 
 "==============================================================================
 " dein
@@ -24,7 +23,8 @@ if dein#load_state('~/.cache/dein')
 
   " Devtool
   call dein#add('ajh17/VimCompletesMe')
-  call dein#add('w0rp/ale')
+  call dein#add('neoclide/coc.nvim', { 'merged': 0 })
+  call dein#add('codechips/coc-svelte')
 
   " Editor
   call dein#add('itchyny/lightline.vim')
@@ -45,13 +45,18 @@ if dein#load_state('~/.cache/dein')
   call dein#add('elzr/vim-json')
   call dein#add('myhere/vim-nodejs-complete')
   call dein#add('leafgarland/typescript-vim')
+  call dein#add('evanleck/vim-svelte')
   call dein#add('rust-lang/rust.vim')
-  call dein#add('leafOfTree/vim-svelte-plugin')
 
   call dein#end()
   call dein#save_state()
 endif
 
+if dein#check_install()
+  call dein#install()
+endif
+
+let g:dein#install_github_api_token = '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'
 
 "==============================================================================
 " Base
@@ -111,19 +116,7 @@ set incsearch
 "==============================================================================
 " Lang
 "==============================================================================
-" vim 内部の文字コード（ブランクバッファの文字コードに影響）
-set enc=utf-8
-" デフォルトのファイル文字コード
-set fenc=utf-8
-" 対応する文字コード
-set fencs=utf-8,iso-2022-jp,euc-jp,cp932
-set langmenu=ja_JP.utf-8
-set termencoding=utf-8
-set fileformats=unix,dos,mac
-" □とか○の文字があってもカーソル位置がずれないようにする
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif
+set ambiwidth=double
 
 
 "==============================================================================
@@ -144,28 +137,6 @@ let g:user_emmet_leader_key = '<C-e>'
 let g:user_emmet_settings = {
 \  'indentation' : '  ',
 \}
-
-
-"==============================================================================
-" ale
-"==============================================================================
-let g:ale_linters = {
-\   'html': [],
-\   'cpp': [],
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint', 'tsserver', 'typecheck'],
-\   'rust': ['rls'],
-\}
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint'],
-\   'rust': ['rustfmt'],
-\}
-let g:ale_lint_delay = 1000
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_typescript_prettier_use_local_config = 1
 
 
 "==============================================================================
@@ -203,9 +174,9 @@ let g:lightline = {
 
 "==============================================================================
 " tyru/caw
-"==============================================================================
-nmap <C-/><C-/> <Plug>(caw:hatpos:toggle)
-vmap <C-/><C-/> <Plug>(caw:hatpos:toggle)
+" ==============================================================================
+nmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
+vmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
 
 
 "==============================================================================
@@ -218,18 +189,6 @@ set backupdir=/tmp
 " インデント後も続けてビジュアルモード
 :vnoremap < <gv
 :vnoremap > >gv
-
-" 勝手にコメントアウトされるのを防ぐ
-autocmd FileType * setlocal formatoptions-=ro
-
-" 保存時に行末の空白を除去する
-function! s:remove_dust()
-  let cursor = getpos(".")
-  %s/\s\+$//ge
-  call setpos(".", cursor)
-  unlet cursor
-endfunction
-autocmd BufWritePre * call <SID>remove_dust()
 
 " vimrcもlocalで欲しい
 if filereadable(expand('~/.vimrc.local'))

@@ -1,12 +1,13 @@
-alias vo='vim'
-alias vu='vim'
-alias bi='vim'
-alias bo='vim'
+alias vo='vi'
+alias vu='vi'
+alias bi='vi'
+alias bo='vi'
+alias ci='vi'
 alias vi='vim'
 
 alias ll='ls -laF'
 
-alias tree='tree -I ".git|.sass-cache|node_modules|vendor|vendors|__sapper__|build|out"'
+alias treee='rg --files | tree --fromfile'
 
 alias gs='git status'
 alias ga='git add'
