@@ -1,196 +1,112 @@
-"==============================================================================
-" .vimrc
-"
-" require Vim v8 for dein.
-"==============================================================================
-
-
-"==============================================================================
-" Set up
-"==============================================================================
-if &compatible
-  set nocompatible
+" ================================================================
+" Plugin settings
+" ================================================================
+" Install vim-plug if not installed
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-"==============================================================================
-" dein
-"==============================================================================
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+call plug#begin('~/.vim/plugged')
+" Indent auto detect
+Plug 'tpope/vim-sleuth'
+" Toggle comment
+Plug 'tyru/caw.vim'
+" Emmet
+Plug 'mattn/emmet-vim'
+" Completion, LSP support, etc...
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Syntax highlights not default supported by coc
+Plug 'leafOfTree/vim-svelte-plugin'
 
-if dein#load_state('~/.cache/dein')
-  call dein#begin('~/.cache/dein')
-  call dein#add('~/.cache/dein')
+" Rich status line
+Plug 'itchyny/lightline.vim'
+" Show indent guides
+Plug 'nathanaelkane/vim-indent-guides'
+call plug#end()
 
-  " Devtool
-  call dein#add('ajh17/VimCompletesMe')
-  call dein#add('neoclide/coc.nvim', { 'merged': 0 })
-  call dein#add('codechips/coc-svelte')
+" After installing coc.nvim, run
+" :CocInstall coc-json coc-html coc-css coc-eslint coc-tsserver coc-svelte
 
-  " Editor
-  call dein#add('itchyny/lightline.vim')
-  call dein#add('nathanaelkane/vim-indent-guides')
-  call dein#add('Townk/vim-autoclose')
-  call dein#add('tyru/caw.vim')
-  call dein#add('vim-scripts/surround.vim')
-  call dein#add('vim-scripts/matchit.zip')
-  call dein#add('haya14busa/is.vim')
-  call dein#add('mattn/emmet-vim')
 
-  " Syntax
-  call dein#add('othree/html5.vim')
-  call dein#add('hail2u/vim-css3-syntax')
-  call dein#add('pangloss/vim-javascript')
-  call dein#add('cakebaker/scss-syntax.vim')
-  call dein#add('chemzqm/vim-jsx-improve')
-  call dein#add('elzr/vim-json')
-  call dein#add('myhere/vim-nodejs-complete')
-  call dein#add('leafgarland/typescript-vim')
-  call dein#add('evanleck/vim-svelte')
-  call dein#add('rust-lang/rust.vim')
-
-  call dein#end()
-  call dein#save_state()
-endif
-
-if dein#check_install()
-  call dein#install()
-endif
-
-let g:dein#install_github_api_token = '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'
-
-"==============================================================================
-" Base
-"==============================================================================
-colorscheme default
-filetype plugin indent on
-syntax enable
-
-" 行数表示を有効にする
-set number
-" 折り返す
-set wrap
-
-" 括弧入力で対応する括弧を一瞬強調
-set showmatch
-
-" 不可視文字の表示
-set list
-set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
-
-" BSでindent, 改行, 挿入開始前の文字を削除
+" ================================================================
+" Editor settings
+" ================================================================
+" BS(or DEL) key can remove
 set backspace=indent,eol,start
+" Make ESC key quick
+set ttimeout ttimeoutlen=300
+" Insert new line by ENTER key
+nnoremap <CR> o<ESC>
+" Keep visual mode in indenting
+vnoremap < <gv
+vnoremap > >gv
 
-" インデント類の設定
-set cindent
+" ================================================================
+" View settings
+" ================================================================
+" Show line number
+set number
 
-" Tabまわり
-set smarttab
-set expandtab
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+" Show invisible characters
+set list listchars=tab:»-,trail:-
 
-" ノーマルモードでEnterキーで改行挿入
-noremap <CR> o<ESC>
+" Show status bar
+set laststatus=2 noshowmode
 
-" シンタックスのエイリアス
-autocmd BufNewFile,BufReadPost *.jsx set filetype=javascript
-autocmd BufNewFile,BufReadPost *.tsx set filetype=typescript
-autocmd BufNewFile,BufReadPost *.ejs set filetype=html
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
-
-"==============================================================================
-" Search
-"==============================================================================
-" 検索文字列を色づけ
-set hlsearch
-" 大文字小文字を判別しない
-set ignorecase
-" でも大文字小文字が混ざって入力されたら区別する
-set smartcase
-" インクリメンタルサーチ
-set incsearch
+" Highlight
+highlight Pmenu ctermfg=white ctermbg=darkblue
+highlight PmenuSel ctermfg=darkblue ctermbg=white
 
 
-"==============================================================================
-" Lang
-"==============================================================================
-set ambiwidth=double
+" ================================================================
+" Search settings
+" ================================================================
+set hlsearch smartcase incsearch ignorecase
+" Clear search highlight
+nnoremap <ESC><ESC> :nohl<CR>
 
 
-"==============================================================================
-" Completion
-"==============================================================================
-" FilePathの補完時の起点となるパスを、pwdではなく開いたファイルにする
-set autochdir
-
-" 補完ポップアップの配色
-hi Pmenu    ctermfg=white    ctermbg=darkblue
-hi PmenuSel ctermfg=darkblue ctermbg=white
-
-
-"==============================================================================
-" emmet
-"==============================================================================
-let g:user_emmet_leader_key = '<C-e>'
-let g:user_emmet_settings = {
-\  'indentation' : '  ',
-\}
-
-
-"==============================================================================
-" vim-indent-guides
-"==============================================================================
-" インデントガイドを有効に
+" ================================================================
+" Plugin specific settings
+" ================================================================
+" For vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
-" ガイドの幅
 let g:indent_guides_guide_size = 1
-" 1インデント目からガイドする
 let g:indent_guides_start_level = 2
-" 自動カラーを無効にして手動で設定する
 let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd  ctermbg=lightblue
-hi IndentGuidesEven ctermbg=darkgray
+highlight IndentGuidesOdd  ctermbg=darkgray
+highlight IndentGuidesEven ctermbg=gray
 
-
-"==============================================================================
-" lightline
-"==============================================================================
-" ステータスラインを常に表示
-set laststatus=2
-let g:lightline = {
-\ 'colorscheme': 'wombat',
-\  'component': {
-\    'readonly': '%{&readonly ? "[RO]" : ""}',
-\  },
-\  'active': {
-\    'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
-\    'right': [ [ 'lineinfo' ], [ 'fileencoding', 'filetype' ] ]
-\  },
-\  'subseparator': { 'left': ' ', 'right': '/' }
-\}
-
-
-"==============================================================================
-" tyru/caw
-" ==============================================================================
+" For caw.vim
 nmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
 vmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
 
+" For emmet-vim
+let g:user_emmet_leader_key = '<C-e>'
 
-"==============================================================================
-" Misc
-"==============================================================================
-" .swp/~ は、邪魔にならない場所に
-set directory=/tmp
-set backupdir=/tmp
+" For coc.nvim
+set encoding=utf-8
+set hidden
+set nobackup
+set nowritebackup
+set updatetime=300
+set shortmess+=c
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+highlight CocErrorSign ctermfg=darkred
+highlight CocWarningSign ctermfg=yellow
+highlight CocHintSign ctermfg=green
+highlight CocInfoSign ctermfg=white
 
-" インデント後も続けてビジュアルモード
-:vnoremap < <gv
-:vnoremap > >gv
-
-" vimrcもlocalで欲しい
-if filereadable(expand('~/.vimrc.local'))
-  source ~/.vimrc.local
-endif
+" For vim-svelte-plugin
+let g:vim_svelte_plugin_use_typescript = 1
+let g:vim_svelte_plugin_use_sass = 1
