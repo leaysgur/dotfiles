@@ -84,9 +84,8 @@ nnoremap <CR> :noh<CR><CR>
 " ================================================================
 " Netrw settings
 " ================================================================
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-" Always open from current
+let g:netrw_liststyle = 1
+" Always open from current buffer
 let g:netrw_keepdir = 0
 
 
