@@ -84,9 +84,9 @@ nnoremap <CR> :noh<CR><CR>
 " ================================================================
 " Netrw settings
 " ================================================================
-let g:netrw_liststyle = 1
-" Always open from current buffer
-let g:netrw_keepdir = 0
+let g:netrw_liststyle = 3
+" Update current dir to make netrw open in current dir
+set autochdir
 
 
 " ================================================================
