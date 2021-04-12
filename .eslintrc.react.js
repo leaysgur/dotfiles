@@ -25,7 +25,6 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
-    "prettier/react",
   ],
   rules: {
     "no-else-return": "error",

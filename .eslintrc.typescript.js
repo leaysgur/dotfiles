@@ -13,7 +13,6 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "prettier/@typescript-eslint",
   ],
   rules: {
     "no-else-return": "error",
@@ -23,5 +22,9 @@ module.exports = {
 
     "no-restricted-syntax": ["error", "TSEnumDeclaration", "TSInterfaceDeclaration"],
     "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { prefer: "type-imports" },
+    ],
   },
 };
