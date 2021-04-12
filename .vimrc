@@ -23,7 +23,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'leafOfTree/vim-svelte-plugin'
 
 " Color scheme
-Plug 'cocopon/iceberg.vim'
+Plug 'tyrannicaltoucan/vim-deep-space'
 " Rich status line
 Plug 'itchyny/lightline.vim'
 " Show indent guides
@@ -58,7 +58,8 @@ set noundofile
 " View settings
 " ================================================================
 set background=dark
-colorscheme iceberg
+set termguicolors
+colorscheme deep-space
 
 " Show line number
 set number
@@ -102,7 +103,7 @@ highlight IndentGuidesEven ctermbg=gray
 
 " For lightline
 let g:lightline = {
-  \ 'colorscheme': 'iceberg',
+  \ 'colorscheme': 'deepspace',
   \ }
 
 " For caw.vim
