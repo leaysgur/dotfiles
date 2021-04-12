@@ -47,8 +47,10 @@ set ttimeout ttimeoutlen=0
 vnoremap < <gv
 vnoremap > >gv
 
-" Keep .swp far away
-set backupdir=/tmp
+" Enable .swp but put it far away
+set directory=/tmp
+" Disable backup
+set nobackup nowritebackup
 " Disable .un~
 set noundofile
 
@@ -114,8 +116,6 @@ let g:user_emmet_leader_key = '<C-e>'
 " For coc.nvim
 set encoding=utf-8
 set hidden
-set nobackup
-set nowritebackup
 set updatetime=300
 set shortmess+=c
 inoremap <silent><expr> <TAB>
