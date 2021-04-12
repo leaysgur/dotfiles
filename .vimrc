@@ -15,11 +15,15 @@ Plug 'tpope/vim-sleuth'
 Plug 'tyru/caw.vim'
 " Emmet
 Plug 'mattn/emmet-vim'
+
 " Completion, LSP support, etc...
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Syntax highlights not default supported by coc
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'leafOfTree/vim-svelte-plugin'
 
+" Color scheme
+Plug 'cocopon/iceberg.vim'
 " Rich status line
 Plug 'itchyny/lightline.vim'
 " Show indent guides
@@ -35,20 +39,27 @@ call plug#end()
 " ================================================================
 " BS(or DEL) key can remove
 set backspace=indent,eol,start
+
 " Make ESC key quick
-set ttimeout ttimeoutlen=300
-" Insert new line by ENTER key
-nnoremap <CR> o<ESC>
+set ttimeout ttimeoutlen=0
+
 " Keep visual mode in indenting
 vnoremap < <gv
 vnoremap > >gv
 
+" Keep .swp far away
+set backupdir=/tmp
+" Disable .un~
+set noundofile
+
 " ================================================================
 " View settings
 " ================================================================
+set background=dark
+colorscheme iceberg
+
 " Show line number
 set number
-
 " Show invisible characters
 set list listchars=tab:»-,trail:-
 
@@ -56,8 +67,8 @@ set list listchars=tab:»-,trail:-
 set laststatus=2 noshowmode
 
 " Highlight
-highlight Pmenu ctermfg=white ctermbg=darkblue
-highlight PmenuSel ctermfg=darkblue ctermbg=white
+highlight Pmenu ctermfg=white ctermbg=black
+highlight PmenuSel ctermfg=black ctermbg=white
 
 
 " ================================================================
@@ -65,7 +76,7 @@ highlight PmenuSel ctermfg=darkblue ctermbg=white
 " ================================================================
 set hlsearch smartcase incsearch ignorecase
 " Clear search highlight
-nnoremap <ESC><ESC> :nohl<CR>
+nnoremap <CR> :noh<CR><CR>
 
 
 " ================================================================
@@ -78,6 +89,11 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_auto_colors = 0
 highlight IndentGuidesOdd  ctermbg=darkgray
 highlight IndentGuidesEven ctermbg=gray
+
+" For lightline
+let g:lightline = {
+  \ 'colorscheme': 'iceberg',
+  \ }
 
 " For caw.vim
 nmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
@@ -103,9 +119,9 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 highlight CocErrorSign ctermfg=darkred
-highlight CocWarningSign ctermfg=yellow
-highlight CocHintSign ctermfg=green
-highlight CocInfoSign ctermfg=white
+highlight CocWarningSign ctermfg=darkyellow
+highlight CocHintSign ctermfg=darkgreen
+highlight CocInfoSign ctermfg=darkgray
 
 " For vim-svelte-plugin
 let g:vim_svelte_plugin_use_typescript = 1
