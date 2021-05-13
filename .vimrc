@@ -21,6 +21,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Syntax highlights not default supported by coc
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'leafOfTree/vim-svelte-plugin'
+Plug 'cespare/vim-toml'
 
 " Color scheme
 Plug 'tyrannicaltoucan/vim-deep-space'
@@ -31,7 +32,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 
 " After installing coc.nvim, run
-" :CocInstall coc-json coc-html coc-css coc-eslint coc-tsserver coc-svelte
+" :CocInstall coc-json coc-toml coc-html coc-css coc-eslint coc-tsserver coc-svelte coc-rls
 
 
 " ================================================================
@@ -53,6 +54,7 @@ set directory=/tmp
 set nobackup nowritebackup
 " Disable .un~
 set noundofile
+
 
 " ================================================================
 " View settings
@@ -101,11 +103,6 @@ let g:indent_guides_auto_colors = 0
 highlight IndentGuidesOdd  ctermbg=darkgray
 highlight IndentGuidesEven ctermbg=gray
 
-" For lightline
-let g:lightline = {
-  \ 'colorscheme': 'deepspace',
-  \ }
-
 " For caw.vim
 nmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
 vmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
@@ -132,6 +129,24 @@ highlight CocWarningSign ctermfg=darkyellow
 highlight CocHintSign ctermfg=darkgreen
 highlight CocInfoSign ctermfg=darkgray
 
+" For lightline
+function! CocCurrentFunction()
+  return get(b:, 'coc_current_function', '')
+endfunction
+
+let g:lightline = {
+  \ 'colorscheme': 'deepspace',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'cocstatus': 'coc#status',
+  \   'currentfunction': 'CocCurrentFunction'
+  \ },
+  \ }
+
+
 " For vim-svelte-plugin
-let g:vim_svelte_plugin_use_typescript = 1
-let g:vim_svelte_plugin_use_sass = 1
+" let g:vim_svelte_plugin_use_typescript = 1
+" let g:vim_svelte_plugin_use_sass = 1
