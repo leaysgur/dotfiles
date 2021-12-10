@@ -35,6 +35,7 @@ module.exports = {
     // For Preact specific
     // "react/no-unknown-property": ["error", { ignore: ["class"] }],
     "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
 
     "react/jsx-boolean-value": "error",
     "react/jsx-curly-brace-presence": "error",

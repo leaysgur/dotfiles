@@ -5,7 +5,7 @@ alias bo='vi'
 alias ci='vi'
 alias vi='vim'
 
-alias ll='ls -laF'
+alias ll='ls -lahF'
 
 alias treee='rg --files | tree --fromfile'
 

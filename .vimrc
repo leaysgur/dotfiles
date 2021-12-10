@@ -22,6 +22,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'cespare/vim-toml'
+Plug 'lepture/vim-jinja'
 
 " Color scheme
 Plug 'tyrannicaltoucan/vim-deep-space'

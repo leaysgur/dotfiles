@@ -162,9 +162,10 @@ source $HOME/.aliases
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
 
-# Export path for nodebrew
-if [ -f ~/.nodebrew/nodebrew ]; then
-  export PATH=$HOME/.nodebrew/current/bin:$PATH
+# Export path for Volta
+if [ -f ~/.volta ]; then
+  export VOLTA_HOME="$HOME/.volta"
+  export PATH="$VOLTA_HOME/bin:$PATH"
 fi
 
 # Export path for rust
