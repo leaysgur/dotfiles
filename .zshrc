@@ -163,7 +163,7 @@ autoload -Uz zmv
 alias zmv='noglob zmv -W'
 
 # Export path for Volta
-if [ -f ~/.volta ]; then
+if [ -d ~/.volta/bin ]; then
   export VOLTA_HOME="$HOME/.volta"
   export PATH="$VOLTA_HOME/bin:$PATH"
 fi
