@@ -30,6 +30,7 @@ alias zmv='noglob zmv -W'
 # Enhancd, enhanced `cd` command
 if [ -d ~/.enhancd ]; then
   source ~/.enhancd/init.sh
+  export ENHANCD_HOOK_AFTER_CD=ls
 fi
 
 
