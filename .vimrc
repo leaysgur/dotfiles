@@ -9,13 +9,16 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+" Color scheme
+Plug 'tyrannicaltoucan/vim-deep-space'
+" Rich status line
+Plug 'itchyny/lightline.vim'
+" Show indent guides
+Plug 'nathanaelkane/vim-indent-guides'
 " Indent auto detect
 Plug 'tpope/vim-sleuth'
 " Toggle comment
 Plug 'tyru/caw.vim'
-" Emmet
-Plug 'mattn/emmet-vim'
-
 " Completion, LSP support, etc...
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Syntax highlights not default supported by coc
@@ -23,13 +26,9 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'cespare/vim-toml'
 Plug 'lepture/vim-jinja'
+" Emmet
+Plug 'mattn/emmet-vim'
 
-" Color scheme
-Plug 'tyrannicaltoucan/vim-deep-space'
-" Rich status line
-Plug 'itchyny/lightline.vim'
-" Show indent guides
-Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 
 " After installing coc.nvim, run
@@ -81,7 +80,7 @@ highlight PmenuSel ctermfg=black ctermbg=white
 " Search settings
 " ================================================================
 set hlsearch smartcase incsearch ignorecase
-" Clear search highlight
+" Clear search highlight on Enter
 nnoremap <CR> :noh<CR><CR>
 
 
@@ -146,7 +145,6 @@ let g:lightline = {
   \   'currentfunction': 'CocCurrentFunction'
   \ },
   \ }
-
 
 " For vim-svelte-plugin
 " let g:vim_svelte_plugin_use_typescript = 1
