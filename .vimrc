@@ -20,7 +20,7 @@ Plug 'tpope/vim-sleuth'
 " Toggle comment
 Plug 'tyru/caw.vim'
 " Completion, LSP support, etc...
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Syntax highlights not default supported by coc
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'leafOfTree/vim-svelte-plugin'
@@ -116,10 +116,10 @@ set hidden
 set updatetime=300
 set shortmess+=c
 inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
+  \ pumvisible() ? '<C-n>' :
+  \ <SID>check_back_space() ? '<TAB>' :
   \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> pumvisible() ? '<C-p>' : '<C-h>'
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
