@@ -9,8 +9,9 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+
 " Color scheme
-Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'cocopon/iceberg.vim'
 " Rich status line
 Plug 'itchyny/lightline.vim'
 " Show indent guides
@@ -61,7 +62,7 @@ set noundofile
 " ================================================================
 set background=dark
 set termguicolors
-colorscheme deep-space
+colorscheme iceberg
 
 " Show line number
 set number
@@ -135,7 +136,7 @@ function! CocCurrentFunction()
 endfunction
 
 let g:lightline = {
-  \ 'colorscheme': 'deepspace',
+  \ 'colorscheme': 'wombat',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
