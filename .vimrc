@@ -20,6 +20,8 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-sleuth'
 " Toggle comment
 Plug 'tyru/caw.vim'
+" Better matchit
+Plug 'andymass/vim-matchup'
 " Completion, LSP support, etc...
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Syntax highlights not default supported by coc
