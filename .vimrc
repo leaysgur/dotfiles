@@ -70,6 +70,7 @@ colorscheme nord
 set number
 " Show invisible characters
 set list listchars=tab:»-,trail:-
+set tabstop=2
 
 " Show status bar
 set laststatus=2 noshowmode
@@ -77,6 +78,9 @@ set laststatus=2 noshowmode
 " Highlight
 highlight Pmenu ctermfg=white ctermbg=black
 highlight PmenuSel ctermfg=black ctermbg=white
+
+" Any extensions not yet supports
+autocmd BufNewFile,BufRead *.astro setfiletype html
 
 
 " ================================================================
