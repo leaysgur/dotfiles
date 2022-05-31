@@ -19,24 +19,17 @@ fi
 
 
 # ================================================================
-# Core
+# Core(prompt, completion)
 # ================================================================
 setopt no_beep
+
+# Enable completion
+autoload -Uz compinit && compinit
 
 # Enable `zmv` command
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
 
-# Enhancd, enhanced `cd` command
-if [ -d ~/.enhancd ]; then
-  source ~/.enhancd/init.sh
-  export ENHANCD_HOOK_AFTER_CD=ls
-fi
-
-
-# ================================================================
-# Prompt, Completion settings
-# ================================================================
 # Pure prompt
 if [ -d ~/.pure ]; then
   fpath+=$HOME/.pure
@@ -44,9 +37,14 @@ if [ -d ~/.pure ]; then
   prompt pure
 fi
 
-autoload -Uz compinit && compinit
 # Enable Shift+Tab
 bindkey '^[[Z' reverse-menu-complete
+
+# Enhancd, enhanced `cd` command
+if [ -d ~/.enhancd ]; then
+  source ~/.enhancd/init.sh
+  export ENHANCD_HOOK_AFTER_CD=ls
+fi
 
 
 # ================================================================
