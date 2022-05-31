@@ -46,6 +46,11 @@ if [ -d ~/.enhancd ]; then
   export ENHANCD_HOOK_AFTER_CD=ls
 fi
 
+# Bat, enhanced `cat` command
+if [ -f /usr/local/bin/bat ]; then
+  export BAT_STYLE="plain"
+  export BAT_THEME="Nord"
+fi
 
 # ================================================================
 # History
