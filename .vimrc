@@ -29,6 +29,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'cespare/vim-toml'
 Plug 'lepture/vim-jinja'
+Plug 'mustache/vim-mustache-handlebars'
 " Emmet
 Plug 'mattn/emmet-vim'
 
