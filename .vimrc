@@ -42,6 +42,9 @@ call plug#end()
 " ================================================================
 " Editor settings
 " ================================================================
+" Use utf-8
+set encoding=utf-8
+
 " BS(or DEL) key can remove
 set backspace=indent,eol,start
 
@@ -54,6 +57,7 @@ vnoremap > >gv
 
 " Enable .swp but put it far away
 set directory=/tmp
+set updatetime=300
 " Disable backup
 set nobackup nowritebackup
 " Disable .un~
@@ -76,11 +80,7 @@ set tabstop=2
 " Show status bar
 set laststatus=2 noshowmode
 
-" Highlight
-highlight Pmenu ctermfg=white ctermbg=black
-highlight PmenuSel ctermfg=black ctermbg=white
-
-" Any extensions not yet supports
+" Any extensions not yet supported by coc...
 autocmd BufNewFile,BufRead *.astro setfiletype html
 
 
@@ -107,9 +107,6 @@ set autochdir
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
-let g:indent_guides_auto_colors = 0
-highlight IndentGuidesOdd  ctermbg=darkgray
-highlight IndentGuidesEven ctermbg=gray
 
 " For caw.vim
 nmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
@@ -119,23 +116,19 @@ vmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
 let g:user_emmet_leader_key = '<C-e>'
 
 " For coc.nvim
-set encoding=utf-8
-set hidden
-set updatetime=300
 set shortmess+=c
+inoremap <silent><expr> <CR>
+  \ coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <TAB>
-  \ pumvisible() ? '<C-n>' :
-  \ <SID>check_back_space() ? '<TAB>' :
+  \ coc#pum#visible() ? coc#pum#next(0) :
+  \ <SID>check_back_space() ? "\<Tab>" :
   \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? '<C-p>' : '<C-h>'
+inoremap <expr><S-TAB>
+  \ coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-highlight CocErrorSign ctermfg=darkred
-highlight CocWarningSign ctermfg=darkyellow
-highlight CocHintSign ctermfg=darkgreen
-highlight CocInfoSign ctermfg=darkgray
 
 " For lightline
 function! CocCurrentFunction()
