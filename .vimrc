@@ -120,11 +120,9 @@ set shortmess+=c
 inoremap <silent><expr> <CR>
   \ coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <TAB>
-  \ coc#pum#visible() ? coc#pum#next(0) :
+  \ coc#pum#visible() ? coc#pum#confirm() :
   \ <SID>check_back_space() ? "\<Tab>" :
   \ coc#refresh()
-inoremap <expr><S-TAB>
-  \ coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
