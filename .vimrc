@@ -24,19 +24,20 @@ Plug 'tyru/caw.vim'
 Plug 'andymass/vim-matchup'
 " Completion, LSP support, etc...
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" Emmet
+Plug 'mattn/emmet-vim'
 " Syntax highlights not default supported by coc
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'cespare/vim-toml'
 Plug 'lepture/vim-jinja'
 Plug 'mustache/vim-mustache-handlebars'
-" Emmet
-Plug 'mattn/emmet-vim'
+Plug 'wuelnerdotexe/vim-astro'
 
 call plug#end()
 
 " After installing coc.nvim, run
-" :CocInstall coc-json coc-toml coc-html coc-css coc-eslint coc-tsserver coc-svelte coc-rls
+" :CocInstall coc-json coc-toml coc-html coc-css coc-eslint coc-tsserver coc-svelte coc-rls, etc...
 
 
 " ================================================================
@@ -79,9 +80,6 @@ set tabstop=2
 
 " Show status bar
 set laststatus=2 noshowmode
-
-" Any extensions not yet supported by coc...
-autocmd BufNewFile,BufRead *.astro setfiletype html
 
 
 " ================================================================
