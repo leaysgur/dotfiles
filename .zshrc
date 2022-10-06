@@ -7,16 +7,6 @@ export EDITOR=vim
 export TERM=xterm-256color
 export CLICOLOR=true
 
-# For Volta, Node.js version manger
-if [ -d ~/.volta/bin ]; then
-  export VOLTA_HOME="$HOME/.volta"
-  export PATH="$VOLTA_HOME/bin:$PATH"
-fi
-# For Cargo, Rust language utilities
-if [ -d ~/.cargo/bin ]; then
-  export PATH=$HOME/.cargo/bin:$PATH
-fi
-
 
 # ================================================================
 # Core(prompt, completion)
@@ -26,9 +16,8 @@ setopt no_beep
 # Enable completion
 autoload -Uz compinit && compinit
 
-# Enable `zmv` command
-autoload -Uz zmv
-alias zmv='noglob zmv -W'
+# Enable Shift+Tab
+bindkey '^[[Z' reverse-menu-complete
 
 # Pure prompt
 if [ -d ~/.pure ]; then
@@ -37,20 +26,9 @@ if [ -d ~/.pure ]; then
   prompt pure
 fi
 
-# Enable Shift+Tab
-bindkey '^[[Z' reverse-menu-complete
-
-# Enhancd, enhanced `cd` command
-if [ -d ~/.enhancd ]; then
-  source ~/.enhancd/init.sh
-  export ENHANCD_HOOK_AFTER_CD=ls
-fi
-
-# Bat, enhanced `cat` command
-if [ -f /usr/local/bin/bat ]; then
-  export BAT_STYLE="plain"
-  export BAT_THEME="Nord"
-fi
+# Enable `zmv` command
+autoload -Uz zmv
+alias zmv='noglob zmv -W'
 
 # ================================================================
 # History
@@ -94,8 +72,31 @@ alias gbd='git branch --merged | grep -v "*" | xargs -I % git branch -d %'
 
 
 # ================================================================
-# Misc
+# Externals
 # ================================================================
+# For Volta, Node.js version manger
+if [ -d ~/.volta/bin ]; then
+  export VOLTA_HOME="$HOME/.volta"
+  export PATH="$VOLTA_HOME/bin:$PATH"
+fi
+
+# For Cargo, Rust language utilities
+if [ -d ~/.cargo/bin ]; then
+  export PATH=$HOME/.cargo/bin:$PATH
+fi
+
+# Enhancd, enhanced `cd` command
+if [ -d ~/.enhancd ]; then
+  source ~/.enhancd/init.sh
+  export ENHANCD_HOOK_AFTER_CD=ls
+fi
+
+# Bat, enhanced `cat` command
+if [ -f /usr/local/bin/bat ]; then
+  export BAT_STYLE="plain"
+  export BAT_THEME="Nord"
+fi
+
 # Override local settings if exists
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
