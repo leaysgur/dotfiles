@@ -24,6 +24,8 @@ Plug 'tyru/caw.vim'
 Plug 'andymass/vim-matchup'
 " Completion, LSP support, etc...
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" Fuzzy finder
+Plug 'liuchengxu/vim-clap'
 " Emmet
 Plug 'mattn/emmet-vim'
 " Syntax highlights not default supported by coc
@@ -128,6 +130,12 @@ endfunction
 nmap <silent> gs :sp<CR><Plug>(coc-definition)
 nmap <silent> gv :vs<CR><Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
+
+" For vim-clap
+nnoremap <silent> <C-p> :Clap gfiles<CR>
+let g:clap_layout = { 'relative': 'editor' }
+let g:clap_open_preview = 'never'
+let g:clap_open_action = { 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }
 
 " For lightline
 function! CocCurrentFunction()
