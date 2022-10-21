@@ -125,8 +125,8 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-nmap <silent> gds :sp<CR><Plug>(coc-definition)
-nmap <silent> gdv :vs<CR><Plug>(coc-definition)
+nmap <silent> gs :sp<CR><Plug>(coc-definition)
+nmap <silent> gv :vs<CR><Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 
 " For lightline
