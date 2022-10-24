@@ -25,7 +25,8 @@ Plug 'andymass/vim-matchup'
 " Completion, LSP support, etc...
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Fuzzy finder
-Plug 'liuchengxu/vim-clap'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mattn/ctrlp-matchfuzzy'
 " Emmet
 Plug 'mattn/emmet-vim'
 " Syntax highlights not default supported by coc
@@ -131,11 +132,12 @@ nmap <silent> gs :sp<CR><Plug>(coc-definition)
 nmap <silent> gv :vs<CR><Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 
-" For vim-clap
-nnoremap <silent> <C-p> :Clap gfiles<CR>
-let g:clap_layout = { 'relative': 'editor' }
-let g:clap_open_preview = 'never'
-let g:clap_open_action = { 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }
+" For ctrlp.vim
+let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|node_modules\|log\|tmp$',
+  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ }
 
 " For lightline
 function! CocCurrentFunction()
