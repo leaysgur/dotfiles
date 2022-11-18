@@ -11,7 +11,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Color scheme
-Plug 'arcticicestudio/nord-vim'
+Plug 'cocopon/iceberg.vim'
 " Rich status line
 Plug 'itchyny/lightline.vim'
 " Show indent guides
@@ -73,7 +73,7 @@ set noundofile
 " ================================================================
 set background=dark
 set termguicolors
-colorscheme nord
+colorscheme iceberg
 
 " Show line number
 set number
@@ -145,7 +145,7 @@ function! CocCurrentFunction()
 endfunction
 
 let g:lightline = {
-  \ 'colorscheme': 'nord',
+  \ 'colorscheme': 'iceberg',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
