@@ -110,8 +110,7 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 
 " For caw.vim
-nmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
-vmap <C-_><C-_> <Plug>(caw:hatpos:toggle)
+nmap <C-_> <Plug>(caw:hatpos:toggle)
 
 " For emmet-vim
 let g:user_emmet_leader_key = '<C-e>'
