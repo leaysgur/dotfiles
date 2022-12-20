@@ -68,6 +68,7 @@ alias gr='git reset'
 alias gc='git commit -v'
 alias gca='git commit --amend'
 alias gch='git checkout'
+alias gsw='git switch'
 alias gbd='git branch --merged | grep -v "*" | xargs -I % git branch -d %'
 
 
