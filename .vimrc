@@ -22,25 +22,24 @@ Plug 'tpope/vim-sleuth'
 Plug 'tyru/caw.vim'
 " Better matchit
 Plug 'andymass/vim-matchup'
-" Completion, LSP support, etc...
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Fuzzy finder
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/ctrlp-matchfuzzy'
 " Emmet
 Plug 'mattn/emmet-vim'
-" Syntax highlights not default supported by coc
+" LSP support
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'rhysd/vim-healthcheck'
+" Auto-complete
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Syntax highlights not supported by LSP
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'leafOfTree/vim-svelte-plugin'
-Plug 'cespare/vim-toml'
-Plug 'lepture/vim-jinja'
-Plug 'mustache/vim-mustache-handlebars'
 Plug 'wuelnerdotexe/vim-astro'
 
 call plug#end()
-
-" After installing coc.nvim, run
-" :CocInstall coc-json coc-toml coc-html coc-css coc-eslint coc-tsserver coc-svelte coc-rls, etc...
 
 
 " ================================================================
@@ -116,22 +115,6 @@ vmap <C-_> <Plug>(caw:hatpos:toggle)
 " For emmet-vim
 let g:user_emmet_leader_key = '<C-e>'
 
-" For coc.nvim
-set shortmess+=c
-inoremap <silent><expr> <CR>
-  \ coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <silent><expr> <TAB>
-  \ coc#pum#visible() ? coc#pum#confirm() :
-  \ <SID>check_back_space() ? "\<Tab>" :
-  \ coc#refresh()
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-nmap <silent> gs :sp<CR><Plug>(coc-definition)
-nmap <silent> gv :vs<CR><Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
-
 " For ctrlp.vim
 let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
 let g:ctrlp_custom_ignore = {
@@ -139,23 +122,25 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 
+" For vim-lsp
+let g:lsp_use_native_client = 1
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_highlights_enabled = 0
+let g:lsp_inlay_hints_enabled = 1
+let g:lsp_semantic_enabled = 1
+nmap gs :sp<CR>:LspDefinition<CR>
+nmap gv :vsp<CR>:LspDefinition<CR>
+nmap <buffer> gr <Plug>(lsp-references)
+nmap <Space> <Plug>(lsp-hover)
+nmap <C-f> <Plug>(lsp-document-format)
+
+" For asynccomplete.vim
+set shortmess+=c
+inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
+inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
+inoremap <expr> <CR> pumvisible() ? asyncomplete#close_popup() : '<CR>'
+
 " For lightline
-function! CocCurrentFunction()
-  return get(b:, 'coc_current_function', '')
-endfunction
-
-let g:lightline = {
-  \ 'colorscheme': 'iceberg',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ 'component_function': {
-  \   'cocstatus': 'coc#status',
-  \   'currentfunction': 'CocCurrentFunction'
-  \ },
-  \ }
-
-" For vim-svelte-plugin
-" let g:vim_svelte_plugin_use_typescript = 1
-" let g:vim_svelte_plugin_use_sass = 1
+let g:lightline = { 'colorscheme': 'rosepine' }
