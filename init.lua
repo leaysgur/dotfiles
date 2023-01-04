@@ -1,6 +1,7 @@
 -- Basics
 vim.opt.number = true
 vim.opt.termguicolors = true
+vim.opt.autochdir = true
 -- Prefer soft tab
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
