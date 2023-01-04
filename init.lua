@@ -26,12 +26,12 @@ if not vim.loop.fs_stat(lazypath) then
 		"git",
 		"clone",
 		"--filter=blob:none",
-		"--single-branch",
 		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
 		lazypath,
 	})
 end
-vim.opt.runtimepath:prepend(lazypath)
+vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	-- Theme
@@ -146,7 +146,7 @@ require("lazy").setup({
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
 							vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
-							vim.keymap.set("n", "<space>f", function()
+							vim.keymap.set("n", "<Space>f", function()
 								vim.lsp.buf.format({ async = true })
 							end, buf_opts)
 						end,
