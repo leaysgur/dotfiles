@@ -55,6 +55,7 @@ alias bo='vim'
 alias ci='vim'
 alias cu='vim'
 alias co='vim'
+alias vim='nvim'
 
 alias ll='ls -lahF'
 
