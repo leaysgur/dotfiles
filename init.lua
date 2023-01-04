@@ -107,6 +107,7 @@ require("lazy").setup({
 						hijack_netrw = true,
 						hidden = true,
 						grouped = true,
+						initial_mode = "normal",
 					},
 				},
 			})
