@@ -11,8 +11,8 @@ vim.opt.list = true
 vim.opt.listchars = { tab = ">-", trail = "-" }
 -- Prefer global status line
 vim.opt.laststatus = 3
--- Disable mouse(scrolling still works)
-vim.opt.mouse = ""
+-- Yank to OS clipboard
+vim.opt.clipboard = "unnamedplus"
 
 -- Keep visual mode after indentation
 vim.keymap.set("v", "<", "<gv", { noremap = true })
