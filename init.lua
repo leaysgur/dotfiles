@@ -36,10 +36,10 @@ vim.opt.runtimepath:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"folke/tokyonight.nvim",
+		"mhartington/oceanic-next",
 		priority = 1000,
 		config = function()
-			vim.cmd([[colorscheme tokyonight-night]])
+			vim.cmd([[colorscheme OceanicNext]])
 		end,
 	},
 
