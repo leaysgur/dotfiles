@@ -166,7 +166,11 @@ require("lazy").setup({
 
 					-- Suppress "Undefined global `vim`" warning
 					if server == "sumneko_lua" then
-						options.settings = { Lua = { diagnostics = { globals = { "vim" } } } }
+						options = vim.tbl_deep_extend(
+							"force",
+							options,
+							{ settings = { Lua = { diagnostics = { globals = { "vim" } } } } }
+						)
 					end
 
 					require("lspconfig")[server].setup(options)
