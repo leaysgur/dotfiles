@@ -3,19 +3,19 @@ local act = wezterm.action;
 
 return {
   font = wezterm.font("Cica"),
-  font_size = 22,
+  font_size = 20,
   adjust_window_size_when_changing_font_size = false,
 
   initial_cols = 120,
   initial_rows = 40,
   window_padding = {
-    left = 8,
+    top = 4,
+    left = 4,
     right = 0,
-    top = 0,
     bottom = 0,
   },
 
-  color_scheme = "Chester",
+  color_scheme = "terafox",
   window_background_opacity = 0.9,
   text_background_opacity = 0.7,
   inactive_pane_hsb = { brightness = 0.1 },

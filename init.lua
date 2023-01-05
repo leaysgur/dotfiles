@@ -37,10 +37,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"mhartington/oceanic-next",
+		"EdenEast/nightfox.nvim",
 		priority = 1000,
 		config = function()
-			vim.cmd([[colorscheme OceanicNext]])
+			vim.cmd([[colorscheme terafox]])
 		end,
 	},
 
