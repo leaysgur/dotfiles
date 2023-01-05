@@ -1,17 +1,17 @@
 -- Basics
-vim.opt.number = true
 vim.opt.termguicolors = true
-vim.opt.autochdir = true
+vim.opt.number = true
+vim.opt.cursorline = true
 vim.opt.tabstop = 2
--- Prefer soft tab
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
--- Show hidden characters
 vim.opt.list = true
 vim.opt.listchars = { tab = "»»", trail = "-" }
 -- Prefer global status line
 vim.opt.laststatus = 3
-
+-- Keep updating cwd
+vim.opt.autochdir = true
+-- Prefer soft tab
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
 -- Yank to OS clipboard
 vim.opt.clipboard = "unnamedplus"
 -- Disable mouse for term handler
@@ -115,8 +115,8 @@ require("lazy").setup({
 						mappings = {
 							n = {
 								-- Override default to auto-close empty buffer
-								["<Esc>"] = function(buf)
-									require("telescope.actions").close(buf)
+								["<Esc>"] = function(bufnr)
+									require("telescope.actions").close(bufnr)
 									-- But confirm to prevent from closing non-empty buffer
 									vim.cmd([[:confirm quit]])
 								end
@@ -130,6 +130,7 @@ require("lazy").setup({
 	},
 
 	-- Editors
+	"machakann/vim-sandwich",
 	{ "windwp/nvim-autopairs", config = true },
 	-- XXX: `config = true` is enough but it throws...
 	{ "andymass/vim-matchup", config = {} },
@@ -156,8 +157,8 @@ require("lazy").setup({
 				function(server)
 					local options = {
 						capabilities = require("cmp_nvim_lsp").default_capabilities(),
-						on_attach = function(_, buf)
-							local buf_opts = { noremap = true, silent = true, buffer = buf }
+						on_attach = function(_, bufnr)
+							local buf_opts = { noremap = true, silent = true, buffer = bufnr }
 							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
@@ -224,6 +225,7 @@ require("lazy").setup({
 						select = true,
 					}),
 				}),
+				experimental = { ghost_text = true },
 			})
 		end,
 	},
