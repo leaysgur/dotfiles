@@ -2,9 +2,6 @@
 # Environment variables
 # ================================================================
 export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin
-export LANG=en_US.UTF-8
-export EDITOR=vim
-export TERM=xterm-256color
 export CLICOLOR=true
 
 
@@ -30,6 +27,7 @@ fi
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
 
+
 # ================================================================
 # History
 # ================================================================
@@ -46,16 +44,15 @@ setopt hist_reduce_blanks
 # ================================================================
 # Aliases
 # ================================================================
-alias vi='vim'
-alias vu='vim'
-alias vo='vim'
-alias bi='vim'
-alias bu='vim'
-alias bo='vim'
-alias ci='vim'
-alias cu='vim'
-alias co='vim'
-alias vim='nvim'
+alias vu='vi'
+alias vo='vi'
+alias bi='vi'
+alias bu='vi'
+alias bo='vi'
+alias ci='vi'
+alias cu='vi'
+alias co='vi'
+alias vi='nvim'
 
 alias ll='ls -lahF'
 
