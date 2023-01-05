@@ -62,6 +62,7 @@ require("lazy").setup({
 	{ "petertriho/nvim-scrollbar", config = true },
 
 	-- Utils
+	"rbtnn/vim-ambiwidth",
 	{ "NMAC427/guess-indent.nvim", config = true },
 	{ "yutkat/history-ignore.nvim", config = true },
 	{
@@ -190,6 +191,7 @@ require("lazy").setup({
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/vim-vsnip",
 			"hrsh7th/cmp-emoji",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -205,6 +207,7 @@ require("lazy").setup({
 					{ name = "vsnip" },
 					{ name = "path" },
 					{ name = "emoji" },
+					{ name = "nvim_lsp_signature_help" },
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<Tab>"] = function(fallback)

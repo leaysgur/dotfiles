@@ -15,7 +15,7 @@ return {
     bottom = 0,
   },
 
-  color_scheme = "terafox",
+  color_scheme = "nightfox",
   window_background_opacity = 0.9,
   text_background_opacity = 0.7,
   inactive_pane_hsb = { brightness = 0.1 },
