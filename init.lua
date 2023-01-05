@@ -2,13 +2,13 @@
 vim.opt.number = true
 vim.opt.termguicolors = true
 vim.opt.autochdir = true
+vim.opt.tabstop = 2
 -- Prefer soft tab
 vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
 vim.opt.expandtab = true
 -- Show hidden characters
 vim.opt.list = true
-vim.opt.listchars = { tab = ">-", trail = "-" }
+vim.opt.listchars = { tab = "»»", trail = "-" }
 -- Prefer global status line
 vim.opt.laststatus = 3
 -- Yank to OS clipboard
@@ -108,6 +108,16 @@ require("lazy").setup({
 						hidden = true,
 						grouped = true,
 						initial_mode = "normal",
+						mappings = {
+							n = {
+								-- Override default to auto-close empty buffer
+								["<Esc>"] = function(buf)
+									require("telescope.actions").close(buf)
+									-- But confirm to prevent from closing non-empty buffer
+									vim.cmd([[:confirm quit]])
+								end
+							},
+						},
 					},
 				},
 			})
