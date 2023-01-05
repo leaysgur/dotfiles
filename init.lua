@@ -11,14 +11,17 @@ vim.opt.list = true
 vim.opt.listchars = { tab = "»»", trail = "-" }
 -- Prefer global status line
 vim.opt.laststatus = 3
+
 -- Yank to OS clipboard
 vim.opt.clipboard = "unnamedplus"
+-- Disable mouse for term handler
+vim.opt.mouse = ""
 
 -- Keep visual mode after indentation
 vim.keymap.set("v", "<", "<gv", { noremap = true })
 vim.keymap.set("v", ">", ">gv", { noremap = true })
 -- Clear search highlight
-vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", { noremap = true })
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", { silent = true, noremap = true })
 
 -- Plugins by `lazy.nvim`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -40,7 +43,7 @@ require("lazy").setup({
 		"EdenEast/nightfox.nvim",
 		priority = 1000,
 		config = function()
-			vim.cmd([[colorscheme terafox]])
+			vim.cmd([[colorscheme nightfox]])
 		end,
 	},
 

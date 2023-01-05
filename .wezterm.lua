@@ -15,9 +15,9 @@ return {
     bottom = 0,
   },
 
-  color_scheme = "nightfox",
+  color_scheme = "terafox",
   window_background_opacity = 0.9,
-  text_background_opacity = 0.7,
+  text_background_opacity = 0.8,
   inactive_pane_hsb = { brightness = 0.1 },
 
   hide_tab_bar_if_only_one_tab = true,
