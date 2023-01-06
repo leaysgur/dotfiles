@@ -19,11 +19,12 @@ vim.opt.clipboard = "unnamedplus"
 -- Disable mouse for term handler
 vim.opt.mouse = ""
 
+local map_args = { silent = true, noremap = true };
 -- Keep visual mode after indentation
 vim.keymap.set("v", "<", "<gv", { noremap = true })
 vim.keymap.set("v", ">", ">gv", { noremap = true })
 -- Clear search highlight
-vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", map_args)
 
 -- Plugins by `lazy.nvim`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -97,7 +98,7 @@ require("lazy").setup({
 			"nvim-telescope/telescope-file-browser.nvim",
 		},
 		init = function()
-			vim.keymap.set("n", "<C-p>", ":Telescope git_files<CR>", { silent = true, noremap = true })
+			vim.keymap.set("n", "<C-p>", ":Telescope git_files show_untracked=true <CR>", map_args)
 		end,
 		config = function()
 			local telescope = require("telescope");
@@ -144,8 +145,8 @@ require("lazy").setup({
 			require("nvim_comment").setup({ create_mappings = false })
 		end,
 		init = function()
-			vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", { silent = true, noremap = true })
-			vim.keymap.set("v", "<C-_>", ":'<,'>CommentToggle<CR>", { silent = true, noremap = true })
+			vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", map_args)
+			vim.keymap.set("v", "<C-_>", ":'<,'>CommentToggle<CR>", map_args)
 		end,
 		cmd = "CommentToggle",
 	},
@@ -161,7 +162,7 @@ require("lazy").setup({
 					local options = {
 						capabilities = require("cmp_nvim_lsp").default_capabilities(),
 						on_attach = function(_, bufnr)
-							local buf_opts = { noremap = true, silent = true, buffer = bufnr }
+							local buf_opts = vim.list_extend({ buffer = bufnr }, map_args)
 							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
