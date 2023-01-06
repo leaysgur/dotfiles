@@ -51,26 +51,24 @@ require("lazy").setup({
 	},
 
 	-- Uis
-	{ "ojroques/nvim-hardline", config = true },
+	{ "ojroques/nvim-hardline", config = true, event = "BufReadPost" },
 	{
 		"lewis6991/gitsigns.nvim",
 		config = {
 			signcolumn = false,
 			numhl = true,
 		},
+		event = "BufReadPost",
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = {
 			show_current_context = true,
 		},
+		event = "BufReadPost",
 	},
-	{ "petertriho/nvim-scrollbar", config = true },
-
-	-- Utils
-	"rbtnn/vim-ambiwidth",
-	{ "NMAC427/guess-indent.nvim", config = true },
-	{ "yutkat/history-ignore.nvim", config = true },
+	{ "petertriho/nvim-scrollbar", config = true, event = "BufReadPost" },
+	{ "rbtnn/vim-ambiwidth", event = "BufReadPost" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -87,6 +85,10 @@ require("lazy").setup({
 		end,
 		event = "BufReadPost",
 	},
+
+	-- Utils
+	{ "NMAC427/guess-indent.nvim", config = true, event = "BufReadPost" },
+	{ "yutkat/history-ignore.nvim", config = true, event = "BufReadPost" },
 
 	-- Finder, file browser
 	{
@@ -134,8 +136,8 @@ require("lazy").setup({
 	},
 
 	-- Editors
-	"machakann/vim-sandwich",
-	{ "windwp/nvim-autopairs", config = true },
+	{ "machakann/vim-sandwich", event = "BufReadPost" },
+	{ "windwp/nvim-autopairs", config = true, event = "BufReadPost" },
 	-- XXX: `config = true` is enough but it throws...
 	{ "andymass/vim-matchup", config = {}, event = "BufReadPost" },
 	{
@@ -152,8 +154,8 @@ require("lazy").setup({
 	},
 
 	-- LSP
-	"neovim/nvim-lspconfig",
-	{ "williamboman/mason.nvim", config = true },
+	{ "neovim/nvim-lspconfig", event = "BufReadPost" },
+	{ "williamboman/mason.nvim", config = true, event = "BufReadPost" },
 	{
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
@@ -193,8 +195,9 @@ require("lazy").setup({
 				end,
 			})
 		end,
+		event = "BufReadPost",
 	},
-	{ "j-hui/fidget.nvim", config = true },
+	{ "j-hui/fidget.nvim", config = true, event = "BufReadPost" },
 
 	-- Completion
 	{
