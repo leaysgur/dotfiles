@@ -9,6 +9,8 @@ vim.opt.listchars = { tab = "»»", trail = "-" }
 vim.opt.laststatus = 3
 -- Keep updating cwd
 vim.opt.autochdir = true
+-- Faster CursorHold
+vim.opt.updatetime = 500
 -- Prefer soft tab
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
@@ -82,6 +84,7 @@ require("lazy").setup({
 				matchup = { enable = true },
 			})
 		end,
+		event = "BufReadPost",
 	},
 
 	-- Finder, file browser
@@ -133,7 +136,7 @@ require("lazy").setup({
 	"machakann/vim-sandwich",
 	{ "windwp/nvim-autopairs", config = true },
 	-- XXX: `config = true` is enough but it throws...
-	{ "andymass/vim-matchup", config = {} },
+	{ "andymass/vim-matchup", config = {}, event = "BufReadPost" },
 	{
 		"terrortylor/nvim-comment",
 		-- XXX: `config = { ... }` does not work because plugin name is not consistent
@@ -166,6 +169,13 @@ require("lazy").setup({
 							vim.keymap.set("n", "<Space>f", function()
 								vim.lsp.buf.format({ async = true })
 							end, buf_opts)
+
+							-- Show diagnostics only on hover
+							vim.diagnostic.config({ virtual_text = false })
+							vim.api.nvim_create_autocmd("CursorHold", {
+								buffer = bufnr,
+								callback = vim.diagnostic.open_float,
+							})
 						end,
 					}
 
@@ -188,7 +198,6 @@ require("lazy").setup({
 	-- Completion
 	{
 		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
@@ -228,6 +237,7 @@ require("lazy").setup({
 				experimental = { ghost_text = true },
 			})
 		end,
+		event = "InsertEnter",
 	},
 }, {
 	checker = {
