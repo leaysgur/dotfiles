@@ -3,7 +3,7 @@ vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.list = true
-vim.opt.listchars = { tab = "»»", trail = "-" }
+vim.opt.listchars = { tab = "__" }
 -- Prefer global status line
 vim.opt.laststatus = 3
 vim.opt.completeopt = "menu,menuone,noselect"
@@ -57,26 +57,27 @@ require("lazy").setup({
 	},
 
 	-- Uis
+	"nvim-tree/nvim-web-devicons",
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
 			signcolumn = false,
 			numhl = true,
+			linehl = true,
 		},
 		event = "BufReadPre",
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		opts = {
+			disable_with_nolist = true,
 			show_current_context = true,
 		},
 		event = "BufReadPre",
 	},
-	{ "petertriho/nvim-scrollbar", config = true, event = "BufReadPost" },
-	{ "ojroques/nvim-hardline", config = true, event = "BufReadPost" },
+	{ "feline-nvim/feline.nvim", config = true, event = "BufReadPost" },
 
 	-- Utils
-	{ "rbtnn/vim-ambiwidth", event = "BufReadPost" },
 	{ "NMAC427/guess-indent.nvim", config = true, event = "BufReadPost" },
 	{ "yutkat/history-ignore.nvim", config = true, event = "BufReadPost" },
 	{
@@ -103,7 +104,6 @@ require("lazy").setup({
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.0",
 		dependencies = {
-			"nvim-tree/nvim-web-devicons",
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
 		},
