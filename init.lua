@@ -2,29 +2,35 @@
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.cursorline = true
-vim.opt.tabstop = 2
 vim.opt.list = true
 vim.opt.listchars = { tab = "»»", trail = "-" }
 -- Prefer global status line
 vim.opt.laststatus = 3
+vim.opt.completeopt = "menu,menuone,noselect"
+-- Search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+-- Prefer soft tab
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 -- Keep updating cwd
 vim.opt.autochdir = true
 -- Faster CursorHold
 vim.opt.updatetime = 500
--- Prefer soft tab
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
 -- Yank to OS clipboard
 vim.opt.clipboard = "unnamedplus"
 -- Disable mouse for term handler
 vim.opt.mouse = ""
 
+
 local map_args = { silent = true, noremap = true };
 -- Keep visual mode after indentation
-vim.keymap.set("v", "<", "<gv", { noremap = true })
-vim.keymap.set("v", ">", ">gv", { noremap = true })
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
-vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", map_args)
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", map_args)
+
 
 -- Plugins by `lazy.nvim`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -51,24 +57,28 @@ require("lazy").setup({
 	},
 
 	-- Uis
-	{ "ojroques/nvim-hardline", config = true, event = "BufReadPost" },
 	{
 		"lewis6991/gitsigns.nvim",
-		config = {
+		opts = {
 			signcolumn = false,
 			numhl = true,
 		},
-		event = "BufReadPost",
+		event = "BufReadPre",
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		config = {
+		opts = {
 			show_current_context = true,
 		},
-		event = "BufReadPost",
+		event = "BufReadPre",
 	},
 	{ "petertriho/nvim-scrollbar", config = true, event = "BufReadPost" },
+	{ "ojroques/nvim-hardline", config = true, event = "BufReadPost" },
+
+	-- Utils
 	{ "rbtnn/vim-ambiwidth", event = "BufReadPost" },
+	{ "NMAC427/guess-indent.nvim", config = true, event = "BufReadPost" },
+	{ "yutkat/history-ignore.nvim", config = true, event = "BufReadPost" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -79,16 +89,14 @@ require("lazy").setup({
 					enable = true,
 					additional_vim_regex_highlighting = false,
 				},
+				indent = { enable = true },
+				context_commentstring = { enable = true, enable_autocmd = false },
 				-- Enhance `vim-matchup`
 				matchup = { enable = true },
 			})
 		end,
 		event = "BufReadPost",
 	},
-
-	-- Utils
-	{ "NMAC427/guess-indent.nvim", config = true, event = "BufReadPost" },
-	{ "yutkat/history-ignore.nvim", config = true, event = "BufReadPost" },
 
 	-- Finder, file browser
 	{
@@ -139,10 +147,10 @@ require("lazy").setup({
 	{ "machakann/vim-sandwich", event = "BufReadPost" },
 	{ "windwp/nvim-autopairs", config = true, event = "BufReadPost" },
 	-- XXX: `config = true` is enough but it throws...
-	{ "andymass/vim-matchup", config = {}, event = "BufReadPost" },
+	{ "andymass/vim-matchup", opts = {}, event = "BufReadPost" },
 	{
 		"terrortylor/nvim-comment",
-		-- XXX: `config = { ... }` does not work because plugin name is not consistent
+		-- XXX: `opts = { ... }` does not work because plugin name is not consistent
 		config = function()
 			require("nvim_comment").setup({ create_mappings = false })
 		end,
@@ -154,15 +162,21 @@ require("lazy").setup({
 	},
 
 	-- LSP
-	{ "neovim/nvim-lspconfig", event = "BufReadPost" },
-	{ "williamboman/mason.nvim", config = true, event = "BufReadPost" },
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			{ "williamboman/mason.nvim", config = true },
+			"williamboman/mason-lspconfig.nvim",
+			{ "j-hui/fidget.nvim", config = true },
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+		},
 		config = function()
+			local default_capabilities = require("cmp_nvim_lsp").default_capabilities()
 			require("mason-lspconfig").setup_handlers({
 				function(server)
 					local options = {
-						capabilities = require("cmp_nvim_lsp").default_capabilities(),
+						capabilities = default_capabilities,
 						on_attach = function(_, bufnr)
 							local buf_opts = vim.list_extend({ buffer = bufnr }, map_args)
 							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
@@ -195,20 +209,19 @@ require("lazy").setup({
 				end,
 			})
 		end,
-		event = "BufReadPost",
+		event = "BufReadPre",
 	},
-	{ "j-hui/fidget.nvim", config = true, event = "BufReadPost" },
 
 	-- Completion
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/vim-vsnip",
 			"hrsh7th/cmp-emoji",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -219,12 +232,12 @@ require("lazy").setup({
 					end,
 				},
 				sources = {
+					{ name = "nvim_lsp_signature_help" },
 					{ name = "nvim_lsp" },
-					{ name = "buffer" },
 					{ name = "vsnip" },
+					{ name = "buffer" },
 					{ name = "path" },
 					{ name = "emoji" },
-					{ name = "nvim_lsp_signature_help" },
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<Tab>"] = function(fallback)
