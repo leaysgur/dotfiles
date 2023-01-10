@@ -2,7 +2,7 @@ local wezterm = require "wezterm";
 local act = wezterm.action;
 
 return {
-  font = wezterm.font("UDEV Gothic 35NF"),
+  font = wezterm.font("PlemolJP Console NF"),
   font_size = 20,
   adjust_window_size_when_changing_font_size = false,
 
