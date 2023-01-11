@@ -82,6 +82,9 @@ require("lazy").setup({
 	{ "yutkat/history-ignore.nvim", config = true, event = "BufReadPost" },
 	{
 		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			"JoosepAlviste/nvim-ts-context-commentstring",
+		},
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
@@ -91,6 +94,7 @@ require("lazy").setup({
 					additional_vim_regex_highlighting = false,
 				},
 				indent = { enable = true },
+				-- Enhance `nvim-comment`
 				context_commentstring = { enable = true, enable_autocmd = false },
 				-- Enhance `vim-matchup`
 				matchup = { enable = true },
@@ -152,7 +156,10 @@ require("lazy").setup({
 		"terrortylor/nvim-comment",
 		-- XXX: `opts = { ... }` does not work because plugin name is not consistent
 		config = function()
-			require("nvim_comment").setup({ create_mappings = false })
+			require("nvim_comment").setup({
+				create_mappings = false,
+				hook = require("ts_context_commentstring.internal").update_commentstring,
+			})
 		end,
 		init = function()
 			vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", map_args)
@@ -217,11 +224,12 @@ require("lazy").setup({
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/vim-vsnip",
 			"hrsh7th/cmp-emoji",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"onsails/lspkind.nvim",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -251,6 +259,9 @@ require("lazy").setup({
 						select = true,
 					}),
 				}),
+				formatting = {
+					format = require("lspkind").cmp_format({ mode = "symbol_text", preset = "codicons" }),
+				},
 				experimental = { ghost_text = true },
 			})
 		end,
