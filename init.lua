@@ -101,20 +101,34 @@ require("lazy").setup({
 		event = "BufReadPost",
 	},
 
-	-- Finder, file browser
+	-- File browser
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+		},
+		opts = {
+			filesystem = {
+				filtered_items = { visible = true },
+				hijack_netrw_behavior = "open_current",
+			},
+		},
+	},
+
+	-- Fuzzy finder
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.0",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-file-browser.nvim",
 		},
 		init = function()
 			vim.keymap.set("n", "<C-p>", ":Telescope git_files show_untracked=true <CR>", map_args)
 		end,
 		config = function()
-			local telescope = require("telescope");
-			telescope.setup({
+			require("telescope").setup({
 				defaults = {
 					mappings = {
 						i = {
@@ -122,27 +136,9 @@ require("lazy").setup({
 						},
 					},
 				},
-				extensions = {
-					file_browser = {
-						hijack_netrw = true,
-						hidden = true,
-						grouped = true,
-						initial_mode = "normal",
-						mappings = {
-							n = {
-								-- Override default to auto-close empty buffer
-								["<Esc>"] = function(bufnr)
-									require("telescope.actions").close(bufnr)
-									-- But confirm to prevent from closing non-empty buffer
-									vim.cmd([[:confirm quit]])
-								end
-							},
-						},
-					},
-				},
 			})
-			telescope.load_extension("file_browser")
 		end,
+		cmd = "Telescope",
 	},
 
 	-- Editors
@@ -173,8 +169,6 @@ require("lazy").setup({
 			{ "williamboman/mason.nvim", config = true },
 			"williamboman/mason-lspconfig.nvim",
 			{ "j-hui/fidget.nvim", config = true },
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
 		},
 		config = function()
 			local default_capabilities = require("cmp_nvim_lsp").default_capabilities()
