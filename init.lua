@@ -18,8 +18,6 @@ vim.opt.shiftwidth = 2
 vim.opt.autochdir = true
 -- Faster CursorHold
 vim.opt.updatetime = 500
--- Yank to OS clipboard
-vim.opt.clipboard = "unnamedplus"
 -- Disable mouse for term handler
 vim.opt.mouse = ""
 
