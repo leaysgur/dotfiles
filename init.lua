@@ -1,5 +1,6 @@
 -- Basics
 vim.opt.termguicolors = true
+vim.opt.pumblend = 10
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.list = true
