@@ -136,6 +136,7 @@ require("lazy").setup({
 		init = function()
 			vim.keymap.set("n", "<C-p>", ":Telescope git_files show_untracked=true <CR>", map_args)
 		end,
+		-- XXX: `opts = { ... }` does not work because it fails to load `telescope.actions`
 		config = function()
 			require("telescope").setup({
 				defaults = {
@@ -153,7 +154,7 @@ require("lazy").setup({
 	-- Editors
 	{ "machakann/vim-sandwich", event = "BufReadPost" },
 	{ "windwp/nvim-autopairs", config = true, event = "BufReadPost" },
-	-- XXX: `config = true` is enough but it throws...
+	-- XXX: `config = true` is enough but it throws error!
 	{ "andymass/vim-matchup", opts = {}, event = "BufReadPost" },
 	{
 		"terrortylor/nvim-comment",
