@@ -103,6 +103,7 @@ require("lazy").setup({
 	},
 
 	-- File browser
+	-- NOTE: It takes 1sec to use as netrw, try faster alternative...?
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
