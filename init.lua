@@ -110,12 +110,19 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 		},
-		opts = {
-			filesystem = {
-				filtered_items = { visible = true },
-				hijack_netrw_behavior = "open_current",
-			},
-		},
+		config = function()
+			vim.cmd([[
+				let g:loaded_netrw = 1
+				let g:loaded_netrwPlugin = 1
+				let g:neo_tree_remove_legacy_commands = 1
+			]])
+			require("neo-tree").setup({
+				filesystem = {
+					filtered_items = { visible = true },
+					hijack_netrw_behavior = "open_current",
+				},
+			})
+		end,
 	},
 
 	-- Fuzzy finder
