@@ -48,10 +48,13 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"EdenEast/nightfox.nvim",
+		"yashguptaz/calvera-dark.nvim",
 		priority = 1000,
 		config = function()
-			vim.cmd([[colorscheme nightfox]])
+			vim.g.calvera_italic_comments = true
+			vim.g.calvera_italic_keywords = true
+			vim.g.calvera_borders = true
+			vim.cmd([[colorscheme calvera]])
 		end,
 	},
 
@@ -62,7 +65,6 @@ require("lazy").setup({
 		opts = {
 			signcolumn = false,
 			numhl = true,
-			linehl = true,
 		},
 		event = "BufReadPre",
 	},
