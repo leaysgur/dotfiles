@@ -8,6 +8,7 @@ vim.opt.listchars = { tab = "__" }
 -- Prefer global status line
 vim.opt.laststatus = 3
 vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.swapfile = false
 -- Search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -202,7 +203,9 @@ require("lazy").setup({
 							vim.diagnostic.config({ virtual_text = false })
 							vim.api.nvim_create_autocmd("CursorHold", {
 								buffer = bufnr,
-								callback = vim.diagnostic.open_float,
+								callback = function()
+									vim.diagnostic.open_float(nil, { focusable = false })
+								end,
 							})
 						end,
 					}
