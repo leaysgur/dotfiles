@@ -94,6 +94,7 @@ fi
 if [ -f /usr/local/bin/bat ]; then
   export BAT_STYLE="plain"
   export BAT_THEME="Nord"
+  export BAT_PAGER="never"
 fi
 
 # Override local settings if exists
