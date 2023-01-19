@@ -197,10 +197,8 @@ require("lazy").setup({
 					vim.keymap.set("n", "gv", ":vs | :Lspsaga goto_definition<CR>", map_args)
 					vim.keymap.set("n", "gr", ":Lspsaga lsp_finder<CR>", map_args)
 					vim.keymap.set("n", "K", ":Lspsaga hover_doc<CR>", map_args)
-					vim.api.nvim_create_autocmd("CursorHold", {
-						command = ":Lspsaga show_line_diagnostics",
-					})
 				end,
+				cmd = "Lspsaga",
 			},
 		},
 		config = function()
@@ -217,6 +215,9 @@ require("lazy").setup({
 
 							-- Show diagnostics only on hover
 							vim.diagnostic.config({ virtual_text = false })
+							vim.api.nvim_create_autocmd("CursorHold", {
+								command = ":Lspsaga show_line_diagnostics",
+							})
 						end,
 					}
 
