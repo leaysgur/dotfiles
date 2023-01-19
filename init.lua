@@ -182,6 +182,26 @@ require("lazy").setup({
 			{ "williamboman/mason.nvim", config = true },
 			"williamboman/mason-lspconfig.nvim",
 			{ "j-hui/fidget.nvim", config = true },
+			{
+				"glepnir/lspsaga.nvim",
+				opts = {
+					symbol_in_winbar = { enable = false },
+					lightbulb = { enable = false },
+					finder = {
+						split = "s",
+						vsplit = "v",
+					},
+				},
+				init = function()
+					vim.keymap.set("n", "gs", ":sp | :Lspsaga goto_definition<CR>", map_args)
+					vim.keymap.set("n", "gv", ":vs | :Lspsaga goto_definition<CR>", map_args)
+					vim.keymap.set("n", "gr", ":Lspsaga lsp_finder<CR>", map_args)
+					vim.keymap.set("n", "K", ":Lspsaga hover_doc<CR>", map_args)
+					vim.api.nvim_create_autocmd("CursorHold", {
+						command = ":Lspsaga show_line_diagnostics",
+					})
+				end,
+			},
 		},
 		config = function()
 			local default_capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -191,22 +211,12 @@ require("lazy").setup({
 						capabilities = default_capabilities,
 						on_attach = function(_, bufnr)
 							local buf_opts = vim.list_extend({ buffer = bufnr }, map_args)
-							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
-							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
-							vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
-							vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
 							vim.keymap.set("n", "<Space>f", function()
 								vim.lsp.buf.format({ async = true })
 							end, buf_opts)
 
 							-- Show diagnostics only on hover
 							vim.diagnostic.config({ virtual_text = false })
-							vim.api.nvim_create_autocmd("CursorHold", {
-								buffer = bufnr,
-								callback = function()
-									vim.diagnostic.open_float(nil, { focusable = false })
-								end,
-							})
 						end,
 					}
 
