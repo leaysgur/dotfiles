@@ -86,6 +86,7 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
+			"windwp/nvim-ts-autotag",
 		},
 		build = ":TSUpdate",
 		config = function()
@@ -96,6 +97,7 @@ require("lazy").setup({
 					additional_vim_regex_highlighting = false,
 				},
 				indent = { enable = true },
+				autotag = { enable = true },
 				-- Enhance `nvim-comment`
 				context_commentstring = { enable = true, enable_autocmd = false },
 				-- Enhance `vim-matchup`
