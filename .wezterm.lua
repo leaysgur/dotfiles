@@ -17,7 +17,7 @@ return {
 
   color_scheme = "nightfox",
   window_background_opacity = 0.9,
-  text_background_opacity = 0.8,
+  text_background_opacity = 0.6,
   inactive_pane_hsb = { brightness = 0.1 },
 
   hide_tab_bar_if_only_one_tab = true,
