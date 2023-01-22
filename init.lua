@@ -49,13 +49,18 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"yashguptaz/calvera-dark.nvim",
+		"catppuccin/nvim",
+		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			vim.g.calvera_italic_comments = true
-			vim.g.calvera_italic_keywords = true
-			vim.g.calvera_borders = true
-			vim.cmd([[colorscheme calvera]])
+			require("catppuccin").setup({
+				flavor = "macchiato",
+				integrations = { mini = true },
+				custom_highlights = function(colors)
+					return { VertSplit = { fg = colors.lavender } }
+				end
+			})
+			vim.cmd([[colorscheme catppuccin]])
 		end,
 	},
 
@@ -77,7 +82,15 @@ require("lazy").setup({
 		},
 		event = "BufReadPre",
 	},
-	{ "feline-nvim/feline.nvim", config = true, event = "BufReadPost" },
+	{
+		"echasnovski/mini.statusline",
+		config = function()
+			require("mini.statusline").setup({
+				set_vim_settings = false,
+			})
+		end,
+		event = "BufReadPost",
+	},
 
 	-- Utils
 	{ "NMAC427/guess-indent.nvim", config = true, event = "BufReadPost" },
