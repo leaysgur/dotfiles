@@ -30,6 +30,8 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", map_args)
+-- Clean up to copy as term text
+vim.keymap.set("n", "cp", ":set number!<CR>:IndentBlanklineToggle<CR>", map_args)
 
 
 -- Plugins by `lazy.nvim`
