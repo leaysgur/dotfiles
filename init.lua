@@ -94,8 +94,8 @@ require("lazy").setup({
 		event = "BufReadPost",
 	},
 	{
-		"brenoprata10/nvim-highlight-colors",
-		config = true,
+		"NvChad/nvim-colorizer.lua",
+		opts = { user_default_options = { css = true } },
 		event = "BufReadPost",
 	},
 
