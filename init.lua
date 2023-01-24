@@ -93,6 +93,11 @@ require("lazy").setup({
 		end,
 		event = "BufReadPost",
 	},
+	{
+		"brenoprata10/nvim-highlight-colors",
+		config = true,
+		event = "BufReadPost",
+	},
 
 	-- Utils
 	{ "NMAC427/guess-indent.nvim", config = true, event = "BufReadPost" },
