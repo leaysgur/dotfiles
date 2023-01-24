@@ -6,8 +6,8 @@ return {
   font_size = 20,
   adjust_window_size_when_changing_font_size = false,
 
-  initial_cols = 120,
-  initial_rows = 40,
+  initial_cols = 150,
+  initial_rows = 50,
   window_padding = {
     top = 4,
     left = 4,
@@ -18,7 +18,7 @@ return {
   color_scheme = "nightfox",
   window_background_opacity = 0.9,
   text_background_opacity = 0.6,
-  inactive_pane_hsb = { brightness = 0.1 },
+  inactive_pane_hsb = { brightness = 0.2 },
 
   hide_tab_bar_if_only_one_tab = true,
   tab_bar_at_bottom = true,
@@ -46,5 +46,5 @@ return {
     },
   },
 
-  debug_key_events = true,
+  -- debug_key_events = true,
 }
