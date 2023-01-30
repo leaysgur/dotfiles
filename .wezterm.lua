@@ -46,5 +46,18 @@ return {
     },
   },
 
+  hyperlink_rules = {
+    -- Default rule for general url
+    {
+      regex = "\\b\\w+://[\\w.-]+\\.[a-z]{2,15}\\S*\\b",
+      format = "$0",
+    },
+    -- Support url like http://127.0.0.1:8000
+    {
+      regex = "\\b\\w+://(?:[\\w.-]+):\\d+\\S*\\b",
+      format = "$0",
+    },
+  },
+
   -- debug_key_events = true,
 }
