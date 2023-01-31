@@ -140,6 +140,7 @@ require("lazy").setup({
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 			"windwp/nvim-ts-autotag",
+			"yioneko/nvim-yati",
 		},
 		build = ":TSUpdate",
 		config = function()
@@ -149,7 +150,11 @@ require("lazy").setup({
 					enable = true,
 					additional_vim_regex_highlighting = false,
 				},
-				indent = { enable = true },
+				-- Native TS indent does not work well with JSDoc multiline comments.
+				-- While waiting for https://github.com/nvim-treesitter/nvim-treesitter/pull/2545 to be merged,
+				-- use `yati`(also not perfect) instead...
+				indent = { enable = false },
+				yati = { enable = true },
 				autotag = { enable = true },
 				-- Enhance `nvim-comment`
 				context_commentstring = { enable = true, enable_autocmd = false },
