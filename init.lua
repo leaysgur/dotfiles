@@ -165,27 +165,34 @@ require("lazy").setup({
 	},
 
 	-- File browser
-	-- NOTE: It takes 1sec to use as netrw, try faster alternative...?
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
+			-- Required to make `*_with_window_picker` mappings work
+			{ "s1n7ax/nvim-window-picker", config = true },
 		},
-		config = function()
-			vim.cmd([[
-				let g:loaded_netrw = 1
-				let g:loaded_netrwPlugin = 1
-				let g:neo_tree_remove_legacy_commands = 1
-			]])
-			require("neo-tree").setup({
-				filesystem = {
-					filtered_items = { visible = true },
-					hijack_netrw_behavior = "open_current",
-				},
-			})
+		init = function()
+			vim.g.neo_tree_remove_legacy_commands = 1
+			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", map_args)
 		end,
+		opts = {
+			close_if_last_window = true,
+			window = {
+				mappings = {
+					["<C-s>"] = "split_with_window_picker",
+					["<C-v>"] = "vsplit_with_window_picker",
+				},
+			},
+			filesystem = {
+				filtered_items = { visible = true },
+				hijack_netrw_behavior = "open_current",
+				bind_to_cwd = false,
+				follow_current_file = true,
+			},
+		},
 	},
 
 	-- Fuzzy finder
