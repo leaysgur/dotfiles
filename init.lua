@@ -304,13 +304,13 @@ require("lazy").setup({
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-buffer",
-			"hrsh7th/vim-vsnip",
+			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-emoji",
+			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"onsails/lspkind.nvim",
+			"hrsh7th/vim-vsnip",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -323,10 +323,9 @@ require("lazy").setup({
 				sources = {
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "nvim_lsp" },
-					{ name = "vsnip" },
-					{ name = "buffer" },
 					{ name = "path" },
 					{ name = "emoji" },
+					{ name = "buffer" },
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<Tab>"] = function(fallback)
