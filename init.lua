@@ -20,8 +20,6 @@ vim.opt.shiftwidth = 2
 vim.opt.autochdir = true
 -- Faster CursorHold
 vim.opt.updatetime = 500
--- Disable mouse, prefer term to handle
-vim.opt.mouse = ""
 
 -- Disable some builtin vim plugins
 local default_plugins = {
@@ -63,8 +61,6 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", map_args)
--- Clean up to copy as term text
-vim.keymap.set("n", "cp", ":set number!<CR>:IndentBlanklineToggle<CR>", map_args)
 
 
 -- Plugins by `lazy.nvim`
