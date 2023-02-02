@@ -191,31 +191,6 @@ require("lazy").setup({
 		},
 	},
 
-	-- Fuzzy finder
-	{
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.0",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		init = function()
-			vim.keymap.set("n", "<C-p>", ":Telescope git_files show_untracked=true <CR>", map_args)
-		end,
-		-- XXX: `opts = { ... }` does not work because it fails to load `telescope.actions`
-		config = function()
-			require("telescope").setup({
-				defaults = {
-					mappings = {
-						i = {
-							["<C-s>"] = require("telescope.actions").select_horizontal,
-						},
-					},
-				},
-			})
-		end,
-		cmd = "Telescope",
-	},
-
 	-- Editors
 	{ "machakann/vim-sandwich", event = "BufReadPost" },
 	{ "windwp/nvim-autopairs", config = true, event = "BufReadPost" },
@@ -310,6 +285,7 @@ require("lazy").setup({
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"onsails/lspkind.nvim",
+			-- Only for expanding snippet from LSP safely
 			"hrsh7th/vim-vsnip",
 		},
 		config = function()
@@ -340,7 +316,7 @@ require("lazy").setup({
 					}),
 				}),
 				formatting = {
-					format = require("lspkind").cmp_format({ mode = "symbol_text", preset = "codicons" }),
+					format = require("lspkind").cmp_format({ mode = "symbol_text" }),
 				},
 				experimental = { ghost_text = true },
 			})
