@@ -85,7 +85,7 @@ require("lazy").setup({
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
-				integrations = { mini = true, lsp_saga = true },
+				integrations = { mini = true, lsp_saga = true, illuminate = true },
 				custom_highlights = function(colors)
 					return { VertSplit = { fg = colors.lavender } }
 				end
@@ -126,6 +126,7 @@ require("lazy").setup({
 		opts = { user_default_options = { css = true, css_fn = true, mode = "virtualtext" } },
 		event = "BufReadPost",
 	},
+	{ "RRethy/vim-illuminate", event = "BufReadPost" },
 
 	-- Utils
 	{ "NMAC427/guess-indent.nvim", config = true, event = "BufReadPost" },
