@@ -168,7 +168,7 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			-- Required to make `*_with_window_picker` mappings work
+			-- Required to make `*_with_window_picker` work on mappings
 			{ "s1n7ax/nvim-window-picker", config = true },
 		},
 		init = function()
@@ -176,8 +176,8 @@ require("lazy").setup({
 			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", map_args)
 		end,
 		opts = {
-			close_if_last_window = true,
 			window = {
+				position = "float",
 				mappings = {
 					["<C-s>"] = "split_with_window_picker",
 					["<C-v>"] = "vsplit_with_window_picker",
