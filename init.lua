@@ -80,17 +80,15 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"folke/tokyonight.nvim",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				integrations = { mini = true, lsp_saga = true, illuminate = true },
-				custom_highlights = function(colors)
-					return { VertSplit = { fg = colors.lavender } }
-				end
+			require("tokyonight").setup({
+				on_colors = function(colors)
+					colors.border = "#565f89"
+				end,
 			})
-			vim.cmd([[colorscheme catppuccin]])
+			vim.cmd([[colorscheme tokyonight]])
 		end,
 	},
 
