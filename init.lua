@@ -84,6 +84,7 @@ require("lazy").setup({
 		priority = 1000,
 		config = function()
 			require("tokyonight").setup({
+				style = "night",
 				on_colors = function(colors)
 					colors.border = colors.border_highlight
 				end,
