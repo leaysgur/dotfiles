@@ -54,14 +54,12 @@ for _, plugin in pairs(default_plugins) do
 	vim.g["loaded_" .. plugin] = 1
 end
 
-
-local map_args = { silent = true, noremap = true };
+local map_args = { silent = true, noremap = true }
 -- Keep visual mode after indentation
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", map_args)
-
 
 -- Plugins by `lazy.nvim`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -305,10 +303,18 @@ require("lazy").setup({
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<Tab>"] = function(fallback)
-						if cmp.visible() then cmp.select_next_item() else fallback() end
+						if cmp.visible() then
+							cmp.select_next_item()
+						else
+							fallback()
+						end
 					end,
 					["<S-Tab>"] = function(fallback)
-						if cmp.visible() then cmp.select_prev_item() else fallback() end
+						if cmp.visible() then
+							cmp.select_prev_item()
+						else
+							fallback()
+						end
 					end,
 					["<CR>"] = cmp.mapping.confirm({
 						behavior = cmp.ConfirmBehavior.Replace,
