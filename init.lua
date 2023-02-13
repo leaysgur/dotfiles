@@ -279,7 +279,6 @@ require("lazy").setup({
 		dependencies = {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-emoji",
-			"lukas-reineke/cmp-rg",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
@@ -299,7 +298,6 @@ require("lazy").setup({
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "nvim_lsp" },
 					{ name = "path" },
-					{ name = "rg" },
 					{ name = "emoji" },
 					{ name = "buffer" },
 				},
