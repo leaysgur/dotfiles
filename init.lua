@@ -258,7 +258,7 @@ require("lazy").setup({
 					}
 
 					-- Suppress "Undefined global `vim`" warning
-					if server == "sumneko_lua" then
+					if server == "lua_ls" then
 						options = vim.tbl_deep_extend(
 							"force",
 							options,
@@ -278,8 +278,9 @@ require("lazy").setup({
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-emoji",
+			"lukas-reineke/cmp-rg",
+			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"onsails/lspkind.nvim",
@@ -298,6 +299,7 @@ require("lazy").setup({
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "nvim_lsp" },
 					{ name = "path" },
+					{ name = "rg" },
 					{ name = "emoji" },
 					{ name = "buffer" },
 				},
@@ -322,7 +324,7 @@ require("lazy").setup({
 					}),
 				}),
 				formatting = {
-					format = require("lspkind").cmp_format({ mode = "symbol_text" }),
+					format = require("lspkind").cmp_format(),
 				},
 				experimental = { ghost_text = true },
 			})
