@@ -223,8 +223,10 @@ require("lazy").setup({
 					symbol_in_winbar = { enable = false },
 					lightbulb = { enable = false },
 					finder = {
-						split = "s",
-						vsplit = "v",
+						keys = {
+							split = "s",
+							vsplit = "v",
+						},
 					},
 				},
 				init = function()
