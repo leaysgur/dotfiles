@@ -5,21 +5,20 @@ vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "__" }
--- Prefer global status line
-vim.opt.laststatus = 3
-vim.opt.completeopt = "menu,menuone,noselect"
-vim.opt.swapfile = false
--- Search
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
 -- Prefer soft tab
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
--- Keep updating cwd
-vim.opt.autochdir = true
--- Faster CursorHold
+-- Quicker CursorHold
 vim.opt.updatetime = 500
+-- Search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+-- Prefer global status line
+vim.opt.laststatus = 3
+vim.opt.swapfile = false
+vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.autochdir = true
 
 -- Disable some builtin vim plugins
 local default_plugins = {
