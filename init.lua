@@ -236,6 +236,21 @@ require("lazy").setup({
 				end,
 				cmd = "Lspsaga",
 			},
+			{
+				"jose-elias-alvarez/null-ls.nvim",
+				dependencies = {
+					"nvim-lua/plenary.nvim",
+				},
+				config = function()
+					local null_ls = require("null-ls")
+					null_ls.setup({
+						sources = {
+							null_ls.builtins.diagnostics.eslint.with({ prefer_local = "node_modules/.bin" }),
+							null_ls.builtins.formatting.prettier.with({ extra_filetypes = { "svelte", "astro" } }),
+						},
+					})
+				end,
+			},
 		},
 		config = function()
 			local default_capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -271,7 +286,7 @@ require("lazy").setup({
 				end,
 			})
 		end,
-		event = "BufReadPre",
+		event = { "BufReadPre", "BufNewFile" },
 	},
 
 	-- Completion
