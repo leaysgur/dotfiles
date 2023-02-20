@@ -217,27 +217,6 @@ require("lazy").setup({
 			"williamboman/mason-lspconfig.nvim",
 			{ "j-hui/fidget.nvim", config = true },
 			{
-				"folke/trouble.nvim",
-				dependencies = {
-					"nvim-tree/nvim-web-devicons",
-				},
-				opts = {
-					action_keys = {
-						-- close = { "q", "<Esc>" },
-						-- cancel = {},
-						open_split = "<C-s>",
-					},
-					auto_open = true,
-					auto_close = true,
-					auto_preview = false,
-					use_diagnostic_signs = true,
-				},
-				init = function()
-					vim.keymap.set("n", "gr", ":Trouble lsp_references<CR>", map_args)
-					-- vim.keymap.set("n", "<Esc>", ":TroubleClose <CR>", map_args)
-				end,
-			},
-			{
 				"jose-elias-alvarez/null-ls.nvim",
 				dependencies = {
 					"nvim-lua/plenary.nvim",
@@ -268,6 +247,7 @@ require("lazy").setup({
 							vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
 							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
+							-- Use `glance` for LSP references
 							-- vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
 
 							-- Show diagnostics only on CursorHold
@@ -295,6 +275,28 @@ require("lazy").setup({
 			})
 		end,
 		event = { "BufReadPre", "BufNewFile" },
+	},
+	{
+		"dnlhc/glance.nvim",
+		config = function()
+			local glance = require("glance")
+			local actions = glance.actions
+			glance.setup({
+				border = { enable = true },
+				list = { position = "left" },
+				folds = { folded = false },
+				mappings = {
+					list = {
+						["<C-s>"] = actions.jump_split,
+						["<C-v>"] = actions.jump_vsplit,
+					},
+				},
+			})
+		end,
+		init = function()
+			vim.keymap.set("n", "gr", ":Glance references<CR>", map_args)
+		end,
+		cmd = "Glance",
 	},
 
 	-- Completion
