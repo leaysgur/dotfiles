@@ -217,24 +217,25 @@ require("lazy").setup({
 			"williamboman/mason-lspconfig.nvim",
 			{ "j-hui/fidget.nvim", config = true },
 			{
-				"glepnir/lspsaga.nvim",
+				"folke/trouble.nvim",
+				dependencies = {
+					"nvim-tree/nvim-web-devicons",
+				},
 				opts = {
-					symbol_in_winbar = { enable = false },
-					lightbulb = { enable = false },
-					finder = {
-						keys = {
-							split = "s",
-							vsplit = "v",
-						},
+					action_keys = {
+						-- close = { "q", "<Esc>" },
+						-- cancel = {},
+						open_split = "<C-s>",
 					},
+					auto_open = true,
+					auto_close = true,
+					auto_preview = false,
+					use_diagnostic_signs = true,
 				},
 				init = function()
-					vim.keymap.set("n", "gs", ":sp | :Lspsaga goto_definition<CR>", map_args)
-					vim.keymap.set("n", "gv", ":vs | :Lspsaga goto_definition<CR>", map_args)
-					vim.keymap.set("n", "gr", ":Lspsaga lsp_finder<CR>", map_args)
-					vim.keymap.set("n", "K", ":Lspsaga hover_doc<CR>", map_args)
+					vim.keymap.set("n", "gr", ":Trouble lsp_references<CR>", map_args)
+					-- vim.keymap.set("n", "<Esc>", ":TroubleClose <CR>", map_args)
 				end,
-				cmd = "Lspsaga",
 			},
 			{
 				"jose-elias-alvarez/null-ls.nvim",
@@ -246,7 +247,7 @@ require("lazy").setup({
 					null_ls.setup({
 						debounce = 1000,
 						sources = {
-							null_ls.builtins.diagnostics.eslint.with({ only_local = "node_modules/.bin", }),
+							null_ls.builtins.diagnostics.eslint.with({ only_local = "node_modules/.bin" }),
 							null_ls.builtins.formatting.prettier.with({ extra_filetypes = { "svelte", "astro" } }),
 						},
 					})
@@ -264,12 +265,18 @@ require("lazy").setup({
 							vim.keymap.set("n", "<Space>f", function()
 								vim.lsp.buf.format({ async = true })
 							end, buf_opts)
+							vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
+							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
+							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
+							-- vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
 
-							-- Show diagnostics only on hover
+							-- Show diagnostics only on CursorHold
 							vim.diagnostic.config({ virtual_text = false })
 							vim.api.nvim_create_autocmd("CursorHold", {
 								buffer = bufnr,
-								command = ":Lspsaga show_line_diagnostics",
+								callback = function()
+									vim.diagnostic.open_float(nil, { focusable = false })
+								end,
 							})
 						end,
 					}
