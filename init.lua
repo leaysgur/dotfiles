@@ -15,7 +15,7 @@ vim.opt.smartcase = true
 -- Prefer global status line
 vim.opt.laststatus = 3
 vim.opt.swapfile = false
-vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.completeopt = "menuone,noselect"
 vim.opt.autochdir = true
 
 -- Disable some builtin vim plugins
@@ -230,11 +230,12 @@ require("lazy").setup({
 			},
 		},
 		config = function()
-			local default_capabilities = require("cmp_nvim_lsp").default_capabilities()
 			require("mason-lspconfig").setup_handlers({
 				function(server)
 					local options = {
-						capabilities = default_capabilities,
+						capabilities = require("cmp_nvim_lsp").default_capabilities(
+							vim.lsp.protocol.make_client_capabilities()
+						),
 						on_attach = function(_, bufnr)
 							local buf_opts = vim.list_extend({ buffer = bufnr }, map_args)
 
