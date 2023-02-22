@@ -215,13 +215,6 @@ require("lazy").setup({
 			"williamboman/mason-lspconfig.nvim",
 			{ "j-hui/fidget.nvim", config = true },
 			{
-				"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-				config = true,
-				init = function()
-					vim.diagnostic.config({ virtual_text = false })
-				end,
-			},
-			{
 				"jose-elias-alvarez/null-ls.nvim",
 				dependencies = { "nvim-lua/plenary.nvim" },
 				config = function()
@@ -244,6 +237,7 @@ require("lazy").setup({
 						capabilities = default_capabilities,
 						on_attach = function(_, bufnr)
 							local buf_opts = vim.list_extend({ buffer = bufnr }, map_args)
+
 							vim.keymap.set("n", "<Space>f", function()
 								vim.lsp.buf.format({ async = true })
 							end, buf_opts)
@@ -252,6 +246,19 @@ require("lazy").setup({
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							-- Use `glance` for LSP references
 							-- vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
+
+							vim.diagnostic.config({
+								-- Show diagnostics only on CursorHold
+								virtual_text = false,
+								severity_sort = true,
+								float = { focusable = false },
+							})
+							vim.api.nvim_create_autocmd("CursorHold", {
+								buffer = bufnr,
+								callback = vim.diagnostic.open_float,
+							})
+							-- Quicken CursorHold
+							vim.api.nvim_set_option("updatetime", 500)
 						end,
 					}
 
