@@ -51,12 +51,12 @@ for _, plugin in pairs(default_plugins) do
 	vim.g["loaded_" .. plugin] = 1
 end
 
-local map_args = { silent = true, noremap = true }
+local map_opts = { silent = true, noremap = true }
 -- Keep visual mode after indentation
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
-vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", map_args)
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", map_opts)
 
 -- Plugins by `lazy.nvim`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -167,7 +167,7 @@ require("lazy").setup({
 		},
 		init = function()
 			vim.g.neo_tree_remove_legacy_commands = 1
-			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", map_args)
+			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", map_opts)
 		end,
 		opts = {
 			window = {
@@ -201,8 +201,8 @@ require("lazy").setup({
 			})
 		end,
 		init = function()
-			vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", map_args)
-			vim.keymap.set("v", "<C-_>", ":'<,'>CommentToggle<CR>", map_args)
+			vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", map_opts)
+			vim.keymap.set("v", "<C-_>", ":'<,'>CommentToggle<CR>", map_opts)
 		end,
 		cmd = "CommentToggle",
 	},
@@ -237,12 +237,13 @@ require("lazy").setup({
 							vim.lsp.protocol.make_client_capabilities()
 						),
 						on_attach = function(_, bufnr)
-							local buf_opts = vim.list_extend({ buffer = bufnr }, map_args)
+							local buf_opts = vim.list_extend({ buffer = bufnr }, map_opts)
 
 							vim.keymap.set("n", "<Space>f", function()
 								vim.lsp.buf.format({ async = true })
 							end, buf_opts)
 							vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
+							vim.keymap.set("n", "rn", vim.lsp.buf.rename, buf_opts)
 							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							-- Use `glance` for LSP references
@@ -296,7 +297,7 @@ require("lazy").setup({
 			})
 		end,
 		init = function()
-			vim.keymap.set("n", "gr", ":Glance references<CR>", map_args)
+			vim.keymap.set("n", "gr", ":Glance references<CR>", map_opts)
 		end,
 		cmd = "Glance",
 	},
