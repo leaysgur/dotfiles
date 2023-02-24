@@ -18,38 +18,6 @@ vim.opt.swapfile = false
 vim.opt.completeopt = "menuone,noselect"
 vim.opt.autochdir = true
 
--- Disable some builtin vim plugins
-local default_plugins = {
-	"2html_plugin",
-	"getscript",
-	"getscriptPlugin",
-	"gzip",
-	"logipat",
-	"netrw",
-	"netrwPlugin",
-	"netrwSettings",
-	"netrwFileHandlers",
-	"matchit",
-	"tar",
-	"tarPlugin",
-	"rrhelper",
-	"spellfile_plugin",
-	"vimball",
-	"vimballPlugin",
-	"zip",
-	"zipPlugin",
-	"tutor",
-	"rplugin",
-	"syntax",
-	"synmenu",
-	"optwin",
-	"compiler",
-	"bugreport",
-	"ftplugin",
-}
-for _, plugin in pairs(default_plugins) do
-	vim.g["loaded_" .. plugin] = 1
-end
 
 local map_opts = { silent = true, noremap = true }
 -- Keep visual mode after indentation
@@ -57,6 +25,7 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", map_opts)
+
 
 -- Plugins by `lazy.nvim`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
