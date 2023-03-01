@@ -18,14 +18,12 @@ vim.opt.swapfile = false
 vim.opt.completeopt = "menuone,noselect"
 vim.opt.autochdir = true
 
-
 local map_opts = { silent = true, noremap = true }
 -- Keep visual mode after indentation
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", map_opts)
-
 
 -- Plugins by `lazy.nvim`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -90,7 +88,15 @@ require("lazy").setup({
 		event = "BufReadPost",
 	},
 	{ "RRethy/vim-illuminate", event = "BufReadPost" },
-	{ "petertriho/nvim-scrollbar", config = true, event = "BufReadPost" },
+	{
+		"petertriho/nvim-scrollbar",
+		opts = {
+			show_in_active_only = true,
+			hide_if_all_visible = true,
+			handlers = { gitsigns = true },
+		},
+		event = "BufReadPost",
+	},
 
 	-- Utils
 	{ "NMAC427/guess-indent.nvim", config = true, event = "BufReadPost" },
