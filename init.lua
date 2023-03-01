@@ -90,6 +90,7 @@ require("lazy").setup({
 		event = "BufReadPost",
 	},
 	{ "RRethy/vim-illuminate", event = "BufReadPost" },
+	{ "petertriho/nvim-scrollbar", config = true, event = "BufReadPost" },
 
 	-- Utils
 	{ "NMAC427/guess-indent.nvim", config = true, event = "BufReadPost" },
