@@ -76,15 +76,16 @@ require("lazy").setup({
 	{
 		"echasnovski/mini.statusline",
 		config = function()
-			require("mini.statusline").setup({
-				set_vim_settings = false,
-			})
+			require("mini.statusline").setup({ set_vim_settings = false })
 		end,
 		event = "BufReadPost",
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
-		opts = { user_default_options = { css = true, css_fn = true, mode = "virtualtext" } },
+		opts = {
+			filetypes = { "*", "!lazy" },
+			user_default_options = { css = true, mode = "virtualtext" },
+		},
 		event = "BufReadPost",
 	},
 	{ "RRethy/vim-illuminate", event = "BufReadPost" },
