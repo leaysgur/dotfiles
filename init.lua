@@ -144,6 +144,8 @@ require("lazy").setup({
 		},
 		init = function()
 			vim.g.neo_tree_remove_legacy_commands = 1
+			vim.g.loaded_netrw = 1
+			vim.g.loaded_netrwPlugin = 1
 			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", map_opts)
 		end,
 		opts = {
