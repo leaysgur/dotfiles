@@ -46,7 +46,7 @@ require("lazy").setup({
 		priority = 1000,
 		config = function()
 			require("tokyonight").setup({
-				style = "night",
+				style = "moon",
 				on_colors = function(colors)
 					colors.border = colors.border_highlight
 				end,
@@ -88,7 +88,7 @@ require("lazy").setup({
 		},
 		event = "BufReadPost",
 	},
-	{ "RRethy/vim-illuminate", event = "BufReadPost" },
+	{ "RRethy/vim-illuminate",      event = "BufReadPost" },
 	{
 		"petertriho/nvim-scrollbar",
 		opts = {
@@ -100,8 +100,8 @@ require("lazy").setup({
 	},
 
 	-- Utils
-	{ "NMAC427/guess-indent.nvim", config = true, event = "BufReadPost" },
-	{ "yutkat/history-ignore.nvim", config = true, event = "BufReadPost" },
+	{ "NMAC427/guess-indent.nvim",  config = true,        event = "BufReadPost" },
+	{ "yutkat/history-ignore.nvim", config = true,        event = "BufReadPost" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
@@ -167,9 +167,9 @@ require("lazy").setup({
 
 	-- Editors
 	{ "machakann/vim-sandwich", event = "BufReadPost" },
-	{ "windwp/nvim-autopairs", config = true, event = "BufReadPost" },
+	{ "windwp/nvim-autopairs",  config = true,        event = "BufReadPost" },
 	-- XXX: `config = true` is enough but it throws error!
-	{ "andymass/vim-matchup", opts = {}, event = "BufReadPost" },
+	{ "andymass/vim-matchup",   opts = {},            event = "BufReadPost" },
 	{
 		"terrortylor/nvim-comment",
 		-- XXX: `opts = { ... }` does not work because plugin name is not consistent
@@ -192,7 +192,7 @@ require("lazy").setup({
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true },
 			"williamboman/mason-lspconfig.nvim",
-			{ "j-hui/fidget.nvim", config = true },
+			{ "j-hui/fidget.nvim",       config = true },
 			{
 				"jose-elias-alvarez/null-ls.nvim",
 				dependencies = { "nvim-lua/plenary.nvim" },
@@ -202,6 +202,7 @@ require("lazy").setup({
 						debounce = 1000,
 						sources = {
 							null_ls.builtins.diagnostics.eslint.with({ only_local = "node_modules/.bin" }),
+							null_ls.builtins.formatting.stylua,
 							null_ls.builtins.formatting.prettier.with({ extra_filetypes = { "svelte", "astro" } }),
 						},
 					})
