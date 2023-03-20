@@ -15,7 +15,7 @@ return {
     bottom = 0,
   },
 
-  color_scheme = "nightfox",
+  color_scheme = "iceberg-dark",
   window_background_opacity = 0.9,
   text_background_opacity = 0.6,
   inactive_pane_hsb = { brightness = 0.2 },

@@ -42,16 +42,17 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"folke/tokyonight.nvim",
+		"EdenEast/nightfox.nvim",
 		priority = 1000,
-		config = function()
-			require("tokyonight").setup({
-				style = "moon",
-				on_colors = function(colors)
-					colors.border = colors.border_highlight
-				end,
-			})
-			vim.cmd([[colorscheme tokyonight]])
+		opts = {
+			options = {
+				styles = {
+					comments = "italic",
+				},
+			},
+		},
+		init = function()
+			vim.cmd([[colorscheme nightfox]])
 		end,
 	},
 
