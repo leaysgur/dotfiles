@@ -46,9 +46,10 @@ require("lazy").setup({
 		priority = 1000,
 		opts = {
 			options = {
-				styles = {
-					comments = "italic",
-				},
+				styles = { comments = "italic" },
+			},
+			groups = {
+				all = { VertSplit = { link = "FloatBorder" } },
 			},
 		},
 		init = function()
