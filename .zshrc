@@ -103,6 +103,11 @@ if [ -f /usr/local/bin/delta ]; then
   export DELTA_FEATURES="+side-by-side"
 fi
 
+# Use nvim
+if [ -f /usr/local/bin/nvim ]; then
+  export GIT_EDITOR="nvim"
+fi
+
 # Override local settings if exists
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
