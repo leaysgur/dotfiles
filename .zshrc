@@ -97,12 +97,6 @@ if [ -f /usr/local/bin/bat ]; then
   export BAT_PAGER="never"
 fi
 
-# Delta, enhanced pager implementation
-if [ -f /usr/local/bin/delta ]; then
-  # export GIT_PAGER="delta"
-  export DELTA_FEATURES="+side-by-side"
-fi
-
 # Use nvim
 if [ -f /usr/local/bin/nvim ]; then
   export GIT_EDITOR="nvim"
