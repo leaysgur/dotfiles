@@ -287,14 +287,23 @@ require("lazy").setup({
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
-			{
-				"hrsh7th/cmp-copilot",
-				dependencies = { "github/copilot.vim", },
-			},
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lsp",
+			{
+				"zbirenbaum/copilot-cmp",
+				dependencies = {
+					{
+						"zbirenbaum/copilot.lua",
+						config = {
+							suggestion = { enabled = false },
+							panel = { enabled = false },
+						},
+					},
+				},
+				config = true,
+			},
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"onsails/lspkind.nvim",
 			-- Only for expanding snippet from LSP safely
@@ -339,7 +348,10 @@ require("lazy").setup({
 					}),
 				}),
 				formatting = {
-					format = require("lspkind").cmp_format(),
+					format = require("lspkind").cmp_format({
+						mode = "symbol_text",
+						symbol_map = { Copilot = "" },
+					}),
 				},
 				experimental = { ghost_text = true },
 			})
