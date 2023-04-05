@@ -288,6 +288,10 @@ require("lazy").setup({
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
+			{
+				"hrsh7th/cmp-copilot",
+				dependencies = { "github/copilot.vim", },
+			},
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-path",
@@ -306,6 +310,7 @@ require("lazy").setup({
 					end,
 				},
 				sources = {
+					{ name = "copilot" },
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "nvim_lsp" },
 					{ name = "path" },
