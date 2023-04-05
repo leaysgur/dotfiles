@@ -193,7 +193,10 @@ require("lazy").setup({
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true },
 			"williamboman/mason-lspconfig.nvim",
-			{ "j-hui/fidget.nvim",       config = true },
+			{
+				"j-hui/fidget.nvim",
+				config = { text = { spinner = "arc" } },
+			},
 			{
 				"jose-elias-alvarez/null-ls.nvim",
 				dependencies = { "nvim-lua/plenary.nvim" },
