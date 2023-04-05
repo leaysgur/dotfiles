@@ -15,7 +15,6 @@ vim.opt.smartcase = true
 -- Prefer global status line
 vim.opt.laststatus = 3
 vim.opt.swapfile = false
-vim.opt.completeopt = "menuone,noselect"
 vim.opt.autochdir = true
 
 local map_opts = { silent = true, noremap = true }
@@ -302,6 +301,8 @@ require("lazy").setup({
 			"hrsh7th/vim-vsnip",
 		},
 		config = function()
+			vim.opt.completeopt = "menuone,noselect"
+
 			local cmp = require("cmp")
 			cmp.setup({
 				snippet = {
