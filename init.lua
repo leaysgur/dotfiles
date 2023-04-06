@@ -44,12 +44,8 @@ require("lazy").setup({
 		"EdenEast/nightfox.nvim",
 		priority = 1000,
 		opts = {
-			options = {
-				styles = { comments = "italic" },
-			},
-			groups = {
-				all = { VertSplit = { link = "FloatBorder" } },
-			},
+			options = { styles = { comments = "italic" } },
+			groups = { all = { VertSplit = { link = "FloatBorder" } } },
 		},
 		init = function()
 			vim.cmd([[colorscheme nightfox]])
@@ -195,7 +191,7 @@ require("lazy").setup({
 			"williamboman/mason-lspconfig.nvim",
 			{
 				"j-hui/fidget.nvim",
-				config = { text = { spinner = "arc" } },
+				opts = { text = { spinner = "arc" } },
 			},
 			{
 				"jose-elias-alvarez/null-ls.nvim",
@@ -267,15 +263,14 @@ require("lazy").setup({
 		"dnlhc/glance.nvim",
 		config = function()
 			local glance = require("glance")
-			local actions = glance.actions
 			glance.setup({
 				border = { enable = true },
 				list = { position = "left" },
 				folds = { folded = false },
 				mappings = {
 					list = {
-						["<C-s>"] = actions.jump_split,
-						["<C-v>"] = actions.jump_vsplit,
+						["<C-s>"] = glance.actions.jump_split,
+						["<C-v>"] = glance.actions.jump_vsplit,
 					},
 				},
 			})
@@ -299,7 +294,7 @@ require("lazy").setup({
 				dependencies = {
 					{
 						"zbirenbaum/copilot.lua",
-						config = {
+						opts = {
 							suggestion = { enabled = false },
 							panel = { enabled = false },
 						},
@@ -362,7 +357,5 @@ require("lazy").setup({
 		event = "InsertEnter",
 	},
 }, {
-	checker = {
-		enabled = true,
-	},
+	checker = { enabled = true },
 })
