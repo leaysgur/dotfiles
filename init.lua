@@ -66,7 +66,13 @@ require("lazy").setup({
 		},
 		event = "BufReadPre",
 	},
-	{ "ojroques/nvim-hardline", config = true,        event = "BufReadPost" },
+	{
+		"echasnovski/mini.statusline",
+		config = function()
+			require("mini.statusline").setup({ set_vim_settings = false })
+		end,
+		event = "BufReadPost",
+	},
 	{
 		"NvChad/nvim-colorizer.lua",
 		opts = {
@@ -75,7 +81,7 @@ require("lazy").setup({
 		},
 		event = "BufReadPost",
 	},
-	{ "RRethy/vim-illuminate",  event = "BufReadPost" },
+	{ "RRethy/vim-illuminate",      event = "BufReadPost" },
 	{
 		"petertriho/nvim-scrollbar",
 		opts = {
@@ -87,8 +93,8 @@ require("lazy").setup({
 	},
 
 	-- Utils
-	{ "NMAC427/guess-indent.nvim",  config = true, event = "BufReadPost" },
-	{ "yutkat/history-ignore.nvim", config = true, event = "BufReadPost" },
+	{ "NMAC427/guess-indent.nvim",  config = true,        event = "BufReadPost" },
+	{ "yutkat/history-ignore.nvim", config = true,        event = "BufReadPost" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
