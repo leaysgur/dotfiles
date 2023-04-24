@@ -41,14 +41,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"EdenEast/nightfox.nvim",
+		"oxfist/night-owl.nvim",
 		priority = 1000,
-		opts = {
-			options = { styles = { comments = "italic" } },
-			groups = { all = { VertSplit = { link = "FloatBorder" } } },
-		},
 		init = function()
-			vim.cmd([[colorscheme nightfox]])
+			vim.cmd([[colorscheme night-owl]])
 		end,
 	},
 
@@ -70,13 +66,7 @@ require("lazy").setup({
 		},
 		event = "BufReadPre",
 	},
-	{
-		"echasnovski/mini.statusline",
-		config = function()
-			require("mini.statusline").setup({ set_vim_settings = false })
-		end,
-		event = "BufReadPost",
-	},
+	{ "ojroques/nvim-hardline", config = true,        event = "BufReadPost" },
 	{
 		"NvChad/nvim-colorizer.lua",
 		opts = {
@@ -85,7 +75,7 @@ require("lazy").setup({
 		},
 		event = "BufReadPost",
 	},
-	{ "RRethy/vim-illuminate",      event = "BufReadPost" },
+	{ "RRethy/vim-illuminate",  event = "BufReadPost" },
 	{
 		"petertriho/nvim-scrollbar",
 		opts = {
@@ -97,8 +87,8 @@ require("lazy").setup({
 	},
 
 	-- Utils
-	{ "NMAC427/guess-indent.nvim",  config = true,        event = "BufReadPost" },
-	{ "yutkat/history-ignore.nvim", config = true,        event = "BufReadPost" },
+	{ "NMAC427/guess-indent.nvim",  config = true, event = "BufReadPost" },
+	{ "yutkat/history-ignore.nvim", config = true, event = "BufReadPost" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {

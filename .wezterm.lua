@@ -16,8 +16,8 @@ return {
   },
 
   color_scheme = "iceberg-dark",
-  window_background_opacity = 0.9,
-  text_background_opacity = 0.6,
+  window_background_opacity = 0.5,
+  text_background_opacity = 0.7,
   inactive_pane_hsb = { brightness = 0.2 },
 
   hide_tab_bar_if_only_one_tab = true,
