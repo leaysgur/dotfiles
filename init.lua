@@ -41,10 +41,16 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"oxfist/night-owl.nvim",
+		"folke/tokyonight.nvim",
 		priority = 1000,
-		init = function()
-			vim.cmd([[colorscheme night-owl]])
+		config = function()
+			require("tokyonight").setup({
+				transparent = true,
+				on_colors = function(colors)
+					colors.border = colors.border_highlight
+				end,
+			})
+			vim.cmd([[colorscheme tokyonight-night]])
 		end,
 	},
 
