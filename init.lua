@@ -1,6 +1,6 @@
 -- Basics
 vim.opt.termguicolors = true
-vim.opt.pumblend = 10
+vim.opt.pumblend = 5
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.list = true
@@ -24,7 +24,6 @@ vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", map_opts)
 
--- Plugins by `lazy.nvim`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -54,15 +53,24 @@ require("lazy").setup({
 		end,
 	},
 
+	-- Common dependencies
+	{ "nvim-tree/nvim-web-devicons", lazy = true },
+	{ "nvim-lua/plenary.nvim",       lazy = true },
+
 	-- Uis
-	"nvim-tree/nvim-web-devicons",
+	{
+		"echasnovski/mini.statusline",
+		main = "mini.statusline",
+		opts = { set_vim_settings = false },
+		event = { "BufReadPost", "BufNewFile" },
+	},
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
 			signcolumn = false,
 			numhl = true,
 		},
-		event = "BufReadPre",
+		event = { "BufReadPost", "BufNewFile" },
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -70,14 +78,7 @@ require("lazy").setup({
 			disable_with_nolist = true,
 			show_current_context = true,
 		},
-		event = "BufReadPre",
-	},
-	{
-		"echasnovski/mini.statusline",
-		config = function()
-			require("mini.statusline").setup({ set_vim_settings = false })
-		end,
-		event = "BufReadPost",
+		event = { "BufReadPost", "BufNewFile" },
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
@@ -85,68 +86,19 @@ require("lazy").setup({
 			filetypes = { "*", "!lazy" },
 			user_default_options = { css = true, mode = "virtualtext" },
 		},
-		event = "BufReadPost",
+		event = { "BufReadPost", "BufNewFile" },
 	},
-	{ "RRethy/vim-illuminate",      event = "BufReadPost" },
-	{
-		"petertriho/nvim-scrollbar",
-		opts = {
-			show_in_active_only = true,
-			hide_if_all_visible = true,
-			handlers = { gitsigns = true },
-		},
-		event = "BufReadPost",
-	},
-
-	-- Utils
-	{ "NMAC427/guess-indent.nvim",  config = true,        event = "BufReadPost" },
-	{ "yutkat/history-ignore.nvim", config = true,        event = "BufReadPost" },
-	{
-		"nvim-treesitter/nvim-treesitter",
-		dependencies = {
-			"JoosepAlviste/nvim-ts-context-commentstring",
-			"windwp/nvim-ts-autotag",
-			"yioneko/nvim-yati",
-		},
-		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = "all",
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = false,
-				},
-				-- Native TS indent does not work well with JSDoc multiline comments.
-				-- While waiting for https://github.com/nvim-treesitter/nvim-treesitter/pull/2545 to be merged,
-				-- use `yati`(also not perfect) instead...
-				indent = { enable = false },
-				yati = { enable = true },
-				autotag = { enable = true },
-				-- Enhance `nvim-comment`
-				context_commentstring = { enable = true, enable_autocmd = false },
-				-- Enhance `vim-matchup`
-				matchup = { enable = true },
-			})
-		end,
-		event = "BufReadPost",
-	},
+	{ "RRethy/vim-illuminate",     event = { "BufReadPost", "BufNewFile" } },
 
 	-- File browser
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
 		dependencies = {
-			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 			-- Required to make `*_with_window_picker` work on mappings
 			{ "s1n7ax/nvim-window-picker", config = true },
 		},
-		init = function()
-			vim.g.neo_tree_remove_legacy_commands = 1
-			vim.g.loaded_netrw = 1
-			vim.g.loaded_netrwPlugin = 1
-			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", map_opts)
-		end,
 		opts = {
 			window = {
 				position = "float",
@@ -162,16 +114,43 @@ require("lazy").setup({
 				follow_current_file = true,
 			},
 		},
+		init = function()
+			vim.g.neo_tree_remove_legacy_commands = 1
+			vim.g.loaded_netrw = 1
+			vim.g.loaded_netrwPlugin = 1
+			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", map_opts)
+		end,
 	},
 
 	-- Editors
-	{ "machakann/vim-sandwich", event = "BufReadPost" },
-	{ "windwp/nvim-autopairs",  config = true,        event = "BufReadPost" },
-	-- XXX: `config = true` is enough but it throws error!
-	{ "andymass/vim-matchup",   opts = {},            event = "BufReadPost" },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			"JoosepAlviste/nvim-ts-context-commentstring",
+			"windwp/nvim-ts-autotag",
+			"yioneko/nvim-yati",
+		},
+		build = ":TSUpdate",
+		main = "nvim-treesitter.configs",
+		opts = {
+			ensure_installed = "all",
+			highlight = { enable = true },
+			-- Native indent does not work well with JSDoc multiline comments.
+			-- While waiting https://github.com/nvim-treesitter/nvim-treesitter/pull/2545 to be merged,
+			-- use `yati`(also not perfect) instead...
+			indent = { enable = false },
+			yati = { enable = true },
+			autotag = { enable = true },
+			-- Enhance `nvim-comment`
+			context_commentstring = { enable = true, enable_autocmd = false },
+			-- Enhance `vim-matchup`
+			matchup = { enable = true },
+		},
+		event = { "BufReadPost", "BufNewFile" },
+	},
 	{
 		"terrortylor/nvim-comment",
-		-- XXX: `opts = { ... }` does not work because plugin name is not consistent
+		-- XXX: `opts = { ... }` will fail to call `require()`
 		config = function()
 			require("nvim_comment").setup({
 				create_mappings = false,
@@ -183,6 +162,21 @@ require("lazy").setup({
 			vim.keymap.set("v", "<C-_>", ":'<,'>CommentToggle<CR>", map_opts)
 		end,
 		cmd = "CommentToggle",
+	},
+	-- XXX: `config = true` is enough but it throws :(
+	{ "andymass/vim-matchup",      opts = {},                              event = { "BufReadPost", "BufNewFile" } },
+	{ "NMAC427/guess-indent.nvim", config = true,                          event = "BufReadPost" },
+	{
+		"echasnovski/mini.surround",
+		main = "mini.surround",
+		config = true,
+		event = "InsertEnter",
+	},
+	{
+		"echasnovski/mini.pairs",
+		main = "mini.pairs",
+		config = true,
+		event = "InsertEnter",
 	},
 
 	-- LSP
@@ -197,7 +191,6 @@ require("lazy").setup({
 			},
 			{
 				"jose-elias-alvarez/null-ls.nvim",
-				dependencies = { "nvim-lua/plenary.nvim" },
 				config = function()
 					local null_ls = require("null-ls")
 					null_ls.setup({
@@ -231,8 +224,8 @@ require("lazy").setup({
 							-- Use `glance` for LSP references
 							-- vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
 
+							-- Show diagnostics only on CursorHold
 							vim.diagnostic.config({
-								-- Show diagnostics only on CursorHold
 								virtual_text = false,
 								severity_sort = true,
 								float = { focusable = false },
@@ -310,10 +303,9 @@ require("lazy").setup({
 			"hrsh7th/vim-vsnip",
 		},
 		config = function()
-			vim.opt.completeopt = "menuone,noselect"
-
 			local cmp = require("cmp")
 			cmp.setup({
+				completion = { completeopt = "menu,menuone,noinsert" },
 				snippet = {
 					expand = function(args)
 						vim.fn["vsnip#anonymous"](args.body)
@@ -355,6 +347,8 @@ require("lazy").setup({
 				},
 				experimental = { ghost_text = true },
 			})
+
+			-- vim.opt.completeopt = "menuone,noselect"
 		end,
 		event = "InsertEnter",
 	},
