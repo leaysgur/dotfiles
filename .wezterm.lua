@@ -2,8 +2,8 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 
 return {
-  font = wezterm.font("Cica"),
-  font_size = 21,
+  font = wezterm.font("UDEV Gothic NF"),
+  font_size = 20,
   adjust_window_size_when_changing_font_size = false,
   initial_cols = 150,
   initial_rows = 50,
