@@ -343,7 +343,6 @@ require("lazy").setup({
 						symbol_map = { Copilot = "" },
 					}),
 				},
-				experimental = { ghost_text = true },
 			})
 		end,
 		event = "InsertEnter",
