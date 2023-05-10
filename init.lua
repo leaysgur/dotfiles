@@ -40,16 +40,16 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"folke/tokyonight.nvim",
+		"rebelot/kanagawa.nvim",
 		priority = 1000,
 		config = function()
-			require("tokyonight").setup({
+			require("kanagawa").setup({
 				transparent = true,
-				on_colors = function(colors)
-					colors.border = colors.border_highlight
+				overrides = function(colors)
+					return { WinSeparator = { fg = colors.theme.ui.nontext } }
 				end,
 			})
-			vim.cmd([[colorscheme tokyonight-night]])
+			vim.cmd([[colorscheme kanagawa-wave]])
 		end,
 	},
 
