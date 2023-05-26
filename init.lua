@@ -14,8 +14,10 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 -- Prefer global status line
 vim.opt.laststatus = 3
+-- Misc
 vim.opt.swapfile = false
 vim.opt.autochdir = true
+vim.opt.autoread = true
 
 local map_opts = { silent = true, noremap = true }
 -- Keep visual mode after indentation
