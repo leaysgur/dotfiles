@@ -187,6 +187,7 @@ require("lazy").setup({
 			"williamboman/mason-lspconfig.nvim",
 			{
 				"j-hui/fidget.nvim",
+				tag = "legacy",
 				opts = { text = { spinner = "arc" } },
 			},
 			{
