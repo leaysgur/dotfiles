@@ -27,6 +27,24 @@ fi
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
 
+# Ensure `cwd` for Wezterm opening new session
+__vte_urlencode() (
+  LC_ALL=C
+  str="$1"
+  while [ -n "$str" ]; do
+    safe="${str%%[!a-zA-Z0-9/:_\.\-\!\'\(\)~]*}"
+    printf "%s" "$safe"
+    str="${str#"$safe"}"
+    if [ -n "$str" ]; then
+      printf "%%%02X" "'$str"
+      str="${str#?}"
+    fi
+  done
+)
+__vte_osc7 () {
+  printf "\033]7;file://%s%s\007" "${HOSTNAME:-}" "$(__vte_urlencode "${PWD}")"
+}
+precmd_functions+=(__vte_osc7)
 
 # ================================================================
 # History
