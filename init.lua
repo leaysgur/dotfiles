@@ -57,7 +57,7 @@ require("lazy").setup({
 
 	-- Common dependencies
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
-	{ "nvim-lua/plenary.nvim",       lazy = true },
+	{ "nvim-lua/plenary.nvim", lazy = true },
 
 	-- Uis
 	{
@@ -90,7 +90,7 @@ require("lazy").setup({
 		},
 		event = { "BufReadPost", "BufNewFile" },
 	},
-	{ "RRethy/vim-illuminate",     event = { "BufReadPost", "BufNewFile" } },
+	{ "RRethy/vim-illuminate", event = { "BufReadPost", "BufNewFile" } },
 
 	-- File browser
 	{
@@ -164,8 +164,8 @@ require("lazy").setup({
 		cmd = "CommentToggle",
 	},
 	-- XXX: `config = true` is enough but it throws :(
-	{ "andymass/vim-matchup",      opts = {},                              event = { "BufReadPost", "BufNewFile" } },
-	{ "NMAC427/guess-indent.nvim", config = true,                          event = { "BufReadPost", "BufNewFile" } },
+	{ "andymass/vim-matchup", opts = {}, event = { "BufReadPost", "BufNewFile" } },
+	{ "NMAC427/guess-indent.nvim", config = true, event = { "BufReadPost", "BufNewFile" } },
 	{
 		"echasnovski/mini.surround",
 		main = "mini.surround",
@@ -201,14 +201,13 @@ require("lazy").setup({
 						on_attach = function(_, bufnr)
 							local buf_opts = vim.list_extend({ buffer = bufnr }, map_opts)
 
-							vim.keymap.set("n", "<Space>f", function()
-								vim.lsp.buf.format({ async = true })
-							end, buf_opts)
+							-- Use `formatter.nvim` for formatting
+							-- vim.keymap.set("n", "<Space>f", function() vim.lsp.buf.format({ async = true }) end, buf_opts)
 							vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
 							vim.keymap.set("n", "rn", vim.lsp.buf.rename, buf_opts)
 							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
-							-- Use `glance` for LSP references
+							-- Use `glance.nvim` for LSP references
 							-- vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
 
 							-- Show diagnostics only on CursorHold
@@ -261,6 +260,28 @@ require("lazy").setup({
 			vim.keymap.set("n", "gr", ":Glance references<CR>", map_opts)
 		end,
 		cmd = "Glance",
+	},
+
+	-- Formatter
+	{
+		"mhartington/formatter.nvim",
+		config = function()
+			require("formatter").setup({
+				filetype = {
+					lua = { require("formatter.filetypes.lua").stylua },
+					javascript = { require("formatter.filetypes.javascript").prettier },
+					javascriptreact = { require("formatter.filetypes.javascript").prettier },
+					typescript = { require("formatter.filetypes.typescript").prettier },
+					typescriptreact = { require("formatter.filetypes.typescript").prettier },
+					-- As of today, `prettier-plugin-svelte` does not support Prettier v3
+					-- svelte = { require("formatter.filetypes.svelte").prettier },
+				},
+			})
+		end,
+		init = function()
+			vim.keymap.set("n", "<Space>f", ":FormatLock<CR>", map_opts)
+		end,
+		cmd = "FormatLock",
 	},
 
 	-- Completion
