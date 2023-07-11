@@ -190,20 +190,6 @@ require("lazy").setup({
 				tag = "legacy",
 				opts = { text = { spinner = "arc" } },
 			},
-			{
-				"jose-elias-alvarez/null-ls.nvim",
-				config = function()
-					local null_ls = require("null-ls")
-					null_ls.setup({
-						debounce = 1000,
-						sources = {
-							null_ls.builtins.diagnostics.eslint.with({ only_local = "node_modules/.bin" }),
-							null_ls.builtins.formatting.stylua,
-							null_ls.builtins.formatting.prettier.with({ extra_filetypes = { "svelte", "astro" } }),
-						},
-					})
-				end,
-			},
 		},
 		config = function()
 			require("mason-lspconfig").setup_handlers({
