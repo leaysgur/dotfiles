@@ -358,7 +358,7 @@ require("lazy").setup({
 		event = "InsertEnter",
 	},
 }, {
-	checker = { enabled = true },
+	checker = { enabled = true, frequency = 60 * 60 * 24 },
 	performance = {
 		rtp = {
 			disabled_plugins = {
