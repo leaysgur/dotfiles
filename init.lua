@@ -95,29 +95,24 @@ require("lazy").setup({
 	-- File browser
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			-- Required to make `*_with_window_picker` work on mappings
-			{ "s1n7ax/nvim-window-picker", config = true },
-		},
+		branch = "v3.x",
+		dependencies = { "MunifTanjim/nui.nvim" },
 		opts = {
 			window = {
 				position = "float",
 				mappings = {
-					["<C-s>"] = "split_with_window_picker",
-					["<C-v>"] = "vsplit_with_window_picker",
+					["<C-s>"] = "open_split",
+					["<C-v>"] = "open_vsplit",
 				},
 			},
 			filesystem = {
 				filtered_items = { visible = true },
 				hijack_netrw_behavior = "open_current",
 				bind_to_cwd = false,
-				follow_current_file = true,
+				follow_current_file = { enabled = true },
 			},
 		},
 		init = function()
-			vim.g.neo_tree_remove_legacy_commands = 1
 			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", map_opts)
 		end,
 	},
@@ -188,7 +183,8 @@ require("lazy").setup({
 			{
 				"j-hui/fidget.nvim",
 				tag = "legacy",
-				opts = { text = { spinner = "arc" } },
+				opts = { text = { spinner = "dots_hop" } },
+				event = "LspAttach",
 			},
 		},
 		config = function()
