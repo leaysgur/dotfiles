@@ -269,8 +269,7 @@ require("lazy").setup({
 					javascriptreact = { require("formatter.filetypes.javascript").prettier },
 					typescript = { require("formatter.filetypes.typescript").prettier },
 					typescriptreact = { require("formatter.filetypes.typescript").prettier },
-					-- As of today, `prettier-plugin-svelte` does not support Prettier v3
-					-- svelte = { require("formatter.filetypes.svelte").prettier },
+					svelte = { require("formatter.filetypes.svelte").prettier },
 				},
 			})
 		end,
