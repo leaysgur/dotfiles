@@ -1,6 +1,5 @@
 -- Basics
 vim.opt.termguicolors = true
-vim.opt.pumblend = 5
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.list = true
@@ -19,12 +18,12 @@ vim.opt.swapfile = false
 vim.opt.autochdir = true
 vim.opt.autoread = true
 
-local map_opts = { silent = true, noremap = true }
+local keymap_opts = { silent = true, noremap = true }
 -- Keep visual mode after indentation
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
-vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", map_opts)
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", keymap_opts)
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -92,7 +91,7 @@ require("lazy").setup({
 	},
 	{ "RRethy/vim-illuminate", event = { "BufReadPost", "BufNewFile" } },
 
-	-- File browser
+	-- File browser(cannot lazy load to open directory like netrw)
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
@@ -113,7 +112,7 @@ require("lazy").setup({
 			},
 		},
 		init = function()
-			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", map_opts)
+			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", keymap_opts)
 		end,
 	},
 
@@ -153,8 +152,8 @@ require("lazy").setup({
 			})
 		end,
 		init = function()
-			vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", map_opts)
-			vim.keymap.set("v", "<C-_>", ":'<,'>CommentToggle<CR>", map_opts)
+			vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", keymap_opts)
+			vim.keymap.set("v", "<C-_>", ":'<,'>CommentToggle<CR>", keymap_opts)
 		end,
 		cmd = "CommentToggle",
 	},
@@ -180,12 +179,6 @@ require("lazy").setup({
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true },
 			"williamboman/mason-lspconfig.nvim",
-			{
-				"j-hui/fidget.nvim",
-				tag = "legacy",
-				opts = { text = { spinner = "dots_hop" } },
-				event = "LspAttach",
-			},
 		},
 		config = function()
 			require("mason-lspconfig").setup_handlers({
@@ -195,7 +188,7 @@ require("lazy").setup({
 							vim.lsp.protocol.make_client_capabilities()
 						),
 						on_attach = function(_, bufnr)
-							local buf_opts = vim.list_extend({ buffer = bufnr }, map_opts)
+							local buf_opts = vim.list_extend({ buffer = bufnr }, keymap_opts)
 
 							-- Use `formatter.nvim` for formatting
 							-- vim.keymap.set("n", "<Space>f", function() vim.lsp.buf.format({ async = true }) end, buf_opts)
@@ -237,6 +230,12 @@ require("lazy").setup({
 		event = { "BufReadPre", "BufNewFile" },
 	},
 	{
+		"j-hui/fidget.nvim",
+		tag = "legacy",
+		opts = { text = { spinner = "dots_hop" } },
+		event = "LspAttach",
+	},
+	{
 		"dnlhc/glance.nvim",
 		config = function()
 			local glance = require("glance")
@@ -253,7 +252,7 @@ require("lazy").setup({
 			})
 		end,
 		init = function()
-			vim.keymap.set("n", "gr", ":Glance references<CR>", map_opts)
+			vim.keymap.set("n", "gr", ":Glance references<CR>", keymap_opts)
 		end,
 		cmd = "Glance",
 	},
@@ -270,11 +269,12 @@ require("lazy").setup({
 					typescript = { require("formatter.filetypes.typescript").prettier },
 					typescriptreact = { require("formatter.filetypes.typescript").prettier },
 					svelte = { require("formatter.filetypes.svelte").prettier },
+					rust = { require("formatter.filetypes.rust").rustfmt },
 				},
 			})
 		end,
 		init = function()
-			vim.keymap.set("n", "<Space>f", ":FormatLock<CR>", map_opts)
+			vim.keymap.set("n", "<Space>f", ":FormatLock<CR>", keymap_opts)
 		end,
 		cmd = "FormatLock",
 	},
