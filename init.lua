@@ -41,16 +41,13 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"rebelot/kanagawa.nvim",
+		"AlexvZyl/nordic.nvim",
 		priority = 1000,
-		config = function()
-			require("kanagawa").setup({
-				transparent = true,
-				overrides = function(colors)
-					return { WinSeparator = { fg = colors.theme.ui.nontext } }
-				end,
-			})
-			vim.cmd([[colorscheme kanagawa-wave]])
+		opts = {
+			transparent_bg = true,
+		},
+		init = function()
+			vim.cmd([[colorscheme nordic]])
 		end,
 	},
 
@@ -100,6 +97,7 @@ require("lazy").setup({
 			window = {
 				position = "float",
 				mappings = {
+					["<space>"] = { "toggle_node", nowait = true },
 					["<C-s>"] = "open_split",
 					["<C-v>"] = "open_vsplit",
 				},
@@ -158,13 +156,13 @@ require("lazy").setup({
 		cmd = "CommentToggle",
 	},
 	-- XXX: `config = true` is enough but it throws :(
-	{ "andymass/vim-matchup", opts = {}, event = { "BufReadPost", "BufNewFile" } },
+	{ "andymass/vim-matchup", opts = {}, event = { "BufReadPre", "BufNewFile" } },
 	{ "NMAC427/guess-indent.nvim", config = true, event = { "BufReadPost", "BufNewFile" } },
 	{
 		"echasnovski/mini.surround",
 		main = "mini.surround",
 		config = true,
-		event = { "BufReadPost", "BufNewFile" },
+		keys = "s",
 	},
 	{
 		"echasnovski/mini.pairs",
