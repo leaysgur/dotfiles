@@ -44,7 +44,7 @@ require("lazy").setup({
 		"AlexvZyl/nordic.nvim",
 		priority = 1000,
 		opts = {
-			transparent_bg = true,
+			bright_border = true,
 		},
 		init = function()
 			vim.cmd([[colorscheme nordic]])
