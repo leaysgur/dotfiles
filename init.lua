@@ -264,6 +264,7 @@ require("lazy").setup({
 					typescript = { require("formatter.filetypes.typescript").prettier },
 					typescriptreact = { require("formatter.filetypes.typescript").prettier },
 					svelte = { require("formatter.filetypes.svelte").prettier },
+					astro = { require("formatter.defaults.prettier")},
 					rust = { require("formatter.filetypes.rust").rustfmt },
 				},
 			})
