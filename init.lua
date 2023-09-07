@@ -43,7 +43,10 @@ require("lazy").setup({
 	{
 		"AlexvZyl/nordic.nvim",
 		priority = 1000,
-		opts = { bright_border = true },
+		opts = {
+			bright_border = true,
+			cursorline = { blend = 1, theme = "light" },
+		},
 		init = function()
 			vim.cmd([[colorscheme nordic]])
 		end,
@@ -264,7 +267,7 @@ require("lazy").setup({
 					typescript = { require("formatter.filetypes.typescript").prettier },
 					typescriptreact = { require("formatter.filetypes.typescript").prettier },
 					svelte = { require("formatter.filetypes.svelte").prettier },
-					astro = { require("formatter.defaults.prettier")},
+					astro = { require("formatter.defaults.prettier") },
 					rust = { require("formatter.filetypes.rust").rustfmt },
 				},
 			})
