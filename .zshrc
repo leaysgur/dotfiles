@@ -120,7 +120,7 @@ if [ -f /usr/local/bin/nvim ]; then
   export GIT_EDITOR="nvim"
 fi
 
-# Override local settings if exists
-if [ -f ~/.zshrc.local ]; then
-  source ~/.zshrc.local
+# This must be at the end
+if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
