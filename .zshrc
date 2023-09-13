@@ -120,6 +120,11 @@ if [ -f /usr/local/bin/nvim ]; then
   export GIT_EDITOR="nvim"
 fi
 
+# Bun completions
+if [ -s ~/.bun/_bun ]; then
+  source ~/.bun/_bun
+fi
+
 # This must be at the end
 if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

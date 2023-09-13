@@ -162,7 +162,7 @@ require("lazy").setup({
 		"echasnovski/mini.surround",
 		main = "mini.surround",
 		config = true,
-		keys = "s",
+		event = { "BufReadPost", "BufNewFile" },
 	},
 	{
 		"echasnovski/mini.pairs",
