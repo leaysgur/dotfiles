@@ -13,7 +13,7 @@ return {
 		right = 0,
 		bottom = 0,
 	},
-	color_scheme = "Arthur",
+	color_scheme = "zenwritten_dark",
 	window_background_opacity = 0.9,
 	text_background_opacity = 0.6,
 	inactive_pane_hsb = { brightness = 0.2 },
