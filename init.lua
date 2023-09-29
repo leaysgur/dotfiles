@@ -73,9 +73,12 @@ require("lazy").setup({
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
 		opts = {
-			disable_with_nolist = true,
-			show_current_context = true,
+			scope = {
+				show_start = false,
+				highlight = "Special",
+			},
 		},
 		event = { "BufReadPost", "BufNewFile" },
 	},
