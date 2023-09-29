@@ -265,13 +265,14 @@ require("lazy").setup({
 			require("formatter").setup({
 				filetype = {
 					lua = { require("formatter.filetypes.lua").stylua },
-					javascript = { require("formatter.filetypes.javascript").prettier },
-					javascriptreact = { require("formatter.filetypes.javascript").prettier },
-					typescript = { require("formatter.filetypes.typescript").prettier },
-					typescriptreact = { require("formatter.filetypes.typescript").prettier },
-					svelte = { require("formatter.filetypes.svelte").prettier },
-					astro = { require("formatter.defaults.prettier") },
 					rust = { require("formatter.filetypes.rust").rustfmt },
+					markdown = { require("formatter.defaults.prettier") },
+					javascript = { require("formatter.defaults.prettier") },
+					typescript = { require("formatter.defaults.prettier") },
+					javascriptreact = { require("formatter.defaults.prettier") },
+					typescriptreact = { require("formatter.defaults.prettier") },
+					svelte = { require("formatter.defaults.prettier") },
+					astro = { require("formatter.defaults.prettier") },
 				},
 			})
 		end,
