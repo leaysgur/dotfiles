@@ -160,7 +160,7 @@ require("lazy").setup({
 	},
 	-- XXX: `config = true` is enough but it throws :(
 	{ "andymass/vim-matchup", opts = {}, event = { "BufReadPre", "BufNewFile" } },
-	{ "NMAC427/guess-indent.nvim", config = true, event = { "BufReadPost", "BufNewFile" } },
+	{ "Darazaki/indent-o-matic", config = true, event = { "BufReadPost", "BufNewFile" } },
 	{
 		"echasnovski/mini.surround",
 		main = "mini.surround",
