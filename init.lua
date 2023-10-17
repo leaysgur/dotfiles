@@ -168,8 +168,7 @@ require("lazy").setup({
 		event = { "BufReadPost", "BufNewFile" },
 	},
 	{
-		"echasnovski/mini.pairs",
-		main = "mini.pairs",
+		"windwp/nvim-autopairs",
 		config = true,
 		event = "InsertEnter",
 	},
