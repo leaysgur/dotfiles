@@ -1,9 +1,13 @@
 -- Basics
 vim.opt.termguicolors = true
+-- Ui
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "__" }
+vim.opt.completeopt = { "menuone", "noselect" }
+-- Use global status line
+vim.opt.laststatus = 3
 -- Prefer soft tab
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
@@ -11,12 +15,12 @@ vim.opt.shiftwidth = 2
 -- Search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
--- Prefer global status line
-vim.opt.laststatus = 3
 -- Misc
 vim.opt.swapfile = false
 vim.opt.autochdir = true
 vim.opt.autoread = true
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 500
 
 local keymap_opts = { silent = true, noremap = true }
 -- Keep visual mode after indentation
@@ -209,8 +213,6 @@ require("lazy").setup({
 								buffer = bufnr,
 								callback = vim.diagnostic.open_float,
 							})
-							-- Quicken CursorHold
-							vim.api.nvim_set_option("updatetime", 500)
 						end,
 					}
 
@@ -310,7 +312,6 @@ require("lazy").setup({
 		config = function()
 			local cmp = require("cmp")
 			cmp.setup({
-				completion = { completeopt = "menu,menuone,noinsert" },
 				snippet = {
 					expand = function(args)
 						vim.fn["vsnip#anonymous"](args.body)
