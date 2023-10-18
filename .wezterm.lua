@@ -5,7 +5,7 @@ return {
 	font = wezterm.font("UDEV Gothic NF"),
 	font_size = 20,
 	adjust_window_size_when_changing_font_size = false,
-	initial_cols = 150,
+	initial_cols = 200,
 	initial_rows = 50,
 	window_padding = {
 		top = 4,
