@@ -95,6 +95,7 @@ require("lazy").setup({
 		event = { "BufReadPost", "BufNewFile" },
 	},
 	{ "RRethy/vim-illuminate", event = { "BufReadPost", "BufNewFile" } },
+	{ "kevinhwang91/nvim-hlslens", opts = { calm_down = true } },
 
 	-- File browser(cannot lazy load to open directory like netrw)
 	{
