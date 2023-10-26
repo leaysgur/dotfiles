@@ -195,7 +195,7 @@ require("lazy").setup({
 						on_attach = function(_, bufnr)
 							local buf_opts = vim.list_extend({ buffer = bufnr }, keymap_opts)
 
-							-- Use `formatter.nvim` for formatting
+							-- Use `conform.nvim` for formatting
 							-- vim.keymap.set("n", "<Space>f", function() vim.lsp.buf.format({ async = true }) end, buf_opts)
 							vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
 							vim.keymap.set("n", "rn", vim.lsp.buf.rename, buf_opts)
@@ -262,26 +262,20 @@ require("lazy").setup({
 
 	-- Formatter
 	{
-		"mhartington/formatter.nvim",
-		config = function()
-			require("formatter").setup({
-				filetype = {
-					lua = { require("formatter.filetypes.lua").stylua },
-					rust = { require("formatter.filetypes.rust").rustfmt },
-					markdown = { require("formatter.defaults.prettier") },
-					javascript = { require("formatter.defaults.prettier") },
-					typescript = { require("formatter.defaults.prettier") },
-					javascriptreact = { require("formatter.defaults.prettier") },
-					typescriptreact = { require("formatter.defaults.prettier") },
-					svelte = { require("formatter.defaults.prettier") },
-					astro = { require("formatter.defaults.prettier") },
-				},
-			})
-		end,
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = {
+				lua = { "stylua" },
+				rust = { "rustfmt" },
+				["_"] = { "prettier" },
+			},
+		},
 		init = function()
-			vim.keymap.set("n", "<Space>f", ":FormatLock<CR>", keymap_opts)
+			vim.keymap.set("n", "<Space>f", function()
+				require("conform").format({ async = true, lsp_fallback = true })
+			end, keymap_opts)
 		end,
-		cmd = "FormatLock",
+		cmd = "ConformInfo",
 	},
 
 	-- Completion
