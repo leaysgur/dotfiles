@@ -272,7 +272,7 @@ require("lazy").setup({
 		},
 		init = function()
 			vim.keymap.set("n", "<Space>f", function()
-				require("conform").format({ async = true, lsp_fallback = true })
+				require("conform").format()
 			end, keymap_opts)
 		end,
 		cmd = "ConformInfo",
