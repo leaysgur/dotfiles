@@ -95,7 +95,6 @@ require("lazy").setup({
 		event = { "BufReadPost", "BufNewFile" },
 	},
 	{ "RRethy/vim-illuminate", event = { "BufReadPost", "BufNewFile" } },
-	{ "kevinhwang91/nvim-hlslens", opts = { calm_down = true } },
 
 	-- File browser(cannot lazy load to open directory like netrw)
 	{
@@ -128,17 +127,13 @@ require("lazy").setup({
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 			"windwp/nvim-ts-autotag",
-			"yioneko/nvim-yati",
 		},
 		build = ":TSUpdate",
 		main = "nvim-treesitter.configs",
 		opts = {
 			ensure_installed = "all",
 			highlight = { enable = true },
-			-- Native indent does not work well with JSDoc multiline comments.
-			-- While waiting https://github.com/nvim-treesitter/nvim-treesitter/pull/2545 to be merged,
-			-- use `yati`(also not perfect) instead...
-			indent = { enable = false },
+			indent = { enable = true },
 			yati = { enable = true },
 			autotag = { enable = true },
 			-- Enhance `nvim-comment`
@@ -172,11 +167,7 @@ require("lazy").setup({
 		config = true,
 		event = { "BufReadPost", "BufNewFile" },
 	},
-	{
-		"windwp/nvim-autopairs",
-		config = true,
-		event = "InsertEnter",
-	},
+	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
 
 	-- LSP
 	{
@@ -271,11 +262,10 @@ require("lazy").setup({
 			},
 		},
 		init = function()
-			vim.keymap.set("n", "<Space>f", function()
-				require("conform").format()
-			end, keymap_opts)
+			-- stylua: ignore
+			vim.keymap.set("n", "<Space>f", function() require("conform").format() end, keymap_opts)
 		end,
-		cmd = "ConformInfo",
+		lazy = true,
 	},
 
 	-- Completion
@@ -308,9 +298,8 @@ require("lazy").setup({
 			local cmp = require("cmp")
 			cmp.setup({
 				snippet = {
-					expand = function(args)
-						vim.fn["vsnip#anonymous"](args.body)
-					end,
+					-- stylua: ignore
+					expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
 				},
 				sources = {
 					{ name = "copilot" },
