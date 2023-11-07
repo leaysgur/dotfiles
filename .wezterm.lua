@@ -2,8 +2,9 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 
 return {
-	font = wezterm.font("UDEV Gothic NF"),
-	font_size = 20,
+	-- https://github.com/be5invis/Sarasa-Gothic
+	font = wezterm.font("Sarasa Fixed J"),
+	font_size = 18,
 	adjust_window_size_when_changing_font_size = false,
 	initial_cols = 200,
 	initial_rows = 50,
