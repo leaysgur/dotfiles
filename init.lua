@@ -225,8 +225,7 @@ require("lazy").setup({
 	},
 	{
 		"j-hui/fidget.nvim",
-		tag = "legacy",
-		opts = { text = { spinner = "dots_hop" } },
+		config = true,
 		event = "LspAttach",
 	},
 	{
