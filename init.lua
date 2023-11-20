@@ -45,15 +45,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"AlexvZyl/nordic.nvim",
+		"JoosepAlviste/palenightfall.nvim",
 		priority = 1000,
 		opts = {
-			bright_border = true,
-			cursorline = { blend = 1, theme = "light" },
+			transparent = true,
+			highlight_overrides = { VertSplit = { fg = "#a6accd" } },
 		},
-		init = function()
-			vim.cmd([[colorscheme nordic]])
-		end,
 	},
 
 	-- Common dependencies
@@ -61,12 +58,7 @@ require("lazy").setup({
 	{ "nvim-lua/plenary.nvim", lazy = true },
 
 	-- Uis
-	{
-		"echasnovski/mini.statusline",
-		main = "mini.statusline",
-		opts = { set_vim_settings = false },
-		event = { "BufReadPost", "BufNewFile" },
-	},
+	"bluz71/nvim-linefly",
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
