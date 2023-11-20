@@ -94,7 +94,10 @@ require("lazy").setup({
 		branch = "v3.x",
 		dependencies = { "MunifTanjim/nui.nvim" },
 		opts = {
+			close_if_last_window = true,
 			window = {
+				position = "right",
+				width = 50,
 				mappings = {
 					["<space>"] = { "toggle_node", nowait = true },
 					["<C-s>"] = "open_split",
@@ -103,13 +106,12 @@ require("lazy").setup({
 			},
 			filesystem = {
 				filtered_items = { visible = true },
+				follow_current_file = { enabled = true, leave_dirs_open = true },
 				hijack_netrw_behavior = "open_current",
-				bind_to_cwd = false,
-				follow_current_file = { enabled = true },
 			},
 		},
 		init = function()
-			vim.keymap.set("n", "\\", ":Neotree toggle float reveal_force_cwd<CR>", keymap_opts)
+			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", keymap_opts)
 		end,
 	},
 
