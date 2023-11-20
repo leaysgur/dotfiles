@@ -125,7 +125,7 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"JoosepAlviste/nvim-ts-context-commentstring",
+			{ "JoosepAlviste/nvim-ts-context-commentstring", opts = { enable_autocmd = false } },
 			"windwp/nvim-ts-autotag",
 		},
 		build = ":TSUpdate",
@@ -134,10 +134,7 @@ require("lazy").setup({
 			ensure_installed = "all",
 			highlight = { enable = true },
 			indent = { enable = true },
-			yati = { enable = true },
 			autotag = { enable = true },
-			-- Enhance `nvim-comment`
-			context_commentstring = { enable = true, enable_autocmd = false },
 			-- Enhance `vim-matchup`
 			matchup = { enable = true },
 		},
