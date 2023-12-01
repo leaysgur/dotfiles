@@ -123,16 +123,8 @@ require("lazy").setup({
 			"windwp/nvim-ts-autotag",
 		},
 		build = ":TSUpdate",
-		main = "nvim-treesitter.configs",
-		opts = {
-			ensure_installed = "all",
-			highlight = { enable = true },
-			indent = { enable = true },
-			autotag = { enable = true },
-			-- Enhance `vim-matchup`
-			matchup = { enable = true },
-		},
-		event = { "BufReadPost", "BufNewFile" },
+		-- Setup manually for perf, see bottom of this file
+		lazy = true,
 	},
 	{
 		"terrortylor/nvim-comment",
@@ -201,13 +193,12 @@ require("lazy").setup({
 						end,
 					}
 
-					-- Suppress "Undefined global `vim`" warning
 					if server == "lua_ls" then
-						options = vim.tbl_deep_extend(
-							"force",
-							options,
-							{ settings = { Lua = { diagnostics = { globals = { "vim" } } } } }
-						)
+						-- Suppress "Undefined global `vim`" warning
+						options.settings = { Lua = { diagnostics = { globals = { "vim" } } } }
+					end
+					if server == "rust_analyzer" then
+						options.settings = { ["rust-analyzer"] = { check = { command = "clippy" } } }
 					end
 
 					require("lspconfig")[server].setup(options)
@@ -239,6 +230,7 @@ require("lazy").setup({
 		end,
 		init = function()
 			vim.keymap.set("n", "gr", ":Glance references<CR>", keymap_opts)
+			vim.keymap.set("n", "grr", ":Glance definitions<CR>", keymap_opts)
 		end,
 		cmd = "Glance",
 	},
@@ -351,3 +343,16 @@ require("lazy").setup({
 		},
 	},
 })
+
+-- Defer Treesitter setup after first render to improve startup time of `nvim {filename}`
+-- See https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#L377
+vim.defer_fn(function()
+	require("nvim-treesitter.configs").setup({
+		ensure_installed = "all",
+		highlight = { enable = true },
+		indent = { enable = true },
+		autotag = { enable = true },
+		-- Enhance `vim-matchup`
+		matchup = { enable = true },
+	})
+end, 0)
