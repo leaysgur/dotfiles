@@ -60,6 +60,11 @@ require("lazy").setup({
 	-- Uis
 	"bluz71/nvim-linefly",
 	{
+		"nvim-focus/focus.nvim",
+		opts = { ui = { number = true } },
+		event = { "BufReadPost", "BufNewFile" },
+	},
+	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
 			signcolumn = false,
