@@ -109,7 +109,7 @@ fi
 # Bat, enhanced `cat` command
 if [ -f /usr/local/bin/bat ]; then
   export BAT_STYLE="plain"
-  export BAT_THEME="OneHalfDark"
+  export BAT_THEME="ansi"
   export BAT_PAGER="never"
 fi
 
