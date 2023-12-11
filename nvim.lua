@@ -193,8 +193,6 @@ require("lazy").setup({
 								buffer = bufnr,
 								callback = vim.diagnostic.open_float,
 							})
-							vim.lsp.handlers["textDocument/hover"] =
-								vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 						end,
 					}
 
@@ -222,7 +220,6 @@ require("lazy").setup({
 		config = function()
 			local glance = require("glance")
 			glance.setup({
-				border = { enable = true },
 				list = { position = "left" },
 				folds = { folded = false },
 				mappings = {
@@ -290,7 +287,6 @@ require("lazy").setup({
 					-- stylua: ignore
 					expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
 				},
-				window = { completion = cmp.config.window.bordered() },
 				sources = {
 					{ name = "copilot" },
 					{ name = "nvim_lsp_signature_help" },
