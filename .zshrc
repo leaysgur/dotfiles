@@ -1,14 +1,7 @@
 # ================================================================
-# Environment variables
+# Core
 # ================================================================
 export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin
-export CLICOLOR=true
-
-
-# ================================================================
-# Core(prompt, completion)
-# ================================================================
-setopt no_beep
 
 # Enable completion
 autoload -Uz compinit && compinit
@@ -27,7 +20,8 @@ fi
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
 
-# Ensure `cwd` for Wezterm opening new session
+# Advise `cwd` for Wezterm opening new session
+# https://wezfurlong.org/wezterm/shell-integration.html#osc-7-escape-sequence-to-set-the-working-directory
 __vte_urlencode() (
   LC_ALL=C
   str="$1"
@@ -46,6 +40,7 @@ __vte_osc7 () {
 }
 precmd_functions+=(__vte_osc7)
 
+
 # ================================================================
 # History
 # ================================================================
@@ -53,8 +48,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-setopt hist_ignore_dups
 setopt share_history
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt hist_reduce_blanks
 
@@ -71,10 +67,6 @@ alias ci='vi'
 alias cu='vi'
 alias co='vi'
 alias vi='nvim'
-
-alias ll='ls -lahF'
-
-alias treee='rg --files | tree --fromfile'
 
 alias gs='git status'
 alias ga='git add'
@@ -108,10 +100,16 @@ if [ -d ~/.enhancd ]; then
   export ENHANCD_HOOK_AFTER_CD=ls
 fi
 
+# Eza, enhanced `ls` command
+if [ -f /usr/local/bin/eza ]; then
+  alias ls='eza'
+  alias tree='eza -T --git-ignore'
+fi
+
 # Bat, enhanced `cat` command
 if [ -f /usr/local/bin/bat ]; then
   export BAT_STYLE="plain"
-  export BAT_THEME="Nord"
+  export BAT_THEME="OneHalfDark"
   export BAT_PAGER="never"
 fi
 
