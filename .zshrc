@@ -40,6 +40,7 @@ __vte_osc7 () {
 }
 precmd_functions+=(__vte_osc7)
 
+setopt no_beep
 
 # ================================================================
 # History
