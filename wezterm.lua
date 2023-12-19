@@ -14,8 +14,9 @@ return {
 		right = 0,
 		bottom = 0,
 	},
-	color_scheme = "zenwritten_dark",
-	window_background_opacity = 0.85,
+	color_scheme = "Oceanic-Next",
+	window_background_opacity = 0.8,
+	text_background_opacity = 0.6,
 	inactive_pane_hsb = { brightness = 0.2 },
 	hide_tab_bar_if_only_one_tab = true,
 	tab_bar_at_bottom = true,
@@ -26,31 +27,6 @@ return {
 		{ key = "d", mods = "SUPER", action = act.SplitHorizontal },
 		{ key = "[", mods = "SUPER", action = act({ ActivatePaneDirection = "Prev" }) },
 		{ key = "]", mods = "SUPER", action = act({ ActivatePaneDirection = "Next" }) },
-	},
-	mouse_bindings = {
-		-- Do nothing on click hyper links without `CMD` key
-		{
-			event = { Up = { streak = 1, button = "Left" } },
-			mods = "NONE",
-			action = act.CompleteSelection("PrimarySelection"),
-		},
-		{
-			event = { Up = { streak = 1, button = "Left" } },
-			mods = "SUPER",
-			action = act.OpenLinkAtMouseCursor,
-		},
-	},
-	hyperlink_rules = {
-		-- Default rule for general url
-		{
-			regex = "\\b\\w+://[\\w.-]+\\.[a-z]{2,15}\\S*\\b",
-			format = "$0",
-		},
-		-- Support url like http://127.0.0.1:8000
-		{
-			regex = "\\b\\w+://(?:[\\w.-]+):\\d+\\S*\\b",
-			format = "$0",
-		},
 	},
 	-- debug_key_events = true,
 }
