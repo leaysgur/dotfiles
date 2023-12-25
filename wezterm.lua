@@ -8,12 +8,6 @@ return {
 	adjust_window_size_when_changing_font_size = false,
 	initial_cols = 200,
 	initial_rows = 50,
-	window_padding = {
-		top = 4,
-		left = 4,
-		right = 0,
-		bottom = 0,
-	},
 	color_scheme = "Oceanic-Next",
 	window_background_opacity = 0.8,
 	text_background_opacity = 0.6,
