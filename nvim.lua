@@ -216,19 +216,24 @@ require("lazy").setup({
 		config = function()
 			local glance = require("glance")
 			glance.setup({
+				height = 30,
 				list = { position = "left" },
 				folds = { folded = false },
 				mappings = {
 					list = {
 						["<C-s>"] = glance.actions.jump_split,
 						["<C-v>"] = glance.actions.jump_vsplit,
+						["<C-w><Right>"] = glance.actions.enter_win("preview"),
+					},
+					preview = {
+						["<C-w><Left>"] = glance.actions.enter_win("list"),
 					},
 				},
 			})
 		end,
 		init = function()
 			vim.keymap.set("n", "gr", ":Glance references<CR>", keymap_opts)
-			vim.keymap.set("n", "grr", ":Glance definitions<CR>", keymap_opts)
+			vim.keymap.set("n", "gd", ":Glance definitions<CR>", keymap_opts)
 		end,
 		cmd = "Glance",
 	},
