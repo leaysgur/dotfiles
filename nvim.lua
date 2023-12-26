@@ -2,7 +2,6 @@
 vim.opt.termguicolors = true
 -- Ui
 vim.opt.number = true
-vim.opt.cursorline = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "__" }
 vim.opt.completeopt = { "menuone", "noselect" }
@@ -72,6 +71,7 @@ require("lazy").setup({
 		},
 		event = { "BufReadPost", "BufNewFile" },
 	},
+	{ "mvllow/modes.nvim", opts = { line_opacity = 0.3 } },
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
