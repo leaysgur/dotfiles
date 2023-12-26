@@ -86,7 +86,7 @@ require("lazy").setup({
 	{
 		"NvChad/nvim-colorizer.lua",
 		opts = {
-			filetypes = { "*", "!lazy" },
+			filetypes = { "*", "!lazy", "!markdown" },
 			user_default_options = { css = true, mode = "virtualtext" },
 		},
 		event = { "BufReadPost", "BufNewFile" },
@@ -133,21 +133,21 @@ require("lazy").setup({
 	},
 	{
 		"terrortylor/nvim-comment",
-		-- XXX: `opts = { ... }` will fail to call `require()`
-		config = function()
-			require("nvim_comment").setup({
-				create_mappings = false,
-				hook = require("ts_context_commentstring.internal").update_commentstring,
-			})
-		end,
+		main = "nvim_comment",
+		opts = {
+			create_mappings = false,
+			comment_empty = false,
+			hook = function()
+				require("ts_context_commentstring.internal").update_commentstring()
+			end,
+		},
 		init = function()
 			vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", keymap_opts)
 			vim.keymap.set("v", "<C-_>", ":'<,'>CommentToggle<CR>", keymap_opts)
 		end,
 		cmd = "CommentToggle",
 	},
-	-- XXX: `config = true` is enough but it throws :(
-	{ "andymass/vim-matchup", opts = {}, event = { "BufReadPre", "BufNewFile" } },
+	{ "andymass/vim-matchup", config = true, event = { "BufReadPre", "BufNewFile" } },
 	{ "Darazaki/indent-o-matic", config = true, event = { "BufReadPost", "BufNewFile" } },
 	{
 		"echasnovski/mini.surround",
@@ -210,11 +210,7 @@ require("lazy").setup({
 		end,
 		event = { "BufReadPre", "BufNewFile" },
 	},
-	{
-		"j-hui/fidget.nvim",
-		config = true,
-		event = "LspAttach",
-	},
+	{ "j-hui/fidget.nvim", config = true, event = "LspAttach" },
 	{
 		"dnlhc/glance.nvim",
 		config = function()
