@@ -58,11 +58,7 @@ require("lazy").setup({
 
 	-- Uis
 	"bluz71/nvim-linefly",
-	{
-		"nvim-focus/focus.nvim",
-		opts = { ui = { number = true } },
-		event = { "BufReadPost", "BufNewFile" },
-	},
+	{ "nvim-focus/focus.nvim", config = true, event = { "BufReadPost", "BufNewFile" } },
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
@@ -149,12 +145,7 @@ require("lazy").setup({
 	},
 	{ "andymass/vim-matchup", config = true, event = { "BufReadPre", "BufNewFile" } },
 	{ "Darazaki/indent-o-matic", config = true, event = { "BufReadPost", "BufNewFile" } },
-	{
-		"echasnovski/mini.surround",
-		main = "mini.surround",
-		config = true,
-		event = { "BufReadPost", "BufNewFile" },
-	},
+	{ "echasnovski/mini.surround", main = "mini.surround", config = true, event = { "BufReadPost", "BufNewFile" } },
 	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
 
 	-- LSP
