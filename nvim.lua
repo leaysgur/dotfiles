@@ -69,13 +69,10 @@ require("lazy").setup({
 	},
 	{ "mvllow/modes.nvim", opts = { line_opacity = 0.3 } },
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
+		"shellRaining/hlchunk.nvim",
 		opts = {
-			scope = {
-				show_start = false,
-				highlight = "Special",
-			},
+			line_num = { enable = false },
+			blank = { enable = false },
 		},
 		event = { "BufReadPost", "BufNewFile" },
 	},
