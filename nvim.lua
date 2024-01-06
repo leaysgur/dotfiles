@@ -67,7 +67,7 @@ require("lazy").setup({
 		},
 		event = { "BufReadPost", "BufNewFile" },
 	},
-	{ "mvllow/modes.nvim", opts = { line_opacity = 0.3 } },
+	{ "mvllow/modes.nvim", opts = { line_opacity = 0.3 }, event = { "BufReadPost", "BufNewFile" } },
 	{
 		"shellRaining/hlchunk.nvim",
 		opts = {
