@@ -85,6 +85,24 @@ require("lazy").setup({
 		event = { "BufReadPost", "BufNewFile" },
 	},
 	{ "RRethy/vim-illuminate", event = { "BufReadPost", "BufNewFile" } },
+	{
+		"echasnovski/mini.animate",
+		config = function()
+			local animate = require("mini.animate")
+			animate.setup({
+				scroll = { enable = false },
+				resize = { enable = false },
+				open = { enable = false },
+				close = { enable = false },
+				cursor = {
+					timing = animate.gen_timing.exponential({ easing = "out", duration = 100, unit = "total" }),
+					-- stylua: ignore
+					path = animate.gen_path.line({ predicate = function() return true end }),
+				},
+			})
+		end,
+		event = { "BufReadPost", "BufNewFile" },
+	},
 
 	-- File browser(cannot lazy load to open directory like netrw)
 	{
