@@ -97,7 +97,7 @@ require("lazy").setup({
 				open = { enable = false },
 				close = { enable = false },
 				cursor = {
-					timing = animate.gen_timing.exponential({ easing = "out", duration = 100, unit = "total" }),
+					timing = animate.gen_timing.exponential({ easing = "out", duration = 160, unit = "total" }),
 					-- stylua: ignore
 					path = animate.gen_path.line({ predicate = function() return true end }),
 				},
@@ -150,9 +150,8 @@ require("lazy").setup({
 		opts = {
 			create_mappings = false,
 			comment_empty = false,
-			hook = function()
-				require("ts_context_commentstring.internal").update_commentstring()
-			end,
+			--stylua: ignore
+			hook = function() require("ts_context_commentstring.internal").update_commentstring() end,
 		},
 		init = function()
 			vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", keymap_opts)
@@ -287,8 +286,7 @@ require("lazy").setup({
 			},
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"onsails/lspkind.nvim",
-			-- Only for expanding snippet from LSP safely
-			"hrsh7th/vim-vsnip",
+			"hrsh7th/vim-vsnip", -- Only for expanding snippet from LSP safely
 		},
 		config = function()
 			local cmp = require("cmp")
