@@ -160,7 +160,8 @@ require("lazy").setup({
 	},
 	{ "andymass/vim-matchup", config = true, event = { "BufReadPre", "BufNewFile" } },
 	{ "Darazaki/indent-o-matic", config = true, event = { "BufReadPost", "BufNewFile" } },
-	{ "echasnovski/mini.surround", main = "mini.surround", config = true, event = { "BufReadPost", "BufNewFile" } },
+	{ "echasnovski/mini.surround", config = true, event = { "BufReadPost", "BufNewFile" } },
+	{ "echasnovski/mini.splitjoin", opts = { mappings = { toggle = "sj" } }, event = { "BufReadPre", "BufNewFile" } },
 	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
 
 	-- LSP

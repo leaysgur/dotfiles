@@ -124,6 +124,12 @@ if [ -s ~/.bun/_bun ]; then
   source ~/.bun/_bun
 fi
 
+# Wasmtime
+if [ -d ~/.wasmtime ]; then
+  export WASMTIME_HOME="$HOME/.wasmtime"
+  export PATH="$WASMTIME_HOME/bin:$PATH"
+fi
+
 # This must be at the end
 if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
