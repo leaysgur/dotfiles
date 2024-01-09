@@ -21,14 +21,17 @@ vim.opt.autoread = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 500
 
+-- Independent keymaps
 local keymap_opts = { silent = true, noremap = true }
-local LazyFile = { "BufReadPost", "BufNewFile", "BufWritePre" }
-
 -- Keep visual mode after indentation
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", keymap_opts)
+
+-- Event for buffer loaded
+-- See https://github.com/LazyVim/LazyVim/discussions/1583
+local LazyFile = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -37,7 +40,7 @@ if not vim.loop.fs_stat(lazypath) then
 		"clone",
 		"--filter=blob:none",
 		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
+		"--branch=stable", -- latest stable release
 		lazypath,
 	})
 end
