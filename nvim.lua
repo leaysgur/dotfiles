@@ -22,6 +22,8 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 500
 
 local keymap_opts = { silent = true, noremap = true }
+local LazyFile = { "BufReadPost", "BufNewFile", "BufWritePre" }
+
 -- Keep visual mode after indentation
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
@@ -58,23 +60,23 @@ require("lazy").setup({
 
 	-- Uis
 	"bluz71/nvim-linefly",
-	{ "nvim-focus/focus.nvim", config = true, event = { "BufReadPost", "BufNewFile" } },
+	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
 			signcolumn = false,
 			numhl = true,
 		},
-		event = { "BufReadPost", "BufNewFile" },
+		event = LazyFile,
 	},
-	{ "mvllow/modes.nvim", opts = { line_opacity = 0.3 }, event = { "BufReadPost", "BufNewFile" } },
+	{ "mvllow/modes.nvim", opts = { line_opacity = 0.3 }, event = LazyFile },
 	{
 		"shellRaining/hlchunk.nvim",
 		opts = {
 			line_num = { enable = false },
 			blank = { enable = false },
 		},
-		event = { "BufReadPost", "BufNewFile" },
+		event = LazyFile,
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
@@ -82,9 +84,9 @@ require("lazy").setup({
 			filetypes = { "*", "!lazy", "!markdown" },
 			user_default_options = { css = true, mode = "virtualtext" },
 		},
-		event = { "BufReadPost", "BufNewFile" },
+		event = LazyFile,
 	},
-	{ "RRethy/vim-illuminate", event = { "BufReadPost", "BufNewFile" } },
+	{ "RRethy/vim-illuminate", event = LazyFile },
 	{
 		"echasnovski/mini.animate",
 		config = function()
@@ -101,7 +103,7 @@ require("lazy").setup({
 				},
 			})
 		end,
-		event = { "BufReadPost", "BufNewFile" },
+		event = LazyFile,
 	},
 
 	-- File browser(cannot lazy load to open directory like netrw)
@@ -158,10 +160,10 @@ require("lazy").setup({
 		end,
 		cmd = "CommentToggle",
 	},
-	{ "andymass/vim-matchup", config = true, event = { "BufReadPre", "BufNewFile" } },
-	{ "Darazaki/indent-o-matic", config = true, event = { "BufReadPost", "BufNewFile" } },
-	{ "echasnovski/mini.surround", config = true, event = { "BufReadPost", "BufNewFile" } },
-	{ "echasnovski/mini.splitjoin", opts = { mappings = { toggle = "sj" } }, event = { "BufReadPre", "BufNewFile" } },
+	{ "andymass/vim-matchup", config = true, event = LazyFile },
+	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
+	{ "echasnovski/mini.surround", config = true, event = LazyFile },
+	{ "echasnovski/mini.splitjoin", opts = { mappings = { toggle = "sj" } }, event = LazyFile },
 	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
 
 	-- LSP
@@ -215,7 +217,7 @@ require("lazy").setup({
 				end,
 			})
 		end,
-		event = { "BufReadPre", "BufNewFile" },
+		event = LazyFile,
 	},
 	{ "j-hui/fidget.nvim", config = true, event = "LspAttach" },
 	{
