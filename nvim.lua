@@ -63,7 +63,11 @@ require("lazy").setup({
 
 	-- Uis
 	"bluz71/nvim-linefly",
-	{ "petertriho/nvim-scrollbar", config = true, event = LazyFile },
+	{
+		"petertriho/nvim-scrollbar",
+		opts = { excluded_filetypes = { "NvimTree", "Lazy" } },
+		event = LazyFile,
+	},
 	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
 	{
 		"lewis6991/gitsigns.nvim",
