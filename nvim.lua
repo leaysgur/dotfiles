@@ -351,6 +351,9 @@ require("lazy").setup({
 				"tutor",
 				"tohtml",
 				"matchit",
+				"man",
+				"osc52",
+				"rplugin",
 				"spellfile",
 				"tarPlugin",
 				"zipPlugin",
@@ -362,7 +365,7 @@ require("lazy").setup({
 })
 
 -- Defer Treesitter setup after first render to improve startup time of `nvim {filename}`
--- See https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#L377
+-- See https://github.com/nvim-lua/kickstart.nvim/blob/2510c29d62d39d63bb75f1a613d2ae628a2af4ee/init.lua#L422
 vim.defer_fn(function()
 	require("nvim-treesitter.configs").setup({
 		ensure_installed = "all",
