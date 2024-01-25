@@ -49,12 +49,15 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"JoosepAlviste/palenightfall.nvim",
+		"rebelot/kanagawa.nvim",
 		priority = 1000,
 		opts = {
 			transparent = true,
-			highlight_overrides = { VertSplit = { fg = "#a6accd" } },
+			dimInactive = true,
 		},
+		init = function()
+			vim.cmd("colorscheme kanagawa-dragon")
+		end,
 	},
 
 	-- Common dependencies
