@@ -229,7 +229,6 @@ require("lazy").setup({
 		end,
 		event = LazyFile,
 	},
-	{ "j-hui/fidget.nvim", config = true, event = "LspAttach" },
 	{
 		"dnlhc/glance.nvim",
 		config = function()
