@@ -6,7 +6,7 @@ return {
 	text_background_opacity = 0.7,
 
 	-- https://github.com/be5invis/Sarasa-Gothic
-	font = w.font("Sarasa Fixed J"),
+	font = w.font("Sarasa Fixed J Light"),
 	font_size = 20,
 	adjust_window_size_when_changing_font_size = false,
 
