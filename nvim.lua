@@ -174,7 +174,15 @@ require("lazy").setup({
 	{ "andymass/vim-matchup", config = true, event = LazyFile },
 	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
 	{ "echasnovski/mini.surround", config = true, event = LazyFile },
-	{ "echasnovski/mini.splitjoin", opts = { mappings = { toggle = "sj" } }, event = LazyFile },
+	{
+		"Wansmer/treesj",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		opts = { use_default_keymaps = false },
+		init = function()
+			vim.keymap.set("n", "sj", ":TSJToggle<CR>", keymap_opts)
+		end,
+		cmd = "TSJToggle",
+	},
 	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
 
 	-- LSP
