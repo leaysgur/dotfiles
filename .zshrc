@@ -9,13 +9,6 @@ autoload -Uz compinit && compinit
 # Enable Shift+Tab
 bindkey '^[[Z' reverse-menu-complete
 
-# Pure prompt
-if [ -d ~/.pure ]; then
-  fpath+=$HOME/.pure
-  autoload -Uz promptinit && promptinit
-  prompt pure
-fi
-
 # Enable `zmv` command
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
@@ -84,6 +77,18 @@ alias gbd='git branch --merged | grep -v "*" | xargs -I % git branch -d %'
 # ================================================================
 # Externals
 # ================================================================
+# Pure prompt
+if [ -d ~/.pure ]; then
+  fpath+=$HOME/.pure
+  autoload -Uz promptinit && promptinit
+  prompt pure
+fi
+
+# Homebrew
+if [ -f /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # For Volta, Node.js version manger
 if [ -d ~/.volta/bin ]; then
   export VOLTA_HOME="$HOME/.volta"
