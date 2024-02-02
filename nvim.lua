@@ -20,6 +20,7 @@ vim.opt.autochdir = true
 vim.opt.autoread = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 500
+vim.opt.clipboard = "unnamedplus"
 
 -- Independent keymaps
 local keymap_opts = { silent = true, noremap = true }
