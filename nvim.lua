@@ -200,7 +200,7 @@ require("lazy").setup({
 						capabilities = require("cmp_nvim_lsp").default_capabilities(
 							vim.lsp.protocol.make_client_capabilities()
 						),
-						on_attach = function(_, bufnr)
+						on_attach = function(client, bufnr)
 							local buf_opts = vim.list_extend({ buffer = bufnr }, keymap_opts)
 
 							-- Use `conform.nvim` for formatting
@@ -222,6 +222,14 @@ require("lazy").setup({
 								buffer = bufnr,
 								callback = vim.diagnostic.open_float,
 							})
+
+							if client.supports_method("textDocument/inlayHint") then
+								vim.lsp.inlay_hint.enable(bufnr, true)
+								vim.keymap.set("n", "H", function()
+									local value = not vim.lsp.inlay_hint.is_enabled(bufnr)
+									vim.lsp.inlay_hint.enable(bufnr, value)
+								end, buf_opts)
+							end
 						end,
 					}
 
