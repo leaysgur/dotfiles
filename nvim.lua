@@ -224,7 +224,6 @@ require("lazy").setup({
 							})
 
 							if client.supports_method("textDocument/inlayHint") then
-								vim.lsp.inlay_hint.enable(bufnr, true)
 								vim.keymap.set("n", "H", function()
 									local value = not vim.lsp.inlay_hint.is_enabled(bufnr)
 									vim.lsp.inlay_hint.enable(bufnr, value)
