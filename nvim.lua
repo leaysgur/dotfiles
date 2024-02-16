@@ -175,6 +175,7 @@ require("lazy").setup({
 	{ "andymass/vim-matchup", config = true, event = LazyFile },
 	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
 	{ "echasnovski/mini.surround", config = true, event = LazyFile },
+	{ "jinh0/eyeliner.nvim", opts = { highlight_on_key = true, dim = true }, event = LazyFile },
 	{
 		"Wansmer/treesj",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
