@@ -70,7 +70,7 @@ require("lazy").setup({
 	"bluz71/nvim-linefly",
 	{
 		"petertriho/nvim-scrollbar",
-		opts = { excluded_filetypes = { "NvimTree", "Lazy" } },
+		opts = { excluded_filetypes = { "NvimTree", "Lazy", "Glance" } },
 		event = LazyFile,
 	},
 	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
