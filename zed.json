@@ -17,13 +17,17 @@
     "breadcrumbs": false,
     "quick_actions": false
   },
-  "copilot": {
-    "disabled_globs": [
-      ".env",
-      "index.md",
-      // How to disable entire directory?
-      "**/~com~apple~CloudDocs/**/*"
-    ]
+  // "copilot": {
+  //   "disabled_globs": [
+  //     ".env",
+  //     // How to disable entire directory?
+  //     "**/~com~apple~CloudDocs/**/*"
+  //   ]
+  // },
+  "languages": {
+    "Markdown": {
+      "show_copilot_suggestions": false
+    }
   },
   "collaboration_panel": {
     "button": false
