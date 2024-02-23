@@ -4,7 +4,7 @@ vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "__" }
-vim.opt.completeopt = { "menuone", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 -- Use global status line
 vim.opt.laststatus = 3
 -- Prefer soft tab
@@ -318,16 +318,13 @@ require("lazy").setup({
 		config = function()
 			local cmp = require("cmp")
 			cmp.setup({
-				snippet = {
-					-- stylua: ignore
-					expand = function(args) vim.fn["vsnip#anonymous"](args.body) end,
-				},
+				-- stylua: ignore
+				snippet = { expand = function(args) vim.fn["vsnip#anonymous"](args.body) end, },
 				sources = {
 					{ name = "copilot" },
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "nvim_lsp" },
 					{ name = "path" },
-					{ name = "emoji" },
 					{ name = "buffer" },
 				},
 				mapping = cmp.mapping.preset.insert({
