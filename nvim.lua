@@ -60,7 +60,7 @@ require("lazy").setup({
 			vim.cmd("colorscheme kanagawa-dragon")
 		end,
 	},
-	{ "ribru17/bamboo.nvim", opts = {}, ft = "markdown" },
+	{ "ribru17/bamboo.nvim", config = true, ft = "markdown" },
 
 	-- Common dependencies
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
@@ -76,10 +76,7 @@ require("lazy").setup({
 	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
 	{
 		"lewis6991/gitsigns.nvim",
-		opts = {
-			signcolumn = false,
-			numhl = true,
-		},
+		opts = { signcolumn = false, numhl = true },
 		event = LazyFile,
 	},
 	{ "mvllow/modes.nvim", opts = { line_opacity = 0.3 }, event = LazyFile },
@@ -179,9 +176,8 @@ require("lazy").setup({
 		"Wansmer/treesj",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = { use_default_keymaps = false },
-		init = function()
-			vim.keymap.set("n", "sj", ":TSJToggle<CR>", keymap_opts)
-		end,
+		--stylua: ignore
+		init = function() vim.keymap.set("n", "sj", ":TSJToggle<CR>", keymap_opts) end,
 		cmd = "TSJToggle",
 	},
 	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
@@ -220,7 +216,8 @@ require("lazy").setup({
 							})
 							vim.api.nvim_create_autocmd("CursorHold", {
 								buffer = bufnr,
-								callback = vim.diagnostic.open_float,
+								-- stylua: ignore
+								callback = function() vim.diagnostic.open_float({ bufnr }) end,
 							})
 
 							if client.supports_method("textDocument/inlayHint") then
@@ -327,24 +324,12 @@ require("lazy").setup({
 					{ name = "buffer" },
 				},
 				mapping = cmp.mapping.preset.insert({
-					["<Tab>"] = function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						else
-							fallback()
-						end
-					end,
-					["<S-Tab>"] = function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						else
-							fallback()
-						end
-					end,
-					["<CR>"] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Replace,
-						select = true,
-					}),
+					-- stylua: ignore
+					["<Tab>"] = function(fallback) if cmp.visible() then cmp.select_next_item() else fallback() end end,
+					-- stylua: ignore
+					["<S-Tab>"] = function(fallback) if cmp.visible() then cmp.select_prev_item() else fallback() end end,
+					-- stylua: ignore
+					["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 				}),
 				formatting = {
 					format = require("lspkind").cmp_format({
