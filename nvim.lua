@@ -202,7 +202,7 @@ require("lazy").setup({
 							-- Use `conform.nvim` for formatting
 							-- vim.keymap.set("n", "<Space>f", function() vim.lsp.buf.format({ async = true }) end, buf_opts)
 							vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
-							vim.keymap.set("n", "rn", vim.lsp.buf.rename, buf_opts)
+							vim.keymap.set("n", "R", vim.lsp.buf.rename, buf_opts)
 							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							-- Use `glance.nvim` for LSP references
