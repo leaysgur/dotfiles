@@ -1,7 +1,7 @@
 # ================================================================
 # Core
 # ================================================================
-export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
 # Enable completion
 autoload -Uz compinit && compinit
@@ -13,27 +13,9 @@ bindkey '^[[Z' reverse-menu-complete
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
 
-# Advise `cwd` for Wezterm opening new session
-# https://wezfurlong.org/wezterm/shell-integration.html#osc-7-escape-sequence-to-set-the-working-directory
-__vte_urlencode() (
-  LC_ALL=C
-  str="$1"
-  while [ -n "$str" ]; do
-    safe="${str%%[!a-zA-Z0-9/:_\.\-\!\'\(\)~]*}"
-    printf "%s" "$safe"
-    str="${str#"$safe"}"
-    if [ -n "$str" ]; then
-      printf "%%%02X" "'$str"
-      str="${str#?}"
-    fi
-  done
-)
-__vte_osc7 () {
-  printf "\033]7;file://%s%s\007" "${HOSTNAME:-}" "$(__vte_urlencode "${PWD}")"
-}
-precmd_functions+=(__vte_osc7)
-
+# No beep!
 setopt no_beep
+
 
 # ================================================================
 # History
@@ -69,6 +51,7 @@ alias gb='git branch'
 alias gr='git reset'
 alias gc='git commit -v'
 alias gca='git commit --amend'
+alias grs='git restore'
 alias gch='git checkout'
 alias gsw='git switch'
 alias gbd='git branch --merged | grep -v "*" | xargs -I % git branch -d %'
@@ -77,65 +60,59 @@ alias gbd='git branch --merged | grep -v "*" | xargs -I % git branch -d %'
 # ================================================================
 # Externals
 # ================================================================
-# Pure prompt
-if [ -d ~/.pure ]; then
-  fpath+=$HOME/.pure
-  autoload -Uz promptinit && promptinit
-  prompt pure
-fi
-
 # Homebrew
 if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# For Volta, Node.js version manger
-if [ -d ~/.volta/bin ]; then
-  export VOLTA_HOME="$HOME/.volta"
-  export PATH="$VOLTA_HOME/bin:$PATH"
+# mise
+if [ -f /opt/homebrew/bin/mise ]; then
+  eval "$(/opt/homebrew/bin/mise activate zsh)"
 fi
 
 # For Cargo, Rust language utilities
-if [ -d ~/.cargo/bin ]; then
-  export PATH=$HOME/.cargo/bin:$PATH
+if [ -d ~/.cargo ]; then
+  source ~/.cargo/env
 fi
 
-# Enhancd, enhanced `cd` command
-if [ -d ~/.enhancd ]; then
-  source ~/.enhancd/init.sh
+# Prompt
+if [ -d ~/Codes/pure ]; then
+  fpath+=(~/Codes/pure)
+  autoload -U promptinit; promptinit
+  prompt pure
+fi
+
+# Enhancd, enhanced `cd` command + `sk` fuzzy matcher
+if [ -d ~/Codes/enhancd ]; then
+  source ~/Codes/enhancd/init.sh
   export ENHANCD_HOOK_AFTER_CD=ls
+  export ENHANCD_FILTER="/opt/homebrew/bin/sk:fzf --ansi:fzy:non-existing-filter"
 fi
 
 # Eza, enhanced `ls` command
-if [ -f /usr/local/bin/eza ]; then
+if [ -f /opt/homebrew/bin/eza ]; then
   alias ls='eza'
   alias tree='eza -T --git-ignore'
 fi
 
 # Bat, enhanced `cat` command
-if [ -f /usr/local/bin/bat ]; then
+if [ -f /opt/homebrew/bin/bat ]; then
   export BAT_STYLE="plain"
   export BAT_THEME="ansi"
   export BAT_PAGER="never"
 fi
 
 # Use nvim
-if [ -f /usr/local/bin/nvim ]; then
+if [ -f /opt/homebrew/bin/nvim ]; then
   export GIT_EDITOR="nvim"
 fi
 
-# Bun completions
-if [ -s ~/.bun/_bun ]; then
-  source ~/.bun/_bun
+# Bun completions(run `bun completions`)
+if [ -s "/opt/homebrew/Cellar/bun/1.0.30/share/zsh/site-functions/_bun" ]; then
+  source "/opt/homebrew/Cellar/bun/1.0.30/share/zsh/site-functions/_bun"
 fi
 
-# Wasmtime
-if [ -d ~/.wasmtime ]; then
-  export WASMTIME_HOME="$HOME/.wasmtime"
-  export PATH="$WASMTIME_HOME/bin:$PATH"
-fi
-
-# This must be at the end
-if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Zsh syntax highlighting, must be at the end
+if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
