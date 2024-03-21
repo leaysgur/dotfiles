@@ -57,7 +57,7 @@ require("lazy").setup({
 			dimInactive = true,
 		},
 		init = function()
-			vim.cmd("colorscheme kanagawa-dragon")
+			vim.cmd("colorscheme kanagawa")
 		end,
 	},
 	{ "ribru17/bamboo.nvim", config = true, ft = "markdown" },
