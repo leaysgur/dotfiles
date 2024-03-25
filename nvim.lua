@@ -60,7 +60,6 @@ require("lazy").setup({
 			vim.cmd("colorscheme kanagawa")
 		end,
 	},
-	{ "ribru17/bamboo.nvim", config = true, ft = "markdown" },
 
 	-- Common dependencies
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
