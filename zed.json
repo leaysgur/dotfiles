@@ -32,6 +32,7 @@
     "button": false
   },
   "assistant": {
+    "version": "1",
     "button": false
   }
 }
