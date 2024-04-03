@@ -102,11 +102,11 @@ require("lazy").setup({
 			local animate = require("mini.animate")
 			animate.setup({
 				scroll = { enable = false },
-				resize = { enable = false },
 				open = { enable = false },
 				close = { enable = false },
+				resize = { timing = animate.gen_timing.linear({ duration = 16, unit = "total" }) },
 				cursor = {
-					timing = animate.gen_timing.exponential({ easing = "out", duration = 160, unit = "total" }),
+					timing = animate.gen_timing.exponential({ easing = "out", duration = 80, unit = "total" }),
 					-- stylua: ignore
 					path = animate.gen_path.line({ predicate = function() return true end }),
 				},
