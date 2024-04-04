@@ -154,7 +154,7 @@ require("lazy").setup({
 			create_mappings = false,
 			comment_empty = false,
 			--stylua: ignore
-			hook = function() require("ts_context_commentstring.internal").update_commentstring() end,
+			hook = function() require("ts_context_commentstring").update_commentstring() end,
 		},
 		init = function()
 			vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", keymap_opts)
