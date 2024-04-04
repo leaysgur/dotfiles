@@ -20,7 +20,6 @@ vim.opt.autochdir = true
 vim.opt.autoread = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 500
-vim.opt.clipboard = "unnamedplus"
 
 -- Independent keymaps
 local keymap_opts = { silent = true, noremap = true }
@@ -110,7 +109,6 @@ require("lazy").setup({
 		end,
 		event = LazyFile,
 	},
-
 	-- File browser(cannot lazy load to open directory like netrw)
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -176,6 +174,15 @@ require("lazy").setup({
 		cmd = "TSJToggle",
 	},
 	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
+	{
+		"ibhagwan/smartyank.nvim",
+		opts = {
+			highlight = { timeout = 80 },
+			tmux = { enabled = false },
+			osc52 = { enabled = false },
+		},
+		event = LazyFile,
+	},
 
 	-- LSP
 	{
