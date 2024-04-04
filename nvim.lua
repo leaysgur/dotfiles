@@ -373,6 +373,7 @@ vim.defer_fn(function()
 		ensure_installed = "all",
 		highlight = { enable = true },
 		indent = { enable = true },
+		-- Use `nvim-ts-autotag`
 		autotag = { enable = true },
 		-- Enhance `vim-matchup`
 		matchup = { enable = true },
