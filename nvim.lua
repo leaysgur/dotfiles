@@ -73,11 +73,7 @@ require("lazy").setup({
 		event = LazyFile,
 	},
 	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
-	{
-		"lewis6991/gitsigns.nvim",
-		opts = { signcolumn = false, numhl = true },
-		event = LazyFile,
-	},
+	{ "echasnovski/mini.diff", config = true, event = LazyFile },
 	{ "mvllow/modes.nvim", opts = { line_opacity = 0.3 }, event = LazyFile },
 	{
 		"shellRaining/hlchunk.nvim",
