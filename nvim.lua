@@ -1,5 +1,3 @@
--- Basics
-vim.opt.termguicolors = true
 -- Ui
 vim.opt.number = true
 vim.opt.list = true
@@ -60,60 +58,26 @@ require("lazy").setup({
 		end,
 	},
 
-	-- Common dependencies
-	{ "nvim-tree/nvim-web-devicons", lazy = true },
-	{ "nvim-lua/plenary.nvim", lazy = true },
-
 	-- Uis
-	"bluz71/nvim-linefly",
+	{
+		"bluz71/nvim-linefly",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	{
 		"petertriho/nvim-scrollbar",
 		opts = { excluded_filetypes = { "NvimTree", "Lazy", "Glance" } },
 		event = LazyFile,
 	},
-	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
 	{ "echasnovski/mini.diff", config = true, event = LazyFile },
-	{ "mvllow/modes.nvim", opts = { line_opacity = 0.3 }, event = LazyFile },
-	{
-		"shellRaining/hlchunk.nvim",
-		opts = {
-			line_num = { enable = false },
-			blank = { enable = false },
-		},
-		event = LazyFile,
-	},
-	{
-		"NvChad/nvim-colorizer.lua",
-		opts = {
-			filetypes = { "*", "!lazy", "!mason", "!markdown" },
-			user_default_options = { css = true, mode = "virtualtext" },
-		},
-		event = LazyFile,
-	},
-	{ "RRethy/vim-illuminate", event = LazyFile },
-	{
-		"echasnovski/mini.animate",
-		config = function()
-			local animate = require("mini.animate")
-			animate.setup({
-				scroll = { enable = false },
-				open = { enable = false },
-				close = { enable = false },
-				resize = { timing = animate.gen_timing.linear({ duration = 16, unit = "total" }) },
-				cursor = {
-					timing = animate.gen_timing.exponential({ easing = "out", duration = 80, unit = "total" }),
-					-- stylua: ignore
-					path = animate.gen_path.line({ predicate = function() return true end }),
-				},
-			})
-		end,
-		event = LazyFile,
-	},
-	-- File browser(cannot lazy load to open directory like netrw)
+	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
-		dependencies = { "MunifTanjim/nui.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
 		opts = {
 			close_if_last_window = true,
 			window = {
@@ -134,9 +98,57 @@ require("lazy").setup({
 		init = function()
 			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", keymap_opts)
 		end,
+		-- To open directory like `netrw` does, this cannot be lazy loaded
 	},
 
-	-- Editors
+	-- UX
+	{
+		"ibhagwan/smartyank.nvim",
+		opts = {
+			highlight = { timeout = 80 },
+			tmux = { enabled = false },
+			osc52 = { enabled = false },
+		},
+		event = LazyFile,
+	},
+	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
+	{ "RRethy/vim-illuminate", event = LazyFile },
+	{ "andymass/vim-matchup", config = true, event = LazyFile },
+	{
+		"echasnovski/mini.animate",
+		config = function()
+			local animate = require("mini.animate")
+			animate.setup({
+				scroll = { enable = false },
+				open = { enable = false },
+				close = { enable = false },
+				resize = { timing = animate.gen_timing.linear({ duration = 16, unit = "total" }) },
+				cursor = {
+					timing = animate.gen_timing.exponential({ easing = "out", duration = 80, unit = "total" }),
+					-- stylua: ignore
+					path = animate.gen_path.line({ predicate = function() return true end }),
+				},
+			})
+		end,
+		event = LazyFile,
+	},
+	{
+		"shellRaining/hlchunk.nvim",
+		opts = {
+			line_num = { enable = false },
+			blank = { enable = false },
+		},
+		event = LazyFile,
+	},
+	{ "mvllow/modes.nvim", opts = { line_opacity = 0.3 }, event = LazyFile },
+	{
+		"NvChad/nvim-colorizer.lua",
+		opts = {
+			filetypes = { "*", "!lazy", "!mason", "!markdown" },
+			user_default_options = { css = true, mode = "virtualtext" },
+		},
+		event = LazyFile,
+	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
@@ -147,6 +159,8 @@ require("lazy").setup({
 		-- Setup manually for perf, see bottom of this file
 		lazy = true,
 	},
+
+	-- Editors
 	{
 		"terrortylor/nvim-comment",
 		main = "nvim_comment",
@@ -162,8 +176,6 @@ require("lazy").setup({
 		end,
 		cmd = "CommentToggle",
 	},
-	{ "andymass/vim-matchup", config = true, event = LazyFile },
-	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
 	{ "echasnovski/mini.surround", config = true, event = LazyFile },
 	{
 		"Wansmer/treesj",
@@ -174,15 +186,6 @@ require("lazy").setup({
 		cmd = "TSJToggle",
 	},
 	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
-	{
-		"ibhagwan/smartyank.nvim",
-		opts = {
-			highlight = { timeout = 80 },
-			tmux = { enabled = false },
-			osc52 = { enabled = false },
-		},
-		event = LazyFile,
-	},
 
 	-- LSP
 	{
@@ -198,7 +201,7 @@ require("lazy").setup({
 						capabilities = require("cmp_nvim_lsp").default_capabilities(
 							vim.lsp.protocol.make_client_capabilities()
 						),
-						on_attach = function(client, bufnr)
+						on_attach = function(_, bufnr)
 							local buf_opts = vim.list_extend({ buffer = bufnr }, keymap_opts)
 
 							-- Use `conform.nvim` for formatting
@@ -207,6 +210,7 @@ require("lazy").setup({
 							vim.keymap.set("n", "R", vim.lsp.buf.rename, buf_opts)
 							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
+							vim.keymap.set("n", "gd", vim.lsp.buf.definition, buf_opts)
 							-- Use `glance.nvim` for LSP references
 							-- vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
 
@@ -221,13 +225,6 @@ require("lazy").setup({
 								-- stylua: ignore
 								callback = function() vim.diagnostic.open_float({ bufnr }) end,
 							})
-
-							if client.supports_method("textDocument/inlayHint") then
-								vim.keymap.set("n", "H", function()
-									local value = not vim.lsp.inlay_hint.is_enabled(bufnr)
-									vim.lsp.inlay_hint.enable(bufnr, value)
-								end, buf_opts)
-							end
 						end,
 					}
 
@@ -267,7 +264,6 @@ require("lazy").setup({
 		end,
 		init = function()
 			vim.keymap.set("n", "gr", ":Glance references<CR>", keymap_opts)
-			vim.keymap.set("n", "gd", ":Glance definitions<CR>", keymap_opts)
 		end,
 		cmd = "Glance",
 	},
