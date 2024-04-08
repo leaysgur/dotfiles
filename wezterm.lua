@@ -2,7 +2,8 @@ local w = require("wezterm")
 
 return {
 	color_scheme = "Adventure",
-	window_background_opacity = 0.9,
+	window_background_opacity = 0.90,
+	text_background_opacity = 0.45,
 
 	-- https://github.com/be5invis/Sarasa-Gothic
 	font = w.font("Sarasa Fixed J Light"),
