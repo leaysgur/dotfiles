@@ -104,11 +104,7 @@ require("lazy").setup({
 	-- UX
 	{
 		"ibhagwan/smartyank.nvim",
-		opts = {
-			highlight = { timeout = 80 },
-			tmux = { enabled = false },
-			osc52 = { enabled = false },
-		},
+		opts = { highlight = { timeout = 80 } },
 		event = LazyFile,
 	},
 	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
@@ -140,7 +136,11 @@ require("lazy").setup({
 		},
 		event = LazyFile,
 	},
-	{ "mvllow/modes.nvim", opts = { line_opacity = 0.3 }, event = LazyFile },
+	{
+		"mvllow/modes.nvim",
+		opts = { line_opacity = 0.3 },
+		event = LazyFile,
+	},
 	{
 		"NvChad/nvim-colorizer.lua",
 		opts = {
