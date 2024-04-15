@@ -1,7 +1,7 @@
 local w = require("wezterm")
 
 return {
-	color_scheme = "Adventure",
+	color_scheme = "Peppermint",
 	window_background_opacity = 0.90,
 	text_background_opacity = 0.45,
 

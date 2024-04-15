@@ -138,7 +138,7 @@ require("lazy").setup({
 	},
 	{
 		"mvllow/modes.nvim",
-		opts = { line_opacity = 0.3 },
+		opts = { line_opacity = 0.4 },
 		event = LazyFile,
 	},
 	{
