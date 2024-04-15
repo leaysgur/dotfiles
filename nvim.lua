@@ -151,6 +151,7 @@ require("lazy").setup({
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
+		version = false,
 		dependencies = {
 			{ "JoosepAlviste/nvim-ts-context-commentstring", opts = { enable_autocmd = false } },
 			"windwp/nvim-ts-autotag",
@@ -367,7 +368,10 @@ require("lazy").setup({
 vim.defer_fn(function()
 	require("nvim-treesitter.configs").setup({
 		ensure_installed = "all",
-		highlight = { enable = true },
+		highlight = {
+			enable = true,
+			additional_vim_regex_highlighting = false,
+		},
 		indent = { enable = true },
 		-- Use `nvim-ts-autotag`
 		autotag = { enable = true },
