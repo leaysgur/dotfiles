@@ -152,14 +152,23 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
-		dependencies = {
-			{ "JoosepAlviste/nvim-ts-context-commentstring", opts = { enable_autocmd = false } },
-			"windwp/nvim-ts-autotag",
+		main = "nvim-treesitter.configs",
+		opts = {
+			ensure_installed = "all",
+			highlight = {
+				enable = true,
+				additional_vim_regex_highlighting = false,
+			},
+			indent = { enable = true },
+			-- Enhance `vim-matchup`
+			matchup = { enable = true },
 		},
 		build = ":TSUpdate",
-		-- Setup manually for perf, see bottom of this file
-		lazy = true,
+		event = LazyFile,
 	},
+	{ "JoosepAlviste/nvim-ts-context-commentstring", opts = { enable_autocmd = false }, event = LazyFile },
+	{ "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 1 }, event = LazyFile, },
+	{ "windwp/nvim-ts-autotag", config = true, event = LazyFile, },
 
 	-- Editors
 	{
@@ -362,20 +371,3 @@ require("lazy").setup({
 		},
 	},
 })
-
--- Defer Treesitter setup after first render to improve startup time of `nvim {filename}`
--- See https://github.com/nvim-lua/kickstart.nvim/blob/2510c29d62d39d63bb75f1a613d2ae628a2af4ee/init.lua#L422
-vim.defer_fn(function()
-	require("nvim-treesitter.configs").setup({
-		ensure_installed = "all",
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = false,
-		},
-		indent = { enable = true },
-		-- Use `nvim-ts-autotag`
-		autotag = { enable = true },
-		-- Enhance `vim-matchup`
-		matchup = { enable = true },
-	})
-end, 0)
