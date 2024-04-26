@@ -167,8 +167,8 @@ require("lazy").setup({
 		event = LazyFile,
 	},
 	{ "JoosepAlviste/nvim-ts-context-commentstring", opts = { enable_autocmd = false }, event = LazyFile },
-	{ "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 1 }, event = LazyFile, },
-	{ "windwp/nvim-ts-autotag", config = true, event = LazyFile, },
+	{ "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 1 }, event = LazyFile },
+	{ "windwp/nvim-ts-autotag", config = true, event = LazyFile },
 
 	-- Editors
 	{
@@ -214,15 +214,15 @@ require("lazy").setup({
 						on_attach = function(_, bufnr)
 							local buf_opts = vim.list_extend({ buffer = bufnr }, keymap_opts)
 
-							-- Use `conform.nvim` for formatting
-							-- vim.keymap.set("n", "<Space>f", function() vim.lsp.buf.format({ async = true }) end, buf_opts)
-							vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
 							vim.keymap.set("n", "R", vim.lsp.buf.rename, buf_opts)
 							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gd", vim.lsp.buf.definition, buf_opts)
-							-- Use `glance.nvim` for LSP references
+							-- Use `glance.nvim` for LSP references, hover
 							-- vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
+							-- vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
+							-- Use `conform.nvim` for formatting
+							-- vim.keymap.set("n", "<Space>f", function() vim.lsp.buf.format({ async = true }) end, buf_opts)
 
 							-- Show diagnostics only on CursorHold
 							vim.diagnostic.config({
@@ -274,6 +274,7 @@ require("lazy").setup({
 		end,
 		init = function()
 			vim.keymap.set("n", "gr", ":Glance references<CR>", keymap_opts)
+			vim.keymap.set("n", "K", ":Glance definitions<CR>", keymap_opts)
 		end,
 		cmd = "Glance",
 	},
