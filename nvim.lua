@@ -64,6 +64,11 @@ require("lazy").setup({
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 	{
+		"b0o/incline.nvim",
+		opts = { hide = { only_win = true, focused_win = true } },
+		event = LazyFile,
+	},
+	{
 		"petertriho/nvim-scrollbar",
 		opts = { excluded_filetypes = { "NvimTree", "Lazy", "Glance" } },
 		event = LazyFile,
