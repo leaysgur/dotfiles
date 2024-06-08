@@ -47,14 +47,11 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"rebelot/kanagawa.nvim",
+		"oxfist/night-owl.nvim",
 		priority = 1000,
-		opts = {
-			transparent = true,
-			dimInactive = true,
-		},
+		opts = { transparent_background = true },
 		init = function()
-			vim.cmd("colorscheme kanagawa")
+			vim.cmd("colorscheme night-owl")
 		end,
 	},
 
