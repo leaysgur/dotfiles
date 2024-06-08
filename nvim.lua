@@ -136,8 +136,8 @@ require("lazy").setup({
 	{
 		"shellRaining/hlchunk.nvim",
 		opts = {
-			line_num = { enable = false },
-			blank = { enable = false },
+			chunk = { enable = true },
+			indent = { enable = true },
 		},
 		event = LazyFile,
 	},
