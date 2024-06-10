@@ -49,9 +49,12 @@ require("lazy").setup({
 	{
 		"oxfist/night-owl.nvim",
 		priority = 1000,
-		opts = { transparent_background = true },
 		init = function()
 			vim.cmd("colorscheme night-owl")
+			-- Add custom highlight for `nvim-linefly`
+			vim.api.nvim_set_hl(0, "LineflyNormal", { link = "DiffText" })
+			vim.api.nvim_set_hl(0, "LineflyInsert", { link = "DiffAdd" })
+			vim.api.nvim_set_hl(0, "LineflyVisual", { link = "DiffDelete" })
 		end,
 	},
 
