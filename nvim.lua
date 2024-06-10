@@ -47,14 +47,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"oxfist/night-owl.nvim",
+		"bluz71/vim-nightfly-colors",
 		priority = 1000,
 		init = function()
-			vim.cmd("colorscheme night-owl")
-			-- Add custom highlight for `nvim-linefly`
-			vim.api.nvim_set_hl(0, "LineflyNormal", { link = "DiffText" })
-			vim.api.nvim_set_hl(0, "LineflyInsert", { link = "DiffAdd" })
-			vim.api.nvim_set_hl(0, "LineflyVisual", { link = "DiffDelete" })
+			vim.g.nightflyVirtualTextColor = true
+			vim.g.nightflyWinSeparator = 2
+			vim.cmd("colorscheme nightfly")
 		end,
 	},
 
