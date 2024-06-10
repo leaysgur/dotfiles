@@ -47,12 +47,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"bluz71/vim-nightfly-colors",
+		"HoNamDuong/hybrid.nvim",
 		priority = 1000,
 		init = function()
-			vim.g.nightflyVirtualTextColor = true
-			vim.g.nightflyWinSeparator = 2
-			vim.cmd("colorscheme nightfly")
+			vim.cmd("colorscheme hybrid")
 		end,
 	},
 
