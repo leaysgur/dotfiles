@@ -47,11 +47,11 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- Theme
 	{
-		"HoNamDuong/hybrid.nvim",
+		"fynnfluegge/monet.nvim",
+		name = "monet",
 		priority = 1000,
-		init = function()
-			vim.cmd("colorscheme hybrid")
-		end,
+		-- stylua: ignore
+		init = function() vim.cmd("colorscheme monet") end,
 	},
 
 	-- Uis
