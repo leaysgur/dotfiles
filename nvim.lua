@@ -96,10 +96,10 @@ require("lazy").setup({
 				hijack_netrw_behavior = "open_current",
 			},
 		},
-		config = function()
+		-- To open directory like `netrw`, this plugin cannot be lazy loaded
+		init = function()
 			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", keymap_opts)
 		end,
-		-- To open directory like `netrw` does, this cannot be lazy loaded
 	},
 
 	-- UX
