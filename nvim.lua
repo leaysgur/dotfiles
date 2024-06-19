@@ -51,7 +51,7 @@ require("lazy").setup({
 		name = "monet",
 		priority = 1000,
 		-- stylua: ignore
-		init = function() vim.cmd("colorscheme monet") end,
+		config = function() vim.cmd("colorscheme monet") end,
 	},
 
 	-- Uis
@@ -96,7 +96,7 @@ require("lazy").setup({
 				hijack_netrw_behavior = "open_current",
 			},
 		},
-		init = function()
+		config = function()
 			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", keymap_opts)
 		end,
 		-- To open directory like `netrw` does, this cannot be lazy loaded
@@ -181,20 +181,17 @@ require("lazy").setup({
 			--stylua: ignore
 			hook = function() require("ts_context_commentstring").update_commentstring() end,
 		},
-		init = function()
-			vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", keymap_opts)
-			vim.keymap.set("v", "<C-_>", ":'<,'>CommentToggle<CR>", keymap_opts)
-		end,
-		cmd = "CommentToggle",
+		keys = {
+			{ "<C-_>", "<cmd>CommentToggle<cr>" },
+			{ "<C-_>", "<cmd>'<,'>CommentToggle<cr>", mode = "v" },
+		},
 	},
 	{ "echasnovski/mini.surround", config = true, event = LazyFile },
 	{
 		"Wansmer/treesj",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = { use_default_keymaps = false },
-		--stylua: ignore
-		init = function() vim.keymap.set("n", "sj", ":TSJToggle<CR>", keymap_opts) end,
-		cmd = "TSJToggle",
+		keys = { { "sj", "<cmd>TSJToggle<cr>" } },
 	},
 	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
 
@@ -273,10 +270,7 @@ require("lazy").setup({
 				},
 			})
 		end,
-		init = function()
-			vim.keymap.set("n", "gr", ":Glance references<CR>", keymap_opts)
-		end,
-		cmd = "Glance",
+		keys = { { "gr", "<cmd>Glance references<cr>" } },
 	},
 
 	-- Formatter
@@ -289,11 +283,7 @@ require("lazy").setup({
 				["_"] = { "prettier" },
 			},
 		},
-		init = function()
-			-- stylua: ignore
-			vim.keymap.set("n", "<Space>f", function() require("conform").format() end, keymap_opts)
-		end,
-		lazy = true,
+		keys = { { "<Space>f", "<cmd>lua require('conform').format()<cr>" } },
 	},
 
 	-- Completion
