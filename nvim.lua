@@ -228,6 +228,8 @@ require("lazy").setup({
 								severity_sort = true,
 								float = { focusable = false },
 							})
+							vim.lsp.handlers["textDocument/hover"] =
+								vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 							vim.api.nvim_create_autocmd("CursorHold", {
 								buffer = bufnr,
 								-- stylua: ignore
