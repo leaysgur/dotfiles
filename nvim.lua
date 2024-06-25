@@ -183,7 +183,8 @@ require("lazy").setup({
 		},
 		keys = {
 			{ "<C-_>", "<cmd>CommentToggle<cr>" },
-			{ "<C-_>", "<cmd>'<,'>CommentToggle<cr>", mode = "v" },
+			-- `<cmd>` can not be used here to indicate visual range
+			{ "<C-_>", ":'<,'>CommentToggle<cr>", mode = "v" },
 		},
 	},
 	{ "echasnovski/mini.surround", config = true, event = LazyFile },
