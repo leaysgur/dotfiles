@@ -227,7 +227,7 @@ require("lazy").setup({
 							vim.diagnostic.config({
 								virtual_text = false,
 								severity_sort = true,
-								float = { focusable = false },
+								float = { focusable = false, border = "single" },
 							})
 							vim.lsp.handlers["textDocument/hover"] =
 								vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
