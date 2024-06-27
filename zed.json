@@ -9,17 +9,10 @@
     "breadcrumbs": false,
     "quick_actions": false
   },
-  // "copilot": {
-  //   "disabled_globs": [
-  //     ".env",
-  //     // How to disable entire directory?
-  //     "**/~com~apple~CloudDocs/**/*"
-  //   ]
-  // },
   "languages": {
     "Markdown": {
       "formatter": "language_server",
-      "show_copilot_suggestions": false
+      "show_inline_completions": false
     }
   },
   "collaboration_panel": {
