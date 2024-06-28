@@ -1,4 +1,8 @@
 {
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
   "theme": "Rosé Pine Moon",
   "ui_font_size": 12,
   "buffer_font_size": 14,
