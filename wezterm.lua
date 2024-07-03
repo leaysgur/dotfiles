@@ -2,8 +2,8 @@ local w = require("wezterm")
 
 return {
 	color_scheme = "Ayu Mirage",
-	window_background_opacity = 0.90,
-	text_background_opacity = 0.45,
+	window_background_opacity = 0.8,
+	text_background_opacity = 0.8,
 
 	-- https://github.com/be5invis/Sarasa-Gothic
 	font = w.font("Sarasa Fixed J Light"),
