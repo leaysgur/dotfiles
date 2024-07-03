@@ -217,8 +217,8 @@ require("lazy").setup({
 							vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
 							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
-							vim.keymap.set("n", "gd", vim.lsp.buf.definition, buf_opts)
-							-- Use `glance.nvim` for LSP references
+							-- Use `glance.nvim` for LSP definition and references
+							-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, buf_opts)
 							-- vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
 							-- Use `conform.nvim` for formatting
 							-- vim.keymap.set("n", "<Space>f", function() vim.lsp.buf.format({ async = true }) end, buf_opts)
@@ -273,7 +273,10 @@ require("lazy").setup({
 				},
 			})
 		end,
-		keys = { { "gr", "<cmd>Glance references<cr>" } },
+		keys = {
+			{ "gd", "<cmd>Glance definitions<cr>" },
+			{ "gr", "<cmd>Glance references<cr>" },
+		},
 	},
 
 	-- Formatter
