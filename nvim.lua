@@ -101,6 +101,14 @@ require("lazy").setup({
 			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", keymap_opts)
 		end,
 	},
+	{
+		"folke/noice.nvim",
+		dependencies = { "MunifTanjim/nui.nvim" },
+		opts = {
+			lsp = { hover = { enabled = false } },
+		},
+		event = "VeryLazy",
+	},
 
 	-- UX
 	{
