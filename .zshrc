@@ -82,11 +82,11 @@ if [ -d ~/Codes/pure ]; then
   prompt pure
 fi
 
-# Enhancd, enhanced `cd` command + `sk` fuzzy matcher
+# Enhancd, enhanced `cd` command + `zf` as fuzzy matcher
 if [ -d ~/Codes/enhancd ]; then
   source ~/Codes/enhancd/init.sh
   export ENHANCD_HOOK_AFTER_CD=ls
-  export ENHANCD_FILTER="/opt/homebrew/bin/sk:fzf --ansi:fzy:non-existing-filter"
+  export ENHANCD_FILTER="/opt/homebrew/bin/zf"
 fi
 
 # Eza, enhanced `ls` command
