@@ -30,13 +30,11 @@ vim.opt.autoread = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 500
 
--- Independent keymaps
-local keymap_opts = { silent = true, noremap = true }
 -- Keep visual mode after indentation
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
-vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", keymap_opts)
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", { silent = true })
 
 -- Event for buffer loaded
 -- See https://github.com/LazyVim/LazyVim/discussions/1583
@@ -58,6 +56,7 @@ require("lazy").setup({
 	{
 		"bluz71/nvim-linefly",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		-- Do not lazy load, just leave it to plugin
 	},
 	{
 		"b0o/incline.nvim",
@@ -85,7 +84,7 @@ require("lazy").setup({
 				position = "right",
 				width = 50,
 				mappings = {
-					["<space>"] = { "toggle_node", nowait = true },
+					["<Space>"] = { "toggle_node", nowait = true },
 					["<C-s>"] = "open_split",
 					["<C-v>"] = "open_vsplit",
 				},
@@ -97,15 +96,15 @@ require("lazy").setup({
 			},
 		},
 		-- To open directory like `netrw`, this plugin cannot be lazy loaded
-		init = function()
-			vim.keymap.set("n", "\\", ":Neotree toggle reveal_force_cwd<CR>", keymap_opts)
-		end,
 	},
 	{
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim" },
 		opts = {
-			lsp = { hover = { enabled = false } },
+			lsp = {
+				hover = { enabled = false }, -- Use default LSP
+				signature = { enabled = false }, -- Use `mini.completion`
+			},
 		},
 		event = "VeryLazy",
 	},
@@ -190,9 +189,8 @@ require("lazy").setup({
 			hook = function() require("ts_context_commentstring").update_commentstring() end,
 		},
 		keys = {
-			{ "<C-_>", "<cmd>CommentToggle<cr>" },
-			-- `<cmd>` can not be used here to indicate visual range
-			{ "<C-_>", ":'<,'>CommentToggle<cr>", mode = "v" },
+			{ "<C-_>", ":CommentToggle<CR>", silent = true },
+			{ "<C-_>", ":'<,'>CommentToggle<CR>", mode = "v", silent = true },
 		},
 	},
 	{ "echasnovski/mini.surround", config = true, event = LazyFile },
@@ -200,7 +198,7 @@ require("lazy").setup({
 		"Wansmer/treesj",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = { use_default_keymaps = false },
-		keys = { { "sj", "<cmd>TSJToggle<cr>" } },
+		keys = { { "sj", ":TSJToggle<CR>", silent = true } },
 	},
 	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
 
@@ -215,35 +213,26 @@ require("lazy").setup({
 			require("mason-lspconfig").setup_handlers({
 				function(server)
 					local options = {
-						capabilities = require("cmp_nvim_lsp").default_capabilities(
-							vim.lsp.protocol.make_client_capabilities()
-						),
 						on_attach = function(_, bufnr)
-							local buf_opts = vim.list_extend({ buffer = bufnr }, keymap_opts)
+							local keymap_opts = { buffer = bufnr, silent = true }
 
-							vim.keymap.set("n", "R", vim.lsp.buf.rename, buf_opts)
-							vim.keymap.set("n", "K", vim.lsp.buf.hover, buf_opts)
-							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", buf_opts)
-							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", buf_opts)
-							-- Use `glance.nvim` for LSP definition and references
-							-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, buf_opts)
-							-- vim.keymap.set("n", "gr", vim.lsp.buf.references, buf_opts)
-							-- Use `conform.nvim` for formatting
-							-- vim.keymap.set("n", "<Space>f", function() vim.lsp.buf.format({ async = true }) end, buf_opts)
+							vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
+							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
+							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 
-							-- Show diagnostics only on CursorHold
+							-- Show diagnostics w/ border only on CursorHold
 							vim.diagnostic.config({
 								virtual_text = false,
 								severity_sort = true,
 								float = { focusable = false, border = "single" },
 							})
-							vim.lsp.handlers["textDocument/hover"] =
-								vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 							vim.api.nvim_create_autocmd("CursorHold", {
-								buffer = bufnr,
 								-- stylua: ignore
 								callback = function() vim.diagnostic.open_float({ bufnr }) end,
 							})
+							-- Apply border to hover
+							vim.lsp.handlers["textDocument/hover"] =
+								vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 						end,
 					}
 
@@ -282,8 +271,8 @@ require("lazy").setup({
 			})
 		end,
 		keys = {
-			{ "gd", "<cmd>Glance definitions<cr>" },
-			{ "gr", "<cmd>Glance references<cr>" },
+			{ "gd", ":Glance definitions<CR>", silent = true },
+			{ "gr", ":Glance references<CR>", silent = true },
 		},
 	},
 
@@ -297,62 +286,50 @@ require("lazy").setup({
 				["_"] = { "prettier" },
 			},
 		},
-		keys = { { "<Space>f", "<cmd>lua require('conform').format()<cr>" } },
+		keys = { { "<Space>f", ":lua require('conform').format()<CR>", silent = true } },
 	},
 
 	-- Completion
 	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp",
-			{
-				"zbirenbaum/copilot-cmp",
-				dependencies = {
-					{
-						"zbirenbaum/copilot.lua",
-						opts = {
-							suggestion = { enabled = false },
-							panel = { enabled = false },
-						},
-					},
+		"zbirenbaum/copilot.lua",
+		opts = {
+			suggestion = {
+				auto_trigger = true,
+				keymap = {
+					accept = "<c-CR>",
+					next = "<c-]>",
+					prev = "<c-[>",
+					dismiss = "<ESC>",
 				},
-				config = true,
 			},
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"onsails/lspkind.nvim",
-			"hrsh7th/vim-vsnip", -- Only for expanding snippet from LSP safely
+			panel = { enabled = false },
 		},
-		config = function()
-			local cmp = require("cmp")
-			cmp.setup({
+		init = function()
+			vim.api.nvim_create_autocmd("CompleteChanged", {
 				-- stylua: ignore
-				snippet = { expand = function(args) vim.fn["vsnip#anonymous"](args.body) end, },
-				sources = {
-					{ name = "copilot" },
-					{ name = "nvim_lsp_signature_help" },
-					{ name = "nvim_lsp" },
-					{ name = "path" },
-					{ name = "buffer" },
-				},
-				mapping = cmp.mapping.preset.insert({
-					-- stylua: ignore
-					["<Tab>"] = function(fallback) if cmp.visible() then cmp.select_next_item() else fallback() end end,
-					-- stylua: ignore
-					["<S-Tab>"] = function(fallback) if cmp.visible() then cmp.select_prev_item() else fallback() end end,
-					-- stylua: ignore
-					["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-				}),
-				formatting = {
-					format = require("lspkind").cmp_format({
-						mode = "symbol_text",
-						symbol_map = { Copilot = "" },
-					}),
-				},
+				callback = function() vim.b.copilot_suggestion_hidden = true end,
+			})
+			vim.api.nvim_create_autocmd("CompleteDone", {
+				-- stylua: ignore
+				callback = function() vim.b.copilot_suggestion_hidden = false end,
 			})
 		end,
 		event = "InsertEnter",
+	},
+	{
+		"echasnovski/mini.completion",
+		opts = {
+			-- Temporary disable due to layout conflict with `noice.nvim`'s popupmenu
+			delay = { info = 10 ^ 7 },
+			window = { signature = { border = "single" } },
+		},
+		init = function()
+			-- stylua: ignore
+			vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<Down>" : "\<Tab>"]], { expr = true, replace_keycodes = false })
+			-- stylua: ignore
+			vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<Up>" : "\<S-Tab>"]], { expr = true, replace_keycodes = false })
+		end,
+		-- Do not lazy load, just leave it to plugin
 	},
 }, {
 	checker = { enabled = true, frequency = 60 * 60 * 12 },
