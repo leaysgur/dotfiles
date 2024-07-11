@@ -319,9 +319,10 @@ require("lazy").setup({
 	{
 		"echasnovski/mini.completion",
 		opts = {
-			-- Temporary disable due to layout conflict with `noice.nvim`'s popupmenu
+			-- Disable due to layout conflict with `noice.nvim`'s popupmenu
 			delay = { info = 10 ^ 7 },
 			window = { signature = { border = "single" } },
+			lsp_completion = { source_func = "omnifunc" },
 		},
 		init = function()
 			-- stylua: ignore
