@@ -157,6 +157,8 @@ require("lazy").setup({
 		},
 		event = LazyFile,
 	},
+
+	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
@@ -215,7 +217,6 @@ require("lazy").setup({
 					local options = {
 						on_attach = function(_, bufnr)
 							local keymap_opts = { buffer = bufnr, silent = true }
-
 							vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
 							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
