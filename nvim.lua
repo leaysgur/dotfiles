@@ -117,7 +117,6 @@ require("lazy").setup({
 	},
 	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
 	{ "RRethy/vim-illuminate", event = LazyFile },
-	{ "andymass/vim-matchup", config = true, event = LazyFile },
 	{
 		"echasnovski/mini.animate",
 		config = function()
@@ -170,8 +169,12 @@ require("lazy").setup({
 				additional_vim_regex_highlighting = false,
 			},
 			indent = { enable = true },
-			-- Enhance `vim-matchup`
-			matchup = { enable = true },
+			-- Enable `nvim-treesitter-pairs`
+			pairs = {
+				enable = true,
+				fallback_cmd_normal = "normal! %",
+				keymaps = { goto_partner = "%" },
+			},
 		},
 		build = ":TSUpdate",
 		event = LazyFile,
@@ -179,6 +182,7 @@ require("lazy").setup({
 	{ "JoosepAlviste/nvim-ts-context-commentstring", opts = { enable_autocmd = false }, event = LazyFile },
 	{ "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 1 }, event = LazyFile },
 	{ "windwp/nvim-ts-autotag", config = true, event = LazyFile },
+	{ "theHamsta/nvim-treesitter-pairs", event = LazyFile },
 
 	-- Editors
 	{
