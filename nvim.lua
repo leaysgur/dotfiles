@@ -81,8 +81,6 @@ require("lazy").setup({
 		opts = {
 			close_if_last_window = true,
 			window = {
-				position = "right",
-				width = 50,
 				mappings = {
 					["<Space>"] = { "toggle_node", nowait = true },
 					["<C-s>"] = "open_split",
@@ -91,7 +89,6 @@ require("lazy").setup({
 			},
 			filesystem = {
 				filtered_items = { visible = true },
-				follow_current_file = { enabled = true, leave_dirs_open = true },
 				hijack_netrw_behavior = "open_current",
 			},
 		},
