@@ -6,6 +6,9 @@
   "theme": "Rosé Pine Moon",
   "ui_font_size": 12,
   "buffer_font_size": 14,
+  "buffer_font_features": {
+    "calt": false
+  },
   "show_whitespaces": "all",
   "soft_wrap": "editor_width",
   "tab_size": 2,
@@ -29,7 +32,7 @@
     "button": false
   },
   "assistant": {
-    "version": "1",
+    "version": "2",
     "button": false
   }
 }
