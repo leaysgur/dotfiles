@@ -17,6 +17,9 @@
     "quick_actions": false
   },
   "languages": {
+    "Markdown-Inline": {
+      "show_inline_completions": false
+    },
     "Markdown": {
       "formatter": "language_server",
       "show_inline_completions": false
