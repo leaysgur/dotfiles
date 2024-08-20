@@ -65,7 +65,12 @@ require("lazy").setup({
 	},
 	{
 		"petertriho/nvim-scrollbar",
-		opts = { excluded_filetypes = { "NvimTree", "Lazy", "Glance" } },
+		opts = {
+			show_in_active_only = true,
+			hide_if_all_visible = true,
+			excluded_filetypes = { "lazy", "mason" },
+			handlers = { handle = false },
+		},
 		event = LazyFile,
 	},
 	{ "echasnovski/mini.diff", config = true, event = LazyFile },
@@ -79,7 +84,6 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 		},
 		opts = {
-			close_if_last_window = true,
 			window = {
 				mappings = {
 					["<Space>"] = { "toggle_node", nowait = true },
@@ -141,11 +145,7 @@ require("lazy").setup({
 		},
 		event = LazyFile,
 	},
-	{
-		"mvllow/modes.nvim",
-		opts = { line_opacity = 0.4 },
-		event = LazyFile,
-	},
+	{ "mvllow/modes.nvim", config = true, event = LazyFile },
 	{
 		"NvChad/nvim-colorizer.lua",
 		opts = {
@@ -215,7 +215,7 @@ require("lazy").setup({
 		},
 		config = function()
 			require("mason-lspconfig").setup_handlers({
-				function(server)
+				function(server_name)
 					local options = {
 						on_attach = function(_, bufnr)
 							local keymap_opts = { buffer = bufnr, silent = true }
@@ -229,25 +229,20 @@ require("lazy").setup({
 								severity_sort = true,
 								float = { focusable = false, border = "single" },
 							})
-							vim.api.nvim_create_autocmd("CursorHold", {
-								-- stylua: ignore
-								callback = function() vim.diagnostic.open_float({ bufnr }) end,
-							})
+							-- stylua: ignore
+							vim.api.nvim_create_autocmd("CursorHold", { callback = function() vim.diagnostic.open_float({ bufnr }) end })
 							-- Apply border to hover
 							vim.lsp.handlers["textDocument/hover"] =
 								vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 						end,
+						settings = {
+							-- Suppress "Undefined global `vim`" warning
+							Lua = { diagnostics = { globals = { "vim" } } },
+							["rust-analyzer"] = { check = { command = "clippy" } },
+						},
 					}
 
-					if server == "lua_ls" then
-						-- Suppress "Undefined global `vim`" warning
-						options.settings = { Lua = { diagnostics = { globals = { "vim" } } } }
-					end
-					if server == "rust_analyzer" then
-						options.settings = { ["rust-analyzer"] = { check = { command = "clippy" } } }
-					end
-
-					require("lspconfig")[server].setup(options)
+					require("lspconfig")[server_name].setup(options)
 				end,
 			})
 		end,
@@ -308,14 +303,10 @@ require("lazy").setup({
 			panel = { enabled = false },
 		},
 		init = function()
-			vim.api.nvim_create_autocmd("CompleteChanged", {
-				-- stylua: ignore
-				callback = function() vim.b.copilot_suggestion_hidden = true end,
-			})
-			vim.api.nvim_create_autocmd("CompleteDone", {
-				-- stylua: ignore
-				callback = function() vim.b.copilot_suggestion_hidden = false end,
-			})
+			-- stylua: ignore
+			vim.api.nvim_create_autocmd("CompleteChanged", { callback = function() vim.b.copilot_suggestion_hidden = true end })
+			-- stylua: ignore
+			vim.api.nvim_create_autocmd("CompleteDone", { callback = function() vim.b.copilot_suggestion_hidden = false end })
 		end,
 		event = "InsertEnter",
 	},

@@ -7,7 +7,7 @@ return {
 
 	-- https://github.com/be5invis/Sarasa-Gothic
 	font = w.font("Sarasa Fixed J Light"),
-	font_size = 20,
+	font_size = 18,
 	adjust_window_size_when_changing_font_size = false,
 
 	initial_cols = 180,
