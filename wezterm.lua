@@ -10,8 +10,8 @@ return {
 	font_size = 18,
 	adjust_window_size_when_changing_font_size = false,
 
-	initial_cols = 180,
-	initial_rows = 50,
+	initial_cols = 240,
+	initial_rows = 56,
 
 	inactive_pane_hsb = { brightness = 0.3 },
 	hide_tab_bar_if_only_one_tab = true,
