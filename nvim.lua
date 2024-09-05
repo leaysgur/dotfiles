@@ -335,15 +335,15 @@ require("lazy").setup({
 				"shada",
 				"tutor",
 				"tohtml",
-				"matchit",
 				"man",
 				"osc52",
 				"rplugin",
 				"spellfile",
 				"tarPlugin",
 				"zipPlugin",
-				"matchparen",
 				"netrwPlugin",
+				-- "matchit", -- Make `%` works for HTML, etc
+				-- "matchparen", -- Highlight matching paren
 			},
 		},
 	},
