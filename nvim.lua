@@ -146,6 +146,7 @@ require("lazy").setup({
 		event = LazyFile,
 	},
 	{ "mvllow/modes.nvim", config = true, event = LazyFile },
+	{ "monkoose/matchparen.nvim", config = true, event = LazyFile },
 	{
 		"NvChad/nvim-colorizer.lua",
 		opts = {
@@ -343,7 +344,7 @@ require("lazy").setup({
 				"zipPlugin",
 				"netrwPlugin",
 				-- "matchit", -- Make `%` works for HTML, etc
-				-- "matchparen", -- Highlight matching paren
+				"matchparen",
 			},
 		},
 	},
