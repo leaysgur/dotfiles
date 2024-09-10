@@ -52,7 +52,7 @@ require("lazy").setup({
 		config = function() vim.cmd([[colorscheme monet]]) end,
 	},
 
-	-- Uis
+	-- UI/UX
 	{
 		"bluz71/nvim-linefly",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -73,31 +73,6 @@ require("lazy").setup({
 		},
 		event = LazyFile,
 	},
-	{ "echasnovski/mini.diff", config = true, event = LazyFile },
-	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons",
-		},
-		opts = {
-			window = {
-				mappings = {
-					["<Space>"] = { "toggle_node", nowait = true },
-					["<C-s>"] = "open_split",
-					["<C-v>"] = "open_vsplit",
-				},
-			},
-			filesystem = {
-				filtered_items = { visible = true },
-				hijack_netrw_behavior = "open_current",
-			},
-		},
-		-- To open directory like `netrw`, this plugin cannot be lazy loaded
-	},
 	{
 		"folke/noice.nvim",
 		version = "4.4.7", -- Until cursor blinking bug is fixed
@@ -110,15 +85,6 @@ require("lazy").setup({
 		},
 		event = "VeryLazy",
 	},
-
-	-- UX
-	{
-		"ibhagwan/smartyank.nvim",
-		opts = { highlight = { timeout = 80 } },
-		event = LazyFile,
-	},
-	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
-	{ "RRethy/vim-illuminate", event = LazyFile },
 	{
 		"echasnovski/mini.animate",
 		config = function()
@@ -145,8 +111,6 @@ require("lazy").setup({
 		},
 		event = LazyFile,
 	},
-	{ "mvllow/modes.nvim", config = true, event = LazyFile },
-	{ "monkoose/matchparen.nvim", config = true, event = LazyFile },
 	{
 		"NvChad/nvim-colorizer.lua",
 		opts = {
@@ -154,6 +118,40 @@ require("lazy").setup({
 			user_default_options = { css = true, mode = "virtualtext" },
 		},
 		event = LazyFile,
+	},
+	{
+		"ibhagwan/smartyank.nvim",
+		opts = { highlight = { timeout = 80 } },
+		event = LazyFile,
+	},
+	{ "echasnovski/mini.diff", config = true, event = LazyFile },
+	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
+	{ "RRethy/vim-illuminate", event = LazyFile },
+	{ "mvllow/modes.nvim", config = true, event = LazyFile },
+	{ "monkoose/matchparen.nvim", config = true, event = LazyFile },
+	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {
+			window = {
+				mappings = {
+					["<Space>"] = { "toggle_node", nowait = true },
+					["<C-s>"] = "open_split",
+					["<C-v>"] = "open_vsplit",
+				},
+			},
+			filesystem = {
+				filtered_items = { visible = true },
+				hijack_netrw_behavior = "open_current",
+			},
+		},
+		-- To open directory like `netrw`, this plugin cannot be lazy loaded
 	},
 
 	-- Treesitter
@@ -198,7 +196,6 @@ require("lazy").setup({
 			{ "<C-_>", ":'<,'>CommentToggle<CR>", mode = "v", silent = true },
 		},
 	},
-	{ "echasnovski/mini.surround", config = true, event = LazyFile },
 	{
 		"Wansmer/treesj",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -206,6 +203,7 @@ require("lazy").setup({
 		keys = { { "sj", ":TSJToggle<CR>", silent = true } },
 	},
 	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
+	{ "echasnovski/mini.surround", config = true, event = LazyFile },
 
 	-- LSP
 	{
