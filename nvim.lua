@@ -75,7 +75,6 @@ require("lazy").setup({
 	},
 	{
 		"folke/noice.nvim",
-		version = "4.4.7", -- Until cursor blinking bug is fixed
 		dependencies = { "MunifTanjim/nui.nvim" },
 		opts = {
 			lsp = {
