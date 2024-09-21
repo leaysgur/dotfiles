@@ -212,35 +212,44 @@ require("lazy").setup({
 			"williamboman/mason-lspconfig.nvim",
 		},
 		config = function()
+			local on_attach = function(_, bufnr)
+				local keymap_opts = { buffer = bufnr, silent = true }
+				vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
+				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
+				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
+
+				-- Show diagnostics w/ border only on CursorHold
+				vim.diagnostic.config({
+					virtual_text = false,
+					severity_sort = true,
+					float = { focusable = false, border = "single" },
+				})
+				-- stylua: ignore
+				vim.api.nvim_create_autocmd("CursorHold", { callback = function() vim.diagnostic.open_float({ bufnr }) end })
+				-- Apply border to hover
+				vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+			end
+
 			require("mason-lspconfig").setup_handlers({
 				function(server_name)
-					local options = {
-						on_attach = function(_, bufnr)
-							local keymap_opts = { buffer = bufnr, silent = true }
-							vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
-							vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
-							vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
-
-							-- Show diagnostics w/ border only on CursorHold
-							vim.diagnostic.config({
-								virtual_text = false,
-								severity_sort = true,
-								float = { focusable = false, border = "single" },
-							})
-							-- stylua: ignore
-							vim.api.nvim_create_autocmd("CursorHold", { callback = function() vim.diagnostic.open_float({ bufnr }) end })
-							-- Apply border to hover
-							vim.lsp.handlers["textDocument/hover"] =
-								vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-						end,
+					require("lspconfig")[server_name].setup({ on_attach = on_attach })
+				end,
+				lua_ls = function()
+					require("lspconfig").lua_ls.setup({
+						on_attach = on_attach,
 						settings = {
 							-- Suppress "Undefined global `vim`" warning
 							Lua = { diagnostics = { globals = { "vim" } } },
-							["rust-analyzer"] = { check = { command = "clippy" } },
 						},
-					}
-
-					require("lspconfig")[server_name].setup(options)
+					})
+				end,
+				rust_analyzer = function()
+					require("lspconfig").rust_analyzer.setup({
+						on_attach = on_attach,
+						settings = {
+							["rust-analyzer"] = { checkOnSave = { command = "clippy" } },
+						},
+					})
 				end,
 			})
 		end,
