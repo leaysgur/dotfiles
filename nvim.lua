@@ -48,8 +48,12 @@ require("lazy").setup({
 		name = "monet",
 		lazy = false,
 		priority = 1000,
-		-- stylua: ignore
-		config = function() vim.cmd([[colorscheme monet]]) end,
+		config = function()
+			vim.cmd([[colorscheme monet]])
+			-- For `indentmini.nvim`
+			vim.api.nvim_set_hl(0, "IndentLine", { link = "WinSeparator" })
+			vim.api.nvim_set_hl(0, "IndentLineCurrent", { link = "WarningMsg" })
+		end,
 	},
 
 	-- UI/UX
@@ -102,14 +106,7 @@ require("lazy").setup({
 		end,
 		event = LazyFile,
 	},
-	{
-		"shellRaining/hlchunk.nvim",
-		opts = {
-			chunk = { enable = true },
-			indent = { enable = true },
-		},
-		event = LazyFile,
-	},
+	{ "nvimdev/indentmini.nvim", config = true, event = LazyFile },
 	{
 		"NvChad/nvim-colorizer.lua",
 		opts = {
