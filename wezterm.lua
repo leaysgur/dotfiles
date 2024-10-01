@@ -4,8 +4,8 @@ return {
 	color_scheme = "Ayu Mirage",
 	window_background_opacity = 0.7,
 	text_background_opacity = 0.5,
-	macos_window_background_blur = 20,
-	inactive_pane_hsb = { brightness = 0.3 },
+	macos_window_background_blur = 50,
+	inactive_pane_hsb = { brightness = 0.4 },
 
 	-- https://github.com/be5invis/Sarasa-Gothic
 	font = w.font("Sarasa Fixed J Light"),
