@@ -1,9 +1,5 @@
 {
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
-  },
-  "theme": "Rosé Pine Moon",
+  "theme": "Aylin",
   "ui_font_size": 12,
   "buffer_font_size": 14,
   "buffer_font_features": {
@@ -12,10 +8,7 @@
   "show_whitespaces": "all",
   "soft_wrap": "editor_width",
   "tab_size": 2,
-  "toolbar": {
-    "breadcrumbs": false,
-    "quick_actions": false
-  },
+
   "languages": {
     "Markdown-Inline": {
       "show_inline_completions": false
@@ -24,6 +17,11 @@
       "formatter": "language_server",
       "show_inline_completions": false
     }
+  },
+
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false
   },
   "collaboration_panel": {
     "button": false
@@ -37,5 +35,13 @@
   "assistant": {
     "version": "2",
     "button": false
+  },
+  "terminal": {
+    "button": false
+  },
+
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
   }
 }
