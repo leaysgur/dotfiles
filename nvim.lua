@@ -52,7 +52,7 @@ require("lazy").setup({
 			vim.cmd([[colorscheme monet]])
 			-- For `indentmini.nvim`
 			vim.api.nvim_set_hl(0, "IndentLine", { link = "WinSeparator" })
-			vim.api.nvim_set_hl(0, "IndentLineCurrent", { link = "WarningMsg" })
+			vim.api.nvim_set_hl(0, "IndentLineCurrent", { link = "StatusLine" })
 		end,
 	},
 
@@ -98,7 +98,7 @@ require("lazy").setup({
 				close = { enable = false },
 				resize = { timing = animate.gen_timing.linear({ duration = 16, unit = "total" }) },
 				cursor = {
-					timing = animate.gen_timing.exponential({ easing = "out", duration = 80, unit = "total" }),
+					timing = animate.gen_timing.exponential({ easing = "out", duration = 160, unit = "total" }),
 					-- stylua: ignore
 					path = animate.gen_path.line({ predicate = function() return true end }),
 				},
@@ -121,8 +121,8 @@ require("lazy").setup({
 		event = LazyFile,
 	},
 	{ "echasnovski/mini.diff", config = true, event = LazyFile },
-	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
 	{ "RRethy/vim-illuminate", event = LazyFile },
+	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
 	{ "mvllow/modes.nvim", config = true, event = LazyFile },
 	{ "monkoose/matchparen.nvim", config = true, event = LazyFile },
 	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
@@ -194,7 +194,6 @@ require("lazy").setup({
 	},
 	{
 		"Wansmer/treesj",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = { use_default_keymaps = false },
 		keys = { { "sj", ":TSJToggle<CR>", silent = true } },
 	},
@@ -222,7 +221,7 @@ require("lazy").setup({
 					float = { focusable = false, border = "single" },
 				})
 				-- stylua: ignore
-				vim.api.nvim_create_autocmd("CursorHold", { callback = function() vim.diagnostic.open_float({ bufnr }) end })
+				vim.api.nvim_create_autocmd("CursorHold", { callback = function() vim.diagnostic.open_float({ bufnr = bufnr }) end })
 				-- Apply border to hover
 				vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 			end
@@ -244,7 +243,7 @@ require("lazy").setup({
 					require("lspconfig").rust_analyzer.setup({
 						on_attach = on_attach,
 						settings = {
-							["rust-analyzer"] = { checkOnSave = { command = "clippy" } },
+							["rust-analyzer"] = { check = { command = "clippy" } },
 						},
 					})
 				end,
@@ -319,6 +318,8 @@ require("lazy").setup({
 		opts = {
 			-- Disable due to layout conflict with `noice.nvim`'s popupmenu
 			delay = { info = 10 ^ 7 },
+			-- For now, nvim does not have API for, it is impossible to add border to completion window
+			-- https://github.com/echasnovski/mini.nvim/issues/741
 			window = { signature = { border = "single" } },
 			lsp_completion = { source_func = "omnifunc" },
 		},
