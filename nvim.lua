@@ -1,3 +1,5 @@
+-- NOTE: This setup requires 0.11 <= nvim, nightly for now
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -55,11 +57,19 @@ require("lazy").setup({
 			vim.api.nvim_set_hl(0, "IndentLineCurrent", { link = "StatusLine" })
 		end,
 	},
+	{
+		"echasnovski/mini.icons",
+		config = function()
+			require("mini.icons").setup()
+			require("mini.icons").tweak_lsp_kind()
+			require("mini.icons").mock_nvim_web_devicons()
+		end,
+		event = "VeryLazy",
+	},
 
 	-- UI/UX
 	{
 		"bluz71/nvim-linefly",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		-- Do not lazy load, just leave it to plugin
 	},
 	{
@@ -85,6 +95,7 @@ require("lazy").setup({
 				hover = { enabled = false }, -- Use default LSP
 				signature = { enabled = false }, -- Use `mini.completion`
 			},
+			popupmenu = { enabled = false }, -- Conflicts with `mini.completion`...
 		},
 		event = "VeryLazy",
 	},
@@ -132,7 +143,6 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons",
 		},
 		opts = {
 			window = {
@@ -316,11 +326,9 @@ require("lazy").setup({
 	{
 		"echasnovski/mini.completion",
 		opts = {
-			-- Disable due to layout conflict with `noice.nvim`'s popupmenu
-			delay = { info = 10 ^ 7 },
-			-- For now, nvim does not have API for, it is impossible to add border to completion window
+			-- Since Nvim does not have API for it, add border to completion is impossible
 			-- https://github.com/echasnovski/mini.nvim/issues/741
-			window = { signature = { border = "single" } },
+			window = { info = { border = "single" }, signature = { border = "single" } },
 			lsp_completion = { source_func = "omnifunc" },
 		},
 		init = function()
