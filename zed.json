@@ -1,5 +1,5 @@
 {
-  "theme": "Aylin",
+  "theme": "Halcyon",
   "ui_font_size": 12,
   "buffer_font_size": 14,
   "buffer_font_features": {
@@ -19,6 +19,11 @@
     }
   },
 
+  "gutter": {
+    "code_actions": false,
+    "folds": false,
+    "runnables": false
+  },
   "toolbar": {
     "breadcrumbs": false,
     "quick_actions": false
