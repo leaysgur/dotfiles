@@ -55,6 +55,9 @@ require("lazy").setup({
 			-- For `indentmini.nvim`
 			vim.api.nvim_set_hl(0, "IndentLine", { link = "WinSeparator" })
 			vim.api.nvim_set_hl(0, "IndentLineCurrent", { link = "StatusLine" })
+			-- For vim.diagnostic
+			vim.api.nvim_set_hl(0, "DiagnosticErrorLine", { link = "ModesDelete" })
+			vim.api.nvim_set_hl(0, "DiagnosticWarnLine", { link = "ModesCopy" })
 		end,
 	},
 	{
@@ -229,6 +232,12 @@ require("lazy").setup({
 					virtual_text = false,
 					severity_sort = true,
 					float = { focusable = false, border = "single" },
+					signs = {
+						linehl = {
+							[vim.diagnostic.severity.ERROR] = "DiagnosticErrorLine",
+							[vim.diagnostic.severity.WARN] = "DiagnosticWarnLine",
+						},
+					},
 				})
 				-- stylua: ignore
 				vim.api.nvim_create_autocmd("CursorHold", { callback = function() vim.diagnostic.open_float({ bufnr = bufnr }) end })
