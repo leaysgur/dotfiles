@@ -52,9 +52,6 @@ require("lazy").setup({
 		priority = 1000,
 		config = function()
 			vim.cmd([[colorscheme monet]])
-			-- For `indentmini.nvim`
-			vim.api.nvim_set_hl(0, "IndentLine", { link = "WinSeparator" })
-			vim.api.nvim_set_hl(0, "IndentLineCurrent", { link = "StatusLine" })
 			-- For vim.diagnostic
 			vim.api.nvim_set_hl(0, "DiagnosticErrorLine", { link = "ModesDelete" })
 			vim.api.nvim_set_hl(0, "DiagnosticWarnLine", { link = "ModesCopy" })
@@ -120,7 +117,15 @@ require("lazy").setup({
 		end,
 		event = LazyFile,
 	},
-	{ "nvimdev/indentmini.nvim", config = true, event = LazyFile },
+	{
+		"Saghen/blink.indent",
+		main = "blink.indent",
+		opts = {
+			static = { char = "│" },
+			scope = { char = "│", highlights = { "BlinkIndentBlue" } },
+		},
+		-- Do not lazy load, just leave it to plugin
+	},
 	{
 		"NvChad/nvim-colorizer.lua",
 		opts = {
