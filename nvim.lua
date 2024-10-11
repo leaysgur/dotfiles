@@ -52,9 +52,6 @@ require("lazy").setup({
 		priority = 1000,
 		config = function()
 			vim.cmd([[colorscheme monet]])
-			-- For vim.diagnostic
-			vim.api.nvim_set_hl(0, "DiagnosticErrorLine", { link = "ModesDelete" })
-			vim.api.nvim_set_hl(0, "DiagnosticWarnLine", { link = "ModesCopy" })
 		end,
 	},
 	{
@@ -238,9 +235,11 @@ require("lazy").setup({
 					severity_sort = true,
 					float = { focusable = false, border = "single" },
 					signs = {
-						linehl = {
-							[vim.diagnostic.severity.ERROR] = "DiagnosticErrorLine",
-							[vim.diagnostic.severity.WARN] = "DiagnosticWarnLine",
+						text = {
+							[vim.diagnostic.severity.ERROR] = "",
+							[vim.diagnostic.severity.WARN] = "",
+							[vim.diagnostic.severity.INFO] = "",
+							[vim.diagnostic.severity.HINT] = "",
 						},
 					},
 				})
