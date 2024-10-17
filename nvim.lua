@@ -1,5 +1,3 @@
--- NOTE: This setup requires 0.11 <= nvim, nightly for now
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -54,19 +52,11 @@ require("lazy").setup({
 			vim.cmd([[colorscheme monet]])
 		end,
 	},
-	{
-		"echasnovski/mini.icons",
-		config = function()
-			require("mini.icons").setup()
-			require("mini.icons").tweak_lsp_kind()
-			require("mini.icons").mock_nvim_web_devicons()
-		end,
-		event = "VeryLazy",
-	},
 
 	-- UI/UX
 	{
 		"bluz71/nvim-linefly",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		-- Do not lazy load, just leave it to plugin
 	},
 	{
@@ -90,9 +80,8 @@ require("lazy").setup({
 		opts = {
 			lsp = {
 				hover = { enabled = false }, -- Use default LSP
-				signature = { enabled = false }, -- Use `mini.completion`
+				signature = { enabled = false }, -- Use `blink.cmp`
 			},
-			popupmenu = { enabled = false }, -- Conflicts with `mini.completion`...
 		},
 		event = "VeryLazy",
 	},
@@ -146,6 +135,7 @@ require("lazy").setup({
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
 		dependencies = {
+			"nvim-tree/nvim-web-devicons",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 		},
@@ -229,24 +219,13 @@ require("lazy").setup({
 				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 
-				-- Show diagnostics w/ border only on CursorHold
+				-- Show diagnostic only on CursorHold
 				vim.diagnostic.config({
 					virtual_text = false,
 					severity_sort = true,
-					float = { focusable = false, border = "single" },
-					signs = {
-						text = {
-							[vim.diagnostic.severity.ERROR] = "",
-							[vim.diagnostic.severity.WARN] = "",
-							[vim.diagnostic.severity.INFO] = "",
-							[vim.diagnostic.severity.HINT] = "",
-						},
-					},
 				})
 				-- stylua: ignore
 				vim.api.nvim_create_autocmd("CursorHold", { callback = function() vim.diagnostic.open_float({ bufnr = bufnr }) end })
-				-- Apply border to hover
-				vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 			end
 
 			require("mason-lspconfig").setup_handlers({
@@ -266,7 +245,7 @@ require("lazy").setup({
 					require("lspconfig").rust_analyzer.setup({
 						on_attach = on_attach,
 						settings = {
-							["rust-analyzer"] = { check = { command = "clippy" } },
+							-- ["rust-analyzer"] = { check = { command = "clippy" } },
 						},
 					})
 				end,
@@ -328,28 +307,22 @@ require("lazy").setup({
 			},
 			panel = { enabled = false },
 		},
-		init = function()
-			-- stylua: ignore
-			vim.api.nvim_create_autocmd("CompleteChanged", { callback = function() vim.b.copilot_suggestion_hidden = true end })
-			-- stylua: ignore
-			vim.api.nvim_create_autocmd("CompleteDone", { callback = function() vim.b.copilot_suggestion_hidden = false end })
-		end,
 		event = "InsertEnter",
 	},
 	{
-		"echasnovski/mini.completion",
+		"saghen/blink.cmp",
+		version = "v0.*",
 		opts = {
-			-- Since Nvim does not have API for it, add border to completion is impossible
-			-- https://github.com/echasnovski/mini.nvim/issues/741
-			window = { info = { border = "single" }, signature = { border = "single" } },
-			lsp_completion = { source_func = "omnifunc" },
+			keymap = {
+				-- hide = "<ESC>", -- TODO: Breaks global keymap...
+				accept = "<CR>",
+				select_prev = { "<Up>", "<S-Tab>" },
+				select_next = { "<Down>", "<Tab>" },
+			},
+			trigger = { signature_help = { enabled = true } },
+			windows = { autocomplete = { selection = "manual" } },
+			-- TODO: How to close copilot suggestion on_open?
 		},
-		init = function()
-			-- stylua: ignore
-			vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<Down>" : "\<Tab>"]], { expr = true, replace_keycodes = false })
-			-- stylua: ignore
-			vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<Up>" : "\<S-Tab>"]], { expr = true, replace_keycodes = false })
-		end,
 		-- Do not lazy load, just leave it to plugin
 	},
 }, {
