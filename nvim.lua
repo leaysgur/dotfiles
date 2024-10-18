@@ -223,6 +223,7 @@ require("lazy").setup({
 				vim.diagnostic.config({
 					virtual_text = false,
 					severity_sort = true,
+					float = { focusable = false },
 				})
 				-- stylua: ignore
 				vim.api.nvim_create_autocmd("CursorHold", { callback = function() vim.diagnostic.open_float({ bufnr = bufnr }) end })
