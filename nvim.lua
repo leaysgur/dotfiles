@@ -315,8 +315,8 @@ require("lazy").setup({
 		version = "v0.*",
 		opts = {
 			keymap = {
-				-- ["<ESC>"] = { "hide" }, -- TODO: Breaks global keymap...
-				["<CR>"] = { "accept" },
+				-- ["<ESC>"] = { "hide", "fallback" }, -- TODO: Breaks global keymap...
+				["<CR>"] = { "accept", "fallback" },
 				["<Tab>"] = { "select_next", "fallback" },
 				["<Down>"] = { "select_next", "fallback" },
 				["<S-Tab>"] = { "select_prev", "fallback" },
