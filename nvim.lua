@@ -315,10 +315,12 @@ require("lazy").setup({
 		version = "v0.*",
 		opts = {
 			keymap = {
-				-- hide = "<ESC>", -- TODO: Breaks global keymap...
-				accept = "<CR>",
-				select_prev = { "<Up>", "<S-Tab>" },
-				select_next = { "<Down>", "<Tab>" },
+				-- ["<ESC>"] = { "hide" }, -- TODO: Breaks global keymap...
+				["<CR>"] = { "accept" },
+				["<Tab>"] = { "select_next", "fallback" },
+				["<Down>"] = { "select_next", "fallback" },
+				["<S-Tab>"] = { "select_prev", "fallback" },
+				["<Up>"] = { "select_prev", "fallback" },
 			},
 			trigger = { signature_help = { enabled = true } },
 			windows = { autocomplete = { selection = "manual" } },
