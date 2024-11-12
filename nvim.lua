@@ -219,12 +219,6 @@ require("lazy").setup({
 				vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
 				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
-
-				vim.diagnostic.config({
-					-- Use `diagflow.nvim`
-					virtual_text = false,
-					severity_sort = true,
-				})
 			end
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
@@ -257,7 +251,7 @@ require("lazy").setup({
 	},
 	{
 		"dgagn/diagflow.nvim",
-		opts = { scope = "line", text_align = "left" },
+		opts = { max_width = 80, scope = "line" },
 		event = "LspAttach",
 	},
 	{
