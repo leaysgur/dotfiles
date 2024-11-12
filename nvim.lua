@@ -211,6 +211,8 @@ require("lazy").setup({
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true },
 			"williamboman/mason-lspconfig.nvim",
+			"saghen/blink.cmp",
+			{ "https://git.sr.ht/~whynothugo/lsp_lines.nvim", config = true },
 		},
 		config = function()
 			local on_attach = function(_, bufnr)
@@ -219,23 +221,23 @@ require("lazy").setup({
 				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 
-				-- Show diagnostic only on CursorHold
 				vim.diagnostic.config({
+					-- Use `lsp_lines`
 					virtual_text = false,
+					virtual_lines = { only_current_line = true },
 					severity_sort = true,
-					float = { focusable = false },
 				})
-				-- stylua: ignore
-				vim.api.nvim_create_autocmd("CursorHold", { callback = function() vim.diagnostic.open_float({ bufnr = bufnr }) end })
 			end
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			require("mason-lspconfig").setup_handlers({
 				function(server_name)
-					require("lspconfig")[server_name].setup({ on_attach = on_attach })
+					require("lspconfig")[server_name].setup({ on_attach = on_attach, capabilities = capabilities })
 				end,
 				lua_ls = function()
 					require("lspconfig").lua_ls.setup({
 						on_attach = on_attach,
+						capabilities = capabilities,
 						settings = {
 							-- Suppress "Undefined global `vim`" warning
 							Lua = { diagnostics = { globals = { "vim" } } },
@@ -245,6 +247,7 @@ require("lazy").setup({
 				rust_analyzer = function()
 					require("lspconfig").rust_analyzer.setup({
 						on_attach = on_attach,
+						capabilities = capabilities,
 						settings = {
 							-- ["rust-analyzer"] = { check = { command = "clippy" } },
 						},
