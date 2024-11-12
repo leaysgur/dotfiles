@@ -212,7 +212,6 @@ require("lazy").setup({
 			{ "williamboman/mason.nvim", config = true },
 			"williamboman/mason-lspconfig.nvim",
 			"saghen/blink.cmp",
-			{ "https://git.sr.ht/~whynothugo/lsp_lines.nvim", config = true },
 		},
 		config = function()
 			local on_attach = function(_, bufnr)
@@ -222,9 +221,8 @@ require("lazy").setup({
 				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 
 				vim.diagnostic.config({
-					-- Use `lsp_lines`
+					-- Use `diagflow.nvim`
 					virtual_text = false,
-					virtual_lines = { only_current_line = true },
 					severity_sort = true,
 				})
 			end
@@ -256,6 +254,11 @@ require("lazy").setup({
 			})
 		end,
 		event = LazyFile,
+	},
+	{
+		"dgagn/diagflow.nvim",
+		opts = { scope = "line", text_align = "left" },
+		event = "LspAttach",
 	},
 	{
 		"dnlhc/glance.nvim",
