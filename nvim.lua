@@ -219,6 +219,8 @@ require("lazy").setup({
 				vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
 				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
+				-- Use `tiny-inline-diagnostic` instead
+				vim.diagnostic.config({ virtual_text = false })
 			end
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
@@ -250,9 +252,9 @@ require("lazy").setup({
 		event = LazyFile,
 	},
 	{
-		"dgagn/diagflow.nvim",
-		opts = { max_width = 80, scope = "line" },
-		event = "LspAttach",
+		"rachartier/tiny-inline-diagnostic.nvim",
+		opts = { options = { show_source = true } },
+		event = "VeryLazy",
 	},
 	{
 		"dnlhc/glance.nvim",
