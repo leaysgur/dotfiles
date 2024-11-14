@@ -253,7 +253,10 @@ require("lazy").setup({
 	},
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
-		opts = { options = { show_source = true } },
+		opts = {
+			signs = { arrow = "", up_arrow = "" }, -- Arrow is useless unless column pos is supported
+			options = { show_source = true },
+		},
 		event = "VeryLazy",
 	},
 	{
