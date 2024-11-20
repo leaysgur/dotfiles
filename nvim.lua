@@ -59,11 +59,7 @@ require("lazy").setup({
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		-- Do not lazy load, just leave it to plugin
 	},
-	{
-		"b0o/incline.nvim",
-		opts = { hide = { only_win = true, focused_win = true } },
-		event = LazyFile,
-	},
+	{ "b0o/incline.nvim", config = true, event = LazyFile },
 	{
 		"petertriho/nvim-scrollbar",
 		opts = {
@@ -90,9 +86,9 @@ require("lazy").setup({
 		config = function()
 			local animate = require("mini.animate")
 			animate.setup({
-				scroll = { enable = false },
 				open = { enable = false },
 				close = { enable = false },
+				scroll = { timing = animate.gen_timing.linear({ duration = 16, unit = "total" }) },
 				resize = { timing = animate.gen_timing.linear({ duration = 16, unit = "total" }) },
 				cursor = {
 					timing = animate.gen_timing.exponential({ easing = "out", duration = 160, unit = "total" }),
@@ -116,7 +112,7 @@ require("lazy").setup({
 		"NvChad/nvim-colorizer.lua",
 		opts = {
 			filetypes = { "*", "!lazy", "!mason", "!markdown" },
-			user_default_options = { css = true, mode = "virtualtext" },
+			user_default_options = { css = true, mode = "virtualtext", user_commands = false },
 		},
 		event = LazyFile,
 	},
