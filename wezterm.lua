@@ -29,5 +29,24 @@ return {
 		{ key = "]", mods = "SUPER", action = w.action({ ActivatePaneDirection = "Next" }) },
 	},
 
+	-- Disable the default click to open and requires SUPER+Click
+	mouse_bindings = {
+		{
+			event = { Up = { streak = 1, button = "Left" } },
+			mods = "NONE",
+			action = w.action.DisableDefaultAssignment,
+		},
+		{
+			event = { Up = { streak = 1, button = "Left" } },
+			mods = "SUPER",
+			action = w.action.OpenLinkAtMouseCursor,
+		},
+		{
+			event = { Down = { streak = 1, button = "Left" } },
+			mods = "SUPER",
+			action = w.action.Nop,
+		},
+	},
+
 	-- debug_key_events = true,
 }
