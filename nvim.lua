@@ -318,7 +318,9 @@ require("lazy").setup({
 	},
 	{
 		"saghen/blink.cmp",
-		version = "v0.*",
+		-- NOTE: Use `main` until `v0.5.2` is released
+		build = "cargo build --release",
+		-- version = "v0.*",
 		opts = {
 			keymap = {
 				-- ["<ESC>"] = { "hide", "fallback" }, -- TODO: Breaks global keymap...
