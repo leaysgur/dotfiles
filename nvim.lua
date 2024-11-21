@@ -112,7 +112,12 @@ require("lazy").setup({
 		"NvChad/nvim-colorizer.lua",
 		opts = {
 			filetypes = { "*", "!lazy", "!mason", "!markdown" },
-			user_default_options = { css = true, mode = "virtualtext", user_commands = false },
+			user_default_options = {
+				css = true,
+				mode = "virtualtext",
+				virtualtext_inline = true,
+				user_commands = false,
+			},
 		},
 		event = LazyFile,
 	},
