@@ -1,14 +1,14 @@
 local w = require("wezterm")
 
 return {
-	color_scheme = "Ayu Mirage",
-	window_background_opacity = 0.7,
+	color_scheme = "Oceanic-Next",
+	window_background_opacity = 0.8,
 	text_background_opacity = 0.5,
-	macos_window_background_blur = 50,
-	inactive_pane_hsb = { brightness = 0.4 },
+	macos_window_background_blur = 80,
+	inactive_pane_hsb = { brightness = 0.5 },
 
 	-- https://github.com/be5invis/Sarasa-Gothic
-	font = w.font("Sarasa Fixed J Light"),
+	font = w.font("Sarasa Fixed J", { weight = "Light" }),
 	font_size = 18,
 	adjust_window_size_when_changing_font_size = false,
 

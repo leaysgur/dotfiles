@@ -46,11 +46,10 @@ require("lazy").setup({
 	{
 		"fynnfluegge/monet.nvim",
 		name = "monet",
-		lazy = false,
 		priority = 1000,
-		config = function()
-			vim.cmd([[colorscheme monet]])
-		end,
+		opts = { transparent_background = true },
+		--stylua: ignore
+		init = function() vim.cmd([[colorscheme monet]]) end,
 	},
 
 	-- UI/UX
