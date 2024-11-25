@@ -221,7 +221,7 @@ require("lazy").setup({
 				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 				-- Use `tiny-inline-diagnostic` instead
-				vim.diagnostic.config({ virtual_text = false })
+				vim.diagnostic.config({ virtual_text = false, sevirity_sort = true })
 			end
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
