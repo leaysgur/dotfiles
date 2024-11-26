@@ -39,7 +39,8 @@
   },
   "assistant": {
     "version": "2",
-    "button": false
+    "button": false,
+    "show_hints": false
   },
   "terminal": {
     "button": false
