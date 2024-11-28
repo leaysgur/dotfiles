@@ -81,24 +81,6 @@ require("lazy").setup({
 		event = "VeryLazy",
 	},
 	{
-		"echasnovski/mini.animate",
-		config = function()
-			local animate = require("mini.animate")
-			animate.setup({
-				open = { enable = false },
-				close = { enable = false },
-				scroll = { timing = animate.gen_timing.linear({ duration = 16, unit = "total" }) },
-				resize = { timing = animate.gen_timing.linear({ duration = 16, unit = "total" }) },
-				cursor = {
-					timing = animate.gen_timing.exponential({ easing = "out", duration = 160, unit = "total" }),
-					-- stylua: ignore
-					path = animate.gen_path.line({ predicate = function() return true end }),
-				},
-			})
-		end,
-		event = LazyFile,
-	},
-	{
 		"Saghen/blink.indent",
 		main = "blink.indent",
 		opts = {
@@ -123,6 +105,11 @@ require("lazy").setup({
 	{
 		"ibhagwan/smartyank.nvim",
 		opts = { highlight = { timeout = 80 } },
+		event = LazyFile,
+	},
+	{
+		"sphamba/smear-cursor.nvim",
+		opts = { color_levels = 8, gamma = 4 },
 		event = LazyFile,
 	},
 	{ "echasnovski/mini.diff", config = true, event = LazyFile },
