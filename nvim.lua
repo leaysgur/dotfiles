@@ -58,7 +58,11 @@ require("lazy").setup({
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		-- Do not lazy load, just leave it to plugin
 	},
-	{ "b0o/incline.nvim", config = true, event = LazyFile },
+	{
+		"b0o/incline.nvim",
+		opts = { hide = { cursorline = true } },
+		event = LazyFile,
+	},
 	{
 		"petertriho/nvim-scrollbar",
 		opts = {
