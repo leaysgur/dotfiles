@@ -304,20 +304,17 @@ require("lazy").setup({
 	},
 	{
 		"saghen/blink.cmp",
-		-- NOTE: Use `main` until `v0.5.2` is released
 		build = "cargo build --release",
-		-- version = "v0.*",
 		opts = {
 			keymap = {
-				-- ["<ESC>"] = { "hide", "fallback" }, -- TODO: Breaks global keymap...
 				["<CR>"] = { "accept", "fallback" },
 				["<Tab>"] = { "select_next", "fallback" },
 				["<Down>"] = { "select_next", "fallback" },
 				["<S-Tab>"] = { "select_prev", "fallback" },
 				["<Up>"] = { "select_prev", "fallback" },
 			},
-			trigger = { signature_help = { enabled = true } },
-			windows = { autocomplete = { selection = "manual" } },
+			signature = { enabled = true },
+			completion = { list = { selection = "manual" } },
 			-- TODO: How to close copilot suggestion on_open?
 		},
 		-- Do not lazy load, just leave it to plugin
