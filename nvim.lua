@@ -245,6 +245,7 @@ require("lazy").setup({
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
 		opts = {
+			preset = "nonerdfont",
 			signs = { arrow = "", up_arrow = "" }, -- Arrow is useless unless column pos is supported
 			options = { show_source = true },
 		},
