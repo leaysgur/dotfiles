@@ -58,10 +58,7 @@ require("lazy").setup({
 	},
 
 	-- UI/UX
-	{
-		"bluz71/nvim-linefly",
-		-- Do not lazy load, just leave it to plugin
-	},
+	{ "bluz71/nvim-linefly", }, -- Do not lazy load, just leave it to plugin
 	{
 		"b0o/incline.nvim",
 		opts = { hide = { cursorline = true } },
@@ -323,7 +320,6 @@ require("lazy").setup({
 			},
 			signature = { enabled = true },
 			completion = { list = { selection = "manual" } },
-			-- TODO: How to close copilot suggestion on_open?
 		},
 		-- Do not lazy load, just leave it to plugin
 	},
