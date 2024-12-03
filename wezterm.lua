@@ -3,8 +3,8 @@ local w = require("wezterm")
 return {
 	color_scheme = "Oceanic-Next",
 	window_background_opacity = 0.8,
-	text_background_opacity = 0.5,
-	macos_window_background_blur = 80,
+	text_background_opacity = 0.7,
+	macos_window_background_blur = 20,
 	inactive_pane_hsb = { brightness = 0.5 },
 
 	-- https://github.com/be5invis/Sarasa-Gothic
