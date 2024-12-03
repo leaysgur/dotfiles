@@ -45,17 +45,21 @@ require("lazy").setup({
 	-- Theme
 	{
 		"fynnfluegge/monet.nvim",
-		name = "monet",
 		priority = 1000,
 		opts = { transparent_background = true },
 		--stylua: ignore
 		init = function() vim.cmd([[colorscheme monet]]) end,
 	},
+	{
+		"echasnovski/mini.icons",
+		config = true,
+		--stylua: ignore
+		init = function() require("mini.icons").mock_nvim_web_devicons() end,
+	},
 
 	-- UI/UX
 	{
 		"bluz71/nvim-linefly",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		-- Do not lazy load, just leave it to plugin
 	},
 	{
@@ -126,7 +130,6 @@ require("lazy").setup({
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
 		dependencies = {
-			"nvim-tree/nvim-web-devicons",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 		},
