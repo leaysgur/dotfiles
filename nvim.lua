@@ -210,6 +210,8 @@ require("lazy").setup({
 				vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
 				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
+				vim.keymap.set("n", "m", vim.diagnostic.goto_next, keymap_opts)
+				vim.keymap.set("n", "M", vim.diagnostic.goto_prev, keymap_opts)
 				-- Use `tiny-inline-diagnostic` instead
 				vim.diagnostic.config({ virtual_text = false, sevirity_sort = true })
 			end
