@@ -16,6 +16,8 @@ vim.opt.listchars = { tab = "__" }
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 -- Use global status line
 vim.opt.laststatus = 3
+-- Use status line as cmd line
+vim.opt.cmdheight = 0
 -- Prefer soft tab
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
@@ -58,7 +60,16 @@ require("lazy").setup({
 	},
 
 	-- UI/UX
-	{ "bluz71/nvim-linefly", }, -- Do not lazy load, just leave it to plugin
+	{
+		"bluz71/nvim-linefly",
+		init = function()
+			vim.g.linefly_options = {
+				with_lsp_status = true,
+				with_search_count = true,
+			}
+		end,
+		-- Do not lazy load, just leave it to plugin
+	},
 	{
 		"b0o/incline.nvim",
 		opts = { hide = { cursorline = true } },
@@ -73,17 +84,6 @@ require("lazy").setup({
 			handlers = { handle = false },
 		},
 		event = LazyFile,
-	},
-	{
-		"folke/noice.nvim",
-		dependencies = { "MunifTanjim/nui.nvim" },
-		opts = {
-			lsp = {
-				hover = { enabled = false }, -- Use default LSP
-				signature = { enabled = false }, -- Use `blink.cmp`
-			},
-		},
-		event = "VeryLazy",
 	},
 	{
 		"Saghen/blink.indent",
