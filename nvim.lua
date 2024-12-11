@@ -76,16 +76,6 @@ require("lazy").setup({
 		event = LazyFile,
 	},
 	{
-		"petertriho/nvim-scrollbar",
-		opts = {
-			show_in_active_only = true,
-			hide_if_all_visible = true,
-			excluded_filetypes = { "lazy", "mason" },
-			handlers = { handle = false },
-		},
-		event = LazyFile,
-	},
-	{
 		"Saghen/blink.indent",
 		main = "blink.indent",
 		opts = {
@@ -117,9 +107,13 @@ require("lazy").setup({
 		opts = { color_levels = 8, gamma = 4 },
 		event = LazyFile,
 	},
+	{
+		"nvim-focus/focus.nvim",
+		opts = { commands = false },
+		event = LazyFile,
+	},
 	{ "echasnovski/mini.diff", config = true, event = LazyFile },
 	{ "RRethy/vim-illuminate", event = LazyFile },
-	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
 	{ "mvllow/modes.nvim", config = true, event = LazyFile },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -170,8 +164,6 @@ require("lazy").setup({
 	{ "nvim-treesitter/nvim-treesitter-context", opts = { max_lines = 1 }, event = LazyFile },
 	{ "windwp/nvim-ts-autotag", config = true, event = LazyFile },
 	{ "theHamsta/nvim-treesitter-pairs", event = LazyFile },
-
-	-- ## Editing
 	{
 		"terrortylor/nvim-comment",
 		main = "nvim_comment",
@@ -191,10 +183,39 @@ require("lazy").setup({
 		opts = { use_default_keymaps = false },
 		keys = { { "sj", ":TSJToggle<CR>", silent = true } },
 	},
-	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
+
+	-- ## Editing
+	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
 	{ "echasnovski/mini.surround", config = true, event = LazyFile },
 	{ "monkoose/matchparen.nvim", config = true, event = LazyFile },
-	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
+	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
+	{
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = {
+				lua = { "stylua" },
+				rust = { "rustfmt" },
+				["_"] = { "prettier" },
+			},
+		},
+		keys = { { "<Space>f", ":lua require('conform').format()<CR>", silent = true } },
+	},
+	{
+		"zbirenbaum/copilot.lua",
+		opts = {
+			suggestion = {
+				auto_trigger = true,
+				keymap = {
+					accept = "<c-CR>",
+					next = "<c-]>",
+					prev = "<c-[>",
+					dismiss = "<ESC>",
+				},
+			},
+			panel = { enabled = false },
+		},
+		event = "InsertEnter",
+	},
 
 	-- ## LSP
 	{
@@ -278,37 +299,6 @@ require("lazy").setup({
 			{ "gd", ":Glance definitions<CR>", silent = true },
 			{ "gr", ":Glance references<CR>", silent = true },
 		},
-	},
-
-	-- ## Formatter
-	{
-		"stevearc/conform.nvim",
-		opts = {
-			formatters_by_ft = {
-				lua = { "stylua" },
-				rust = { "rustfmt" },
-				["_"] = { "prettier" },
-			},
-		},
-		keys = { { "<Space>f", ":lua require('conform').format()<CR>", silent = true } },
-	},
-
-	-- ## Completion
-	{
-		"zbirenbaum/copilot.lua",
-		opts = {
-			suggestion = {
-				auto_trigger = true,
-				keymap = {
-					accept = "<c-CR>",
-					next = "<c-]>",
-					prev = "<c-[>",
-					dismiss = "<ESC>",
-				},
-			},
-			panel = { enabled = false },
-		},
-		event = "InsertEnter",
 	},
 	{
 		"saghen/blink.cmp",
