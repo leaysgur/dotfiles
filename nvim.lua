@@ -1,4 +1,4 @@
--- Bootstrap lazy.nvim
+-- # Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -6,9 +6,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- # Global options
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-
 -- Ui
 vim.opt.number = true
 vim.opt.list = true
@@ -28,23 +28,23 @@ vim.opt.smartcase = true
 -- Misc
 vim.opt.swapfile = false
 vim.opt.autochdir = true
-vim.opt.autoread = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 500
 
+-- # Keymaps
 -- Keep visual mode after indentation
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", { silent = true })
 
+-- # Setup plugins
 -- Event for buffer loaded
 -- See https://github.com/LazyVim/LazyVim/discussions/1583
 local LazyFile = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
--- Setup lazy.nvim
 require("lazy").setup({
-	-- Theme
+	-- ## Theme
 	{
 		"fynnfluegge/monet.nvim",
 		priority = 1000,
@@ -59,7 +59,7 @@ require("lazy").setup({
 		init = function() require("mini.icons").mock_nvim_web_devicons() end,
 	},
 
-	-- UI/UX
+	-- ## UI/UX
 	{
 		"bluz71/nvim-linefly",
 		init = function()
@@ -121,8 +121,6 @@ require("lazy").setup({
 	{ "RRethy/vim-illuminate", event = LazyFile },
 	{ "nvim-focus/focus.nvim", config = true, event = LazyFile },
 	{ "mvllow/modes.nvim", config = true, event = LazyFile },
-	{ "monkoose/matchparen.nvim", config = true, event = LazyFile },
-	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
@@ -146,7 +144,7 @@ require("lazy").setup({
 		-- To open directory like `netrw`, this plugin cannot be lazy loaded
 	},
 
-	-- Treesitter
+	-- ## Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
@@ -173,7 +171,7 @@ require("lazy").setup({
 	{ "windwp/nvim-ts-autotag", config = true, event = LazyFile },
 	{ "theHamsta/nvim-treesitter-pairs", event = LazyFile },
 
-	-- Editors
+	-- ## Editing
 	{
 		"terrortylor/nvim-comment",
 		main = "nvim_comment",
@@ -195,8 +193,10 @@ require("lazy").setup({
 	},
 	{ "windwp/nvim-autopairs", config = true, event = "InsertEnter" },
 	{ "echasnovski/mini.surround", config = true, event = LazyFile },
+	{ "monkoose/matchparen.nvim", config = true, event = LazyFile },
+	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
 
-	-- LSP
+	-- ## LSP
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -236,6 +236,7 @@ require("lazy").setup({
 						on_attach = on_attach,
 						capabilities = capabilities,
 						settings = {
+							-- Temporarily disable, it's too slow in large repo
 							-- ["rust-analyzer"] = { check = { command = "clippy" } },
 						},
 					})
@@ -248,7 +249,7 @@ require("lazy").setup({
 		"rachartier/tiny-inline-diagnostic.nvim",
 		opts = {
 			preset = "nonerdfont",
-			signs = { arrow = "", up_arrow = "" }, -- Arrow is useless unless column pos is supported
+			signs = { arrow = "", up_arrow = "" }, -- Arrows are useless because column pos is not supported
 			options = { show_source = true },
 		},
 		event = "VeryLazy",
@@ -279,7 +280,7 @@ require("lazy").setup({
 		},
 	},
 
-	-- Formatter
+	-- ## Formatter
 	{
 		"stevearc/conform.nvim",
 		opts = {
@@ -292,7 +293,7 @@ require("lazy").setup({
 		keys = { { "<Space>f", ":lua require('conform').format()<CR>", silent = true } },
 	},
 
-	-- Completion
+	-- ## Completion
 	{
 		"zbirenbaum/copilot.lua",
 		opts = {
