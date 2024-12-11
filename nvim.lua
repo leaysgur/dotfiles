@@ -311,8 +311,11 @@ require("lazy").setup({
 				["<S-Tab>"] = { "select_prev", "fallback" },
 				["<Up>"] = { "select_prev", "fallback" },
 			},
+			completion = {
+				list = { selection = "manual" },
+				documentation = { auto_show = true },
+			},
 			signature = { enabled = true },
-			completion = { list = { selection = "manual" } },
 		},
 		-- Do not lazy load, just leave it to plugin
 	},
