@@ -48,7 +48,6 @@ require("lazy").setup({
 	{
 		"fynnfluegge/monet.nvim",
 		priority = 1000,
-		opts = { transparent_background = true },
 		--stylua: ignore
 		init = function() vim.cmd([[colorscheme monet]]) end,
 	},
@@ -62,17 +61,19 @@ require("lazy").setup({
 	-- ## UI/UX
 	{
 		"bluz71/nvim-linefly",
-		init = function()
-			vim.g.linefly_options = {
+		--stylua: ignore
+		init = function() vim.g.linefly_options = {
 				with_lsp_status = true,
 				with_search_count = true,
-			}
-		end,
+		} end,
 		-- Do not lazy load, just leave it to plugin
 	},
 	{
 		"b0o/incline.nvim",
-		opts = { hide = { cursorline = true } },
+		opts = {
+			hide = { cursorline = true },
+			highlight = { groups = { InclineNormal = { default = true, group = "FloatShadow" } } },
+		},
 		event = LazyFile,
 	},
 	{
