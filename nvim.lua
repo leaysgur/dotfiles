@@ -314,7 +314,7 @@ require("lazy").setup({
 				["<Up>"] = { "select_prev", "fallback" },
 			},
 			completion = {
-				list = { selection = "manual" },
+				list = { selection = { preselect = false, auto_insert = false } },
 				documentation = { auto_show = true },
 			},
 			signature = { enabled = true },
