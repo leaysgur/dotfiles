@@ -185,6 +185,14 @@ require("lazy").setup({
 		opts = { use_default_keymaps = false },
 		keys = { { "sj", ":TSJToggle<CR>", silent = true } },
 	},
+	{
+		"aaronik/treewalker.nvim",
+		config = true,
+		keys = {
+			{ "<S-Up>", "<CMD>Treewalker Up<CR>", silent = true },
+			{ "<S-Down>", "<CMD>Treewalker Down<CR>", silent = true },
+		},
+	},
 
 	-- ## Editing
 	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
