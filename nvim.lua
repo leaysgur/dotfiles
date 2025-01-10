@@ -259,8 +259,7 @@ require("lazy").setup({
 						on_attach = on_attach,
 						capabilities = capabilities,
 						settings = {
-							-- Temporarily disable, it's too slow in large repo
-							-- ["rust-analyzer"] = { check = { command = "clippy" } },
+							["rust-analyzer"] = { check = { command = "clippy" } },
 						},
 					})
 				end,
