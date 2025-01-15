@@ -245,6 +245,7 @@ require("lazy").setup({
 				vim.keymap.set("n", "M", vim.diagnostic.goto_prev, keymap_opts)
 				-- Use `tiny-inline-diagnostic` instead
 				vim.diagnostic.config({ virtual_text = false, sevirity_sort = true })
+				vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 			end
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
@@ -292,6 +293,7 @@ require("lazy").setup({
 				height = 30,
 				list = { position = "left" },
 				folds = { folded = false },
+				border = { enable = true },
 				mappings = {
 					list = {
 						["<C-s>"] = glance.actions.jump_split,
@@ -321,10 +323,11 @@ require("lazy").setup({
 				["<Up>"] = { "select_prev", "fallback" },
 			},
 			completion = {
+				menu = { border = "single" },
 				list = { selection = { preselect = false, auto_insert = false } },
-				documentation = { auto_show = true },
+				documentation = { auto_show = true, window = { border = "single" } },
 			},
-			signature = { enabled = true },
+			signature = { enabled = true, window = { border = "single" } },
 		},
 		-- Do not lazy load, just leave it to plugin
 	},
