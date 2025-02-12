@@ -1,7 +1,7 @@
 {
   "theme": "Vitesse Dark",
   "ui_font_size": 12,
-  "buffer_font_size": 14,
+  "buffer_font_size": 14.0,
   "buffer_font_features": {
     "calt": false
   },
@@ -11,11 +11,11 @@
 
   "languages": {
     "Markdown-Inline": {
-      "show_inline_completions": false
+      "show_edit_predictions": false
     },
     "Markdown": {
       "formatter": "language_server",
-      "show_inline_completions": false
+      "show_edit_predictions": false
     }
   },
 
