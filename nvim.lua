@@ -76,13 +76,19 @@ require("lazy").setup({
 		event = LazyFile,
 	},
 	{
-		"Saghen/blink.indent",
-		main = "blink.indent",
+		"folke/snacks.nvim",
+		priority = 1000,
 		opts = {
-			static = { char = "│" },
-			scope = { char = "│", highlights = { "BlinkIndentBlue" } },
+			bigfile = { enabled = true },
+			indent = { enabled = true },
+			scroll = { enabled = true },
+			words = { debounce = 50 },
 		},
-		-- Do not lazy load, just leave it to plugin
+		init = function()
+			vim.keymap.set("n", "<C-n>", ":lua Snacks.words.jump(vim.v.count1, true)<CR>", { silent = true })
+			vim.keymap.set("n", "<C-S-n>", ":lua Snacks.words.jump(-vim.v.count1, true)<CR>", { silent = true })
+		end,
+		lazy = false,
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
@@ -113,7 +119,6 @@ require("lazy").setup({
 		event = LazyFile,
 	},
 	{ "echasnovski/mini.diff", config = true, event = LazyFile },
-	{ "RRethy/vim-illuminate", event = LazyFile },
 	{ "mvllow/modes.nvim", config = true, event = LazyFile },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -187,8 +192,8 @@ require("lazy").setup({
 		"aaronik/treewalker.nvim",
 		config = true,
 		keys = {
-			{ "<S-Up>", "<CMD>Treewalker Up<CR>", silent = true },
-			{ "<S-Down>", "<CMD>Treewalker Down<CR>", silent = true },
+			{ "<S-Up>", ":Treewalker Up<CR>", silent = true },
+			{ "<S-Down>", ":Treewalker Down<CR>", silent = true },
 		},
 	},
 
