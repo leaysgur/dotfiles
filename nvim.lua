@@ -12,6 +12,8 @@ vim.opt.number = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "__" }
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 -- Use global status line
 vim.opt.laststatus = 3
 -- Use status line as cmd line
