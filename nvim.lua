@@ -238,7 +238,7 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 		},
 		build = "make tiktoken",
-		opts = { model = "claude-3.7-sonnet" },
+		opts = { model = "claude-3.7-sonnet-thought" },
 		cmd = "CopilotChat",
 	},
 
