@@ -239,7 +239,7 @@ require("lazy").setup({
 		},
 		build = "make tiktoken",
 		opts = { model = "claude-3.7-sonnet-thought" },
-		cmd = "CopilotChat",
+		event = LazyFile,
 	},
 
 	-- ## LSP
