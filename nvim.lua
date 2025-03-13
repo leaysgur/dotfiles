@@ -81,9 +81,9 @@ require("lazy").setup({
 		"folke/snacks.nvim",
 		priority = 1000,
 		opts = {
-			bigfile = { enabled = true },
-			indent = { enabled = true },
-			scroll = { enabled = true },
+			bigfile = {},
+			indent = {},
+			scroll = {},
 			words = { debounce = 50 },
 		},
 		init = function()
