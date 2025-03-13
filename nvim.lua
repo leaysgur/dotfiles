@@ -239,7 +239,10 @@ require("lazy").setup({
 		},
 		build = "make tiktoken",
 		opts = { model = "claude-3.7-sonnet-thought" },
-		event = LazyFile,
+		init = function()
+			vim.api.nvim_create_user_command("CO", "CopilotChatOpen", {})
+		end,
+		cmd = "CopilotChatOpen",
 	},
 
 	-- ## LSP
