@@ -341,7 +341,24 @@ require("lazy").setup({
 				["<Up>"] = { "select_prev", "fallback" },
 			},
 			completion = {
-				menu = { border = "single" },
+				menu = {
+					border = "single",
+					draw = {
+						components = {
+							kind_icon = {
+								ellipsis = false,
+								text = function(ctx)
+									local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+									return kind_icon .. " " .. ctx.kind
+								end,
+								highlight = function(ctx)
+									local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+									return hl
+								end,
+							},
+						},
+					},
+				},
 				list = { selection = { preselect = false, auto_insert = false } },
 				documentation = { auto_show = true, window = { border = "single" } },
 			},
