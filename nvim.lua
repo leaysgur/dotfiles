@@ -330,6 +330,24 @@ require("lazy").setup({
 		},
 	},
 	{
+		"hedyhli/outline.nvim",
+		opts = {
+			outline_window = { width = 50 },
+			outline_items = { show_symbol_lineno = true },
+			keymaps = { fold_toggle = "<Space>" },
+			symbol_folding = { autofold_depth = 2 },
+			symbols = {
+				icon_fetcher = function(kind)
+					return require("mini.icons").get("lsp", kind) .. " " .. kind
+				end,
+			},
+		},
+		init = function()
+			vim.api.nvim_create_user_command("OO", "OutlineOpen", {})
+		end,
+		cmd = "OutlineOpen",
+	},
+	{
 		"saghen/blink.cmp",
 		build = "cargo build --release",
 		opts = {
