@@ -261,7 +261,7 @@ require("lazy").setup({
 				vim.keymap.set("n", "<C-n>", vim.diagnostic.goto_next, keymap_opts)
 				vim.keymap.set("n", "<C-S-n>", vim.diagnostic.goto_prev, keymap_opts)
 				-- Use `tiny-inline-diagnostic` instead
-				vim.diagnostic.config({ virtual_text = false, sevirity_sort = true })
+				vim.diagnostic.config({ virtual_text = false, severity_sort = true })
 				vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 			end
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
