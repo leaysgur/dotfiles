@@ -116,6 +116,14 @@ require("lazy").setup({
 		event = LazyFile,
 	},
 	{
+		"rainbowhxch/accelerated-jk.nvim",
+		config = true,
+		keys = {
+			{ "<Up>", "<Plug>(accelerated_jk_gk)", silent = true },
+			{ "<Down>", "<Plug>(accelerated_jk_gj)", silent = true },
+		},
+	},
+	{
 		"nvim-focus/focus.nvim",
 		opts = { commands = false },
 		event = LazyFile,
@@ -189,14 +197,6 @@ require("lazy").setup({
 		"Wansmer/treesj",
 		opts = { use_default_keymaps = false },
 		keys = { { "sj", ":TSJToggle<CR>", silent = true } },
-	},
-	{
-		"aaronik/treewalker.nvim",
-		config = true,
-		keys = {
-			{ "<S-Up>", ":Treewalker Up<CR>", silent = true },
-			{ "<S-Down>", ":Treewalker Down<CR>", silent = true },
-		},
 	},
 
 	-- ## Editing
