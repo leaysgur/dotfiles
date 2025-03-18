@@ -83,7 +83,6 @@ require("lazy").setup({
 		opts = {
 			bigfile = {},
 			indent = {},
-			scroll = {},
 			words = { debounce = 50 },
 		},
 		init = function()
@@ -379,6 +378,7 @@ require("lazy").setup({
 				documentation = { auto_show = true, window = { border = "single" } },
 			},
 			signature = { enabled = true, window = { border = "single" } },
+			cmdline = { enabled = false },
 		},
 		-- Do not lazy load, just leave it to plugin
 	},
