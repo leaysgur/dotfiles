@@ -238,9 +238,7 @@ require("lazy").setup({
 		},
 		build = "make tiktoken",
 		opts = { model = "claude-3.7-sonnet-thought" },
-		--stylua: ignore
-		init = function() vim.api.nvim_create_user_command("CO", "CopilotChatOpen", {}) end,
-		cmd = "CopilotChatOpen",
+		keys = { { "<C-c>", ":CopilotChatOpen<CR>", silent = true } },
 	},
 
 	-- ## LSP
@@ -340,9 +338,7 @@ require("lazy").setup({
 				end,
 			},
 		},
-		--stylua: ignore
-		init = function() vim.api.nvim_create_user_command("OO", "OutlineOpen", {}) end,
-		cmd = "OutlineOpen",
+		keys = { { "<C-o>", ":OutlineOpen<CR>", silent = true } },
 	},
 	{
 		"saghen/blink.cmp",
