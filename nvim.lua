@@ -128,7 +128,6 @@ require("lazy").setup({
 		event = LazyFile,
 	},
 	{ "echasnovski/mini.diff", config = true, event = LazyFile },
-	{ "mvllow/modes.nvim", config = true, event = LazyFile },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
