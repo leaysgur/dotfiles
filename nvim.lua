@@ -258,8 +258,6 @@ require("lazy").setup({
 				vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
 				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
-				-- Use `tiny-inline-diagnostic` instead
-				vim.diagnostic.config({ virtual_text = false, severity_sort = true })
 				vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 			end
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
