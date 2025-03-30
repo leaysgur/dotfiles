@@ -1,50 +1,28 @@
 {
-  "theme": "Vitesse Dark",
+  "theme": "Maple Dark",
   "ui_font_size": 12,
-  "buffer_font_size": 14.0,
-  "buffer_font_features": {
-    "calt": false
-  },
+  "buffer_font_features": { "calt": false },
   "show_whitespaces": "all",
   "soft_wrap": "editor_width",
   "tab_size": 2,
 
-  "languages": {
-    "Markdown-Inline": {
-      "show_edit_predictions": false
-    },
-    "Markdown": {
-      "formatter": "language_server",
-      "show_edit_predictions": false
-    }
-  },
-
   "gutter": {
     "code_actions": false,
     "folds": false,
-    "runnables": false
+    "runnables": false,
+    "breakpoints": false,
+    "line_numbers": false
   },
   "toolbar": {
     "breadcrumbs": false,
     "quick_actions": false
   },
-  "collaboration_panel": {
-    "button": false
-  },
-  "notification_panel": {
-    "button": false
-  },
-  "chat_panel": {
-    "button": false
-  },
-  "assistant": {
-    "version": "2",
-    "button": false,
-    "show_hints": false
-  },
-  "terminal": {
-    "button": false
-  },
+  "collaboration_panel": { "button": false },
+  "notification_panel": { "button": false },
+  "chat_panel": { "button": "never" },
+  "git_panel": { "button": false },
+  "terminal": { "button": false },
+  "assistant": { "version": "2", "button": false },
 
   "telemetry": {
     "diagnostics": false,
