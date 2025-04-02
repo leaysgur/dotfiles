@@ -14,6 +14,7 @@ vim.opt.listchars = { tab = "__" }
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.winborder = "single"
 -- Use global status line
 vim.opt.laststatus = 3
 -- Use status line as cmd line
@@ -258,7 +259,6 @@ require("lazy").setup({
 				vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
 				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
-				vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 			end
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
