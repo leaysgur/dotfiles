@@ -74,14 +74,7 @@ require("lazy").setup({
 		} end,
 		-- Do not lazy load, just leave it to plugin
 	},
-	{
-		"b0o/incline.nvim",
-		opts = {
-			hide = { cursorline = true },
-			highlight = { groups = { InclineNormal = { default = true, group = "FloatShadow" } } },
-		},
-		event = LazyFile,
-	},
+	{ "b0o/incline.nvim", config = true, event = LazyFile },
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
