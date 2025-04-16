@@ -7,6 +7,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- # Global options
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 -- Ui
 vim.opt.number = true
 vim.opt.list = true
