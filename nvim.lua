@@ -238,7 +238,7 @@ require("lazy").setup({
 		build = "make tiktoken",
 		opts = { sticky = { "#buffer", "$claude-3.7-sonnet-thought" } },
 		--stylua: ignore
-    init = function() vim.api.nvim_create_user_command("CO", "CopilotChatOpen", {}) end,
+	  init = function() vim.api.nvim_create_user_command("CO", "CopilotChatOpen", {}) end,
 		cmd = "CopilotChatOpen",
 	},
 
