@@ -13,7 +13,7 @@ vim.g.maplocalleader = "\\"
 vim.opt.number = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "__" }
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.winborder = "single"
