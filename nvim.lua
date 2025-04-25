@@ -82,6 +82,7 @@ require("lazy").setup({
 		priority = 1000,
 		opts = {
 			bigfile = {},
+			dashboard = {},
 			indent = {},
 			words = { debounce = 50 },
 		},
