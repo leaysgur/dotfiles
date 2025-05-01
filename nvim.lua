@@ -32,7 +32,7 @@ vim.opt.smartcase = true
 vim.opt.swapfile = false
 vim.opt.autochdir = true
 vim.opt.updatetime = 250
-vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 300
 
 -- # Keymaps
 -- Keep visual mode after indentation

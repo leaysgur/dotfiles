@@ -58,6 +58,14 @@ alias gbd='git branch --merged | grep -v "*" | xargs -I % git branch -d %'
 
 
 # ================================================================
+# Local if exists
+# ================================================================
+if [ -f ~/.zshrc.local ]; then
+  source ~/.zshrc.local
+fi
+
+
+# ================================================================
 # Externals
 # ================================================================
 # Homebrew
@@ -110,9 +118,4 @@ fi
 # Bun completions(run `bun completions`)
 if [ -s "/opt/homebrew/Cellar/bun/1.0.30/share/zsh/site-functions/_bun" ]; then
   source "/opt/homebrew/Cellar/bun/1.0.30/share/zsh/site-functions/_bun"
-fi
-
-# Zsh syntax highlighting, must be at the end
-if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
