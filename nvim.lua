@@ -252,18 +252,25 @@ require("lazy").setup({
 			"saghen/blink.cmp",
 		},
 		config = function()
+			local on_attach = function(_, bufnr)
+				local keymap_opts = { buffer = bufnr, silent = true }
+				vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
+				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
+				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
+			end
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			vim.lsp.config("*", {
-				on_attach = function(_, bufnr)
-					local keymap_opts = { buffer = bufnr, silent = true }
-					vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
-					vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
-					vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
-				end,
-				capabilities = require("blink.cmp").get_lsp_capabilities(),
+				on_attach = on_attach,
+				capabilities = capabilities,
 			})
-			-- NOTE: LSPs installed by Mason will be automatically setup, even if not configured here
-			vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
+			vim.lsp.config("lua_ls", {
+				on_attach = on_attach,
+				capabilities = capabilities,
+				settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+			})
 			vim.lsp.config("rust_analyzer", {
+				on_attach = on_attach,
+				capabilities = capabilities,
 				settings = {
 					["rust-analyzer"] = {
 						check = {
