@@ -252,34 +252,36 @@ require("lazy").setup({
 			"saghen/blink.cmp",
 		},
 		config = function()
-			local on_attach = function(_, bufnr)
-				local keymap_opts = { buffer = bufnr, silent = true }
-				vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
-				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
-				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
-			end
-			local capabilities = require("blink.cmp").get_lsp_capabilities()
-			vim.lsp.config("*", {
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-			vim.lsp.config("lua_ls", {
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = { Lua = { diagnostics = { globals = { "vim" } } } },
-			})
-			vim.lsp.config("rust_analyzer", {
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					["rust-analyzer"] = {
-						check = {
-							command = "clippy",
-							extraArgs = { "--target-dir", "./target/ra" },
+			local default_config = {
+				on_attach = function(_, bufnr)
+					local keymap_opts = { buffer = bufnr, silent = true }
+					vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
+					vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
+					vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
+				end,
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
+			}
+			local server_configs = {
+				lua_ls = {
+					settings = {
+						Lua = { diagnostics = { globals = { "vim" } } },
+					},
+				},
+				rust_analyzer = {
+					settings = {
+						["rust-analyzer"] = {
+							check = {
+								command = "clippy",
+								extraArgs = { "--target-dir", "./target/ra" },
+							},
 						},
 					},
 				},
-			})
+			}
+
+			for _, server in ipairs(require("mason-lspconfig").get_installed_servers()) do
+				vim.lsp.config(server, vim.tbl_deep_extend("force", default_config, server_configs[server] or {}))
+			end
 		end,
 		event = LazyFile,
 	},
