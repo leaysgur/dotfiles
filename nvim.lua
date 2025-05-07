@@ -247,42 +247,31 @@ require("lazy").setup({
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "williamboman/mason.nvim", config = true },
-			"williamboman/mason-lspconfig.nvim",
+			{ "mason-org/mason.nvim", config = true },
+			{ "mason-org/mason-lspconfig.nvim", config = true },
 			"saghen/blink.cmp",
 		},
 		config = function()
-			local on_attach = function(_, bufnr)
-				local keymap_opts = { buffer = bufnr, silent = true }
-				vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
-				vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
-				vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
-			end
-			local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-			require("mason-lspconfig").setup_handlers({
-				function(server_name)
-					require("lspconfig")[server_name].setup({ on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.config("*", {
+				on_attach = function(_, bufnr)
+					local keymap_opts = { buffer = bufnr, silent = true }
+					vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
+					vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
+					vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 				end,
-				lua_ls = function()
-					require("lspconfig").lua_ls.setup({
-						on_attach = on_attach,
-						capabilities = capabilities,
-						settings = {
-							-- Suppress "Undefined global `vim`" warning
-							Lua = { diagnostics = { globals = { "vim" } } },
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
+			})
+			-- NOTE: LSPs installed by Mason will be automatically setup, even if not configured here
+			vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
+			vim.lsp.config("rust_analyzer", {
+				settings = {
+					["rust-analyzer"] = {
+						check = {
+							command = "clippy",
+							extraArgs = { "--target-dir", "./target/ra" },
 						},
-					})
-				end,
-				rust_analyzer = function()
-					require("lspconfig").rust_analyzer.setup({
-						on_attach = on_attach,
-						capabilities = capabilities,
-						settings = {
-							["rust-analyzer"] = { check = { command = "clippy" } },
-						},
-					})
-				end,
+					},
+				},
 			})
 		end,
 		event = LazyFile,
