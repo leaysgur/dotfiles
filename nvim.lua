@@ -93,19 +93,6 @@ require("lazy").setup({
 		lazy = false,
 	},
 	{
-		"NvChad/nvim-colorizer.lua",
-		opts = {
-			filetypes = { "*", "!lazy", "!mason", "!markdown" },
-			user_default_options = {
-				css = true,
-				mode = "virtualtext",
-				virtualtext_inline = true,
-				user_commands = false,
-			},
-		},
-		event = LazyFile,
-	},
-	{
 		"ibhagwan/smartyank.nvim",
 		opts = { highlight = { timeout = 80 } },
 		event = LazyFile,
@@ -150,6 +137,14 @@ require("lazy").setup({
 			},
 		},
 		-- To open directory like `netrw`, this plugin cannot be lazy loaded
+	},
+	{
+		"catgoose/nvim-colorizer.lua",
+		opts = {
+			user_commands = false,
+			user_default_options = { css = true, tailwind = true },
+		},
+		ft = { "css", "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte", "astro" },
 	},
 
 	-- ## Treesitter
