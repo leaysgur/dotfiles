@@ -84,6 +84,8 @@ require("lazy").setup({
 			bigfile = {},
 			dashboard = {},
 			indent = {},
+			notifier = {}, -- For `CodeCompanion.nvim` to display progress
+			picker = {}, -- For `CodeCompanion.nvim` to change adapters
 			words = { debounce = 50 },
 		},
 		init = function()
@@ -226,16 +228,39 @@ require("lazy").setup({
 		event = "InsertEnter",
 	},
 	{
-		"CopilotC-Nvim/CopilotChat.nvim",
+		"olimorris/codecompanion.nvim",
 		dependencies = {
-			"zbirenbaum/copilot.lua",
 			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
 		},
-		build = "make tiktoken",
-		opts = { sticky = { "#buffer", "$claude-3.7-sonnet-thought" } },
-		--stylua: ignore
-	  init = function() vim.api.nvim_create_user_command("CO", "CopilotChatOpen", {}) end,
-		cmd = "CopilotChatOpen",
+		opts = {
+			adapters = {
+				copilot = function()
+					return require("codecompanion.adapters").extend(
+						"copilot",
+						{ schema = { model = { default = "gemini-2.5-pro" } } }
+					)
+				end,
+			},
+			display = { chat = { show_header_separator = true } },
+			opts = { language = "same(user asked)" },
+		},
+		init = function()
+			vim.api.nvim_create_autocmd({ "User" }, {
+				pattern = "CodeCompanionRequest{Started,Streaming,Finished}",
+				group = vim.api.nvim_create_augroup("CodeCompanionHooks", { clear = true }),
+				callback = function(request)
+					vim.notify("[CodeCompanion] " .. request.match:gsub("CodeCompanion", ""), "info", {
+						id = "code_companion_status",
+						title = "CodeCompanion.nvim",
+						timeout = 1600,
+						-- stylua: ignore
+						keep = function() return not vim.endswith(request.match, "Finished") end,
+					})
+				end,
+			})
+		end,
+		event = LazyFile,
 	},
 
 	-- ## LSP
