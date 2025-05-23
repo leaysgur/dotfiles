@@ -71,7 +71,6 @@ require("lazy").setup({
 		"bluz71/nvim-linefly",
 		--stylua: ignore
 		init = function() vim.g.linefly_options = {
-				with_lsp_status = true,
 				with_search_count = true,
 		} end,
 		-- Do not lazy load, just leave it to plugin
@@ -84,7 +83,6 @@ require("lazy").setup({
 			bigfile = {},
 			dashboard = {},
 			indent = {},
-			notifier = {}, -- For `CodeCompanion.nvim` to display progress
 			picker = {}, -- For `CodeCompanion.nvim` to change adapters
 			words = { debounce = 50 },
 		},
@@ -93,6 +91,13 @@ require("lazy").setup({
 			vim.keymap.set("n", "]w", ":lua Snacks.words.jump(vim.v.count1, true)<CR>", { silent = true })
 		end,
 		lazy = false,
+	},
+	{
+		"echasnovski/mini.notify",
+		config = true,
+		-- stylua: ignore
+		init = function() vim.notify = require("mini.notify").make_notify() end,
+		event = LazyFile,
 	},
 	{
 		"ibhagwan/smartyank.nvim",
