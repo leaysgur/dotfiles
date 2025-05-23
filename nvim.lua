@@ -257,7 +257,7 @@ require("lazy").setup({
 				pattern = "CodeCompanionRequest{Started,Streaming,Finished}",
 				group = vim.api.nvim_create_augroup("CodeCompanionHooks", { clear = true }),
 				callback = function(request)
-					vim.notify("[CodeCompanion] " .. request.match:gsub("CodeCompanion", ""), "info", {
+					vim.notify("CodeCompanion: " .. request.match:gsub("CodeCompanion", ""), vim.log.levels.INFO, {
 						id = "code_companion_status",
 						title = "CodeCompanion.nvim",
 						timeout = 1600,
@@ -267,7 +267,7 @@ require("lazy").setup({
 				end,
 			})
 		end,
-		event = LazyFile,
+		cmd = { "CodeCompanion", "CodeCompanionChat" },
 	},
 
 	-- ## LSP
