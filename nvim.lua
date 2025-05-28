@@ -16,6 +16,8 @@ vim.opt.listchars = { tab = "__" }
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+-- Since Nvim does not have API for it, add border to completion list is impossible for now
+-- https://github.com/echasnovski/mini.nvim/issues/741
 vim.opt.winborder = "single"
 -- Use global status line
 vim.opt.laststatus = 3
@@ -62,8 +64,10 @@ require("lazy").setup({
 	{
 		"echasnovski/mini.icons",
 		config = true,
-		--stylua: ignore
-		init = function() require("mini.icons").mock_nvim_web_devicons() end,
+		init = function()
+			require("mini.icons").tweak_lsp_kind()
+			require("mini.icons").mock_nvim_web_devicons()
+		end,
 	},
 
 	-- ## UI/UX
@@ -281,7 +285,7 @@ require("lazy").setup({
 		dependencies = {
 			{ "mason-org/mason.nvim", config = true },
 			{ "mason-org/mason-lspconfig.nvim", config = true },
-			"saghen/blink.cmp",
+			"echasnovski/mini.completion",
 		},
 		config = function()
 			local default_config = {
@@ -291,7 +295,7 @@ require("lazy").setup({
 					vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 					vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 				end,
-				capabilities = require("blink.cmp").get_lsp_capabilities(),
+				capabilities = require("mini.completion").get_lsp_capabilities(),
 			}
 			local server_configs = {
 				lua_ls = {
@@ -370,42 +374,15 @@ require("lazy").setup({
 		cmd = "Outline",
 	},
 	{
-		"saghen/blink.cmp",
-		build = "cargo build --release",
-		opts = {
-			keymap = {
-				["<CR>"] = { "accept", "fallback" },
-				["<Tab>"] = { "select_next", "fallback" },
-				["<Down>"] = { "select_next", "fallback" },
-				["<S-Tab>"] = { "select_prev", "fallback" },
-				["<Up>"] = { "select_prev", "fallback" },
-			},
-			completion = {
-				menu = {
-					border = "single",
-					draw = {
-						components = {
-							kind_icon = {
-								ellipsis = false,
-								text = function(ctx)
-									local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-									return kind_icon .. " " .. ctx.kind
-								end,
-								highlight = function(ctx)
-									local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-									return hl
-								end,
-							},
-						},
-					},
-				},
-				list = { selection = { preselect = false, auto_insert = false } },
-				documentation = { auto_show = true, window = { border = "single" } },
-			},
-			signature = { enabled = true, window = { border = "single" } },
-			cmdline = { enabled = false },
-		},
-		-- Do not lazy load, just leave it to plugin
+		"echasnovski/mini.completion",
+		opts = { lsp_completion = { source_func = "omnifunc" } },
+		init = function()
+			-- stylua: ignore
+			vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<Down>" : "\<Tab>"]], { expr = true, replace_keycodes = false })
+			-- stylua: ignore
+			vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<Up>" : "\<S-Tab>"]], { expr = true, replace_keycodes = false })
+		end,
+		event = "InsertEnter",
 	},
 }, {
 	checker = { enabled = true, frequency = 60 * 60 * 12 },
