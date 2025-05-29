@@ -243,18 +243,17 @@ require("lazy").setup({
 			"nvim-treesitter/nvim-treesitter",
 		},
 		opts = {
-			strategies = { chat = { adapter = "anthropic" } },
+			strategies = {
+				chat = {
+					adapter = "anthropic",
+					keymaps = { completion = { modes = { i = "<Tab>" } } },
+				},
+			},
 			adapters = {
 				anthropic = function()
 					return require("codecompanion.adapters").extend(
 						"anthropic",
 						{ schema = { model = { default = "claude-opus-4-20250514" } } }
-					)
-				end,
-				copilot = function()
-					return require("codecompanion.adapters").extend(
-						"copilot",
-						{ schema = { model = { default = "claude-sonnet-4" } } }
 					)
 				end,
 			},
