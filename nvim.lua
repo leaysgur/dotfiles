@@ -277,15 +277,6 @@ require("lazy").setup({
 		end,
 		cmd = { "CodeCompanion", "CodeCompanionChat" },
 	},
-	{
-		"greggh/claude-code.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {
-			window = { position = "vertical" },
-			command = "npx -y @anthropic-ai/claude-code@latest -d",
-		},
-		cmd = "ClaudeCode",
-	},
 
 	-- ## LSP
 	{
