@@ -243,12 +243,7 @@ require("lazy").setup({
 			"nvim-treesitter/nvim-treesitter",
 		},
 		opts = {
-			strategies = {
-				chat = {
-					adapter = "anthropic",
-					keymaps = { completion = { modes = { i = "<Tab>" } } },
-				},
-			},
+			strategies = { chat = { adapter = "anthropic" } },
 			adapters = {
 				anthropic = function()
 					return require("codecompanion.adapters").extend(
@@ -258,7 +253,7 @@ require("lazy").setup({
 				end,
 			},
 			display = { chat = { show_header_separator = true } },
-			opts = { language = "same(user asked)" },
+			opts = { language = "same" },
 		},
 		init = function()
 			vim.api.nvim_create_autocmd({ "User" }, {
