@@ -1,0 +1,16 @@
+{
+  "cleanupPeriodDays": 7,
+  "permissions": {
+    "allow": [
+      "Bash(fd:*)",
+      "Bash(rg:*)",
+      "Bash(sg:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
+    ],
+    "deny": []
+  },
+  "env": {
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": true
+  }
+}
