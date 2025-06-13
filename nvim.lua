@@ -313,7 +313,7 @@ require("lazy").setup({
 				vim.lsp.config(server, vim.tbl_deep_extend("force", default_config, server_configs[server] or {}))
 			end
 		end,
-		event = LazyFile,
+		event = "VeryLazy",
 	},
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
