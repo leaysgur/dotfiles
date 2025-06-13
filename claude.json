@@ -3,10 +3,13 @@
   "permissions": {
     "allow": [
       "Bash(fd:*)",
+      "Bash(find:*)",
       "Bash(rg:*)",
+      "Bash(grep:*)",
       "Bash(sg:*)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "mcp__claude__*"
     ],
     "deny": []
   },
