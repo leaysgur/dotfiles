@@ -58,7 +58,7 @@ alias gbd='git branch --merged | grep -v "*" | xargs -I % git branch -d %'
 
 
 # ================================================================
-# Local if exists
+# Local if exists(e.g.: For ANTHROPIC_API_KEY)
 # ================================================================
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
