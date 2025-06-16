@@ -22,7 +22,7 @@
   "chat_panel": { "button": "never" },
   "git_panel": { "button": false },
   "terminal": { "button": false },
-  "assistant": { "version": "2", "button": false },
+  "agent": { "version": "2", "button": false },
 
   "telemetry": {
     "diagnostics": false,
