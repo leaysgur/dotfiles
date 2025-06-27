@@ -323,7 +323,8 @@ require("lazy").setup({
 			signs = { arrow = "", up_arrow = "" }, -- Arrows are useless because column pos is not supported
 			options = { show_source = true },
 		},
-		event = "VeryLazy",
+		-- XXX: I'm not sure but this sometimes not working
+		-- event = "VeryLazy",
 	},
 	{
 		"dnlhc/glance.nvim",
