@@ -1,12 +1,15 @@
 {
   "cleanupPeriodDays": 7,
+  "defaultMode": "plan",
   "permissions": {
     "allow": [
+      "Bash(ls:*)",
       "Bash(fd:*)",
       "Bash(find:*)",
       "Bash(rg:*)",
       "Bash(grep:*)",
       "Bash(sg:*)",
+      "WebFetch(domain:developer.mozilla.org)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "mcp__claude__*"
