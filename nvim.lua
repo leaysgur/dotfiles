@@ -203,6 +203,14 @@ require("lazy").setup({
 		opts = { use_default_keymaps = false },
 		keys = { { "sj", ":TSJToggle<CR>", silent = true } },
 	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
+		opts = {
+			sign = { enabled = false },
+			completions = { lsp = { enabled = true } },
+		},
+	},
 
 	-- ## Editing
 	{ "Darazaki/indent-o-matic", config = true, event = LazyFile },
@@ -245,6 +253,12 @@ require("lazy").setup({
 		opts = {
 			strategies = { chat = { adapter = "anthropic" } },
 			adapters = {
+				copilot = function()
+					return require("codecompanion.adapters").extend(
+						"copilot",
+						{ schema = { model = { default = "claude-3.7-sonnet-thought" } } }
+					)
+				end,
 				anthropic = function()
 					return require("codecompanion.adapters").extend(
 						"anthropic",
