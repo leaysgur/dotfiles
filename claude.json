@@ -1,7 +1,7 @@
 {
   "cleanupPeriodDays": 7,
-  "defaultMode": "plan",
   "permissions": {
+    "defaultMode": "plan",
     "allow": [
       "Bash(ls:*)",
       "Bash(fd:*)",
