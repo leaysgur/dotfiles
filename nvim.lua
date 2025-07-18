@@ -85,7 +85,6 @@ require("lazy").setup({
 		priority = 1000,
 		opts = {
 			bigfile = {},
-			dashboard = {},
 			indent = {},
 			picker = {}, -- For `CodeCompanion.nvim` to change adapters
 			words = { debounce = 50 },
