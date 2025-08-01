@@ -1,7 +1,9 @@
 {
   "cleanupPeriodDays": 7,
+  "env": {
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "true"
+  },
   "permissions": {
-    "defaultMode": "plan",
     "allow": [
       "Bash(ls:*)",
       "Bash(fd:*)",
@@ -12,12 +14,12 @@
       "WebFetch(domain:developer.mozilla.org)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:docs.rs)",
-      "mcp__claude__*"
+      "WebFetch(domain:docs.rs)"
     ],
     "deny": []
   },
-  "env": {
-    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": true
+  "feedbackSurveyState": {
+    "lastShownTime": 1753948742979
   }
 }
+
