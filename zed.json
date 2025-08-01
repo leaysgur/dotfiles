@@ -1,13 +1,12 @@
 {
   "theme": "Maple Dark",
   "ui_font_size": 12,
-  "buffer_font_features": { "calt": false },
+  "buffer_font_size": 16,
+  "buffer_font_family": "Sarasa Fixed J",
   "show_whitespaces": "all",
   "soft_wrap": "editor_width",
   "tab_size": 2,
-
   "gutter": {
-    "code_actions": false,
     "folds": false,
     "runnables": false,
     "breakpoints": false,
@@ -23,8 +22,7 @@
   "git_panel": { "button": false },
   "terminal": { "button": false },
   "debugger": { "button": false },
-  "agent": { "version": "2", "button": false },
-
+  "agent": { "button": false },
   "telemetry": {
     "diagnostics": false,
     "metrics": false
