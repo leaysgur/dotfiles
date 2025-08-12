@@ -48,7 +48,7 @@ local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
 -- # Theme, UIs
 now(function()
-	add({ source = "everviolet/nvim", name = "evergarden" })
+	add("everviolet/nvim")
 	require("evergarden").setup({
 		theme = { variant = "fall", accent = "overlay1" },
 		editor = { transparent_background = true },
@@ -57,25 +57,25 @@ now(function()
 end)
 
 now(function()
-	add({ source = "echasnovski/mini.icons" })
+	add("echasnovski/mini.icons")
 	require("mini.icons").setup()
 	later(require("mini.icons").tweak_lsp_kind)
 	later(require("mini.icons").mock_nvim_web_devicons)
 end)
 
 now(function()
-	add({ source = "echasnovski/mini.notify" })
+	add("echasnovski/mini.notify")
 	require("mini.notify").setup()
 	vim.notify = require("mini.notify").make_notify()
 end)
 
 now(function()
-	add({ source = "bluz71/nvim-linefly" })
+	add("bluz71/nvim-linefly")
 	vim.g.linefly_options = { with_search_count = true }
 end)
 
 now(function()
-	add({ source = "b0o/incline.nvim" })
+	add("b0o/incline.nvim")
 	require("incline").setup()
 end)
 
@@ -105,7 +105,7 @@ end)
 
 -- # UX
 now(function()
-	add({ source = "folke/snacks.nvim" })
+	add("folke/snacks.nvim")
 	require("snacks").setup({
 		bigfile = {},
 		indent = {},
@@ -117,7 +117,7 @@ now(function()
 end)
 
 now(function()
-	add({ source = "catgoose/nvim-colorizer.lua" })
+	add("catgoose/nvim-colorizer.lua")
 	require("colorizer").setup({
 		lazy_load = true,
 		user_commands = false,
@@ -126,43 +126,43 @@ now(function()
 end)
 
 now(function()
-	add({ source = "andymass/vim-matchup" })
+	add("andymass/vim-matchup")
 end)
 
 now(function()
-	add({ source = "Darazaki/indent-o-matic" })
+	add("Darazaki/indent-o-matic")
 	require("indent-o-matic").setup({})
 end)
 
 later(function()
-	add({ source = "ibhagwan/smartyank.nvim" })
+	add("ibhagwan/smartyank.nvim")
 	require("smartyank").setup({ highlight = { timeout = 160 } })
 end)
 
 later(function()
-	add({ source = "sphamba/smear-cursor.nvim" })
+	add("sphamba/smear-cursor.nvim")
 	require("smear_cursor").setup({ color_levels = 16, gamma = 8 })
 end)
 
 later(function()
-	add({ source = "rainbowhxch/accelerated-jk.nvim" })
+	add("rainbowhxch/accelerated-jk.nvim")
 	require("accelerated-jk").setup()
 	vim.keymap.set("n", "<Up>", "<Plug>(accelerated_jk_gk)", { silent = true })
 	vim.keymap.set("n", "<Down>", "<Plug>(accelerated_jk_gj)", { silent = true })
 end)
 
 later(function()
-	add({ source = "nvim-focus/focus.nvim" })
+	add("nvim-focus/focus.nvim")
 	require("focus").setup({ commands = false })
 end)
 
 later(function()
-	add({ source = "echasnovski/mini.diff" })
+	add("echasnovski/mini.diff")
 	require("mini.diff").setup()
 end)
 
 later(function()
-	add({ source = "echasnovski/mini.surround" })
+	add("echasnovski/mini.surround")
 	require("mini.surround").setup()
 end)
 
@@ -189,7 +189,7 @@ now(function()
 end)
 
 later(function()
-	add({ source = "windwp/nvim-ts-autotag" })
+	add("windwp/nvim-ts-autotag")
 	require("nvim-ts-autotag").setup({
 		opts = {
 			enable_rename = false,
@@ -199,12 +199,12 @@ later(function()
 end)
 
 later(function()
-	add({ source = "nvim-treesitter/nvim-treesitter-context" })
+	add("nvim-treesitter/nvim-treesitter-context")
 	require("treesitter-context").setup({ max_lines = 1 })
 end)
 
 later(function()
-	add({ source = "Wansmer/treesj" })
+	add("Wansmer/treesj")
 	require("treesj").setup({ use_default_keymaps = false })
 	vim.keymap.set("n", "sj", ":TSJToggle<CR>", { silent = true })
 end)
@@ -272,7 +272,7 @@ now(function()
 end)
 
 later(function()
-	add({ source = "rachartier/tiny-inline-diagnostic.nvim" })
+	add("rachartier/tiny-inline-diagnostic.nvim")
 	require("tiny-inline-diagnostic").setup({
 		preset = "nonerdfont",
 		signs = { arrow = "", up_arrow = "" }, -- Arrows are useless because column pos is not moved
@@ -281,7 +281,7 @@ later(function()
 end)
 
 later(function()
-	add({ source = "dnlhc/glance.nvim" })
+	add("dnlhc/glance.nvim")
 	local glance = require("glance")
 	glance.setup({
 		height = 30,
@@ -323,7 +323,7 @@ later(function()
 end)
 
 later(function()
-	add({ source = "stevearc/conform.nvim" })
+	add("stevearc/conform.nvim")
 	require("conform").setup({
 		formatters_by_ft = {
 			lua = { "stylua" },
@@ -336,14 +336,14 @@ end)
 
 -- # Completion
 later(function()
-	add({ source = "echasnovski/mini.completion" })
+	add("echasnovski/mini.completion")
 	require("mini.completion").setup({ lsp_completion = { source_func = "omnifunc" } })
 	vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<Down>" : "\<Tab>"]], { expr = true, replace_keycodes = false })
 	vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<Up>" : "\<S-Tab>"]], { expr = true, replace_keycodes = false })
 end)
 
 later(function()
-	add({ source = "zbirenbaum/copilot.lua" })
+	add("zbirenbaum/copilot.lua")
 	require("copilot").setup({
 		suggestion = {
 			auto_trigger = true,
