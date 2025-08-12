@@ -6,47 +6,45 @@ if not vim.loop.fs_stat(mini_path) then
 	vim.cmd("packadd mini.deps | helptags ALL")
 end
 
+-- # Global options and keymaps
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+-- Ui
+vim.opt.number = true
+vim.opt.list = true
+vim.opt.listchars = { tab = "__" }
+vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+-- Since Nvim does not have API for it, add border to completion list is impossible for now
+-- https://github.com/echasnovski/mini.nvim/issues/741
+vim.opt.winborder = "single"
+-- Use global status line
+vim.opt.laststatus = 3
+-- Use status line as cmd line
+vim.opt.cmdheight = 0
+-- Prefer soft tab
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+-- Search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+-- Misc
+vim.opt.swapfile = false
+vim.opt.autochdir = true
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
+
+-- Keep visual mode after indentation
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+-- Clear search highlight
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", { silent = true })
+
 -- # Setup `mini.deps` and utils
 require("mini.deps").setup({ path = { package = path_package } })
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-
--- # Global options and keymaps
-now(function()
-	vim.g.mapleader = " "
-	vim.g.maplocalleader = "\\"
-	-- Ui
-	vim.opt.number = true
-	vim.opt.list = true
-	vim.opt.listchars = { tab = "__" }
-	vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
-	vim.opt.splitright = true
-	vim.opt.splitbelow = true
-	-- Since Nvim does not have API for it, add border to completion list is impossible for now
-	-- https://github.com/echasnovski/mini.nvim/issues/741
-	vim.opt.winborder = "single"
-	-- Use global status line
-	vim.opt.laststatus = 3
-	-- Use status line as cmd line
-	vim.opt.cmdheight = 0
-	-- Prefer soft tab
-	vim.opt.expandtab = true
-	vim.opt.tabstop = 2
-	vim.opt.shiftwidth = 2
-	-- Search
-	vim.opt.ignorecase = true
-	vim.opt.smartcase = true
-	-- Misc
-	vim.opt.swapfile = false
-	vim.opt.autochdir = true
-	vim.opt.updatetime = 250
-	vim.opt.timeoutlen = 300
-
-	-- Keep visual mode after indentation
-	vim.keymap.set("v", "<", "<gv")
-	vim.keymap.set("v", ">", ">gv")
-	-- Clear search highlight
-	vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", { silent = true })
-end)
 
 -- # Theme, UIs
 now(function()
@@ -61,8 +59,8 @@ end)
 now(function()
 	add({ source = "echasnovski/mini.icons" })
 	require("mini.icons").setup()
-	require("mini.icons").tweak_lsp_kind()
-	require("mini.icons").mock_nvim_web_devicons()
+	later(require("mini.icons").tweak_lsp_kind)
+	later(require("mini.icons").mock_nvim_web_devicons)
 end)
 
 now(function()
