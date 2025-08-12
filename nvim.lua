@@ -51,15 +51,15 @@ local LazyFile = { "BufReadPost", "BufNewFile", "BufWritePre" }
 require("lazy").setup({
 	-- ## Theme
 	{
-		"neanias/everforest-nvim",
+		"everviolet/nvim",
+		name = "evergarden",
 		priority = 1000,
-		main = "everforest",
 		opts = {
-			transparent_background_level = 1,
-			italics = true,
+			theme = { variant = "fall", accent = "overlay1" },
+			editor = { transparent_background = true },
 		},
 		--stylua: ignore
-		init = function() vim.cmd([[colorscheme everforest]]) end,
+		init = function() vim.cmd([[colorscheme evergarden]]) end,
 	},
 	{
 		"echasnovski/mini.icons",
