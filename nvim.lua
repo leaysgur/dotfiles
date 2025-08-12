@@ -227,13 +227,12 @@ later(function()
 end)
 
 -- # Language server, linter, formatter
-now(function()
+later(function()
 	add({
 		source = "neovim/nvim-lspconfig",
 		depends = {
 			"mason-org/mason.nvim",
 			"mason-org/mason-lspconfig.nvim",
-			"echasnovski/mini.completion",
 		},
 	})
 
@@ -244,7 +243,6 @@ now(function()
 			vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 			vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 		end,
-		capabilities = require("mini.completion").get_lsp_capabilities(),
 	}
 	local server_configs = {
 		lua_ls = {
@@ -337,7 +335,17 @@ end)
 -- # Completion
 later(function()
 	add("echasnovski/mini.completion")
-	require("mini.completion").setup({ lsp_completion = { source_func = "omnifunc" } })
+	require("mini.completion").setup({
+		-- These are required to make...
+		lsp_completion = { source_func = "omnifunc", auto_setup = false },
+	})
+	-- ... these settings work!
+	vim.api.nvim_create_autocmd("LspAttach", {
+		callback = function(args)
+			vim.bo[args.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+		end,
+	})
+	vim.lsp.config("*", { capabilities = require("mini.completion").get_lsp_capabilities() })
 	vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<Down>" : "\<Tab>"]], { expr = true, replace_keycodes = false })
 	vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<Up>" : "\<S-Tab>"]], { expr = true, replace_keycodes = false })
 end)
