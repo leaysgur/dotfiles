@@ -6,7 +6,7 @@ if not vim.loop.fs_stat(mini_path) then
 	vim.cmd("packadd mini.deps | helptags ALL")
 end
 
--- # Setup `mini.deps`
+-- # Setup `mini.deps` and utils
 require("mini.deps").setup({ path = { package = path_package } })
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
@@ -105,6 +105,7 @@ now(function()
 	})
 end)
 
+-- # UX
 now(function()
 	add({ source = "folke/snacks.nvim" })
 	require("snacks").setup({
@@ -117,15 +118,32 @@ now(function()
 	vim.keymap.set("n", "]w", ":lua Snacks.words.jump(vim.v.count1, true)<CR>", { silent = true })
 end)
 
--- # UX
+now(function()
+	add({ source = "catgoose/nvim-colorizer.lua" })
+	require("colorizer").setup({
+		lazy_load = true,
+		user_commands = false,
+		user_default_options = { css = true, tailwind = true },
+	})
+end)
+
+now(function()
+	add({ source = "andymass/vim-matchup" })
+end)
+
+now(function()
+	add({ source = "Darazaki/indent-o-matic" })
+	require("indent-o-matic").setup({})
+end)
+
 later(function()
 	add({ source = "ibhagwan/smartyank.nvim" })
-	require("smartyank").setup({ highlight = { timeout = 80 } })
+	require("smartyank").setup({ highlight = { timeout = 160 } })
 end)
 
 later(function()
 	add({ source = "sphamba/smear-cursor.nvim" })
-	require("smear_cursor").setup({ color_levels = 8, gamma = 4 })
+	require("smear_cursor").setup({ color_levels = 16, gamma = 8 })
 end)
 
 later(function()
@@ -141,87 +159,73 @@ later(function()
 end)
 
 later(function()
-	add({ source = "catgoose/nvim-colorizer.lua" })
-	require("colorizer").setup({
-		user_commands = false,
-		user_default_options = { css = true, tailwind = true },
-	})
-end)
-
-later(function()
 	add({ source = "echasnovski/mini.diff" })
 	require("mini.diff").setup()
 end)
 
--- # Treesitter
--- now(function()
--- 	add({
--- 		source = "nvim-treesitter/nvim-treesitter",
--- 		checkout = "master",
--- 		depends = {
--- 			"JoosepAlviste/nvim-ts-context-commentstring",
--- 			"nvim-treesitter/nvim-treesitter-context",
--- 			"windwp/nvim-ts-autotag",
--- 			"theHamsta/nvim-treesitter-pairs",
--- 		},
--- 	})
--- 	require("nvim-treesitter.configs").setup({
--- 		ensure_installed = "all",
--- 		ignore_install = { "ipkg" },
--- 		highlight = {
--- 			enable = true,
--- 			additional_vim_regex_highlighting = false,
--- 		},
--- 		indent = { enable = true },
--- 		pairs = {
--- 			enable = true,
--- 			fallback_cmd_normal = "normal! %",
--- 			keymaps = { goto_partner = "%" },
--- 		},
--- 	})
--- 	vim.cmd("TSUpdate")
-
--- 	require("ts_context_commentstring").setup({ enable_autocmd = false })
--- 	require("treesitter-context").setup({ max_lines = 1 })
--- 	require("nvim-ts-autotag").setup()
--- end)
-
--- now(function()
--- 	add({ source = "terrortylor/nvim-comment" })
--- 	require("nvim_comment").setup({
--- 		create_mappings = false,
--- 		comment_empty = false,
--- 		hook = function() require("ts_context_commentstring").update_commentstring() end,
--- 	})
--- 	vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", { silent = true })
--- 	vim.keymap.set("v", "<C-_>", ":'<,'>CommentToggle<CR>", { silent = true })
--- end)
-
--- now(function()
--- 	add({ source = "Wansmer/treesj" })
--- 	require("treesj").setup({ use_default_keymaps = false })
--- 	vim.keymap.set("n", "sj", ":TSJToggle<CR>", { silent = true })
--- end)
-
--- # Editing
 later(function()
 	add({ source = "echasnovski/mini.surround" })
 	require("mini.surround").setup()
 end)
 
-later(function()
-	add({ source = "monkoose/matchparen.nvim" })
-	require("matchparen").setup()
+-- # Treesitter
+now(function()
+	add({
+		source = "nvim-treesitter/nvim-treesitter",
+		-- NOTE: Stick to `master` for a while since:
+		-- - Failed to attempt to apply highlight on `svelte` file
+		-- - `Wansmer/treesj` does not work for `svelte`, `astro`, `rust`, etc
+		checkout = "master",
+    -- stylua: ignore
+		hooks = { post_checkout = function() vim.cmd("TSUpdate") end },
+	})
+	require("nvim-treesitter.configs").setup({
+		ensure_installed = "all",
+		ignore_install = { "ipkg" },
+		highlight = {
+			enable = true,
+			additional_vim_regex_highlighting = false,
+		},
+		indent = { enable = true },
+	})
 end)
 
 later(function()
-	add({ source = "windwp/nvim-autopairs" })
-	require("nvim-autopairs").setup()
+	add({ source = "windwp/nvim-ts-autotag" })
+	require("nvim-ts-autotag").setup({
+		opts = {
+			enable_rename = false,
+			enable_close_on_slash = true,
+		},
+	})
 end)
 
 later(function()
-	add({ source = "Darazaki/indent-o-matic" })
-	require("indent-o-matic").setup({})
+	add({ source = "nvim-treesitter/nvim-treesitter-context" })
+	require("treesitter-context").setup({ max_lines = 1 })
+end)
+
+later(function()
+	add({ source = "Wansmer/treesj" })
+	require("treesj").setup({ use_default_keymaps = false })
+	vim.keymap.set("n", "sj", ":TSJToggle<CR>", { silent = true })
+end)
+
+later(function()
+	add({
+		source = "terrortylor/nvim-comment",
+		depends = { "JoosepAlviste/nvim-ts-context-commentstring" },
+	})
+	require("ts_context_commentstring").setup({ enable_autocmd = false })
+	require("nvim_comment").setup({
+		create_mappings = false,
+		comment_empty = false,
+		hook = function()
+			require("ts_context_commentstring").update_commentstring()
+		end,
+	})
+	vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>", { silent = true })
+	vim.keymap.set("v", "<C-_>", ":'<,'>CommentToggle<CR>", { silent = true })
 end)
 
 -- # Language server, linter, formatter
@@ -262,7 +266,7 @@ now(function()
 		},
 	}
 
-	require("mason").setup()
+	require("mason").setup() -- will make `server`s available to configure
 	for _, server in ipairs(require("mason-lspconfig").get_installed_servers()) do
 		vim.lsp.config(server, vim.tbl_deep_extend("force", default_config, server_configs[server] or {}))
 	end
@@ -329,19 +333,13 @@ later(function()
 			["_"] = { "prettier" },
 		},
 	})
-
 	vim.keymap.set("n", "<Space>f", ":lua require('conform').format()<CR>", { silent = true })
 end)
 
 -- # Completion
 later(function()
-	add({
-		source = "echasnovski/mini.completion",
-	})
-	require("mini.completion").setup({
-		lsp_completion = { source_func = "omnifunc" },
-	})
-
+	add({ source = "echasnovski/mini.completion" })
+	require("mini.completion").setup({ lsp_completion = { source_func = "omnifunc" } })
 	vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<Down>" : "\<Tab>"]], { expr = true, replace_keycodes = false })
 	vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<Up>" : "\<S-Tab>"]], { expr = true, replace_keycodes = false })
 end)
