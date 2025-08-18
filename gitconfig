@@ -1,0 +1,14 @@
+[user]
+	name = Yuji Sugiura
+	email = y.sugiura.0316@gmail.com
+[init]
+	edefaultBranch = main
+[diff]
+	algorithm = histogram
+[credential]
+	helper = /usr/local/share/gcm-core/git-credential-manager
+[pull]
+	ff = only
+	autostash = true
+[fetch]
+	prune = true
