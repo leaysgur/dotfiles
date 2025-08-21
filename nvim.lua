@@ -377,12 +377,6 @@ later(function()
 	require("codecompanion").setup({
 		strategies = { chat = { adapter = "anthropic" } },
 		adapters = {
-			copilot = function()
-				return require("codecompanion.adapters").extend(
-					"copilot",
-					{ schema = { model = { default = "claude-3.7-sonnet-thought" } } }
-				)
-			end,
 			anthropic = function()
 				return require("codecompanion.adapters").extend(
 					"anthropic",
@@ -392,6 +386,29 @@ later(function()
 		},
 		display = { chat = { show_header_separator = true } },
 		opts = { language = "same" },
+		prompt_library = {
+			["English writer"] = {
+				strategy = "chat",
+				description = "Write better English",
+				opts = {
+					ignore_system_prompt = true,
+					adapter = { name = "anthropic", model = "claude-3-5-haiku-20241022" },
+				},
+				prompts = {
+					{
+						role = "system",
+						content = [[Help user to write better English.
+- Text may contain English and Japanese.
+- Correct mistakes in English.
+- Translate Japanese to English.
+- Keep the meaning of the text and prefer simple words.
+- The context is a conversation on GitHub or with colleague engineers.
+Provide response with markdown code block for easy copying.
+]],
+					},
+				},
+			},
+		},
 	})
 
 	vim.api.nvim_create_autocmd({ "User" }, {
