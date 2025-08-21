@@ -391,6 +391,7 @@ later(function()
 				strategy = "chat",
 				description = "Write better English",
 				opts = {
+					-- is_slash_cmd = true, -- From slash command, opts below do not work...
 					ignore_system_prompt = true,
 					adapter = { name = "anthropic", model = "claude-3-5-haiku-20241022" },
 				},
@@ -403,7 +404,7 @@ later(function()
 - Translate Japanese to English.
 - Keep the meaning of the text and prefer simple words.
 - The context is a conversation on GitHub or with colleague engineers.
-Provide response with markdown code block for easy copying.
+Provide response with Markdown code block for easy copying.
 ]],
 					},
 				},
