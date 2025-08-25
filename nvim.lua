@@ -127,6 +127,7 @@ end)
 
 now(function()
 	add("andymass/vim-matchup")
+	require("match-up").setup({})
 end)
 
 now(function()
