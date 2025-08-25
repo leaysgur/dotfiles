@@ -388,7 +388,16 @@ later(function()
 		display = { chat = { show_header_separator = true } },
 		opts = { language = "same" },
 		prompt_library = {
-			["English writer"] = {
+			["PLAIN"] = {
+				strategy = "chat",
+				description = "Chat with plain Claude",
+				opts = {
+					ignore_system_prompt = true,
+					adapter = { name = "anthropic", model = "claude-3-5-haiku-20241022" },
+				},
+				prompts = { { role = "user", content = "" } },
+			},
+			["ENGLISH"] = {
 				strategy = "chat",
 				description = "Write better English",
 				opts = {
