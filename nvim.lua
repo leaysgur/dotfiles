@@ -378,12 +378,14 @@ later(function()
 	require("codecompanion").setup({
 		strategies = { chat = { adapter = "anthropic" } },
 		adapters = {
-			anthropic = function()
-				return require("codecompanion.adapters").extend(
-					"anthropic",
-					{ schema = { model = { default = "claude-opus-4-20250514" } } }
-				)
-			end,
+			http = {
+				anthropic = function()
+					return require("codecompanion.adapters").extend(
+						"anthropic",
+						{ schema = { model = { default = "claude-opus-4-20250514" } } }
+					)
+				end,
+			},
 		},
 		display = { chat = { show_header_separator = true } },
 		opts = { language = "same" },
