@@ -2,7 +2,7 @@
 local path_package = vim.fn.stdpath("data") .. "/site/"
 local mini_path = path_package .. "pack/deps/start/mini.deps"
 if not vim.loop.fs_stat(mini_path) then
-	vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/echasnovski/mini.deps", mini_path })
+	vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/nvim-mini/mini.deps", mini_path })
 	vim.cmd("packadd mini.deps | helptags ALL")
 end
 
@@ -17,7 +17,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 -- Since Nvim does not have API for it, add border to completion list is impossible for now
--- https://github.com/echasnovski/mini.nvim/issues/741
+-- https://github.com/nvim-mini/mini.nvim/issues/741
 vim.opt.winborder = "single"
 -- Use global status line
 vim.opt.laststatus = 3
@@ -57,14 +57,14 @@ now(function()
 end)
 
 now(function()
-	add("echasnovski/mini.icons")
+	add("nvim-mini/mini.icons")
 	require("mini.icons").setup()
 	later(require("mini.icons").tweak_lsp_kind)
 	later(require("mini.icons").mock_nvim_web_devicons)
 end)
 
 now(function()
-	add("echasnovski/mini.notify")
+	add("nvim-mini/mini.notify")
 	require("mini.notify").setup()
 	vim.notify = require("mini.notify").make_notify()
 end)
@@ -158,12 +158,12 @@ later(function()
 end)
 
 later(function()
-	add("echasnovski/mini.diff")
+	add("nvim-mini/mini.diff")
 	require("mini.diff").setup()
 end)
 
 later(function()
-	add("echasnovski/mini.surround")
+	add("nvim-mini/mini.surround")
 	require("mini.surround").setup()
 end)
 
@@ -305,7 +305,7 @@ end)
 later(function()
 	add({
 		source = "hedyhli/outline.nvim",
-		depends = { "echasnovski/mini.icons" },
+		depends = { "nvim-mini/mini.icons" },
 	})
 	require("outline").setup({
 		outline_window = { width = 50 },
@@ -335,7 +335,7 @@ end)
 
 -- # Completion
 later(function()
-	add("echasnovski/mini.completion")
+	add("nvim-mini/mini.completion")
 	require("mini.completion").setup({
 		-- These are required to make...
 		lsp_completion = { source_func = "omnifunc", auto_setup = false },
