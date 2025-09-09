@@ -376,26 +376,26 @@ later(function()
 		},
 	})
 	require("codecompanion").setup({
-		strategies = { chat = { adapter = "anthropic" } },
 		adapters = {
 			http = {
-				anthropic = function()
+				copilot = function()
 					return require("codecompanion.adapters").extend(
-						"anthropic",
-						{ schema = { model = { default = "claude-opus-4-20250514" } } }
+						"copilot",
+						{ schema = { model = { default = "claude-sonnet-4" } } }
 					)
 				end,
 			},
 		},
 		display = { chat = { show_header_separator = true } },
 		opts = { language = "same" },
+		-- `opts.is_slash_cmd = true` does not work for slash command, opts are ignored...
 		prompt_library = {
 			["PLAIN"] = {
 				strategy = "chat",
 				description = "Chat with plain Claude",
 				opts = {
 					ignore_system_prompt = true,
-					adapter = { name = "anthropic", model = "claude-3-5-haiku-20241022" },
+					adapter = { name = "copilot", model = "gpt-5" },
 				},
 				prompts = { { role = "user", content = "" } },
 			},
@@ -403,9 +403,8 @@ later(function()
 				strategy = "chat",
 				description = "Write better English",
 				opts = {
-					-- is_slash_cmd = true, -- From slash command, opts below do not work...
 					ignore_system_prompt = true,
-					adapter = { name = "anthropic", model = "claude-3-5-haiku-20241022" },
+					adapter = { name = "copilot", model = "o4-mini" },
 				},
 				prompts = {
 					{
@@ -425,7 +424,7 @@ later(function()
 			},
 		},
 	})
-
+	-- Notify request status
 	vim.api.nvim_create_autocmd({ "User" }, {
 		pattern = "CodeCompanionRequest{Started,Streaming,Finished}",
 		group = vim.api.nvim_create_augroup("CodeCompanionHooks", { clear = true }),
