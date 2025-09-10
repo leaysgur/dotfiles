@@ -392,7 +392,7 @@ later(function()
 		prompt_library = {
 			["PLAIN"] = {
 				strategy = "chat",
-				description = "Chat with plain Claude",
+				description = "Chat with plain LLM",
 				opts = {
 					ignore_system_prompt = true,
 					adapter = { name = "copilot", model = "gpt-5" },
@@ -404,7 +404,7 @@ later(function()
 				description = "Write better English",
 				opts = {
 					ignore_system_prompt = true,
-					adapter = { name = "copilot", model = "o4-mini" },
+					adapter = { name = "copilot", model = "gemini-2.0-flash-001" },
 				},
 				prompts = {
 					{
