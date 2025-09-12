@@ -1,5 +1,8 @@
 {
   "cleanupPeriodDays": 7,
+  "feedbackSurveyState": {
+    "lastShownTime": 1753948742979
+  },
   "env": {
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "true"
   },
@@ -21,8 +24,29 @@
     ],
     "deny": []
   },
-  "feedbackSurveyState": {
-    "lastShownTime": 1753948742979
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Hero.aiff"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
+          }
+        ]
+      }
+    ]
   },
   "statusLine": {
     "type": "command",
