@@ -6,11 +6,14 @@
   "permissions": {
     "allow": [
       "Bash(ls:*)",
+      "Bash(tree:*)",
       "Bash(fd:*)",
       "Bash(find:*)",
       "Bash(rg:*)",
       "Bash(grep:*)",
+      "Bash(ast-grep:*)",
       "Bash(sg:*)",
+      "Bash(jq:*)",
       "WebFetch(domain:developer.mozilla.org)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
@@ -20,6 +23,9 @@
   },
   "feedbackSurveyState": {
     "lastShownTime": 1753948742979
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "npx ccusage@latest statusline"
   }
 }
-
