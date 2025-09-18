@@ -1,8 +1,5 @@
 {
   "cleanupPeriodDays": 7,
-  "feedbackSurveyState": {
-    "lastShownTime": 1753948742979
-  },
   "env": {
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "true"
   },
@@ -51,5 +48,8 @@
   "statusLine": {
     "type": "command",
     "command": "npx ccusage@latest statusline"
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1753948742979
   }
 }
