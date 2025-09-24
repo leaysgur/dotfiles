@@ -40,7 +40,7 @@ vim.opt.timeoutlen = 300
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 -- Clear search highlight
-vim.keymap.set("n", "<Esc>", ":nohlsearch<CR><Esc>", { silent = true })
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", { silent = true })
 
 -- # Setup `mini.deps` and utils
 require("mini.deps").setup({ path = { package = path_package } })
@@ -357,10 +357,11 @@ later(function()
 		suggestion = {
 			auto_trigger = true,
 			keymap = {
-				accept = "<c-CR>",
-				next = "<c-]>",
-				prev = "<c-[>",
-				dismiss = "<ESC>",
+				accept = "<C-CR>",
+				next = "<C-]>",
+				-- In recent updates, this breaks <Esc> in insert mode...
+				-- prev = "<C-[>",
+				dismiss = "<C-Esc>",
 			},
 		},
 		panel = { enabled = false },
