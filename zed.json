@@ -18,7 +18,6 @@
   },
   "collaboration_panel": { "button": false },
   "notification_panel": { "button": false },
-  "chat_panel": { "button": "never" },
   "git_panel": { "button": false },
   "terminal": { "button": false },
   "debugger": { "button": false },

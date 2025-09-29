@@ -14,6 +14,7 @@
       "Bash(ast-grep:*)",
       "Bash(sg:*)",
       "Bash(jq:*)",
+      "Bash(cat:*)",
       "WebFetch(domain:developer.mozilla.org)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
