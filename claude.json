@@ -50,6 +50,7 @@
     "type": "command",
     "command": "npx ccusage@latest statusline"
   },
+  "alwaysThinkingEnabled": false,
   "feedbackSurveyState": {
     "lastShownTime": 1753948742979
   }
