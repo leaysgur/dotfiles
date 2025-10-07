@@ -7,8 +7,7 @@ config.window_background_opacity = 0.9
 config.macos_window_background_blur = 25
 config.inactive_pane_hsb = { brightness = 0.6 }
 
--- https://github.com/zed-industries/zed-fonts
-config.font = wezterm.font("Zed Mono", { weight = "Light" })
+config.font = wezterm.font("Sarasa Fixed J", { weight = "Light" })
 config.harfbuzz_features = { "calt = 0", "clig = 0", "liga = 0" }
 config.font_size = 18
 config.adjust_window_size_when_changing_font_size = false
