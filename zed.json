@@ -1,8 +1,8 @@
 {
-  "theme": "Maple Dark",
+  "theme": "Nebula Pulse",
   "ui_font_size": 12,
   "buffer_font_size": 18,
-  "buffer_font_family": "Sarasa Fixed J",
+  "buffer_font_family": "Zed Mono",
   "show_whitespaces": "all",
   "soft_wrap": "editor_width",
   "tab_size": 2,
