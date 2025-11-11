@@ -17,6 +17,7 @@
       "Bash(cat:*)",
       "WebFetch(domain:developer.mozilla.org)",
       "WebFetch(domain:github.com)",
+      "WebFetch(domain:napi.rs)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:docs.rs)"
     ],
