@@ -253,9 +253,9 @@ later(function()
 		rust_analyzer = {
 			settings = {
 				["rust-analyzer"] = {
+					cargo = { targetDir = true },
 					check = {
 						command = "clippy",
-						extraArgs = { "--target-dir", "./target/rust-analyzer" },
 					},
 				},
 			},
