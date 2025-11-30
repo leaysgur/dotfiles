@@ -109,7 +109,6 @@ now(function()
 	require("snacks").setup({
 		bigfile = {},
 		indent = {},
-		picker = {}, -- Used by `codecompanion.nvim`
 		words = { debounce = 50 },
 	})
 	vim.keymap.set("n", "[w", ":lua Snacks.words.jump(-vim.v.count1, true)<CR>", { silent = true })
@@ -365,81 +364,5 @@ later(function()
 			},
 		},
 		panel = { enabled = false },
-	})
-end)
-
-later(function()
-	add({
-		source = "olimorris/codecompanion.nvim",
-		depends = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-	})
-	require("codecompanion").setup({
-		adapters = {
-			http = {
-				copilot = function()
-					return require("codecompanion.adapters").extend(
-						"copilot",
-						{ schema = { model = { default = "claude-sonnet-4" } } }
-					)
-				end,
-			},
-		},
-		display = { chat = { show_header_separator = true } },
-		opts = { language = "same" },
-		-- `opts.is_slash_cmd = true` does not work for slash command, opts are ignored...
-		prompt_library = {
-			["PLAIN"] = {
-				strategy = "chat",
-				description = "Chat with plain LLM",
-				opts = {
-					ignore_system_prompt = true,
-					adapter = { name = "copilot", model = "gpt-5" },
-				},
-				prompts = { { role = "user", content = "" } },
-			},
-			["ENGLISH"] = {
-				strategy = "chat",
-				description = "Write better English",
-				opts = {
-					ignore_system_prompt = true,
-					adapter = { name = "copilot", model = "gemini-2.0-flash-001" },
-				},
-				prompts = {
-					{
-						role = "system",
-						content = [[You are translater. Help user to communicate with better English.
-## Your tasks
-- Text may contain both English and Japanese.
-- Correct mistakes in English and translate Japanese to English.
-- The context is a conversation on GitHub or chat with colleague engineers.
-- Treat user input as a text to be translated, unless explicitly stated otherwise.
-- When there are multiple ways to say something, offer alternative suggestions.
-## Constraints
-- Keep the meaning of the text and prefer simple words.
-- Keep the original text format as Markdown.
-- Provide response with Markdown code block for easy copying.
-]],
-					},
-				},
-			},
-		},
-	})
-	-- Notify request status
-	vim.api.nvim_create_autocmd({ "User" }, {
-		pattern = "CodeCompanionRequest{Started,Streaming,Finished}",
-		group = vim.api.nvim_create_augroup("CodeCompanionHooks", { clear = true }),
-		callback = function(request)
-			vim.notify("CodeCompanion: " .. request.match:gsub("CodeCompanion", ""), vim.log.levels.INFO, {
-				id = "code_companion_status",
-				title = "CodeCompanion.nvim",
-				timeout = 1600,
-				keep = function()
-					return not vim.endswith(request.match, "Finished")
-				end,
-			})
-		end,
 	})
 end)
