@@ -76,7 +76,10 @@ end)
 
 now(function()
 	add("b0o/incline.nvim")
-	require("incline").setup()
+	require("incline").setup({
+		hide = { focused_win = true },
+		window = { placement = { vertical = "bottom" } },
+	})
 end)
 
 now(function()
