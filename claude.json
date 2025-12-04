@@ -49,7 +49,8 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "npx ccusage@latest statusline"
+    "command": "npx -y ccusage@latest statusline",
+    "padding": 0
   },
   "alwaysThinkingEnabled": false,
   "feedbackSurveyState": {
