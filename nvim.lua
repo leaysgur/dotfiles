@@ -329,7 +329,33 @@ later(function()
 		formatters_by_ft = {
 			lua = { "stylua" },
 			rust = { "rustfmt" },
-			["_"] = { "prettier" },
+			-- ["_"] = { "prettier" },
+			["_"] = { "oxfmt_custom" },
+		},
+		formatters = {
+			oxfmt_custom = {
+				command = "oxfmt",
+				args = function(self, ctx)
+					local files = { "oxfmtrc.json", "oxfmtrc.jsonc" }
+					local root = require("conform.util").root_file(files)(self, ctx)
+					if not root then
+						return { "--stdin-filepath", "$FILENAME" }
+					end
+					for _, file in ipairs(files) do
+						local config = root .. "/" .. file
+						if vim.fn.filereadable(config) == 1 then
+							return { "--config", config, "--stdin-filepath", "$FILENAME" }
+						end
+					end
+					return { "--stdin-filepath", "$FILENAME" }
+				end,
+				cwd = require("conform.util").root_file({
+					".oxfmtrc.json",
+					".oxfmtrc.jsonc",
+					"oxfmtrc.json",
+					"oxfmtrc.jsonc",
+				}),
+			},
 		},
 	})
 	vim.keymap.set("n", "<Space>f", ":lua require('conform').format()<CR>", { silent = true })
