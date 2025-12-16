@@ -48,8 +48,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "npx -y ccusage@latest statusline",
+    "command": "~/Codes/dotfiles/cc-statusline.sh",
     "padding": 0
-  },
-  "alwaysThinkingEnabled": false
+  }
 }
