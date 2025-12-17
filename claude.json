@@ -18,9 +18,11 @@
       "Bash(cat:*)",
       "WebFetch(domain:developer.mozilla.org)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:napi.rs)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:docs.rs)"
+      "WebFetch(domain:napi.rs)",
+      "WebFetch(domain:docs.rs)",
+      "WebFetch(domain:tsdown.dev)",
+      "WebFetch(domain:rolldown.rs)"
     ],
     "deny": []
   },
