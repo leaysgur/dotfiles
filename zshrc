@@ -96,7 +96,6 @@ if [[ $- == *i* ]] && [ -t 0 ]; then
 if [ -d ~/Codes/enhancd ]; then
   source ~/Codes/enhancd/init.sh
   export ENHANCD_HOOK_AFTER_CD=ls
-  export ENHANCD_FILTER="/opt/homebrew/bin/zf"
 fi
 fi
 
