@@ -103,7 +103,7 @@ fi
 # Eza, enhanced `ls` command
 if [ -f /opt/homebrew/bin/eza ]; then
   alias ls='eza'
-  alias tree='eza -T --git-ignore'
+  alias tree='eza -T --all --git-ignore'
 fi
 
 # Bat, enhanced `cat` command
