@@ -130,11 +130,6 @@ if [ -f /opt/homebrew/bin/nvim ]; then
   export GIT_EDITOR="nvim"
 fi
 
-# Bun completions(run `bun completions`)
-if [ -s "/opt/homebrew/Cellar/bun/1.0.30/share/zsh/site-functions/_bun" ]; then
-  source "/opt/homebrew/Cellar/bun/1.0.30/share/zsh/site-functions/_bun"
-fi
-
 # Graphite, `gt` completions(run `gt completion >> ~/.zshrc`)
 _gt_yargs_completions()
 {
