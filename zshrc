@@ -30,19 +30,6 @@ setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt hist_reduce_blanks
 
-# Custom Ctrl+R binding with `zf`
-if [ -f /opt/homebrew/bin/zf ]; then
-  function zf-history() {
-    local selected=$(fc -lnr 1 | awk '!seen[$0]++' | zf --keep-order)
-    if [ -n "$selected" ]; then
-      BUFFER=$selected
-      CURSOR=$#BUFFER
-    fi
-    zle reset-prompt
-  }
-  zle -N zf-history
-  bindkey '^R' zf-history
-fi
 
 # ================================================================
 # Aliases
