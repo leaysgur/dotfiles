@@ -9,7 +9,7 @@ config.inactive_pane_hsb = { brightness = 0.6 }
 
 config.font = wezterm.font("Sarasa Fixed J", { weight = "Light" })
 config.harfbuzz_features = { "calt = 0", "clig = 0", "liga = 0" }
-config.font_size = 18
+config.font_size = 22
 config.adjust_window_size_when_changing_font_size = false
 
 config.initial_cols = 240
