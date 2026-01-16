@@ -99,6 +99,14 @@ if [ -d ~/Codes/enhancd ]; then
 fi
 fi
 
+# Fzf, fuzzy finder (Enhancd also uses `fzf`)
+if [ -f /opt/homebrew/bin/fzf ]; then
+  export FZF_DEFAULT_OPTS="--layout reverse"
+  export FZF_ALT_C_COMMAND=""
+  export FZF_CTRL_T_COMMAND=""
+  source <(fzf --zsh)
+fi
+
 # Eza, enhanced `ls` command
 if [ -f /opt/homebrew/bin/eza ]; then
   alias ls='eza'
