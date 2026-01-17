@@ -26,7 +26,7 @@ config.keys = {
 	{ key = "]", mods = "SUPER", action = wezterm.action({ ActivatePaneDirection = "Next" }) },
 	-- This makes (Neo)Vim key map `<C-_>`(slash) works
 	{ key = "/", mods = "CTRL", action = wezterm.action({ SendString = "\x1f" }) },
-	-- This makes ClaudeCode SHIT+Enter works
+	-- This makes ClaudeCode SHIFT+Enter works
 	{ key = "Enter", mods = "SHIFT", action = wezterm.action({ SendString = "\x1b\r" }) },
 }
 
