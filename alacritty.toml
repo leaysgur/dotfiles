@@ -1,0 +1,9 @@
+[font]
+size = 18
+normal = { family = "Sarasa Fixed J", style = "Light" }
+
+[keyboard]
+bindings = [
+  # This makes ClaudeCode SHIFT+Enter works
+  { key = "Return", mods = "Shift", chars = "\n" }
+] 
