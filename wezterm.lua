@@ -12,8 +12,8 @@ config.harfbuzz_features = { "calt = 0", "clig = 0", "liga = 0" }
 config.font_size = 22
 config.adjust_window_size_when_changing_font_size = false
 
-config.initial_cols = 240
-config.initial_rows = 54
+config.initial_cols = 200
+config.initial_rows = 48
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
