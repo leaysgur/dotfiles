@@ -12,4 +12,3 @@
 	prune = true
 [credential]
 	helper = /usr/local/share/gcm-core/git-credential-manager
-	useHttpPath = true
