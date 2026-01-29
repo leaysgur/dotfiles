@@ -2,6 +2,9 @@
 size = 18
 normal = { family = "Sarasa Fixed J", style = "Light" }
 
+[selection]
+save_to_clipboard = true
+
 [keyboard]
 bindings = [
   # This makes ClaudeCode SHIFT+Enter works
