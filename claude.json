@@ -15,6 +15,7 @@
       "Bash(ast-grep:*)",
       "Bash(sg:*)",
       "Bash(jq:*)",
+      "Bash(wc:*)",
       "Bash(cat:*)",
       "Bash(diff:*)",
       "Bash(git log:*)",

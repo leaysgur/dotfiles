@@ -10,5 +10,7 @@
 	autostash = true
 [fetch]
 	prune = true
+[url "https://github.com/"]
+	insteadOf = ssh://git@github.com/
 [credential]
 	helper = /usr/local/share/gcm-core/git-credential-manager
