@@ -136,3 +136,7 @@ _gt_yargs_completions()
   _describe 'values' reply
 }
 compdef _gt_yargs_completions gt
+
+# GPG, for git commit signing
+export GPG_TTY=$(tty)
+

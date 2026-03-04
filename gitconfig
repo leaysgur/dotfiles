@@ -1,6 +1,7 @@
 [user]
 	name = Yuji Sugiura
 	email = y.sugiura.0316@gmail.com
+	signingkey = 1D269C9759BB3B4747D765EB70293D154826F1A9
 [init]
 	defaultBranch = main
 [diff]
@@ -14,3 +15,7 @@
 	insteadOf = ssh://git@github.com/
 [credential]
 	helper = /usr/local/share/gcm-core/git-credential-manager
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
