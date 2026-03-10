@@ -10,6 +10,7 @@ end
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 -- Ui
+vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "__" }
@@ -123,7 +124,10 @@ now(function()
 	require("colorizer").setup({
 		lazy_load = true,
 		user_commands = false,
-		user_default_options = { css = true, tailwind = true },
+		options = {
+			parsers = { css = true },
+			display = { mode = "foreground" },
+		},
 	})
 end)
 
