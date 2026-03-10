@@ -26,8 +26,13 @@
       "Bash(gh pr view:*)",
       "Bash(gh issue view:*)",
       "Bash(gh issue list:*)",
-      "Bash(gh run list:*)",
       "Bash(gh run view:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh repo list:*)",
+      "Bash(gh api:*)",
+      "Bash(npm view:*)",
+      "Bash(npm info:*)",
       "WebFetch(domain:developer.mozilla.org)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
@@ -39,6 +44,17 @@
     "deny": []
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/Codes/dotfiles/cc-gh-api-readonly.sh"
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "hooks": [
