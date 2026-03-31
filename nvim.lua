@@ -177,10 +177,6 @@ end)
 now(function()
 	add({
 		source = "nvim-treesitter/nvim-treesitter",
-		-- NOTE: Stick to `master` for a while since:
-		-- - Failed to attempt to apply highlight on `svelte` file
-		-- - `Wansmer/treesj` does not work for `svelte`, `astro`, `rust`, etc
-		checkout = "master",
     -- stylua: ignore
 		hooks = { post_checkout = function() vim.cmd("TSUpdate") end },
 	})
