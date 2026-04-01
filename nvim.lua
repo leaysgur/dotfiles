@@ -180,15 +180,6 @@ now(function()
     -- stylua: ignore
 		hooks = { post_checkout = function() vim.cmd("TSUpdate") end },
 	})
-	require("nvim-treesitter.configs").setup({
-		ensure_installed = "all",
-		ignore_install = { "ipkg" },
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = false,
-		},
-		indent = { enable = true },
-	})
 end)
 
 later(function()
