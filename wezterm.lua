@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-config.color_scheme = "Afterglow"
+config.color_scheme = "wilmersdorf"
 config.window_background_opacity = 0.9
 config.macos_window_background_blur = 25
 config.inactive_pane_hsb = { brightness = 0.6 }
