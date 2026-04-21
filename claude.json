@@ -1,9 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "cleanupPeriodDays": 7,
+  "cleanupPeriodDays": 14,
   "env": {
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "true"
   },
+  "effortLevel": "high",
   "permissions": {
     "allow": [
       "Bash(ls:*)",
@@ -51,26 +52,6 @@
           {
             "type": "command",
             "command": "~/Codes/dotfiles/cc-gh-api-readonly.sh"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "afplay /System/Library/Sounds/Hero.aiff"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "afplay /System/Library/Sounds/Glass.aiff"
           }
         ]
       }
