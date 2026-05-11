@@ -13,4 +13,4 @@ else
     PERCENT_USED=0
 fi
 
-echo "[$MODEL] / Ctx: ${PERCENT_USED}% / Cwd: ${CURRENT_DIR##*/}"
+echo "$MODEL ･ ${CURRENT_DIR##*/} ･ Context ${PERCENT_USED}% used"
