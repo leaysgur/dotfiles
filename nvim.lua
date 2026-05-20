@@ -230,14 +230,16 @@ later(function()
 		},
 	})
 
-	local default_config = {
-		on_attach = function(_, bufnr)
-			local keymap_opts = { buffer = bufnr, silent = true }
+	vim.api.nvim_create_autocmd("LspAttach", {
+		group = vim.api.nvim_create_augroup("user_lsp_attach", { clear = true }),
+		callback = function(args)
+			local keymap_opts = { buffer = args.buf, silent = true }
 			vim.keymap.set("n", "R", vim.lsp.buf.rename, keymap_opts)
 			vim.keymap.set("n", "gs", ":sp | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 			vim.keymap.set("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", keymap_opts)
 		end,
-	}
+	})
+
 	local server_configs = {
 		lua_ls = {
 			settings = {
@@ -248,9 +250,7 @@ later(function()
 			settings = {
 				["rust-analyzer"] = {
 					cargo = { targetDir = true },
-					check = {
-						command = "clippy",
-					},
+					check = { command = "clippy" },
 				},
 			},
 		},
@@ -258,9 +258,11 @@ later(function()
 
 	require("mason").setup() -- will make `server`s available to configure
 	for _, server in ipairs(require("mason-lspconfig").get_installed_servers()) do
-		vim.lsp.config(server, vim.tbl_deep_extend("force", default_config, server_configs[server] or {}))
+		vim.lsp.config(server, server_configs[server] or {})
 	end
 	require("mason-lspconfig").setup() -- will call `vim.lsp.enable()`
+
+	vim.lsp.enable("rust_analyzer") -- Not managed by `mason-lspconfig`
 end)
 
 later(function()
