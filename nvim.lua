@@ -147,11 +147,6 @@ later(function()
 end)
 
 later(function()
-	add("sphamba/smear-cursor.nvim")
-	require("smear_cursor").setup({ color_levels = 16, gamma = 8 })
-end)
-
-later(function()
 	add("rainbowhxch/accelerated-jk.nvim")
 	require("accelerated-jk").setup()
 	vim.keymap.set("n", "<Up>", "<Plug>(accelerated_jk_gk)", { silent = true })
@@ -327,20 +322,21 @@ later(function()
 		},
 		formatters = {
 			oxfmt_custom = {
-				command = "oxfmt",
+				command = "npx",
 				args = function(self, ctx)
+					local prepend = { "oxfmt" }
 					local files = { "oxfmtrc.json", "oxfmtrc.jsonc" }
 					local root = require("conform.util").root_file(files)(self, ctx)
 					if not root then
-						return { "--stdin-filepath", "$FILENAME" }
+						return vim.list_extend(prepend, { "--stdin-filepath", "$FILENAME" })
 					end
 					for _, file in ipairs(files) do
 						local config = root .. "/" .. file
 						if vim.fn.filereadable(config) == 1 then
-							return { "--config", config, "--stdin-filepath", "$FILENAME" }
+							return vim.list_extend(prepend, { "--config", config, "--stdin-filepath", "$FILENAME" })
 						end
 					end
-					return { "--stdin-filepath", "$FILENAME" }
+					return vim.list_extend(prepend, { "--stdin-filepath", "$FILENAME" })
 				end,
 				cwd = require("conform.util").root_file({
 					".oxfmtrc.json",
