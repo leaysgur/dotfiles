@@ -66,7 +66,11 @@ end)
 
 now(function()
 	add("nvim-mini/mini.notify")
-	require("mini.notify").setup()
+	require("mini.notify").setup({
+		window = {
+			config = { anchor = "SE", row = vim.o.lines - vim.o.cmdheight },
+		},
+	})
 	vim.notify = require("mini.notify").make_notify()
 end)
 
