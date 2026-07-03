@@ -130,7 +130,7 @@ now(function()
 		user_commands = false,
 		options = {
 			parsers = { css = true },
-			display = { mode = "foreground" },
+			display = { mode = "background" },
 		},
 	})
 end)
