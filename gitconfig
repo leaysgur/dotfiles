@@ -13,9 +13,11 @@
 	prune = true
 [url "https://github.com/"]
 	insteadOf = ssh://git@github.com/
-[credential]
-	helper = /usr/local/share/gcm-core/git-credential-manager
 [commit]
 	gpgsign = true
 [tag]
 	gpgSign = true
+[credential]
+	helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true
