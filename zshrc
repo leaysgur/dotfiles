@@ -1,7 +1,7 @@
 # ================================================================
 # Core
 # ================================================================
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
 
 # Enable completion
 autoload -Uz compinit && compinit
