@@ -4,7 +4,9 @@
   "env": {
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
+  "model": "claude-fable-5",
   "permissions": {
+    "defaultMode": "auto",
     "allow": [
       "Bash(ls:*)",
       "Bash(tree:*)",
