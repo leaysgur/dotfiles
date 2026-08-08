@@ -124,18 +124,6 @@ now(function()
 end)
 
 now(function()
-	add("catgoose/nvim-colorizer.lua")
-	require("colorizer").setup({
-		lazy_load = true,
-		user_commands = false,
-		options = {
-			parsers = { css = true },
-			display = { mode = "background" },
-		},
-	})
-end)
-
-now(function()
 	add("andymass/vim-matchup")
 	require("match-up").setup({})
 end)
