@@ -153,6 +153,7 @@ end)
 later(function()
 	add("nvim-mini/mini.diff")
 	require("mini.diff").setup()
+	vim.keymap.set("n", "go", ":lua MiniDiff.toggle_overlay()<CR>", { silent = true })
 end)
 
 later(function()
