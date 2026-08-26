@@ -6,7 +6,6 @@
   },
   "model": "claude-fable-5",
   "permissions": {
-    "defaultMode": "auto",
     "allow": [
       "Bash(ls:*)",
       "Bash(tree:*)",
@@ -42,8 +41,7 @@
       "WebFetch(domain:docs.rs)",
       "WebFetch(domain:tsdown.dev)",
       "WebFetch(domain:rolldown.rs)"
-    ],
-    "deny": []
+    ]
   },
   "hooks": {
     "PreToolUse": [
@@ -62,5 +60,6 @@
     "type": "command",
     "command": "~/Codes/dotfiles/cc-statusline.sh",
     "padding": 0
-  }
+  },
+  "tui": "fullscreen",
 }
