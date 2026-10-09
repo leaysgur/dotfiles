@@ -3,16 +3,6 @@
 # ================================================================
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
 
-# Enable completion
-autoload -Uz compinit && compinit
-
-# Enable Shift+Tab
-bindkey '^[[Z' reverse-menu-complete
-
-# Enable `zmv` command
-autoload -Uz zmv
-alias zmv='noglob zmv -W'
-
 # No beep!
 setopt no_beep
 
@@ -90,21 +80,22 @@ if [ -d ~/Codes/pure ]; then
   prompt pure
 fi
 
-# Enhancd, enhanced `cd` command
-# Only for interactive shell
-if [[ $- == *i* ]] && [ -t 0 ]; then
-if [ -d ~/Codes/enhancd ]; then
-  source ~/Codes/enhancd/init.sh
-  export ENHANCD_HOOK_AFTER_CD=ls
-fi
-fi
-
-# Fzf, fuzzy finder (Enhancd also uses `fzf`)
+# Fzf, fuzzy finder
 if [ -f /opt/homebrew/bin/fzf ]; then
   export FZF_DEFAULT_OPTS="--layout reverse"
   export FZF_ALT_C_COMMAND=""
   export FZF_CTRL_T_COMMAND=""
   source <(fzf --zsh)
+
+  # `cd` without args: pick a dir under ~/Codes and ~/Sandbox
+  cd() {
+    if (( $# )); then
+      builtin cd "$@"
+      return
+    fi
+    local dir
+    dir=$(builtin cd ~ && print -l Codes/*(N/) Sandbox/*(N/) | fzf) && builtin cd ~/$dir
+  }
 fi
 
 # Eza, enhanced `ls` command
@@ -125,6 +116,20 @@ if [ -f /opt/homebrew/bin/nvim ]; then
   export GIT_EDITOR="nvim"
 fi
 
+# GPG, for git commit signing
+export GPG_TTY=$TTY
+
+
+# ================================================================
+# Completion (Keep this section last!)
+# `compinit` must run after all `fpath` changes,
+# and before any `compdef` calls.
+# ================================================================
+autoload -Uz compinit && compinit
+
+# Enable Shift+Tab
+bindkey '^[[Z' reverse-menu-complete
+
 # Graphite, `gt` completions(run `gt completion >> ~/.zshrc`)
 _gt_yargs_completions()
 {
@@ -136,7 +141,4 @@ _gt_yargs_completions()
   _describe 'values' reply
 }
 compdef _gt_yargs_completions gt
-
-# GPG, for git commit signing
-export GPG_TTY=$(tty)
 
