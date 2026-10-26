@@ -360,20 +360,3 @@ later(function()
 	vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<Down>" : "\<Tab>"]], { expr = true, replace_keycodes = false })
 	vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<Up>" : "\<S-Tab>"]], { expr = true, replace_keycodes = false })
 end)
-
-later(function()
-	add("zbirenbaum/copilot.lua")
-	require("copilot").setup({
-		suggestion = {
-			auto_trigger = true,
-			keymap = {
-				accept = "<C-CR>",
-				next = "<C-]>",
-				-- In recent updates, this breaks <Esc> in insert mode...
-				-- prev = "<C-[>",
-				dismiss = "<C-Esc>",
-			},
-		},
-		panel = { enabled = false },
-	})
-end)
