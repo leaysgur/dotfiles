@@ -4,46 +4,6 @@
   "env": {
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
-  "model": "claude-fable-5",
-  "permissions": {
-    "defaultMode": "auto",
-    "allow": [
-      "Bash(ls:*)",
-      "Bash(tree:*)",
-      "Bash(fd:*)",
-      "Bash(find:*)",
-      "Bash(rg:*)",
-      "Bash(grep:*)",
-      "Bash(ast-grep:*)",
-      "Bash(sg:*)",
-      "Bash(jq:*)",
-      "Bash(wc:*)",
-      "Bash(cat:*)",
-      "Bash(diff:*)",
-      "Bash(git log:*)",
-      "Bash(git diff:*)",
-      "Bash(git show:*)",
-      "Bash(gh search:*)",
-      "Bash(gh pr diff:*)",
-      "Bash(gh pr view:*)",
-      "Bash(gh issue view:*)",
-      "Bash(gh issue list:*)",
-      "Bash(gh run view:*)",
-      "Bash(gh run list:*)",
-      "Bash(gh repo view:*)",
-      "Bash(gh repo list:*)",
-      "Bash(gh api:*)",
-      "Bash(npm view:*)",
-      "Bash(npm info:*)",
-      "WebFetch(domain:developer.mozilla.org)",
-      "WebFetch(domain:github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:napi.rs)",
-      "WebFetch(domain:docs.rs)",
-      "WebFetch(domain:tsdown.dev)",
-      "WebFetch(domain:rolldown.rs)"
-    ]
-  },
   "hooks": {
     "PreToolUse": [
       {
@@ -63,4 +23,10 @@
     "padding": 0
   },
   "tui": "fullscreen",
+  "autoMemoryEnabled": false,
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    }
+  }
 }
