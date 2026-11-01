@@ -10,4 +10,5 @@ ln -s ~/Codes/dotfiles/ghostty-cursor-shader.glsl ~/.config/ghostty/ghostty-curs
 ln -s ~/Codes/dotfiles/nvim.lua ~/.config/nvim/init.lua
 ln -s ~/Codes/dotfiles/zed.json ~/.config/zed/settings.json
 ln -s ~/Codes/dotfiles/claude.json ~/.claude/settings.json
+ln -s ~/Codes/dotfiles/claude.md ~/.claude/CLAUDE.md
 ```
