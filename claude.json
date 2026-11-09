@@ -24,6 +24,7 @@
   },
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
+  "idleCompaction": false,
   "modelSettings": {
     "claude-opus-5-5": {
       "effortLevel": "high"
